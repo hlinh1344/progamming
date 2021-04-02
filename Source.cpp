@@ -165,6 +165,7 @@ int main() {
 	cout << S << endl;
 	*/
 
+	/*
 	//ex12
 	int n, x;
 	cout << "nhap so x: ";
@@ -181,6 +182,10 @@ int main() {
 		S = S + P;
 
 	}
+	*/
+	
+	
+
 	cout << S << endl;
 	system("pause");
 	return 0;
