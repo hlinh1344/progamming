@@ -9,4 +9,4 @@ This is a repository for myself to pratice programming with the following topics
 - Recursion
 - Struct
 - Linked list
-- Binary search tree
+- Binary search tree.
