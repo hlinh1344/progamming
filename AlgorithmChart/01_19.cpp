@@ -30,7 +30,7 @@ using namespace std;
 //	return 0;
 //}
 
-	
+
 
 //	//exercise 3
 //int main() {
@@ -47,10 +47,10 @@ using namespace std;
 //	system("pause");
 //	return 0;
 //}
-	
 
 
-	
+
+
 //	//exercise 4
 //int main() {
 //	int n;
@@ -68,7 +68,7 @@ using namespace std;
 //	return 0;
 //}
 
-	
+
 //	//exercise 5
 //int main() {
 //	int n;
@@ -85,7 +85,7 @@ using namespace std;
 //	return 0;
 //}
 
-	
+
 //	//exercise 6
 //	int main(){
 //	int n;
@@ -103,7 +103,7 @@ using namespace std;
 //}
 
 
-	
+
 //	//exercise 7
 //int main() {
 //	int n;
@@ -119,9 +119,9 @@ using namespace std;
 //	system("pause");
 //	return 0;
 //}
-	
 
-	
+
+
 //	//exercise 8
 //int main() {
 //	int n;
@@ -153,9 +153,9 @@ using namespace std;
 //	system("pause");
 //	return 0;
 //}
-	
 
-	
+
+
 //	//exercise 10
 //int main() {
 //	int n, x;
@@ -180,7 +180,7 @@ using namespace std;
 //}
 
 
-	
+
 //	//exercise 11
 //int main() {
 //	int n;
@@ -201,7 +201,7 @@ using namespace std;
 //}
 
 
-	
+
 //	//exercise 12
 //int main() {
 //	int n, x;
@@ -313,7 +313,102 @@ using namespace std;
 //	return 0;
 //}
 
+//	//exercise 17
+//int main() {
+//	int n, x;
+//	cout << "nhap so x: ";
+//	cin >> x;
+//	cout << "nhap so n: ";
+//	cin >> n;
+//	float S = 0.0f;
+//
+//	for (int i = 1; i <= n; i++) {
+//		int P = 1;
+//		int P2 = 1;
+//		float temp = 0.0f;
+//		for (int j = 1; j <= i; j++) {
+//			P = P * x;
+//			P2 = P2 * j;
+//			temp = P / (float)P2;
+//		}
+//		S = S + temp;
+//	}
+//	cout << S << endl;
+//	system("pause");
+//	return 0;
+//}
+
+//	//exercise 18
+//int main() {
+//		int n, x;
+//		cout << "nhap so x: ";
+//		cin >> x;
+//		cout << "nhap so n: ";
+//		cin >> n;
+//		float S = 1.0f;
+//		if (n == 0) {
+//			cout << S << endl;
+//		}
+//		else {
+//			for (int i = 1; i <= n; i++) {
+//
+//				for (int j = 2; j <= (2 * i); j = j + 2) {
+//					int P = 1;
+//					int P2 = 1;
+//					float temp = 0.0f;
+//					for (int k = 1; k <= j; k++)
+//					{
+//						P = P * x;
+//						P2 = P2 * k;
+//					}
+//					temp = P / (float)P2;
+//
+//					if (j == (2 * i)) {
+//						S = S + temp;
+//					}
+//				}
+//
+//			}
+//			cout << S << endl;
+//		}
+//	system("pause");
+//	return 0;
+//}
 
 
-
-
+//	//exercise 19
+//int main() {
+//		int n, x;
+//		cout << "nhap so x: ";
+//		cin >> x;
+//		cout << "nhap so n : ";
+//		cin >> n;
+//		float S = 1.0f;
+//		if (n == 0) {
+//			cout << S+x << endl;
+//		}
+//		else {
+//			for (int i = 0; i <= n; i++) {
+//
+//				for (int j = 1; j <= ((2 * i) + 1 ); j = j + 2) {
+//					int P = 1;
+//					int P2 = 1;
+//					float temp = 0.0f;
+//					for (int k = 1; k <= j; k++)
+//					{
+//						P = P * x;
+//						P2 = P2 * k;
+//					}
+//					temp = P / (float)P2;
+//
+//					if (j == ((2 * i) + 1 )) {
+//						S = S + temp;
+//					}
+//				}
+//
+//			}
+//			cout << S << endl;
+//		}
+//	system("pause");
+//	return 0;
+//}
