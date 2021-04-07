@@ -4,7 +4,7 @@ using namespace std;
 //	//exercise 20
 //int main() {
 //	int n;
-//	cout << "nhap so ngyuen duong n: ";
+//	cout << "nhap so nguyen duong n: ";
 //	do {
 //		cin >> n;
 //		if (n <= 0) {
@@ -25,7 +25,7 @@ using namespace std;
 //	//exercise 21
 //int main() {
 //int n;
-//cout << "nhap so ngyuen duong n: ";
+//cout << "nhap so nguyen duong n: ";
 //do {
 //	cin >> n;
 //	if (n <= 0) {
@@ -51,7 +51,7 @@ using namespace std;
 //	//exercise 22
 //int main() {
 //	int n;
-//	cout << "nhap so ngyuen duong n: ";
+//	cout << "nhap so nguyen duong n: ";
 //	do {
 //		cin >> n;
 //		if (n <= 0) {
@@ -79,7 +79,7 @@ using namespace std;
 //	//exercise 23
 //int main() {
 //	int n;
-//	cout << "nhap so ngyuen duong n: ";
+//	cout << "nhap so nguyen duong n: ";
 //	do {
 //		cin >> n;
 //		if (n <= 0) {
@@ -105,7 +105,7 @@ using namespace std;
 //	//exercise 24
 //int main() {
 //	int n;
-//	cout << "nhap so ngyuen duong n: ";
+//	cout << "nhap so nguyen duong n: ";
 //	do {
 //		cin >> n;
 //		if (n <= 0) {
@@ -132,7 +132,7 @@ using namespace std;
 //	//exercise 25
 //int main() {
 //	int n;
-//	cout << "nhap so ngyuen duong n: ";
+//	cout << "nhap so nguyen duong n: ";
 //	do {
 //		cin >> n;
 //		if (n <= 0) {
@@ -163,7 +163,7 @@ using namespace std;
 //	//exercise 26
 //int main() {
 //	int n;
-//	cout << "nhap so ngyuen duong n: ";
+//	cout << "nhap so nguyen duong n: ";
 //	do {
 //		cin >> n;
 //		if (n <= 0) {
@@ -194,7 +194,7 @@ using namespace std;
 //	//exercise 27
 //int main() {
 //	int n;
-//	cout << "nhap so ngyuen duong n: ";
+//	cout << "nhap so nguyen duong n: ";
 //	do {
 //		cin >> n;
 //		if (n <= 0) {
@@ -224,7 +224,7 @@ using namespace std;
 //	//exercise 28
 //int main() {
 //	int n;
-//	cout << "nhap so ngyuen duong n: ";
+//	cout << "nhap so nguyen duong n: ";
 //	do {
 //		cin >> n;
 //		if (n <= 0) {
@@ -252,7 +252,7 @@ using namespace std;
 //	//exercise 29
 //int main() {
 //	int n;
-//	cout << "nhap so ngyuen duong n: ";
+//	cout << "nhap so nguyen duong n: ";
 //	do {
 //		cin >> n;
 //		if (n <= 0) {
@@ -283,7 +283,7 @@ using namespace std;
 //int main() {
 //	bool isPerfectNumber = 1;
 //	int n;
-//	cout << "nhap so ngyuen duong n: ";
+//	cout << "nhap so nguyen duong n: ";
 //	do {
 //		cin >> n;
 //		if (n <= 0) {
@@ -324,7 +324,7 @@ using namespace std;
 //	//exercise 31
 //int main() {
 //	int n;
-//	cout << "nhap so ngyuen duong n: ";
+//	cout << "nhap so nguyen duong n: ";
 //	do {
 //		cin >> n;
 //		if (n < 0) {
@@ -368,7 +368,7 @@ using namespace std;
 //	//exercise 32
 //int main() {
 //	int n;
-//	cout << "nhap so ngyuen duong n: ";
+//	cout << "nhap so nguyen duong n: ";
 //	do {
 //		cin >> n;
 //		if (n <= 0) {
