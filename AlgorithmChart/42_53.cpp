@@ -302,15 +302,16 @@ using namespace std;
 //
 //	int S = 0;
 //	for (int j = 1; P2 > 0; j++) {
-//		P2 = P2 / 10;
 //		if ((P2 % 10) == nMax) {
 //			S = S + 1;
 //		}
-//
+//		P2 = P2 / 10;
 //	}
 //
 //	cout << n << " co "<< S << " so lon nhat la " << nMax << endl;
 //	system("pause");
 //	return 0;
 //}
+
+
 

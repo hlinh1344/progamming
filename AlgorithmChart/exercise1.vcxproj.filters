@@ -24,5 +24,14 @@
     <ClCompile Include="33_41.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="42_53.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="54_66.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="67_76.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

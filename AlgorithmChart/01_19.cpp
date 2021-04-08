@@ -295,20 +295,19 @@ using namespace std;
 //	cin >> x;
 //	cout << "nhap so n: ";
 //	cin >> n;
+//
+//
 //	float s = 0.0f;
+//	int s2 = 0;
+//	int p = 1 ;
 //
 //	for (int i = 1; i <= n; i++) {
-//		int s2 = 0;
-//		float temp = 0.0f;
-//		int P = 1;
-//		for (int j = 1; j <= i; j++) {
-//			s2 = s2 + j;
-//			P = P * x;
-//			temp = P / (float)s2;
-//		}
-//		s = s + temp;
+//			s2 = s2 + i;
+//			p = p * x;
+//		s = s + (p / (float)s2);
 //	}
-//	cout << s << endl;
+//
+//	cout <<" s = "<< s << endl;
 //	system("pause");
 //	return 0;
 //}
@@ -320,19 +319,18 @@ using namespace std;
 //	cin >> x;
 //	cout << "nhap so n: ";
 //	cin >> n;
+//
 //	float S = 0.0f;
+//	int P = 1;
+//	int P2 = 1;
 //
 //	for (int i = 1; i <= n; i++) {
-//		int P = 1;
-//		int P2 = 1;
-//		float temp = 0.0f;
-//		for (int j = 1; j <= i; j++) {
 //			P = P * x;
-//			P2 = P2 * j;
-//			temp = P / (float)P2;
-//		}
-//		S = S + temp;
+//			P2 = P2 * i;
+//
+//		S = S + P / (float)P2;
 //	}
+//
 //	cout << S << endl;
 //	system("pause");
 //	return 0;
@@ -345,31 +343,20 @@ using namespace std;
 //		cin >> x;
 //		cout << "nhap so n: ";
 //		cin >> n;
-//		float S = 1.0f;
+//		float s = 1.0f;
 //		if (n == 0) {
-//			cout << S << endl;
+//			cout << s << endl;
 //		}
 //		else {
+//			int tuso = 1;
+//			int mauso = 1;
 //			for (int i = 1; i <= n; i++) {
 //
-//				for (int j = 2; j <= (2 * i); j = j + 2) {
-//					int P = 1;
-//					int P2 = 1;
-//					float temp = 0.0f;
-//					for (int k = 1; k <= j; k++)
-//					{
-//						P = P * x;
-//						P2 = P2 * k;
-//					}
-//					temp = P / (float)P2;
-//
-//					if (j == (2 * i)) {
-//						S = S + temp;
-//					}
-//				}
-//
+//				tuso = tuso * x *x;
+//				mauso = mauso * (2*i) * (2*i-1);
+//				s = s + tuso / (float)mauso;
 //			}
-//			cout << S << endl;
+//			cout << s << endl;
 //		}
 //	system("pause");
 //	return 0;
@@ -383,31 +370,20 @@ using namespace std;
 //		cin >> x;
 //		cout << "nhap so n : ";
 //		cin >> n;
-//		float S = 1.0f;
+//		float s = 1.0f +x ;
 //		if (n == 0) {
-//			cout << S+x << endl;
+//			cout << s << endl;
 //		}
 //		else {
-//			for (int i = 0; i <= n; i++) {
+//			int tuso = x;
+//			int mauso = 1;
+//			for (int i = 1; i <= n; i++) {
 //
-//				for (int j = 1; j <= ((2 * i) + 1 ); j = j + 2) {
-//					int P = 1;
-//					int P2 = 1;
-//					float temp = 0.0f;
-//					for (int k = 1; k <= j; k++)
-//					{
-//						P = P * x;
-//						P2 = P2 * k;
-//					}
-//					temp = P / (float)P2;
-//
-//					if (j == ((2 * i) + 1 )) {
-//						S = S + temp;
-//					}
-//				}
-//
+//				tuso = tuso * x * x;
+//				mauso = mauso * (2 * i) * (2 * i + 1);
+//				s = s + tuso / (float)mauso;
 //			}
-//			cout << S << endl;
+//			cout << s << endl;
 //		}
 //	system("pause");
 //	return 0;
