@@ -246,26 +246,26 @@ using namespace std;
 //	return 0;
 //}
 
-//	//exercise 14
-//int main() {
-//	int x, n;
-//	cout << "nhap so x: ";
-//	cin >> x;
-//	cout << "nhap so n: ";
-//	cin >> n;
-//	int S = 0;
-//
-//	for (int i = 0; i <= n; i++) {
-//		int P = 1;
-//		for (int j = 0; j < (2 * i + 1); j++) {
-//			P = P * x;
-//		}
-//		S = S + P;
-//	}
-//	cout << S << endl;
-//	system("pause");
-//	return 0;
-//}
+	//exercise 14
+int main() {
+	int x, n;
+	cout << "nhap so x: ";
+	cin >> x;
+	cout << "nhap so n: ";
+	cin >> n;
+	int S = 0;
+
+	for (int i = 0; i <= n; i++) {
+		int P = 1;
+		for (int j = 0; j < (2 * i + 1); j++) {
+			P = P * x;
+		}
+		S = S + P;
+	}
+	cout << S << endl;
+	system("pause");
+	return 0;
+}
 
 
 //	//exercise 15

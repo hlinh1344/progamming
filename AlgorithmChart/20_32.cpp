@@ -12,7 +12,7 @@ using namespace std;
 //		}
 //	} 	while (n <= 0);
 //	cout << "Cac uoc so cua " << n << " la:" << endl;
-//	for (int i = 2; i <= (int)(n/2); i++) {
+//	for (int i = 1; i <= (int)(n/2); i++) {
 //		if (n % i == 0) {
 //			cout << i <<"\t";
 //		}
