@@ -408,7 +408,7 @@ using namespace std;
 
 //	//exercise 66
 //int main() {
-//	cout << "\t ax^4 + b^2 + c = 0 \n";
+//	cout << "\t ax^4 + bx^2 + c = 0 \n";
 //
 //	float a;
 //	cout << "Nhap he so a : ";
