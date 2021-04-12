@@ -362,7 +362,7 @@ float xuly36(int n);
 float xuly37(int n);
 float xuly38(int n);
 float xuly39(int n);
-float xuly40(int n,int x);
+float xuly40(int n, int x);
 float xuly41(int n);
 void xuly42(int n);
 void xuly43(int n);
@@ -386,18 +386,18 @@ void xuly61(int n);
 void nhapab(int& a, int& b);
 int xuly62(int a, int b);
 void xuly64(float a, float b);
-void nhap64(float& a,float &b);
+void nhap64(float& a, float& b);
 void xuly65(float a, float b, float c);
-void nhap65(float& a, float& b, float &c);
+void nhap65(float& a, float& b, float& c);
 
 #pragma endregion Region_1
 int main()
 {
 	int bai = 65;
-#pragma region swi
+#pragma region switch
 	switch (bai)
 	{
-	case 231:
+	case 27:
 		bai27();
 		break;
 	case 28:
@@ -517,7 +517,7 @@ int main()
 	default:
 		break;
 	}
-#pragma endregion swi
+#pragma endregion switch
 	return 0;
 }
 
@@ -532,37 +532,37 @@ void bai27() {
 	system("pause");
 }
 
-	void nhapn(int& n) {
-		cout << "nhap so nguyen duong n: ";
-		do {
-			cin >> n;
-			if (n <= 0) {
-				cout << "nhap sai, moi nhap lai: ";
-			}
-		} while (n <= 0);
-
-
-	}
-
-	int souocchan(int n) {
-		int S = 0;
-		int i = 1;
-		while (i <= n / 2) {
-			if ((n % i == 0) && (i % 2 == 0)) {
-				S = S + 1;
-			}
-			i++;
+void nhapn(int& n) {
+	cout << "nhap so nguyen duong n: ";
+	do {
+		cin >> n;
+		if (n <= 0) {
+			cout << "nhap sai, moi nhap lai: ";
 		}
-		if (n % 2 == 0) {
+	} while (n <= 0);
+
+
+}
+
+int souocchan(int n) {
+	int S = 0;
+	int i = 1;
+	while (i <= n / 2) {
+		if ((n % i == 0) && (i % 2 == 0)) {
 			S = S + 1;
 		}
-		return S;
+		i++;
 	}
+	if (n % 2 == 0) {
+		S = S + 1;
+	}
+	return S;
+}
 
-	void xuat27(int n, int S) {
-		cout << "\n";
-		cout << "So luong uoc so chan cua " << n << " la: " << S << endl;
-	}
+void xuat27(int n, int S) {
+	cout << "\n";
+	cout << "So luong uoc so chan cua " << n << " la: " << S << endl;
+}
 #pragma endregion Bai27
 
 
@@ -571,7 +571,7 @@ void bai28() {
 	int n;
 	nhapn(n);
 	int S = tonguocsonhohonn(n);
-	xuat28(n,S);
+	xuat28(n, S);
 
 	system("pause");
 
@@ -580,7 +580,7 @@ void bai28() {
 int tonguocsonhohonn(int n) {
 	int S = 0;
 	int i = 1;
-	while (i <= n/2)
+	while (i <= n / 2)
 	{
 		if (n % i == 0) {
 			S = S + i;
@@ -599,11 +599,11 @@ void xuat28(int n, int S) {
 #pragma endregion Bai28
 
 #pragma region Bai29
-void bai29(){
+void bai29() {
 	int n;
 	nhapn(n);
 	int uoclelonnhat = uocsolelonnhat(n);
-	xuat29(n,uoclelonnhat);
+	xuat29(n, uoclelonnhat);
 	system("pause");
 
 }
@@ -616,7 +616,7 @@ int uocsolelonnhat(int n) {
 	}
 	else {
 		int i = (n / 2);
-		while (i >0){
+		while (i > 0) {
 			if ((n % i == 0) && (i % 2 == 1)) {
 				uoclelonnhat = i;
 				break;
@@ -634,7 +634,7 @@ void xuat29(int n, int uoclelonnhat) {
 #pragma endregion Bai29
 
 #pragma region Bai30
-	//exercise 30
+//exercise 30
 void bai30() {
 	int n;
 	nhapn(n);
@@ -642,7 +642,7 @@ void bai30() {
 	bool isPerfectNumber = Checksohoanthien(n);
 	xuat30(isPerfectNumber, n);
 	system("pause");
-	
+
 }
 
 bool Checksohoanthien(int n) {
@@ -678,7 +678,7 @@ void xuat30(bool isPerfectNumber, int n) {
 #pragma endregion Bai30
 
 #pragma region Bai31
-	//exercise 31
+//exercise 31
 void bai31() {
 	int n;
 	nhapn(n);
@@ -718,7 +718,7 @@ bool check31(int n) {
 #pragma endregion Bai31
 
 #pragma region Bai32
-	//exercise 32
+//exercise 32
 void bai32() {
 	int n;
 	nhapn(n);
@@ -745,7 +745,7 @@ bool check32(int n) {
 	else
 	{
 		int i = 1;
-		while (i <= n / 2)  {
+		while (i <= n / 2) {
 			if (i * i == n) {
 				check = 1;
 				break;
@@ -760,13 +760,13 @@ bool check32(int n) {
 #pragma endregion Bai32
 
 #pragma region Bai33
-	//exercise 33
+//exercise 33
 void bai33() {
 	int n;
 	nhapn(n);
 	float S = xuly33(n);
 
-	cout << "S = "<< S<<endl;
+	cout << "S = " << S << endl;
 	system("pause");
 
 }
@@ -781,11 +781,11 @@ float xuly33(int n) {
 #pragma endregion Bai33
 
 #pragma region Bai34
-	//exercise 34
+//exercise 34
 void bai34() {
 	int n;
 	nhapn(n);
-	
+
 	float S = xuly34(n);
 	cout << "S = " << S << endl;
 	system("pause");
@@ -802,7 +802,7 @@ float xuly34(int n) {
 #pragma endregion Bai34
 
 #pragma region Bai35
-	//exercise 35
+//exercise 35
 void bai35() {
 	int n;
 	nhapn(n);
@@ -814,7 +814,7 @@ void bai35() {
 }
 
 float xuly35(int n) {
-		float S = 0.0f;
+	float S = 0.0f;
 	for (int i = n; i >= 1; i--) {
 		S = sqrt(i + S);
 	}
@@ -873,7 +873,7 @@ float xuly37(int n) {
 #pragma endregion Bai37
 
 #pragma region Bai38
-	//exercise 38
+//exercise 38
 void bai38() {
 	int n;
 	nhapn(n);
@@ -897,12 +897,12 @@ float xuly38(int n) {
 #pragma endregion Bai38
 
 #pragma region Bai39
-	//exercise 39
+//exercise 39
 void bai39() {
 	int n;
 	nhapn(n);
 
-	float S = xuly39( n);
+	float S = xuly39(n);
 	cout << "S = " << S << endl;
 
 	system("pause");
@@ -912,21 +912,21 @@ float xuly39(int n) {
 	float S = 0.0f;
 	float  P = 1.0f;
 	for (int i = 1; i <= n; i++) {
-			P = P * i;
-		S = pow(P + S, 1 / (float)(i+1));
+		P = P * i;
+		S = pow(P + S, 1 / (float)(i + 1));
 	}
 	return S;
 }
 #pragma endregion Bai39
 
 #pragma region Bai40
-	//exercise 40
+//exercise 40
 void bai40() {
 	int x;
 	int n;
-	nhapxn(x,n);
+	nhapxn(x, n);
 
-	float S = xuly40(n,x);
+	float S = xuly40(n, x);
 
 
 	cout << "S = " << S << endl;
@@ -947,7 +947,7 @@ void nhapxn(int& x, int& n) {
 	} while (n <= 0);
 }
 
-float xuly40(int n,int x) {
+float xuly40(int n, int x) {
 	float S = 0.0f;
 	float  P = 1.0f;
 	for (int i = 1; i <= n; i++) {
@@ -960,7 +960,7 @@ float xuly40(int n,int x) {
 #pragma endregion Bai40
 
 #pragma region Bai41
-	//exercise 41
+//exercise 41
 void bai41() {
 	int n;
 	nhapn(n);
@@ -980,7 +980,7 @@ float xuly41(int n) {
 #pragma endregion Bai41
 
 #pragma region Bai42
-	//exercise 42
+//exercise 42
 void bai42() {
 	int n;
 	nhapn(n);
@@ -994,17 +994,17 @@ void xuly42(int n) {
 	int i = 0;
 	while (S < n) {
 		S = S + i;
-		
+
 		i++;
 	}
-	cout << "S = " << S - i + 1<< " < " << n << endl;
+	cout << "S = " << S - i + 1 << " < " << n << endl;
 	cout << "k = " << i - 2 << endl;
 
 }
 #pragma endregion Bai42
 
 #pragma region Bai43
-	//exercise 43
+//exercise 43
 void bai43() {
 	int n;
 	nhapn(n);
@@ -1025,7 +1025,7 @@ void xuly43(int n) {
 #pragma endregion Bai43
 
 #pragma region Bai44
-	//exercise 44
+//exercise 44
 void bai44() {
 	int n;
 	nhapn(n);
@@ -1047,7 +1047,7 @@ void xuly44(int n) {
 #pragma endregion Bai44
 
 #pragma region Bai45
-	//exercise 45
+//exercise 45
 void bai45() {
 	int n;
 	nhapn(n);
@@ -1068,7 +1068,7 @@ void xuly45(int n) {
 #pragma endregion Bai45
 
 #pragma region Bai46
-	//exercise 46
+//exercise 46
 void bai46() {
 	int n;
 	nhapn(n);
@@ -1095,7 +1095,7 @@ void xuly46(int n) {
 #pragma endregion Bai46
 
 #pragma region Bai47
-	//exercise 47
+//exercise 47
 void bai47() {
 	int n;
 	nhapn(n);
@@ -1119,7 +1119,7 @@ void xuly47(int n) {
 #pragma endregion Bai47
 
 #pragma region Bai48
-	//exercise 48
+//exercise 48
 void bai48() {
 	int n;
 	nhapn(n);
@@ -1143,7 +1143,7 @@ void xuly48(int n) {
 #pragma endregion Bai48
 
 #pragma region Bai49
-	//exercise 49
+//exercise 49
 void bai49() {
 	int n;
 	nhapn(n);
@@ -1162,7 +1162,7 @@ void xuly49(int n) {
 #pragma endregion Bai49
 
 #pragma region Bai50
-	//exercise 50
+//exercise 50
 void bai50() {
 	int n;
 	nhapn(n);
@@ -1171,7 +1171,7 @@ void bai50() {
 
 }
 
-void xuly50(int n){
+void xuly50(int n) {
 	if (n < 10) {
 		cout << n << " dao nguoc lai la so " << n << endl;
 	}
@@ -1190,7 +1190,7 @@ void xuly50(int n){
 #pragma endregion Bai50
 
 #pragma region Bai51
-	//exercise 51
+//exercise 51
 void bai51() {
 	int n;
 	nhapn(n);
@@ -1214,7 +1214,7 @@ void xuly51(int n) {
 #pragma endregion Bai51
 
 #pragma region Bai52
-	//exercise 52
+//exercise 52
 void bai52() {
 	int n;
 	nhapn(n);
@@ -1236,7 +1236,7 @@ void xuly52(int n) {
 #pragma endregion Bai52
 
 #pragma region Bai53
-	//exercise 53
+//exercise 53
 void bai53() {
 	int n;
 	nhapn(n);
@@ -1267,7 +1267,7 @@ void xuly53(int n) {
 #pragma endregion Bai53
 
 #pragma region Bai54
-	//exercise 54
+//exercise 54
 void bai54() {
 	int n;
 	nhapn(n);
@@ -1299,11 +1299,11 @@ void xuly54(int n) {
 #pragma endregion Bai54
 
 #pragma region Bai55
-	//exercise 55
+//exercise 55
 void bai55() {
 	int n;
 	nhapn(n);
-	
+
 	xuly55(n);
 	system("pause");
 }
@@ -1329,7 +1329,7 @@ void xuly55(int n) {
 #pragma endregion Bai55
 
 #pragma region Bai56
-	//exercise 56
+//exercise 56
 void bai56() {
 	int n;
 	nhapn(n);
@@ -1355,7 +1355,7 @@ void xuly56(int n) {
 #pragma endregion Bai56
 
 #pragma region Bai57
-	//exercise 57 (58)
+//exercise 57 (58)
 void bai57() {
 	int n;
 	nhapn(n);
@@ -1384,7 +1384,7 @@ void xuly57(int n) {
 #pragma endregion Bai57
 
 #pragma region Bai59
-	//exercise 59
+//exercise 59
 void bai59() {
 	int n;
 	nhapn(n);
@@ -1420,7 +1420,7 @@ void xuly59(int n) {
 #pragma endregion Bai59
 
 #pragma region Bai60
-	//exercise 60
+//exercise 60
 void bai60() {
 	int n;
 	nhapn(n);
@@ -1459,7 +1459,7 @@ void xuly60(int n) {
 #pragma endregion Bai60
 
 #pragma region Bai61
-	//exercise 61
+//exercise 61
 void bai61() {
 	int n;
 	nhapn(n);
@@ -1497,13 +1497,13 @@ void xuly61(int n) {
 #pragma endregion Bai61
 
 #pragma region Bai62
-	//exercise 62
+//exercise 62
 void bai62() {
 
 	int a, b;
 	nhapab(a, b);
-	
-	int uocchunglonnhat = xuly62( a, b);
+
+	int uocchunglonnhat = xuly62(a, b);
 
 	cout << "uoc chung lon nhat cua " << a << " va " << b << " la : " << uocchunglonnhat << endl;
 	cout << "\n";
@@ -1511,7 +1511,7 @@ void bai62() {
 
 }
 
-void nhapab(int& a, int& b){
+void nhapab(int& a, int& b) {
 	cout << "nhap so thu nhat : ";
 	cin >> a;
 	cout << "nhap so thu hai : ";
@@ -1519,9 +1519,9 @@ void nhapab(int& a, int& b){
 }
 
 int xuly62(int a, int b) {
-	while (a*b != 0) {
+	while (a * b != 0) {
 
-		if (a > b){
+		if (a > b) {
 			a = a % b;
 		}
 		else {
@@ -1534,7 +1534,7 @@ int xuly62(int a, int b) {
 #pragma endregion Bai62
 
 #pragma region Bai63
-	//exercise 63
+//exercise 63
 void bai63() {
 	int a, b;
 	nhapab(a, b);
@@ -1548,16 +1548,16 @@ void bai63() {
 #pragma endregion Bai63
 
 #pragma region Bai64
-	//exercise 64
+//exercise 64
 void bai64() {
 	cout << "\t ax + b = 0 \n";
-	float a,b;
-	nhap64(a,b);
+	float a, b;
+	nhap64(a, b);
 	xuly64(a, b);
 	system("pause");
 }
 
-void nhap64(float& a,float &b) {
+void nhap64(float& a, float& b) {
 	cout << "Nhap he so a : ";
 	do {
 		cin >> a;
@@ -1579,7 +1579,7 @@ void xuly64(float a, float b) {
 #pragma endregion Bai64
 
 #pragma region Bai65
-	//exercise 65
+//exercise 65
 void bai65() {
 	cout << "\t ax^2 + bx + c = 0 \n";
 
