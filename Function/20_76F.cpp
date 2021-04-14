@@ -342,6 +342,18 @@ void bai62();
 void bai63();
 void bai64();
 void bai65();
+void bai66();
+void bai67();
+void bai68();
+void bai69();
+void bai70();
+void bai71();
+void bai72();
+void bai73();
+void bai74();
+void bai75();
+void bai76();
+
 
 void nhapn(int& n);
 void nhapxn(int& x, int& n);
@@ -389,11 +401,23 @@ void xuly64(float a, float b);
 void nhap64(float& a, float& b);
 void xuly65(float a, float b, float c);
 void nhap65(float& a, float& b, float& c);
+void nhap66(float& a, float& b, float& c);
+void xuly66(float a, float b, float c);
+int  xuly67(int n, int x);
+int xuly68(int n, int x);
+int xuly69(int n, int x);
+float xuly70(int n);
+float xuly71(int n, int x);
+float xuly72(int n, int x);
+float xuly73(int n, int x);
+float xuly74(int n, int x);
+void xuly75(int n);
+void xuly76(int n);
 
 #pragma endregion Region_1
 int main()
 {
-	int bai = 65;
+	int bai = 27;
 #pragma region switch
 	switch (bai)
 	{
@@ -513,6 +537,39 @@ int main()
 		break;
 	case 65:
 		bai65();
+		break;
+	case 66:
+		bai66();
+		break;
+	case 67:
+		bai67();
+		break;
+	case 68:
+		bai68();
+		break;
+	case 69:
+		bai69();
+		break;
+	case 70:
+		bai70();
+		break;
+	case 71:
+		bai71();
+		break;
+	case 72:
+		bai72();
+		break;
+	case 73:
+		bai73();
+		break;
+	case 74:
+		bai74();
+		break;
+	case 75:
+		bai75();
+		break;
+	case 76:
+		bai76();
 		break;
 	default:
 		break;
@@ -1644,17 +1701,404 @@ void xuly65(float a, float b, float c) {
 #pragma endregion Bai65
 
 #pragma region Bai66
+	//exercise 66
+void bai66() {
+	float a;
+	float b;
+	float c;
+	nhap66( a, b, c);
+	xuly66(a, b, c);
+	system("pause");
+}
+
+void nhap66(float &a, float &b, float &c) {
+	cout << "\t ax^4 + bx^2 + c = 0 \n";
+	cout << "Nhap he so a : ";
+	do {
+		cin >> a;
+		if (a == 0) {
+			cout << "nhap sai, moi nhap lai: ";
+		}
+	} while (a == 0);
+	cout << "Nhap he so b : ";
+	cin >> b;
+	cout << "Nhap he so c : ";
+	cin >> c;
+}
+
+void xuly66(float a, float b, float c) {
+	bool vonghiem = 0;
+	float t1, t2, x1, x2, x3, x4;
+
+	if (b == 0) {
+		t1 = sqrt(-c / (a));
+		t2 = -sqrt(-c / (a));
+	}
+	else {
+		float denta = ((b * b) - (4 * a * c));
+		if (denta < 0) {
+			vonghiem = 1;
+		}
+		else if (denta == 0) {
+			t1 = (-b / 2 * a);
+			t2 = t1;
+		}
+		else {
+			t1 = (-b + sqrt(denta)) / (2 * a);
+			t2 = (-b - sqrt(denta)) / (2 * a);
+		}
+	}
+
+	if (vonghiem) {
+		cout << "phuong trinh vo nghiem" << endl;
+	}
+	else {
+
+		if ((t1 >= 0) && (t2 >= 0)) {
+			cout << "phuong trinh co 4 nghiem :" << endl;
+			cout << "x1 = " << sqrt(t1) << endl;
+			cout << "x2 = " << -sqrt(t1) << endl;
+			cout << "x3 = " << sqrt(t2) << endl;
+			cout << "x4 = " << -sqrt(t2) << endl;
+		}
+		else if ((t1 >= 0) && (t2 < 0)) {
+			cout << "phuong trinh co 2 nghiem :" << endl;
+			cout << "x1 = " << sqrt(t1) << endl;
+			cout << "x2 = " << -sqrt(t1) << endl;
+		}
+		else if ((t1 < 0) && (t2 >= 0)) {
+			cout << "phuong trinh co 2 nghiem :" << endl;
+			cout << "x1 = " << sqrt(t2) << endl;
+			cout << "x2 = " << -sqrt(t2) << endl;
+		}
+		else {
+			cout << "phuong trinh vo nghiem :" << endl;
+		}
+
+	}
+}
 
 #pragma endregion Bai66
 
 #pragma region Bai67
+	//exercise 67
+void bai67() {
+	int x;
+	int n;
+	nhapxn(x, n);
+	int S = xuly67(n, x);
+	cout << "S = " << S << endl;
+	system("pause");
 
+}
+
+int  xuly67(int n, int x) {
+	int S = 0;
+	int P1 = -1;
+	int P2 = 1;
+
+	for (int i = 1; i <= n; i++) {
+		P1 = P1 * (-1);
+		P2 = P2 * x;
+		S = S + (P1 * P2);
+	}
+	return S;
+}
 #pragma endregion Bai67
 
 #pragma region Bai68
+	//exercise 68
+void bai68() {
+	int x;
+	int n;
+	nhapxn(x, n);
 
+	int S = xuly68(n, x);
+
+	cout << "S = " << S << endl;
+	system("pause");
+
+}
+
+int xuly68(int n,int x){
+ 
+	int S = 0;
+	int P1 = 1;
+	int P2 = 1;
+
+	for (int i = 1; i <= n; i++) {
+		P1 = P1 * (-1);
+		P2 = P2 * x * x;
+		S = S + (P1 * P2);
+	}
+	return S;
+}
 #pragma endregion Bai68
 
 #pragma region Bai69
+	//exercise 69
+void bai69() {
+	int x;
+	int n;
+	nhapxn(x, n);
+	int S = xuly69(n, x);
+	cout << "S = " << S << endl;
+	system("pause");
 
+}
+
+int xuly69(int n, int x){
+	int S = x;
+	int P1 = 1;
+	int P2 = x;
+
+	if (n == 0) {
+		S = x;
+	}
+	else {
+		for (int i = 1; i <= n; i++) {
+			P1 = P1 * (-1);
+			P2 = P2 * x * x;
+			S = S + (P1 * P2);
+		}
+	}
+	return S;
+}
 #pragma endregion Bai69
+
+#pragma region Bai70
+	//exercise 70
+void bai70() {
+
+	int n;
+	nhapn(n);
+
+	float S = xuly70(n);
+
+	cout << "S = " << S << endl;
+	system("pause");
+}
+
+float xuly70(int n) {
+	float S = 0;
+	int P1 = -1;
+	float mauso = 0;
+
+	for (int i = 1; i <= n; i++) {
+		P1 = P1 * (-1);
+		mauso = mauso + i;
+		S = S + (P1 * (1 / mauso));
+	}
+	return S;
+}
+#pragma endregion Bai70
+
+#pragma region Bai71
+	//exercise 71
+void bai71() {
+	int x;
+	int n;
+	nhapxn(x, n);
+	float S = xuly71(n, x);
+	cout << "S = " << S << endl;
+	system("pause");
+
+}
+
+float xuly71(int n, int x) {
+	float S = 0;
+	int P1 = 1;
+	int tuso = 1;
+	float mauso = 0;
+
+	for (int i = 1; i <= n; i++) {
+		P1 = P1 * (-1);
+		tuso = tuso * x;
+		mauso = mauso + i;
+		S = S + (P1 * (tuso / mauso));
+	}
+	return S;
+}
+#pragma endregion Bai71
+
+#pragma region Bai72
+	//exercise 72
+void bai72() {
+	int x;
+	int n;
+	nhapxn(x,n);
+	float S = xuly72(n, x);
+	cout << "S = " << S << endl;
+	system("pause");
+
+}
+
+float xuly72(int n, int x) {
+	float S = 0;
+	int P1 = 1;
+	int tuso = 1;
+	float mauso = 1;
+
+	for (int i = 1; i <= n; i++) {
+		P1 = P1 * (-1);
+		tuso = tuso * x;
+		mauso = mauso * i;
+		S = S + (P1 * tuso / mauso);
+	}
+	return S;
+}
+#pragma endregion Bai72
+
+#pragma region Bai73
+	//exercise 73
+void bai73() {
+	int x;
+	int n;
+	nhapxn(x,n);
+	float S = xuly73(n, x);
+	
+	cout << "S = " << S << endl;
+	system("pause");
+
+}
+
+float xuly73(int n, int x) {
+	float S = -1;
+	int P1 = -1;
+	int tuso = 1;
+	float mauso = 1;
+
+	if (n == 0) {
+		S = -1;
+	}
+	else {
+
+
+		for (int i = 1; i <= n; i++) {
+			P1 = P1 * (-1);
+			tuso = tuso * x * x;
+			mauso = mauso * ((2 * i) - 1) * (2 * i);
+			S = S + (P1 * tuso / mauso);
+		}
+	}
+	return S;
+}
+#pragma endregion Bai73
+
+#pragma region Bai74
+	//exercise 74
+void bai74() {
+	int x;
+	int n;
+	nhapxn(x, n);
+	float S = xuly74(n, x);
+	cout << "S = " << S << endl;
+	system("pause");
+}
+
+float xuly74(int n, int x) {
+	float S = 1 - x;
+	int P1 = -1;
+	int tuso = x;
+	float mauso = 1;
+
+	if (n == 0) {
+		S = S = 1 - x;
+	}
+	else {
+
+		for (int i = 1; i <= n; i++) {
+			P1 = P1 * (-1);
+			tuso = tuso * x * x;
+			mauso = mauso * (2 * i) * ((2 * i) + 1);
+			S = S + (P1 * tuso / mauso);
+		}
+	}
+	return S;
+}
+
+#pragma endregion Bai74
+
+#pragma region Bai75
+void bai75() {
+	int n;
+	nhapn(n);
+	xuly75(n);
+	system("pause");
+}
+void xuly75(int n) {
+	bool is2muk = 1;
+	int somu = 0;
+	int a = n;
+
+	if (a == 1) {
+		somu = 0;
+	}
+	else
+	{
+		while (a >= 2) {
+			if (a % 2 != 0) {
+				is2muk = 0;
+				break;
+			}
+			else {
+				somu = somu + 1;
+				a = a / 2;
+			}
+
+		}
+	}
+
+	if (is2muk) {
+		cout << "so tu nhien " << n << " la 2 mu " << somu << endl;
+	}
+	else {
+		cout << "so tu nhien " << n << " khong phai la 2 mu k" << endl;
+	}
+}
+#pragma endregion Bai75
+
+#pragma region Bai76
+void bai76() {
+	int n;
+	nhapn(n);
+	xuly76(n);
+
+
+	system("pause");
+}
+
+void xuly76(int n) {
+	bool is3muk = 1;
+	int somu = 0;
+	int a = n;
+
+	if (a == 1) {
+		somu = 0;
+	}
+	else if (a < 3) {
+		is3muk = 0;
+	}
+	else
+	{
+		while (a >=3) {
+			if (a % 3 != 0) {
+				is3muk = 0;
+				break;
+			}
+			else {
+				somu = somu + 1;
+				a = a / 3;
+			}
+
+		}
+	}
+
+	if (is3muk) {
+		cout << "so tu nhien " << n << " la 3 mu " << somu << endl;
+	}
+	else {
+		cout << "so tu nhien " << n << " khong phai la 3 mu k" << endl;
+	}
+}
+#pragma endregion Bai76
