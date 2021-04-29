@@ -9,7 +9,6 @@ int main() {
     int select;
     bool willExit = false;
     do {
-
         system("cls");
         cout << "1.  Nhap mang mot chieu.";
         cout << "\n2.  Xuat mang.";
@@ -39,6 +38,21 @@ int main() {
             break;
         case 4:
             bai4(a, n);
+            break;
+        case 5:
+            bai5(a, n);
+            break;
+        case 6:
+            bai6(a, n);
+        case 7:
+            bai7(a, n);
+        case 8:
+            bai8(a, n);
+        case 9:
+            bai9(a, n);
+        case 10:
+            bai10(a, n);
+            willExit = true;
             break;
         default:
             break;
@@ -95,7 +109,6 @@ void bai4(int *a, int n) {
     system("pause");
 }
 
-
 void bai5(int *a, int n) {
     int soduongdau = duongdau(a, n);
     cout << "\ngia tri duong dau tien: " << soduongdau << endl;
@@ -111,4 +124,115 @@ int duongdau(int *a, int n) {
         a++;
     }
     return -1;
+}
+
+void bai6(int *a, int n) {
+    int sochancuoi = chancuoi(a, n);
+    cout << "\ngia so chan cuoi cung: " << sochancuoi << endl;
+}
+
+int chancuoi(int *a, int n) {
+    a = a + n - 1;
+    for (int i = n - 1; i >= 0; i--) {
+        if (*a % 2 == 0) {
+            return *a;
+        }
+        a--;
+    }
+    return -1;
+}
+
+void bai7(int *a, int n) {
+    cout << "\nvi tri nho nhat cua mang la: a[" << vitrinhonhat(a, n) << "]";
+}
+
+int vitrinhonhat(int *a, int n) {
+    int min = *a;
+    int vitrimin = 0;
+    for (int i = 0; i < n; i++) {
+        if (*a < min) {
+            min = *a;
+            vitrimin = i;
+        }
+        a++;
+    }
+    return vitrimin;
+}
+
+void bai8(int *a, int n) {
+    cout << "\nso nguyen to dau tien trong mang : " << songuyentodau(a, n) << endl;
+}
+
+int songuyentodau(int *a, int n) {
+    for (int i = 0; i < n; i++) {
+        if (checkSonguyento(*a) == 1) {
+            return *a;
+        }
+        a++;
+    }
+    return -1;
+}
+
+bool checkSonguyento(int n) {
+    if (n < 2) {
+        return 0;
+    }
+
+    if (n == 2) {
+        return 1;
+    }
+
+    for (int i = 2; i <= n / 2; i++) {
+        if (n % i == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void bai9(int *a, int n) {
+    int sntmax = songuyentomax(a, n);
+    cout << "\nso nguyen to lon nhat trong mang : " << sntmax << endl;
+}
+
+int vitrisonguyentodau(int *a, int n) {
+    for (int i = 0; i < n; i++) {
+        if (checkSonguyento(*a) == 1) {
+            return i;
+        }
+        a++;
+    }
+    return -1;
+}
+
+int songuyentomax(int *a, int n) {
+
+    if (songuyentodau(a, n) == -1) {
+        return 0;
+    }
+    int sntMax = songuyentodau(a, n);
+    for (int i = vitrisonguyentodau(a, n); i < n; i++) {
+        if ((checkSonguyento(*a) == 1) && (*a > sntMax)) {
+            sntMax = *a;
+        }
+        a++;
+    }
+
+    return sntMax;
+}
+
+void bai10(int *a, int n) {
+    int x;
+    cout << "\nnhap so nguyen x: ";
+    cin >> x;
+    int xanhat = 0;
+    int khoangcachxanhat = abs(*a - x);
+    for (int i = 0; i < n; i++) {
+        if (abs(x - *a) > khoangcachxanhat) {
+            khoangcachxanhat = abs(x - *a);
+            xanhat = *a;
+        }
+        a++;
+    }
+    cout << "xa gia tri " << x << " nhat la : " << xanhat << endl;
 }
