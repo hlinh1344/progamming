@@ -46,3 +46,5 @@ AlgorithmChart/x64/Debug/
 *.tlog
 *.log
 *.vcxproj.user
+*.recipe
+.vs/
