@@ -15,16 +15,20 @@ void menu(int& select, bool willExit, char* yourString, int& lengthOfString) {
         std::cout << "6.Check Palindrome string.\n";
         std::cout << "7.Shorten the string to n characters.\n";
         std::cout << "8.Capitalizes the first letter in every word.\n";
-        std::cout << "9.Check all characters (are Alphabetic?)\n";
-        std::cout << "10.\n";
-        std::cout << "11.\n";
-        std::cout << "12.\n";
-        std::cout << "13.\n";
-        std::cout << "14.\n";
+        std::cout << "9.Capitalizes the first letter in the sring.\n";
+        std::cout << "10.Check all characters (are Alphabetic?).\n";
+        std::cout << "11.Reverses the characters in the string.\n";
+        std::cout << "12.Counts the occurrences of a character in the string.\n";
+        std::cout << "13.Counts the occurrences (of all characters in the second string) in the first string. \n";
+        std::cout << "14.Delete all occurrences of a character in the string.\n";
         std::cout << "15.Exit the program\n";
+        std::cout << "Select a action you want to do: ";
+        std::cin >> select;
 
         int n;
-        std::cin >> select;
+        char c;
+        int count_c;
+     
         switch (select) {
         case 1:
             trimRight(yourString, lengthOfString);
@@ -60,7 +64,7 @@ void menu(int& select, bool willExit, char* yourString, int& lengthOfString) {
             if (isPalindrome(yourString, lengthOfString))
                 std::cout << "\n" << yourString << " is a palindrome\n";
             else
-                std::cout << "\n" << yourString << " is not a palindrome\n";
+                std::cout << "\n" << yourString << " is NOT a palindrome\n";
             system("pause");
             break;
         case 7:
@@ -76,27 +80,42 @@ void menu(int& select, bool willExit, char* yourString, int& lengthOfString) {
             system("pause");
             break;
         case 9:
-            if (isAlpha(yourString, lengthOfString))
-                std::cout << "\nAll characters in the parameter are alphabetic.\n";
-            else
-                std::cout << "\nAll characters in the parameter are not alphabetic.\n";
+            capitalize(yourString, lengthOfString);
             std::cout << yourString << ".\n";
             system("pause");
             break;
         case 10:
-
+            if (isAlpha(yourString, lengthOfString))
+                std::cout << "\nAll characters in the parameter are alphabetic.\n";
+            else
+                std::cout << "\nAll characters in the parameter are NOT alphabetic.\n";
+            std::cout << yourString << ".\n";
+            system("pause");
             break;
         case 11:
-
+            reverseString(yourString, lengthOfString);
+            std::cout << yourString << ".\n";
+            system("pause");
             break;
         case 12:
-
+            std::cout << "\nEnter a character you want to count : ";
+            std::cin >> c;
+            count_c = count(yourString, c, lengthOfString);
+            std::cout << "\nNumbers of "<< c <<" in the string : "<< count_c<< std::endl;
+            std::cout << yourString << ".\n";
+            system("pause");
             break;
         case 13:
-
+            count(yourString, lengthOfString);
+            std::cout << yourString << ".\n";
+            system("pause");
             break;
         case 14:
-
+            std::cout << "\nEnter a character you want to delete : ";
+            std::cin >> c;
+            deleteChar(yourString, lengthOfString, c);
+            std::cout << yourString << ".\n";
+            system("pause");
             break;
         case 15:
             exitProgram(willExit);
@@ -221,6 +240,14 @@ void capitalizeWords(char* yourString, int lengthOfString) {
     }
 }
 
+void capitalize(char* yourString, int lengthOfString) {
+    for (int i = 0; i < lengthOfString; i++) {
+        if (((yourString[i] >= 'a') && (yourString[i] <= 'z')) || ((yourString[i] >= 'A') && (yourString[i] <= 'Z'))) {
+            upperCharacter(yourString[i]);
+            break;
+        }
+   }
+}
 int length(char* yourString) {
     int i = 0;
     while (yourString[i] != NULL)
@@ -231,10 +258,49 @@ int length(char* yourString) {
 bool isAlpha(char* yourString, int lengthOfString) {
     bool temp = 1;
     for (int i = 0; i < lengthOfString; i++) {
-        if ((yourString[i] != ' ') && ((yourString[i] < 'a') && (yourString[i] > 'z')) && ((yourString[i] < 'A') && (yourString[i] > 'Z'))) {
-            bool temp = 0;
+        if (!((yourString[i] == ' ') || ((yourString[i] >= 'a') && (yourString[i] <= 'z')) || ((yourString[i] >= 'A') && (yourString[i] <= 'Z')) )) {
+            temp = 0;
             break;
         }
     }
     return temp;
+}
+
+int count(char* yourString, char c, int lengthOfString) {
+    int temp = 0;
+    for (int i = 0; i < lengthOfString; i++) {
+        if (yourString[i] == c) {
+            temp++;
+        }
+    }
+    return temp;
+}
+
+int count(char* yourString, int lengthOfString) {
+  // char* secondString = new char[100];
+  // std::cout << "\nEnter a second string : ";
+   //std::cin.getline(secondString, 100);
+
+    char a[3] = {'b','a','x'};
+    char *secondString = &a[0];
+    int lengthOf2ndString = length(secondString);
+    int temp = 0;
+    for (int i = 0; i < lengthOf2ndString; i++) {
+        temp += count(yourString, secondString[i], lengthOfString);
+    }
+    std::cout << "\nOccurrences of all charactes in second string in the first string : " << temp << std::endl;
+    return temp;
+}
+
+void deleteChar(char* yourString, int &lengthOfString, char c) {
+    for (int i = 0; i < lengthOfString; i++) {
+        if (yourString[i] == c) {
+            lengthOfString--;
+            for (int j = i; j < lengthOfString; j++) {
+                yourString[j] = yourString[j + 1];
+            }
+            yourString[lengthOfString] = NULL;
+            i--;
+        }
+    }
 }

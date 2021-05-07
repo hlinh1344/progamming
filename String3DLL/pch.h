@@ -32,3 +32,7 @@ STRING3DLL_API void upperCharacter(char& a);
 STRING3DLL_API void lowerCharacter(char& a);
 STRING3DLL_API void capitalizeWords(char* yourString, int lengthOfString);
 STRING3DLL_API bool isAlpha(char* yourString, int lengthOfString);
+STRING3DLL_API void capitalize(char* yourString, int lengthOfString);
+STRING3DLL_API int count(char *yourString, char c, int lengthOfString);
+STRING3DLL_API int count(char* yourString, int lengthOfString);
+STRING3DLL_API void deleteChar(char* yourString, int& lengthOfString, char c);

@@ -3,12 +3,8 @@
 
 
 int main() {
-
-
     bool willExit = 0;
     int select;
-
-
     std::cout << "\nEnter the string : ";
     char* yourString =  new char[100];
     std::cin.getline(yourString, 100);
