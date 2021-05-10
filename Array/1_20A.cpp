@@ -5,8 +5,6 @@
 #include <iostream>
 #include <vector>
 #include "IO.h"
-//#include "Algorithm.h"
-#include "Source.h"
 
 using namespace std;
 
@@ -44,6 +42,7 @@ void bai19(int a[], int n);
 void bai20(int a[], int n);
 void bai21(int a[], int n);
 vector<vector<int>> C(int a[], int l, int n, int k, int x);
+int sum(int a[], int n);
 int sum2(vector <int> a);
 void inVT(vector <int> a);
 void bai22(int a[], int n);
@@ -591,6 +590,13 @@ void bai21(int a[], int n) {
         }
     }  
  }
+
+int sum(int a[], int n) {
+    int Sum = 0;
+    for (int j = 0; j < n; j++)
+        Sum = Sum + a[j];
+    return Sum;
+}
 
 int sum2(vector <int> a) {
     int Sum = 0;

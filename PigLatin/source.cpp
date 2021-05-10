@@ -7,14 +7,13 @@
 char* ToPigLatin(char* word) {
   
     char last[MAX] = {};
-    
-    char vowel[] = { 'a','e','o','u','i','A','E','O','U','I' };
-    char vowel[256] = "aeouiAEOUI";
+       
+    char vowel[16] = "aeouiAEOUI";
     int mid = 0;
 
     int length = lengOfWord(word);
-
-    char *result = new char(length);
+    int resultLength = length + 3;
+    char *result = new char[resultLength];
     for (int i = 0; i < length; i++) {
         result[i] = word[i];
     }
@@ -34,7 +33,7 @@ char* ToPigLatin(char* word) {
         }
     }
 
-    if (!isLowerCaseCharacters(result[0])) {
+    if (!isLowerCase(result[0])) {
         result[mid] -= 32;
         result[0] += 32;
     }
@@ -61,7 +60,7 @@ char* ToPigLatin(char* word) {
     for (int i = mid; i < length; i++) {
         result[b++] = result[i];
     }
-
+    
     for (int i = 0; i < mid + (newLength - length); i++) {
         result[b++] = last[i];
     }
@@ -73,42 +72,16 @@ char* ToPigLatin(char* word) {
 
 
 int lengOfWord(char* word) {
-    //for (int i = 0; i < 43; i++) {
-    //    if (word[i] == NULL) {
-    //        return i;
-    //    }
-    //}
-    // 
-    // 
-    // 
-    // 
-    // 
-    // giai phong resource
-    //return -1;
-    int i = 0;
-    for (; word[i] != NULL; i++)
-        ;
-    return i;
-
     int i = 0;
     while (word[i] != NULL)
         i++;
     return i;
-
-
-
-    int temp = 0;
-    while (word != NULL) {
-        word++;
-        temp++;
-    }
-    return temp;
 }
 
 
 bool isVowel(char a, char vowel[]) {
     bool result = false;
-    int n = sizeof(vowel) / sizeof(char);
+    int n = lengOfWord(vowel);
     for (int i = 0; i < n; i++) {
         if (a == vowel[i]) {
             result = true;
@@ -118,8 +91,8 @@ bool isVowel(char a, char vowel[]) {
     return result;
 }
 
-bool isLowerCaseCharacters(char a) {
+bool isLowerCase(char a) {
     if ((a >= 'a') && (a <= 'z')) 
-        return 0;
-    return 1;
+        return false;
+    return true;
 }

@@ -48,3 +48,7 @@ AlgorithmChart/x64/Debug/
 *.vcxproj.user
 *.recipe
 .vs/
+String3/x64/Debug/vc.nativecodeanalysis.all.xml
+String3/x64/Debug/Source.nativecodeanalysis.xml
+String3/x64/Debug/Source.nativecodeanalysis.sarif
+String3/x64/Debug/CodeAnalysisResultManifest.txt

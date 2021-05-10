@@ -7,9 +7,11 @@ int main() {
     int select;
     std::cout << "\nEnter the string : ";
     char* yourString =  new char[100];
+    
     std::cin.getline(yourString, 100);
-    int lengthOfString = length(yourString);
-    menu(select, willExit, yourString, lengthOfString);
+    int stringLength = length(yourString);
+    menu(select, willExit, yourString, stringLength);
+    delete []yourString;
     system("pause");
     return 0;
 

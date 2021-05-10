@@ -4,7 +4,7 @@
 #include "pch.h"
 
 // When you are using pre-compiled headers, this source file is necessary for compilation to succeed.
-void menu(int& select, bool willExit, char* yourString, int& lengthOfString) {
+void menu(int& select, bool willExit, char* yourString, int& stringLength) {
     do {
         system("cls");
         std::cout << "1.Remove all trailing blanks from the right end of the string.\n";
@@ -28,15 +28,15 @@ void menu(int& select, bool willExit, char* yourString, int& lengthOfString) {
         int n;
         char c;
         int count_c;
-     
+        char* secondString;
         switch (select) {
         case 1:
-            trimRight(yourString, lengthOfString);
+            trimRight(yourString, stringLength);
             std::cout << yourString << ".\n";
             system("pause");
             break;
         case 2:
-            trimLeft(yourString, lengthOfString);
+            trimLeft(yourString, stringLength);
             std::cout << yourString << ".\n";
             system("pause");
             break;
@@ -44,24 +44,24 @@ void menu(int& select, bool willExit, char* yourString, int& lengthOfString) {
 
             std::cout << "\nenter the minimum length of string: ";
             std::cin >> n;
-            padRight(yourString, lengthOfString, n);
+            padRight(yourString, stringLength, n);
             std::cout << yourString << ".\n";
             system("pause");
             break;
         case 4:
             std::cout << "\nenter the minimum length of string: ";
             std::cin >> n;
-            padLeft(yourString, lengthOfString, n);
+            padLeft(yourString, stringLength, n);
             std::cout << yourString << ".\n";
             system("pause");
             break;
         case 5:
-            center(yourString, lengthOfString);
+            center(yourString, stringLength);
             std::cout << yourString << ".\n";
             system("pause");
             break;
         case 6:
-            if (isPalindrome(yourString, lengthOfString))
+            if (isPalindrome(yourString, stringLength))
                 std::cout << "\n" << yourString << " is a palindrome\n";
             else
                 std::cout << "\n" << yourString << " is NOT a palindrome\n";
@@ -70,22 +70,22 @@ void menu(int& select, bool willExit, char* yourString, int& lengthOfString) {
         case 7:
             std::cout << "\nenter the maximum length of string: ";
             std::cin >> n;
-            truncate(yourString, lengthOfString, n);
+            truncate(yourString, stringLength, n);
             std::cout << yourString << ".\n";
             system("pause");
             break;
         case 8:
-            capitalizeWords(yourString, lengthOfString);
+            capitalizeWords(yourString, stringLength);
             std::cout << yourString << ".\n";
             system("pause");
             break;
         case 9:
-            capitalize(yourString, lengthOfString);
+            capitalize(yourString, stringLength);
             std::cout << yourString << ".\n";
             system("pause");
             break;
         case 10:
-            if (isAlpha(yourString, lengthOfString))
+            if (isAlpha(yourString, stringLength))
                 std::cout << "\nAll characters in the parameter are alphabetic.\n";
             else
                 std::cout << "\nAll characters in the parameter are NOT alphabetic.\n";
@@ -93,27 +93,32 @@ void menu(int& select, bool willExit, char* yourString, int& lengthOfString) {
             system("pause");
             break;
         case 11:
-            reverseString(yourString, lengthOfString);
+            reverseString(yourString, stringLength);
             std::cout << yourString << ".\n";
             system("pause");
             break;
         case 12:
             std::cout << "\nEnter a character you want to count : ";
             std::cin >> c;
-            count_c = count(yourString, c, lengthOfString);
+            count_c = count(yourString, c, stringLength);
             std::cout << "\nNumbers of "<< c <<" in the string : "<< count_c<< std::endl;
             std::cout << yourString << ".\n";
             system("pause");
             break;
         case 13:
-            count(yourString, lengthOfString);
+            secondString = new char[100];
+            std::cout << "\nEnter a second string : ";
+            std::cin.ignore();
+            std::cin.getline(secondString, 100);
+            count(yourString, stringLength,secondString);
+            delete[]secondString;
             std::cout << yourString << ".\n";
             system("pause");
             break;
         case 14:
             std::cout << "\nEnter a character you want to delete : ";
             std::cin >> c;
-            deleteChar(yourString, lengthOfString, c);
+            deleteChar(yourString, stringLength, c);
             std::cout << yourString << ".\n";
             system("pause");
             break;
@@ -130,27 +135,27 @@ void exitProgram(bool& willExit) {
     willExit = 1;
 }
 
-void trimRight(char* yourString, int& lengthOfString) {
-    for (int i = lengthOfString - 1; i >= 0; i--) {
+void trimRight(char* yourString, int& stringLength) {
+    for (int i = stringLength - 1; i >= 0; i--) {
         if (yourString[i] != ' ')
             break;
         else {
             yourString[i] = NULL;
-            lengthOfString--;
+            stringLength--;
         }
     }
 }
 
-void trimLeft(char* yourString, int& lengthOfString) {
-    reverseString(yourString, lengthOfString);
-    trimRight(yourString, lengthOfString);
-    reverseString(yourString, lengthOfString);
+void trimLeft(char* yourString, int& stringLength) {
+    reverseString(yourString, stringLength);
+    trimRight(yourString, stringLength);
+    reverseString(yourString, stringLength);
 }
 
-void reverseString(char* yourString, int lengthOfString) {
+void reverseString(char* yourString, int stringLength) {
 
-    for (int i = 0; i < (int)lengthOfString / 2; i++) {
-        swap(yourString[i], yourString[lengthOfString - i - 1]);
+    for (int i = 0; i < (int)stringLength / 2; i++) {
+        swap(yourString[i], yourString[stringLength - i - 1]);
 
     }
 }
@@ -162,48 +167,48 @@ void swap(char& a, char& b) {
     b = temp;
 }
 
-void padRight(char* yourString, int& lengthOfString, int n) {
-    if (lengthOfString < n) {
-        while (lengthOfString < n) {
-            yourString[lengthOfString++] = ' ';
+void padRight(char* yourString, int& stringLength, int n) {
+    if (stringLength < n) {
+        while (stringLength < n) {
+            yourString[stringLength++] = ' ';
         }
-        yourString[lengthOfString] = NULL;
+        yourString[stringLength] = NULL;
     }
 }
 
-void padLeft(char* yourString, int& lengthOfString, int n) {
-    int diff = n - lengthOfString;
+void padLeft(char* yourString, int& stringLength, int n) {
+    int diff = n - stringLength;
     if (diff > 0) {
-        yourString[lengthOfString] = ' ';
+        yourString[stringLength] = ' ';
         yourString[n] = NULL;
 
-        for (int i = n - 1; i >= n - lengthOfString; i--)
+        for (int i = n - 1; i >= n - stringLength; i--)
             yourString[i] = yourString[i - diff];
 
         for (int i = 0; i < diff; i++)
             yourString[i] = ' ';
 
-        lengthOfString = n;
+        stringLength = n;
     }
 }
 
-void center(char* yourString, int& lengthOfString) {
+void center(char* yourString, int& stringLength) {
     int n;
     std::cout << "\nenter the least length of string: ";
     std::cin >> n;
-    if (lengthOfString < n) {
-        int nLeft = (n - lengthOfString) / 2;
-        int nRight = n - nLeft - lengthOfString;
-        padLeft(yourString, lengthOfString, nLeft + lengthOfString);
-        padRight(yourString, lengthOfString, nRight + lengthOfString);
+    if (stringLength < n) {
+        int nLeft = (n - stringLength) / 2;
+        int nRight = n - nLeft - stringLength;
+        padLeft(yourString, stringLength, nLeft + stringLength);
+        padRight(yourString, stringLength, nRight + stringLength);
     }
 }
 
-bool isPalindrome(char* yourString, int lengthOfString) {
+bool isPalindrome(char* yourString, int stringLength) {
     bool isPalindrome_a = 1;
 
-    for (int i = 0; i < lengthOfString / 2; i++) {
-        if (yourString[i] != yourString[lengthOfString - 1 - i]) {
+    for (int i = 0; i < stringLength / 2; i++) {
+        if (yourString[i] != yourString[stringLength - 1 - i]) {
             isPalindrome_a = 0;
             break;
         }
@@ -211,12 +216,12 @@ bool isPalindrome(char* yourString, int lengthOfString) {
     return isPalindrome_a;
 }
 
-void truncate(char* yourString, int& lengthOfString, int n) {
-    if (n < lengthOfString) {
+void truncate(char* yourString, int& stringLength, int n) {
+    if (n < stringLength) {
         yourString[n] = NULL;
-        lengthOfString = n;
+        stringLength = n;
     }
-    std::cout << lengthOfString << std::endl;
+    std::cout << stringLength << std::endl;
 }
 
 void upperCharacter(char& a) {
@@ -230,9 +235,9 @@ void lowerCharacter(char& a) {
     }
 }
 
-void capitalizeWords(char* yourString, int lengthOfString) {
+void capitalizeWords(char* yourString, int stringLength) {
     upperCharacter(yourString[0]);
-    for (int i = 1; i < lengthOfString; i++) {
+    for (int i = 1; i < stringLength; i++) {
         if (yourString[i - 1] == ' ')
             upperCharacter(yourString[i]);
         else
@@ -240,8 +245,8 @@ void capitalizeWords(char* yourString, int lengthOfString) {
     }
 }
 
-void capitalize(char* yourString, int lengthOfString) {
-    for (int i = 0; i < lengthOfString; i++) {
+void capitalize(char* yourString, int stringLength) {
+    for (int i = 0; i < stringLength; i++) {
         if (((yourString[i] >= 'a') && (yourString[i] <= 'z')) || ((yourString[i] >= 'A') && (yourString[i] <= 'Z'))) {
             upperCharacter(yourString[i]);
             break;
@@ -255,9 +260,9 @@ int length(char* yourString) {
     return i;
 }
 
-bool isAlpha(char* yourString, int lengthOfString) {
+bool isAlpha(char* yourString, int stringLength) {
     bool temp = 1;
-    for (int i = 0; i < lengthOfString; i++) {
+    for (int i = 0; i < stringLength; i++) {
         if (!((yourString[i] == ' ') || ((yourString[i] >= 'a') && (yourString[i] <= 'z')) || ((yourString[i] >= 'A') && (yourString[i] <= 'Z')) )) {
             temp = 0;
             break;
@@ -266,9 +271,9 @@ bool isAlpha(char* yourString, int lengthOfString) {
     return temp;
 }
 
-int count(char* yourString, char c, int lengthOfString) {
+int count(char* yourString, char c, int stringLength) {
     int temp = 0;
-    for (int i = 0; i < lengthOfString; i++) {
+    for (int i = 0; i < stringLength; i++) {
         if (yourString[i] == c) {
             temp++;
         }
@@ -276,30 +281,26 @@ int count(char* yourString, char c, int lengthOfString) {
     return temp;
 }
 
-int count(char* yourString, int lengthOfString) {
-  // char* secondString = new char[100];
-  // std::cout << "\nEnter a second string : ";
-   //std::cin.getline(secondString, 100);
+int count(char* yourString, int stringLength,char * secondString) {
 
-    char a[3] = {'b','a','x'};
-    char *secondString = &a[0];
-    int lengthOf2ndString = length(secondString);
+    int stringLength2 = length(secondString);
     int temp = 0;
-    for (int i = 0; i < lengthOf2ndString; i++) {
-        temp += count(yourString, secondString[i], lengthOfString);
+    for (int i = 0; i < stringLength2; i++) {
+        temp += count(yourString, secondString[i], stringLength);
     }
     std::cout << "\nOccurrences of all charactes in second string in the first string : " << temp << std::endl;
+    
     return temp;
 }
 
-void deleteChar(char* yourString, int &lengthOfString, char c) {
-    for (int i = 0; i < lengthOfString; i++) {
+void deleteChar(char* yourString, int &stringLength, char c) {
+    for (int i = 0; i < stringLength; i++) {
         if (yourString[i] == c) {
-            lengthOfString--;
-            for (int j = i; j < lengthOfString; j++) {
+            stringLength--;
+            for (int j = i; j < stringLength; j++) {
                 yourString[j] = yourString[j + 1];
             }
-            yourString[lengthOfString] = NULL;
+            yourString[stringLength] = NULL;
             i--;
         }
     }

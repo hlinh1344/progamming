@@ -24,6 +24,7 @@
     <ProjectGuid>{7b6306da-5873-46ff-a984-cee570384fef}</ProjectGuid>
     <RootNamespace>String3DLL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>StringManipulateLib</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

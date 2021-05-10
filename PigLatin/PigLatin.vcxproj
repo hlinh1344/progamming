@@ -24,6 +24,7 @@
     <ProjectGuid>{e57f4dad-d3e4-4a83-b904-87b05c8e6bd1}</ProjectGuid>
     <RootNamespace>PigLatin</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>PigLatinLib</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
