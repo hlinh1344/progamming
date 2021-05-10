@@ -13,18 +13,22 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Array", "Array\Array.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArrayP", "ArrayP\ArrayP.vcxproj", "{E3DB3AC7-85DC-42F9-97B8-6B7458E4C2EB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String", "String\String.vcxproj", "{EA80E6FB-690E-49E9-8BEE-802A7137BB0A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleString", "String\String.vcxproj", "{EA80E6FB-690E-49E9-8BEE-802A7137BB0A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String2", "String2\String2.vcxproj", "{BB8B3C77-C4E7-495B-8B38-929832092E4E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PigLatinString", "String2\String2.vcxproj", "{BB8B3C77-C4E7-495B-8B38-929832092E4E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PigLatin", "PigLatin\PigLatin.vcxproj", "{E57F4DAD-D3E4-4A83-B904-87B05C8E6BD1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PigLatinLib", "PigLatin\PigLatin.vcxproj", "{E57F4DAD-D3E4-4A83-B904-87B05C8E6BD1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String3", "String3\String3.vcxproj", "{ADD72418-6F01-4463-89D8-E1213D5D0CE5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StringManipulate", "String3\String3.vcxproj", "{ADD72418-6F01-4463-89D8-E1213D5D0CE5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7B6306DA-5873-46FF-A984-CEE570384FEF} = {7B6306DA-5873-46FF-A984-CEE570384FEF}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String3DLL", "String3DLL\String3DLL.vcxproj", "{7B6306DA-5873-46FF-A984-CEE570384FEF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StringManipulateLib", "String3DLL\String3DLL.vcxproj", "{7B6306DA-5873-46FF-A984-CEE570384FEF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FoodOrder", "FoodOrder\FoodOrder.vcxproj", "{FE1E8807-3108-45B8-BF3C-0CDEB3FC80AC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FoodOrderLib", "FoodOrderLib\FoodOrderLib.vcxproj", "{3A5217AA-C0D8-4370-A166-A71E030854A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -114,6 +118,22 @@ Global
 		{7B6306DA-5873-46FF-A984-CEE570384FEF}.Release|x64.Build.0 = Release|x64
 		{7B6306DA-5873-46FF-A984-CEE570384FEF}.Release|x86.ActiveCfg = Release|Win32
 		{7B6306DA-5873-46FF-A984-CEE570384FEF}.Release|x86.Build.0 = Release|Win32
+		{FE1E8807-3108-45B8-BF3C-0CDEB3FC80AC}.Debug|x64.ActiveCfg = Debug|x64
+		{FE1E8807-3108-45B8-BF3C-0CDEB3FC80AC}.Debug|x64.Build.0 = Debug|x64
+		{FE1E8807-3108-45B8-BF3C-0CDEB3FC80AC}.Debug|x86.ActiveCfg = Debug|Win32
+		{FE1E8807-3108-45B8-BF3C-0CDEB3FC80AC}.Debug|x86.Build.0 = Debug|Win32
+		{FE1E8807-3108-45B8-BF3C-0CDEB3FC80AC}.Release|x64.ActiveCfg = Release|x64
+		{FE1E8807-3108-45B8-BF3C-0CDEB3FC80AC}.Release|x64.Build.0 = Release|x64
+		{FE1E8807-3108-45B8-BF3C-0CDEB3FC80AC}.Release|x86.ActiveCfg = Release|Win32
+		{FE1E8807-3108-45B8-BF3C-0CDEB3FC80AC}.Release|x86.Build.0 = Release|Win32
+		{3A5217AA-C0D8-4370-A166-A71E030854A6}.Debug|x64.ActiveCfg = Debug|x64
+		{3A5217AA-C0D8-4370-A166-A71E030854A6}.Debug|x64.Build.0 = Debug|x64
+		{3A5217AA-C0D8-4370-A166-A71E030854A6}.Debug|x86.ActiveCfg = Debug|Win32
+		{3A5217AA-C0D8-4370-A166-A71E030854A6}.Debug|x86.Build.0 = Debug|Win32
+		{3A5217AA-C0D8-4370-A166-A71E030854A6}.Release|x64.ActiveCfg = Release|x64
+		{3A5217AA-C0D8-4370-A166-A71E030854A6}.Release|x64.Build.0 = Release|x64
+		{3A5217AA-C0D8-4370-A166-A71E030854A6}.Release|x86.ActiveCfg = Release|Win32
+		{3A5217AA-C0D8-4370-A166-A71E030854A6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
