@@ -1,0 +1,18 @@
+
+
+                           NOWFOODY
+                         www.foody.vn
+
+
+Item Name                       Rate       Qty       Amount	Note                
+---------------------------------------------------------------------------
+tra sua                         3000         4        12000	khong da            
+tra dao                         6000         2        12000	khong duong         
+---------------------------------------------------------------------------
+ITEMS SOLD :                                 6
+SUB TOTAL :                                           24000 VND
+SALE :                                                  0.0 VND
+SERVICE FEE :                                          2000 VND
+DELIVERY FEE :                                        13000 VND
+---------------------------------------------------------------------------
+TOTAL :                                               39000 VND
