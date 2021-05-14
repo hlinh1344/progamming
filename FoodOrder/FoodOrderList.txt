@@ -14,3 +14,7 @@ kem plan
 3
 9000
 it duong
+kem plan2
+8
+9000
+it duong
