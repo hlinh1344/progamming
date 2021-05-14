@@ -14,52 +14,51 @@ void enterOrderList(OrderItem* &list, int &n) {
     std::cout << "\nNumber of dishes you want to order : ";
     std::cin >> n;
     list = new OrderItem[n];
-    enterItem(list, n);
     std::cin.ignore();
-}
-void enterItem(OrderItem* list, int n) {
+
     for (int i = 0; i < n; i++) {
-        std::cout << "\n" << i + 1 << ".Name : ";
-        std::cin.getline(list[i].name, 100);
-        std::cout << i + 1 << ".Quantity : ";
-        std::cin >> list[i].quantity;
-        std::cout << i + 1 << ".Rate : ";
-        std::cin >> list[i].rate;
-        std::cout << i + 1 << ".Note : ";
-        std::cin.ignore();
-        std::cin.getline(list[i].note, 256);
+        std::cout << "\n" << (i + 1) << ":\n";
+        enterItem(list[i]);
     }
-    
+}
+void enterItem(OrderItem &item) {
+        std::cout << "\tName : ";
+        std::cin.getline(item.name, 100);
+        std::cout << "\tQuantity : ";
+        std::cin >> item.quantity;
+        std::cout << "\tRate : ";
+        std::cin >> item.rate;
+        std::cout << "\tNote : ";
+        std::cin.ignore();
+        std::cin.getline(item.note, 100);
 }
 
-void valueOfEachItem(OrderItem* list, int n) {
+void valueOfAllItems(OrderItem* list, int n) {
     for (int i = 0; i < n; i++) {
-        list[i].amount = list[i].rate * list[i].quantity;
+        valueOfEachItem(list[i]);
     }
+}
+
+void valueOfEachItem(OrderItem &item) {
+        item.amount = item.rate * item.quantity;
 }
 
 void display(OrderItem* list, int n) {
-
-    displayHeader(list, n);
-    for (int i = 0; i < 15; i++) {
-        std::cout << "-----";
-    }
-
-    std::cout << "\n";
-
+    displayHeader();
+    std::cout << "---------------------------------------------------------------------------\n";
     for (int i = 0; i < n; i++) {
-    displayItem(list,n,i);
+    displayItem(list[i]);
     }
 }
 
-void displayHeader(OrderItem* list, int n) {
+void displayHeader() {
     std::cout << "\n" << std::setw(25) << std::left << "Item Name" << std::setw(11) << std::right << "Rate" << std::setw(10) << std::right << "Qty" <<
         std::setw(13) << std::right << "Amount" << "\t" << std::setw(20) << std::left << "Note" << std::endl;
 }
 
-void displayItem(OrderItem* list, int n,int i) {
-        std::cout << std::setw(25) << std::left << list[i].name << std::setw(11) << std::right << list[i].rate << std::setw(10) << std::right << list[i].quantity <<
-            std::setw(13) << std::right << list[i].amount << "\t" << std::setw(20) << std::left << list[i].note << std::endl; 
+void displayItem(OrderItem &item) {
+        std::cout << std::setw(25) << std::left << item.name << std::setw(11) << std::right << item.rate << std::setw(10) << std::right << item.quantity <<
+            std::setw(13) << std::right << item.amount << "\t" << std::setw(20) << std::left << item.note << std::endl; 
 }
 void exitProgram(bool& willExit) {
     willExit = 1;
@@ -68,13 +67,13 @@ void exitProgram(bool& willExit) {
 void allItemInfo(OrderItem* list, int n) {
     std::cout << "\n";
     for (int i = 0; i < n; i++) {
-        itemInfo(list, n, i);
+        itemInfo(list[i]);
     }
 }
 
-void itemInfo(OrderItem* list, int n, int i) {
-    std::cout << std::setw(30) << std::left << list[i].name << std::setw(5) << std::right << "x" << list[i].quantity
-        << std::setw(10) << std::right << list[i].amount << " VND" << std::endl;
+void itemInfo(OrderItem item) {
+    std::cout << std::setw(30) << std::left << item.name << std::setw(5) << std::right << "x" << item.quantity
+        << std::setw(10) << std::right << item.amount << " VND" << std::endl;
 }
 
 void bubbleSort(OrderItem* list, int n) {
@@ -104,24 +103,25 @@ void calculateBill(OrderItem* list, int n) {
         foodBill << std::setw(35) << std::right << "NOWFOODY" << std::endl;
         foodBill << std::setw(37) << std::right << "www.foody.vn" << std::endl;
         foodBill << "\n\n";
-        foodBill << std::setw(25) << std::left << "Item Name" << std::setw(11) << std::right << "Rate" << std::setw(10) << std::right << "Qty" <<
-            std::setw(13) << std::right << "Amount" << "\t" << std::setw(20) << std::left << "Note" << std::endl;
-        for (int i = 0; i < 15; i++) {
-            foodBill << "-----";
-        }
-        foodBill << "\n";
+        foodBill << std::setw(25) << std::left << "Item Name" << std::setw(11) << std::right 
+            << "Rate" << std::setw(10) << std::right << "Qty" <<std::setw(13) << std::right 
+            << "Amount" << "\t" << std::setw(20) << std::left << "Note" << std::endl;
+
+        foodBill << "---------------------------------------------------------------------------\n";
+
         for (int i = 0; i < n; i++) {
-            foodBill << std::setw(25) << std::left << list[i].name << std::setw(11) << std::right << list[i].rate << std::setw(10) << std::right << list[i].quantity <<
-                std::setw(13) << std::right << list[i].amount << "\t" << std::setw(20) << std::left << list[i].note << std::endl;
+            foodBill << std::setw(25) << std::left << list[i].name << std::setw(11) << std::right 
+                << list[i].rate << std::setw(10) << std::right << list[i].quantity <<std::setw(13) 
+                << std::right << list[i].amount << "\t" << std::setw(20) << std::left << list[i].note << std::endl;
+
             subTotal = subTotal + list[i].amount;
             itemsSold = itemsSold + list[i].quantity;
         }
         int total = subTotal + 15000;
 
-        for (int i = 0; i < 15; i++) {
-            foodBill << "-----";
-        }
-        foodBill << "\n" << std::setw(36) << std::left << "ITEMS SOLD :"
+        foodBill << "---------------------------------------------------------------------------\n";
+
+        foodBill  << std::setw(36) << std::left << "ITEMS SOLD :"
             << std::setw(10) << std::right << itemsSold << std::endl;
         foodBill << std::setw(46) << std::left << "SUB TOTAL :"
             << std::setw(13) << std::right << subTotal << " VND" << std::endl;
@@ -132,10 +132,9 @@ void calculateBill(OrderItem* list, int n) {
         foodBill << std::setw(46) << std::left << "DELIVERY FEE :"
             << std::setw(13) << std::right << 13000 << " VND" << std::endl;
 
-        for (int i = 0; i < 15; i++) {
-            foodBill << "-----";
-        }
-        foodBill << "\n" << std::setw(46) << std::left << "TOTAL :"
+        foodBill << "---------------------------------------------------------------------------\n";
+
+        foodBill << std::setw(46) << std::left << "TOTAL :"
             << std::setw(13) << std::right << total << " VND" << std::endl;
     }
     else {
@@ -157,7 +156,7 @@ void calculateBill(OrderItem* list, int n) {
             itemsSold = itemsSold + list[i].quantity;
         }
         int total = subTotal + 15000;
-        foodBillCSV << "TOTAL :," << total;
+        foodBillCSV << "TOTAL," << total;
         std::cout << "Your bill in FoodOrderBill.csv\n";
     }
     else {
@@ -177,17 +176,18 @@ void readFoodOrderList(OrderItem* &list, int &n) {
             myFile.getline(list[i].name, 100);
             std::cout << list[i].name << '\n';
 
-            myFile.getline(line, 100, '\n');
+            myFile.getline(line, 100);
             list[i].quantity = atoi(line);
          
             std::cout << list[i].quantity << '\n';
 
-            myFile.getline(line, 100, '\n');
+            myFile.getline(line, 100);
             list[i].rate = atoi(line);
             std::cout << list[i].rate << '\n';
 
-            myFile.getline(list[i].note, 100, '\n');
-            std::cout << list[i].note << "\n\n";
+            myFile.getline(list[i].note, 100);
+            std::cout << list[i].note << "\n";
+            std::cout << "------\n";
             
             i++;
         }
@@ -198,4 +198,36 @@ void readFoodOrderList(OrderItem* &list, int &n) {
         std::cout << "\nCan't open FoodOrderList.txt\n";
     }
     myFile.close();
+}
+
+
+std::istream& operator>> (std::istream& is, OrderItem& Item)
+{
+    std::cout << "\tName : ";
+    is.getline(Item.name, 100);
+
+    std::cout << "\tQuatity : ";
+    is >> Item.quantity;
+
+    std::cout << "\tRate : ";
+    is >> Item.rate;
+
+    is.ignore();
+    std::cout << "\tNote : ";
+    is.getline(Item.note, 100);
+
+    return is;
+}
+
+void enterOrderList2(OrderItem* &list, int& n) {
+    std::cout << "\nNumber of dishes you want to order : ";
+    std::cin >> n;
+    list = new OrderItem[n];
+    std::cin.ignore();
+
+    for (int i = 0; i < n; i++) {
+        std::cout << "\n" << (i + 1) << ":\n";
+        std::cin >> list[i];
+    }
+    
 }

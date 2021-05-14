@@ -14,7 +14,7 @@ kem plan
 3
 9000
 it duong
-kem plan2
+tra dao cam xa
 8
 9000
-it duong
+50% duong

@@ -15,24 +15,26 @@
 
 #endif //PCH_H
 FOODORDER_API struct OrderItem {
-    char name[100];
-    int quantity;
-    int rate;
-    char note[100];
-    int amount;
+    char name[100] = {};
+    int quantity = 0;
+    int rate = 0;
+    char note[100] = {};
+    int amount = 0;
 };
 
 FOODORDER_API void runProgram(OrderItem* &list);
 FOODORDER_API void display(OrderItem* list, int n);
-FOODORDER_API void enterOrderList(OrderItem*& list, int& n);
+FOODORDER_API void enterOrderList(OrderItem* &list, int& n);
 FOODORDER_API void exitProgram(bool& willExit);
 FOODORDER_API void swap(OrderItem& a, OrderItem& b);
 FOODORDER_API void bubbleSort(OrderItem* list, int n);
 FOODORDER_API void calculateBill(OrderItem* list, int n);
 FOODORDER_API void readFoodOrderList(OrderItem* &list, int &n);
-FOODORDER_API void enterItem(OrderItem* list, int n);
-FOODORDER_API void displayItem(OrderItem* list, int n, int i);
-FOODORDER_API void displayHeader(OrderItem* list, int n);
+FOODORDER_API void enterItem(OrderItem &item);
+FOODORDER_API void displayItem(OrderItem& item);
+FOODORDER_API void displayHeader();
 FOODORDER_API void allItemInfo(OrderItem* list, int n);
-FOODORDER_API void itemInfo(OrderItem* list, int n, int i);
-FOODORDER_API void valueOfEachItem(OrderItem* list, int n);
+FOODORDER_API void itemInfo(OrderItem item);
+FOODORDER_API void valueOfEachItem(OrderItem& item);
+FOODORDER_API void valueOfAllItems(OrderItem* list, int n);
+FOODORDER_API void enterOrderList2(OrderItem* &list, int& n);

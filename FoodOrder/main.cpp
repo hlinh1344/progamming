@@ -25,6 +25,7 @@ void runProgram(OrderItem*& list) {
         std::cout << "5. Total value of payment (included 15.000 VND shipping fee).\n";
         std::cout << "6. Export the food bill to CSV format  .\n";
         std::cout << "7. Exit program.\n";
+        std::cout << "8. Enter order list from keyboard using overloading >> operator.\n";
         std::cout << "---------------------------------------------------------------------------" << std::endl;
         std::cout << "Select a action you want to do : ";
         int select;
@@ -32,11 +33,11 @@ void runProgram(OrderItem*& list) {
         switch (select) {
         case 1:
             enterOrderList(list, n);
-            valueOfEachItem(list, n);
+            valueOfAllItems(list, n);
             break;
         case 2:
             readFoodOrderList(list, n);
-            valueOfEachItem(list, n);
+            valueOfAllItems(list, n);
             std::cout << "\n";
             system("pause");
             break;
@@ -65,6 +66,10 @@ void runProgram(OrderItem*& list) {
 
         case 7:
             exitProgram(willExit);
+            break;
+        case 8:
+            enterOrderList2(list, n);
+            valueOfAllItems(list, n);
             break;
         default:
             break;
