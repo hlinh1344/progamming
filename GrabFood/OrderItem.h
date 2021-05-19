@@ -29,4 +29,6 @@ public:
     void valueOfItem();
     void displayItem();
     void printToFile(std::ostream &os);
+    void itemInfo();
+    friend std::istream& operator>> (std::istream& is, OrderItem& Item); // global operator
 };

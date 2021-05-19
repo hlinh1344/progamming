@@ -71,3 +71,28 @@ void OrderItem::printToFile(std::ostream& os)
     os << name << "," << rate << "," << quantity <<
         "," << amount << "," << note << std::endl;
 }
+
+void OrderItem::itemInfo() {
+    std::cout << std::setw(30) << std::left << name << std::setw(5) << std::right << "x" << quantity
+        << std::setw(10) << std::right << amount << " VND" << std::endl;
+}
+
+
+
+std::istream& operator >> (std::istream& is, OrderItem& Item)
+{
+    std::cout << "\tName : ";
+    getline(is, Item.name);
+
+    std::cout << "\tQuatity : ";
+    is >> Item.quantity;
+
+    std::cout << "\tRate : ";
+    is >> Item.rate;
+
+    is.ignore();
+    std::cout << "\tNote : ";
+    getline(is, Item.note);
+
+    return is;
+}
