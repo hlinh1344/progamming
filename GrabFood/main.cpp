@@ -123,10 +123,11 @@ void readFoodOrderList(OrderItem*& list, int& n) {
     std::ifstream myFile("GrabFoodOrderList.txt");
     if (myFile.is_open()) {
         char line[100] = {};
-        int i = 0;
+        int i = 0;        
         while (!myFile.eof())
         {
-            myFile.getline(line,100);
+            myFile >> list[i];
+            /*myFile.getline(line,100);
             list[i].setName(line);
 
             myFile.getline(line, 100);
@@ -136,7 +137,7 @@ void readFoodOrderList(OrderItem*& list, int& n) {
             list[i].setRate(atoi(line));
 
             myFile.getline(line, 100);
-            list[i].setNote(line);
+            list[i].setNote(line);*/
 
             list[i].valueOfItem();
             i++;
