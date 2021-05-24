@@ -24,7 +24,7 @@ public:
     void setRate(int rate);
     int getQuantity();
     void setQuantity(int quantity);
-    int getAmount();
+    int calculateAmount();
     void enterItemInfo();
     void valueOfItem();
     void displayItem();

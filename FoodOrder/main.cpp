@@ -7,7 +7,7 @@
 int main() {    
    
     runProgram(); // runProgram
-    //delete[]list;
+   
     system("pause");
     return 0;
 }

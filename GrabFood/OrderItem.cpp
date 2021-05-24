@@ -41,7 +41,7 @@ void OrderItem::setQuantity(int quantity) {
     this->quantity = quantity;
 }
 
-int OrderItem::getAmount() {
+int OrderItem::calculateAmount() {
     return amount;
 }
 

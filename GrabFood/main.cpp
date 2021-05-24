@@ -17,14 +17,13 @@ void enterOrderList2(OrderItem*& list, int& n);
 
 
 int main() {
-   // OrderItem* list;
     runProgram();
     system("pause");
     return 0;
 }
 
 void runProgram() {
-    OrderItem* list = new OrderItem[1];
+    OrderItem* list = nullptr;
     bool willExit = false;
     int n = 0;
     do {
@@ -44,11 +43,13 @@ void runProgram() {
         std::cin >> select;
         switch (select) {
         case 1:
+            delete[] list;
             enterOrderList(list,  n);
             std::cout << "\n";
             system("pause");
             break;
         case 2:
+            delete[] list;
             readOrderList(list, n);
             std::cout << "\n";
             system("pause");
@@ -75,9 +76,11 @@ void runProgram() {
             system("pause");
             break;
         case 7:
+            delete[] list;
             exitProgram(willExit);
             break;
         case 8:
+            delete[] list;
             enterOrderList2(list, n);
             break;
         default:
@@ -167,7 +170,7 @@ void printBilll(OrderItem* list, int n) {
         int itemsSold = 0;
         for (int i = 0; i < n; i++) {
             list[i].printToFile(foodBillCSV);
-            subTotal = subTotal + list[i].getAmount();
+            subTotal = subTotal + list[i].calculateAmount();
             itemsSold = itemsSold + list[i].getQuantity();
         }
         int total = subTotal + 15000;
