@@ -17,14 +17,14 @@ void enterOrderList2(OrderItem*& list, int& n);
 
 
 int main() {
-    
+   // OrderItem* list;
     runProgram();
     system("pause");
     return 0;
 }
 
 void runProgram() {
-    OrderItem* list;
+    OrderItem* list = new OrderItem[1];
     bool willExit = false;
     int n = 0;
     do {
@@ -115,7 +115,7 @@ void enterOrderList(OrderItem* &list, int &n) {
 void showAllItemInfo(OrderItem* list, int n) {
     std::cout << "\n";
     for (int i = 0; i < n; i++) {
-        list[i].itemInfo();
+        list[i].showItemInfo();
     }
 }
 
@@ -128,22 +128,11 @@ void readOrderList(OrderItem*& list, int& n) {
         while (!myFile.eof())
         {
             myFile >> list[i];
-            /*myFile.getline(line,100);
-            list[i].setName(line);
-
-            myFile.getline(line, 100);
-            list[i].setQuantity(atoi(line));
-
-            myFile.getline(line, 100);
-            list[i].setRate(atoi(line));
-
-            myFile.getline(line, 100);
-            list[i].setNote(line);*/
-
             list[i].valueOfItem();
             i++;
         }
         n = i;
+        system("cls");
         std::cout << "Read GrabFoodOrderList.txt is finished! ";
     }
 

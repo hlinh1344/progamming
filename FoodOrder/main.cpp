@@ -5,14 +5,15 @@
 
 
 int main() {    
-    OrderItem* list;
-    runProgram(list); // runProgram
-    delete[]list;
+   
+    runProgram(); // runProgram
+    //delete[]list;
     system("pause");
     return 0;
 }
 
-void runProgram(OrderItem*& list) {
+void runProgram() {
+    OrderItem* list;
     bool willExit = false;
     int n = 0;
     do {

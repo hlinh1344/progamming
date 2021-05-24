@@ -72,7 +72,7 @@ void OrderItem::printToFile(std::ostream& os)
         "," << amount << "," << note << std::endl;
 }
 
-void OrderItem::itemInfo() {
+void OrderItem::showItemInfo() {
     std::cout << std::setw(30) << std::left << name << std::setw(5) << std::right << "x" << quantity
         << std::setw(10) << std::right << amount << " VND" << std::endl;
 }
