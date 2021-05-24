@@ -1,7 +1,7 @@
 #include "Pet.h"
 
 
-float Pet:: morningRation()
+float Pet:: calculateMorniingRation()
 {
     return 0;
 }
@@ -11,7 +11,7 @@ float Pet::afternoonRation()
     return 0;
 }
 
-int Pet::untilTheHealthCheck(tm recentHealthCheck)
+int Pet::untilHealthCheck(tm recentHealthCheck)
 {
     return 0;
 }
@@ -66,8 +66,12 @@ void Pet::inputDateFromString(std::string date)
 }
 
 
- void Pet::petInfo(std::ostream& os) {
-
+ void Pet::showPetInfo(std::ostream& os) {
+     os  << std::setw(10) << std::right << weight
+         << std::setw(10) << std::right << length
+         << std::setw(10) << std::right << height
+         << std::setw(25) << std::right << breed
+         << std::setw(25) << std::right << hairColor << std::endl;
 }
 
 void Pet::enterInfo(std::istream& is)
@@ -112,7 +116,7 @@ void Pet::showPetRation() {
      return temp;
  }
 
- tm Pet::theNextHealthCheck(tm recentHealthCheck) {
+ tm Pet::nextHealthCheck(tm recentHealthCheck) {
      return recentHealthCheck;
  }
 

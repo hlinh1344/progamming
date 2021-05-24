@@ -6,24 +6,25 @@
 void displayHeader();
 void display(OrderItem* list, int& n);
 void enterOrderList(OrderItem*& list, int& n);
-void allItemInfo(OrderItem* list, int n);
-void runProgram(OrderItem*& list);
-void readFoodOrderList(OrderItem*& list, int& n);
+void showAllItemInfo(OrderItem* list, int n);
+void runProgram();
+void readOrderList(OrderItem*& list, int& n);
 void bubbleSort(OrderItem* list, int n);
 void swap(OrderItem& itemA, OrderItem& itemB);
-void calculateBill(OrderItem* list, int n);
+void printBilll(OrderItem* list, int n);
 void exitProgram(bool& willExit);
 void enterOrderList2(OrderItem*& list, int& n);
 
 
 int main() {
-    OrderItem* list;
-    runProgram(list);
+    
+    runProgram();
     system("pause");
     return 0;
 }
 
-void runProgram(OrderItem*& list) {
+void runProgram() {
+    OrderItem* list;
     bool willExit = false;
     int n = 0;
     do {
@@ -48,12 +49,12 @@ void runProgram(OrderItem*& list) {
             system("pause");
             break;
         case 2:
-            readFoodOrderList(list, n);
+            readOrderList(list, n);
             std::cout << "\n";
             system("pause");
             break;
         case 3:
-            allItemInfo(list, n);
+            showAllItemInfo(list, n);
             std::cout << "\n";
             system("pause");
             break;
@@ -69,7 +70,7 @@ void runProgram(OrderItem*& list) {
             system("pause");
             break;
         case 6:
-            calculateBill(list, n);
+            printBilll(list, n);
             std::cout << "\n";
             system("pause");
             break;
@@ -111,14 +112,14 @@ void enterOrderList(OrderItem* &list, int &n) {
     }
 }
 
-void allItemInfo(OrderItem* list, int n) {
+void showAllItemInfo(OrderItem* list, int n) {
     std::cout << "\n";
     for (int i = 0; i < n; i++) {
         list[i].itemInfo();
     }
 }
 
-void readFoodOrderList(OrderItem*& list, int& n) {
+void readOrderList(OrderItem*& list, int& n) {
     list = new OrderItem[200];
     std::ifstream myFile("GrabFoodOrderList.txt");
     if (myFile.is_open()) {
@@ -169,8 +170,7 @@ void swap(OrderItem& itemA, OrderItem& itemB) {
     itemB = itemC;
 }
 
-void calculateBill(OrderItem* list, int n) {
-    //export CSV file
+void printBilll(OrderItem* list, int n) {
     std::ofstream foodBillCSV;
     foodBillCSV.open("FoodOrderBill.csv");
     if (foodBillCSV.is_open()) {

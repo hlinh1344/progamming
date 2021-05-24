@@ -92,7 +92,7 @@ void exitProgram(bool &willExit) {
 
 void readPetList(Pet **list, int& nPet, int& nDog, int& nCat) {
 
-   std::ifstream myFile("PetInfo.txt");
+   std::ifstream myFile("petInfo.txt");
     //std::istream myFile(std::cin);
     if (myFile.is_open()) {
         char line[100] = {};
@@ -130,7 +130,7 @@ void display(Pet** list, int nPet, int nDog) {
 
     for (int i = 0; i < nPet; i++) {
         std::cout << std::setw(3) << std::right << i+1;
-        list[i]->petInfo(std::cout);
+        list[i]->showPetInfo(std::cout);
     }
 }
 

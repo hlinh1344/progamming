@@ -4,17 +4,17 @@
 class Dog :public Pet
 {
 private:
-    float hourOfPlayPerADay;
+    float playedHours;
 public:
     void enterInfo(std::istream& is) override;    
-    float morningRation() override;
+    float calculateMorniingRation() override;
     float afternoonRation() override;
-    float getHourOfPlayPerADay();
-    void setHourOfPlayPerADay(float hourOfPlayPerADay);
-    int untilTheHealthCheck(tm recentHealthCheck) override;
-    void petInfo(std::ostream& os) override;
+    float getPlayedHours();
+    void setPlayedHours(float playedHours);
+    int untilHealthCheck(tm recentHealthCheck) override;
+    void showPetInfo(std::ostream& os) override;
     void showPetRation() override;
     void showPetHealCheckInfo() override;
-    tm theNextHealthCheck(tm recentHealthCheck) override;
+    tm nextHealthCheck(tm recentHealthCheck) override;
 };
 

@@ -21,9 +21,9 @@ public:
    
 public:
   
-    virtual float morningRation();
+    virtual float calculateMorniingRation();
     virtual float afternoonRation();
-    virtual int untilTheHealthCheck(tm recentHealthCheck);
+    virtual int untilHealthCheck(tm recentHealthCheck);
     float getWeight();
     void setWeight(float weight);
     float getLength();
@@ -36,11 +36,11 @@ public:
     void setHairColor(std::string hairColor);
     void inputDateFromString(std::string date);
     virtual void enterInfo(std::istream& is);
-    virtual void petInfo(std::ostream& os);
+    virtual void showPetInfo(std::ostream& os);
     virtual void showPetRation();
     virtual void showPetHealCheckInfo();
     std::string printDate(int day, int month, int year);
-    virtual tm theNextHealthCheck(tm recentHealthCheck);
+    virtual tm nextHealthCheck(tm recentHealthCheck);
 };
 
 

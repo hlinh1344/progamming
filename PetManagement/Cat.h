@@ -4,17 +4,17 @@
 class Cat : public Pet
 {
 private:
-    float hourOfSleepPerADay;
+    float sleptHours;
 public:
     void enterInfo(std::istream& is)  override;
-    float morningRation() override;
+    float calculateMorniingRation() override;
     float afternoonRation() override;
-    float getHourOfSleepPerADay();
-    void setHourOfSleepPerADay(float hourOfSleepPerADay);
-    int untilTheHealthCheck(tm recentHealthCheck) override;
-    void petInfo(std::ostream& os)  override;
+    float getSleptHours();
+    void setSleptHours(float sleptHours);
+    int untilHealthCheck(tm recentHealthCheck) override;
+    void showPetInfo(std::ostream& os)  override;
     void showPetHealCheckInfo() override;
     void showPetRation() override;
-    tm theNextHealthCheck(tm recentHealthCheck) override;
+    tm nextHealthCheck(tm recentHealthCheck) override;
 };
 
