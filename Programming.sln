@@ -34,6 +34,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GrabFood", "GrabFood\GrabFo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PetManagement", "PetManagement\PetManagement.vcxproj", "{7D0D73C5-07CC-4892-9411-323805489030}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Linked List", "Linked List\Linked List.vcxproj", "{1F5CD2ED-ACD0-45B4-B5D8-6203E0DCC344}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -146,6 +148,14 @@ Global
 		{7D0D73C5-07CC-4892-9411-323805489030}.Release|x64.Build.0 = Release|x64
 		{7D0D73C5-07CC-4892-9411-323805489030}.Release|x86.ActiveCfg = Release|Win32
 		{7D0D73C5-07CC-4892-9411-323805489030}.Release|x86.Build.0 = Release|Win32
+		{1F5CD2ED-ACD0-45B4-B5D8-6203E0DCC344}.Debug|x64.ActiveCfg = Debug|x64
+		{1F5CD2ED-ACD0-45B4-B5D8-6203E0DCC344}.Debug|x64.Build.0 = Debug|x64
+		{1F5CD2ED-ACD0-45B4-B5D8-6203E0DCC344}.Debug|x86.ActiveCfg = Debug|Win32
+		{1F5CD2ED-ACD0-45B4-B5D8-6203E0DCC344}.Debug|x86.Build.0 = Debug|Win32
+		{1F5CD2ED-ACD0-45B4-B5D8-6203E0DCC344}.Release|x64.ActiveCfg = Release|x64
+		{1F5CD2ED-ACD0-45B4-B5D8-6203E0DCC344}.Release|x64.Build.0 = Release|x64
+		{1F5CD2ED-ACD0-45B4-B5D8-6203E0DCC344}.Release|x86.ActiveCfg = Release|Win32
+		{1F5CD2ED-ACD0-45B4-B5D8-6203E0DCC344}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -163,6 +173,7 @@ Global
 		{ADD72418-6F01-4463-89D8-E1213D5D0CE5} = {1E0F24B4-A12D-4CD8-98E3-1C6D27D10192}
 		{7B6306DA-5873-46FF-A984-CEE570384FEF} = {1E0F24B4-A12D-4CD8-98E3-1C6D27D10192}
 		{DCFAA78E-F107-4C9D-BACE-87FE953913AB} = {1E0F24B4-A12D-4CD8-98E3-1C6D27D10192}
+		{7D0D73C5-07CC-4892-9411-323805489030} = {1E0F24B4-A12D-4CD8-98E3-1C6D27D10192}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4E9C769-8759-4C49-B6A5-AAA39E070BC3}
