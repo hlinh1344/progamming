@@ -9,10 +9,19 @@ private:
 public:
 	List();
 	~List();
+
 	void addHead(Node* temp);
 	void addTail(Node* temp);
-	void display() const;
-	bool isEmpty() const;
-	
+	void display();
+	bool isEmpty();
+	int countNumberOfNode();
+	int calculateSum();
+	int coutEvenElements();
+	void printPositiveNode();
+	void addNodeAfterK(Node* p, int k);
+	void removeHead();
+	void removeTail();
+	void removeNodeAfterK(int k);
+
 };
 

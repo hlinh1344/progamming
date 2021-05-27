@@ -34,7 +34,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GrabFood", "GrabFood\GrabFo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PetManagement", "PetManagement\PetManagement.vcxproj", "{7D0D73C5-07CC-4892-9411-323805489030}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Linked List", "Linked List\Linked List.vcxproj", "{1F5CD2ED-ACD0-45B4-B5D8-6203E0DCC344}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinkedList", "LinkedList\Linked List.vcxproj", "{1F5CD2ED-ACD0-45B4-B5D8-6203E0DCC344}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

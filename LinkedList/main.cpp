@@ -9,23 +9,23 @@ int main() {
 }
 
 void runProgram() {
-    List list;
+    List *list = new List;
 	bool willExit = false;
 	int select;
 	do {
         system("cls");
-        std::cout << "1.Create a list.\n";
+        std::cout << "1.Create a new list.\n";
         std::cout << "2.Display the list.\n";
-        std::cout << "3.Sum all elements in the list.\n";
+        std::cout << "3.Sum of all elements in the list.\n";
         std::cout << "4.Count the number of all elements in the list.\n";
         std::cout << "5.Count the number of even elements in the list.\n";
         std::cout << "6.Print positive elements in the list.\n";
         std::cout << "7.Add an element to the beginning of the list.\n";
         std::cout << "8.Add an element to the end of the list.\n";
-        std::cout << "9.Add an element to the middle of the list.\n";
+        std::cout << "9.Add an element after value 'k' of the list.\n";
         std::cout << "10.Remove the first element of the list.\n";
         std::cout << "11.Remove the last element of the list.\n";
-        std::cout << "12.Remove all elements with value 'k'of the list.\n";
+        std::cout << "12.Remove all elements with value 'k' of the list.\n";
         std::cout << "13.Exit.\n";
         std::cout << "------------------------------------------\n";
         std::cout << "Select a number : ";
@@ -35,7 +35,7 @@ void runProgram() {
         switch (select)
         {
         case 1:
-            createList(list);
+            list = createList();
             std::cout << "\n\n";
             system("pause");
             break;
@@ -45,22 +45,22 @@ void runProgram() {
             system("pause");
             break;
         case 3:
-
+            sumList(list);
             std::cout << "\n\n";
             system("pause");
             break;
         case 4:
-
+            calculateNumberOfElements(list);
             std::cout << "\n\n";
             system("pause");
             break;
         case 5:
-
+            calculateNumberOEvenElements(list);
             std::cout << "\n\n";
             system("pause");
             break;
         case 6:
-
+            printPositiveElements(list);
             std::cout << "\n\n";
             system("pause");
             break;
@@ -75,22 +75,22 @@ void runProgram() {
             system("pause");
             break;
         case 9:
-
+            addAfterValueK(list);
             std::cout << "\n\n";
             system("pause");
             break;
         case 10:
-
+            removeFirst(list);
             std::cout << "\n\n";
             system("pause");
             break;
         case 11:
-
+            removeLast(list);
             std::cout << "\n\n";
             system("pause");
             break;
         case 12:
-
+            removeAfterValueK(list);
             std::cout << "\n\n";
             system("pause");
             break;
@@ -112,31 +112,76 @@ bool exitProgram(bool& willExit) {
 }
 
 
-
-void addFirst(List &list) {
-    std::cout << "data : ";
-    int data;
-    std::cin >> data;
-    list.addHead(Node::getNewNode(data));
+void displayList(List *list) {
+    list->display();
 }
 
-void displayList(const List &list) {
-    list.display();
-}
-
-void createList(List& list) {
-    std::cout << "Number of elements of the list : ";
+List *createList() {
+    std::cout << "\nNumber of elements of the list : ";
     int n;
     std::cin >> n;
+    List* newList = new List;
     for (int i = 0; i < n; i++) {
         std::cout << i + 1<< ".";
-        addLast(list);
+        addLast(newList);
     }
+    return newList;
 }
 
-void addLast(List& list) {
+void addFirst(List* list) {
     std::cout << "data : ";
     int data;
     std::cin >> data;
-    list.addTail(Node::getNewNode(data));
+    list->addHead(Node::getNewNode(data));
+}
+
+void addLast(List* list) {
+    std::cout << "data : ";
+    int data;
+    std::cin >> data;
+    list->addTail(Node::getNewNode(data));
+}
+
+void addAfterValueK(List* list) {
+    std::cout << "Enter K value : ";
+    int kValue;
+    std::cin >> kValue;
+    std::cout << "Enter data you want to add : ";
+    int data;
+    std::cin >> data;
+    list->addNodeAfterK(Node::getNewNode(data), kValue);
+}
+
+void sumList(List *list) {
+    int sumAllElements = list->calculateSum();
+    std::cout << "\nSum of all elements in the list : "<< sumAllElements;
+}
+
+void calculateNumberOfElements( List *list) {
+    int numberOfNode = list->countNumberOfNode();
+    std::cout << "\nNumber of elements : " << numberOfNode;
+}
+
+void calculateNumberOEvenElements(List* list) {
+    int numberOfEvenElements = list->coutEvenElements();
+    std::cout << "\nNumber of even elements : " << numberOfEvenElements;
+}
+
+void printPositiveElements(List* list) {
+    list->printPositiveNode();
+}
+
+void removeFirst(List* list) {
+    list->removeHead();
+}
+
+void removeLast(List* list) {
+    list->removeTail();
+}
+
+void removeAfterValueK(List* list) {
+    std::cout << "Enter K value : ";
+    int kValue;
+    std::cin >> kValue;
+    list->removeNodeAfterK(kValue);
 }
