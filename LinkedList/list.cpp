@@ -2,6 +2,7 @@
 
 List::List() {
 	pHead = nullptr;
+	pTail = nullptr;
 }
 
 List::~List() {
