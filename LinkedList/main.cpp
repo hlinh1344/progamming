@@ -113,7 +113,7 @@ bool exitProgram(bool& willExit) {
 
 
 void displayList(List *list) {
-    list->display();
+    list->printList();
 }
 
 List *createList() {
@@ -158,7 +158,7 @@ void sumList(List *list) {
 }
 
 void calculateNumberOfElements( List *list) {
-    int numberOfNode = list->countNumberOfNode();
+    int numberOfNode = list->getSize();
     std::cout << "\nNumber of elements : " << numberOfNode;
 }
 
@@ -183,5 +183,5 @@ void removeAfterValueK(List* list) {
     std::cout << "Enter K value : ";
     int kValue;
     std::cin >> kValue;
-    list->removeNodeAfterK(kValue);
+    list->removeNodeHasKValue(kValue);
 }

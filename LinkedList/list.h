@@ -12,16 +12,16 @@ public:
 
 	void addHead(Node* temp);
 	void addTail(Node* temp);
-	void display();
+	void printList();
 	bool isEmpty();
-	int countNumberOfNode();
+	int getSize();
 	int calculateSum();
 	int coutEvenElements();
 	void printPositiveNode();
 	void addNodeAfterK(Node* p, int k);
 	void removeHead();
 	void removeTail();
-	void removeNodeAfterK(int k);
+	void removeNodeHasKValue(int k);
 
 };
 
