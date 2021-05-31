@@ -11,7 +11,7 @@ public:
     float afternoonRation() override;
     float getPlayedHours();
     void setPlayedHours(float playedHours);
-    int untilHealthCheck(tm recentHealthCheck) override;
+    double untilHealthCheck() override;
     void showPetInfo(std::ostream& os) override;
     void showPetRation() override;
     void showPetHealCheckInfo() override;

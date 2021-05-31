@@ -10,8 +10,8 @@ public:
 	List();
 	~List();
 
-	void addHead(Node* temp);
-	void addTail(Node* temp);
+	void addHead(Node* p);
+	void addTail(Node* p);
 	void printList();
 	bool isEmpty();
 	int getSize();

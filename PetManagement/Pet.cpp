@@ -11,7 +11,7 @@ float Pet::afternoonRation()
     return 0;
 }
 
-int Pet::untilHealthCheck(tm recentHealthCheck)
+double Pet::untilHealthCheck()
 {
     return 0;
 }
@@ -91,7 +91,6 @@ void Pet::showPetRation() {
  void Pet::showPetHealCheckInfo() {
 
  }
-
 
 
  std::string Pet::printDate(int day, int month, int year) {
