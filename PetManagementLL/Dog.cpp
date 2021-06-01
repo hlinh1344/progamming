@@ -71,10 +71,11 @@ void Dog::showPetHealCheckInfo() {
 }
 
 void Dog::addPet() {
+    std::cout << "\nEnter information of a new dog :\n";
     Pet::addPet();
     double hour;
-    std::cout << "Played hours : ";
+    std::cout << "Played hours (h) : ";
     std::cin >> hour;
     Dog::setPlayedHours(hour);
-    std::cout << "\n\nA new dog is added to the list!";
+    std::cout << "\n\nA new dog has been added to the list!";
 }

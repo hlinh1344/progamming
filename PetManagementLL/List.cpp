@@ -88,7 +88,7 @@ int List::getSize() {
 }
 
 void List::Ration() {
-	List::petInfoHeader();
+	List::petRationHeader();
 	int n = 1;
 	Node* current = pHead;
 	while (current != nullptr) {
@@ -137,4 +137,20 @@ void List::addPetToList(int type) {
 		newNode->setData(newPet);
 	}
 	addHead(newNode);
+}
+
+void List::removeNode(int idRemove) {
+	if (idRemove == 1) {
+		pHead = pHead->getpNext();
+	}
+	else
+	{
+		Node* current = pHead;
+		//move current pointer to the previous idRemove
+		for (int i = 1; i < idRemove - 1; i++) {
+			current = current->getpNext();
+		}
+		current->setpNext(current->getpNext()->getpNext());
+	}
+	std::cout << "\n\nThe pet has been removed from the list !\n";
 }

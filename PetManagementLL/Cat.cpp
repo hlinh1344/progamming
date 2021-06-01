@@ -73,10 +73,11 @@ void Cat::showPetHealCheckInfo() {
 }
 
 void Cat::addPet() {
+    std::cout << "\nEnter information of a new cat :\n";
     Pet::addPet();
     double hour;
-    std::cout << "Slept hours : ";
+    std::cout << "Slept hours (h) : ";
     std::cin >> hour;
     Cat::setSleptHours(hour);
-    std::cout << "\n\nA new cat is added to the list!";
+    std::cout << "\n\nA new cat has been added to the list!";
 }

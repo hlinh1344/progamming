@@ -126,13 +126,13 @@ void Pet::addPet() {
     std::string hairColor;
     std::string recentHealthCheck;
 
-    std::cout << "\nWeight : ";
+    std::cout << "\nWeight (g): ";
     std::cin >> weight;
     setWeight(weight);
-    std::cout << "Length : ";
+    std::cout << "Length (g) : ";
     std::cin >> length;
     setLength(length);
-    std::cout << "Height : ";
+    std::cout << "Height (g) : ";
     std::cin >> height;
     setHeight(height);
     std::cout << "Breed : ";
@@ -141,8 +141,8 @@ void Pet::addPet() {
     setBreed(breed);
     std::cout << "Hair color : ";
     getline(std::cin, hairColor);
-    setBreed(hairColor);
-    std::cout << "Recent health check day : ";
+    setHairColor(hairColor);
+    std::cout << "Recent health check day (dd/mm/yyyy): ";
     getline(std::cin, recentHealthCheck);
     inputDateFromString(recentHealthCheck);
 }

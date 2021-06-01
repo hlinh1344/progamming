@@ -20,4 +20,5 @@ public:
 	void petHealthCheckHeader();
 	void showHealthCheck();
 	void addPetToList(int type);
+	void removeNode(int idRemove);
 };

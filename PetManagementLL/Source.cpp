@@ -25,7 +25,8 @@ void runProgram() {
         std::cout << "3.Show pet's (morning & afternoon) ration.\n";
         std::cout << "4.Calculate number of days until the next health check day.\n";
         std::cout << "5.Add a Pet to the List.\n";
-        std::cout << "6.Exit.\n";
+        std::cout << "6.Remove a Pet from the List.\n";
+        std::cout << "7.Exit.\n";
         std::cout << "------------------------------------------\n";
         std::cout << "Select a number : ";
         std::cin >> select;
@@ -59,6 +60,11 @@ void runProgram() {
             system("pause");
             break;
         case 6:
+            removePet(list);
+            std::cout << "\n\n";
+            system("pause");
+            break;
+        case 7:
             exitProgram(willExit);
             std::cout << "\nBye!\n\n";
             system("pause");
@@ -93,7 +99,7 @@ List* createPetList() {
         {
              newList->addTail(Node::getNewNode(myFile));
         }
-        std::cout << "\nAdded Pet's information to the list!\n";
+        std::cout << "\nCreate the list of pet from file!\n";
         myFile.close();
     }
     else {
@@ -120,4 +126,17 @@ void addPet(List* list) {
         }  
     } while ((type != 1) && (type != 2));
     list->addPetToList(type);
+}
+
+void removePet(List* list) {
+    int idRemove;
+    int listSize = list->getSize();
+    do {
+        std::cout << "\nEnter ID number of pet you want to remove : ";
+        std::cin >> idRemove;
+        if ((idRemove < 1) || (idRemove > listSize)) {
+            std::cout << "\n\nThe ID you entered is wrong, please re-enter!\n";
+        }
+    } while ((idRemove < 1) || (idRemove > listSize));
+    list->removeNode(idRemove);
 }
