@@ -1,3 +1,4 @@
+#pragma once
 #include "node.h"
 #include "list.h"
 #include "source.h"
@@ -21,12 +22,11 @@ void runProgram() {
         std::cout << "5.Count the number of even elements in the list.\n";
         std::cout << "6.Print positive elements in the list.\n";
         std::cout << "7.Add an element to the beginning of the list.\n";
-        std::cout << "8.Add an element to the end of the list.\n";
-        std::cout << "9.Add an element after value 'k' of the list.\n";
-        std::cout << "10.Remove the first element of the list.\n";
-        std::cout << "11.Remove the last element of the list.\n";
-        std::cout << "12.Remove all elements with value 'k' of the list.\n";
-        std::cout << "13.Exit.\n";
+        std::cout << "8.Add an element after value 'k' of the list.\n";
+        std::cout << "9.Remove the first element of the list.\n";
+        std::cout << "10.Remove the last element of the list.\n";
+        std::cout << "11.Remove all elements with value 'k' of the list.\n";
+        std::cout << "12.Exit.\n";
         std::cout << "------------------------------------------\n";
         std::cout << "Select a number : ";
         std::cin >> select;
@@ -70,31 +70,26 @@ void runProgram() {
             system("pause");
             break;
         case 8:
-            addLast(list);
-            std::cout << "\n\n";
-            system("pause");
-            break;
-        case 9:
             addAfterValueK(list);
             std::cout << "\n\n";
             system("pause");
             break;
-        case 10:
+        case 9:
             removeFirst(list);
             std::cout << "\n\n";
             system("pause");
             break;
-        case 11:
+        case 10:
             removeLast(list);
             std::cout << "\n\n";
             system("pause");
             break;
-        case 12:
+        case 11:
             removeAfterValueK(list);
             std::cout << "\n\n";
             system("pause");
             break;
-        case 13:
+        case 12:
             exitProgram(willExit);
             std::cout << "\nBye!\n\n";
             system("pause");
@@ -123,7 +118,10 @@ List *createList() {
     List* newList = new List;
     for (int i = 0; i < n; i++) {
         std::cout << i + 1<< ".";
-        addLast(newList);
+        std::cout << "data : ";
+        int data;
+        std::cin >> data;
+        newList->addTail(new Node(data));
     }
     return newList;
 }
@@ -132,15 +130,9 @@ void addFirst(List* list) {
     std::cout << "data : ";
     int data;
     std::cin >> data;
-    list->addHead(Node::getNewNode(data));
+    list->addHead(new Node(data));
 }
 
-void addLast(List* list) {
-    std::cout << "data : ";
-    int data;
-    std::cin >> data;
-    list->addTail(Node::getNewNode(data));
-}
 
 void addAfterValueK(List* list) {
     std::cout << "Enter K value : ";
@@ -149,7 +141,7 @@ void addAfterValueK(List* list) {
     std::cout << "Enter data you want to add : ";
     int data;
     std::cin >> data;
-    list->addNodeAfterK(Node::getNewNode(data), kValue);
+    list->addNodeAfterK(data, kValue);
 }
 
 void sumList(List *list) {
@@ -172,7 +164,7 @@ void printPositiveElements(List* list) {
 }
 
 void removeFirst(List* list) {
-    list->removeHead();
+    Node* newHead = list->removeHead();
 }
 
 void removeLast(List* list) {

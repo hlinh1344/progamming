@@ -18,10 +18,11 @@ public:
 	int calculateSum();
 	int coutEvenElements();
 	void printPositiveNode();
-	void addNodeAfterK(Node* p, int k);
-	void removeHead();
-	void removeTail();
+	void addNodeAfterK(int data, int k);
+	Node* removeHead();
+	Node* removeTail();
 	void removeNodeHasKValue(int k);
-
+	void removeNode(Node* &previous, Node* &current);
+	void deleteNode(Node* &current);
 };
 

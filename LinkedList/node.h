@@ -5,16 +5,17 @@
 class Node
 {
 protected:
-	int data_;
-	Node* pNext_;
+	int data;
+	Node* next;
 public:
 	Node();
+	Node(int a_data);
+	Node(int a_data, Node * a_next);
 	~Node();
 	int getData();
 	void setData(int data);
-	Node* getpNext();
-	void setpNext(Node* pNext);
-	static Node* getNewNode(int data);
+	Node* getNext();
+	void setNext(Node* next);
 
 };
 

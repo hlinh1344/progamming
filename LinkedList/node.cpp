@@ -1,37 +1,49 @@
 #include "node.h"
 
 Node::Node() {
-	data_ = 0;
-	pNext_ = nullptr;
+	data = 0;
+	next = nullptr;
 }
+
+Node::Node(int a_data) {
+	data = a_data;
+	next = nullptr;
+}
+
+Node::Node(int a_data, Node* a_next) {
+	data = a_data;
+	next = a_next;
+}
+
 Node::~Node() {
-	pNext_ = NULL;
+	data = 0;
+	next = NULL;
 }
 
 int Node::getData() {
-	return data_;
+	return data;
 }
 
 void Node::setData(int data) {
-	this->data_ = data;
+	this->data = data;
 }
 
-Node* Node::getpNext() {
-	return pNext_;
+Node* Node::getNext() {
+	return next;
 }
 
-void Node::setpNext(Node* pNext) {
-	this->pNext_ = pNext;
+void Node::setNext(Node* next) {
+	this->next = next;
 }
 
-Node* Node::getNewNode(int data) {
-	Node* newNode = new Node();
-	if (newNode == NULL) {
-		std::cout << "\nCan't create new node!\n";
-		return NULL;
-	}
-	else {
-		newNode->setData(data);
-	}
-	return newNode;
-}
+//Node* Node::getNewNode(int data) {
+//	Node* newNode = new Node();
+//	if (newNode == NULL) {
+//		std::cout << "\nCan't create new node!\n";
+//		return NULL;
+//	}
+//	else {
+//		newNode->setData(data);
+//	}
+//	return newNode;
+//}
