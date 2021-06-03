@@ -38,6 +38,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinkedList", "LinkedList\Li
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PetManagementLL", "PetManagementLL\PetManagementLL.vcxproj", "{F14EBFB6-907A-4440-B669-2FA2AC0DB5D9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DesktopApp", "DesktopApp\DesktopApp.vcxproj", "{3509C221-33FB-409E-A39D-DFA658FAE312}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -166,6 +168,14 @@ Global
 		{F14EBFB6-907A-4440-B669-2FA2AC0DB5D9}.Release|x64.Build.0 = Release|x64
 		{F14EBFB6-907A-4440-B669-2FA2AC0DB5D9}.Release|x86.ActiveCfg = Release|Win32
 		{F14EBFB6-907A-4440-B669-2FA2AC0DB5D9}.Release|x86.Build.0 = Release|Win32
+		{3509C221-33FB-409E-A39D-DFA658FAE312}.Debug|x64.ActiveCfg = Debug|x64
+		{3509C221-33FB-409E-A39D-DFA658FAE312}.Debug|x64.Build.0 = Debug|x64
+		{3509C221-33FB-409E-A39D-DFA658FAE312}.Debug|x86.ActiveCfg = Debug|Win32
+		{3509C221-33FB-409E-A39D-DFA658FAE312}.Debug|x86.Build.0 = Debug|Win32
+		{3509C221-33FB-409E-A39D-DFA658FAE312}.Release|x64.ActiveCfg = Release|x64
+		{3509C221-33FB-409E-A39D-DFA658FAE312}.Release|x64.Build.0 = Release|x64
+		{3509C221-33FB-409E-A39D-DFA658FAE312}.Release|x86.ActiveCfg = Release|Win32
+		{3509C221-33FB-409E-A39D-DFA658FAE312}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
