@@ -7,11 +7,11 @@ List::List() {
 
 List::~List() {
 	Node* current = pHead;
-	while (current != nullptr) {
+	for (Node* current = pHead; current != nullptr;) {
 		Node* nodeDistructed = current;
 		current = (current->getNext());
-		delete nodeDistructed;
-		nodeDistructed = NULL;
+		deleteNode(nodeDistructed);
+	
 	}
 }
 
@@ -27,6 +27,17 @@ void List::addHead(Node * p) {
 
 }
 
+void List::addHead(int data) {
+	Node* newHead = new Node(data);
+	if (isEmpty()) {
+		pHead = newHead;
+		pTail = newHead;
+	}
+	else {
+		newHead->setNext(pHead);
+		pHead = newHead;
+	}
+}
 
 void List::addTail(Node* p) {
 	if (isEmpty()) {
@@ -38,6 +49,18 @@ void List::addTail(Node* p) {
 		pTail = p;
 	}
 
+}
+
+void List::addTail(int data) {
+	Node* newTail = new Node(data);
+	if (isEmpty()) {
+		pHead = newTail;
+		pTail = newTail;
+	}
+	else {
+		pTail->setNext(newTail);
+		pTail = newTail;
+	}
 }
 
 void List::printList(){
@@ -60,19 +83,19 @@ bool List::isEmpty() {
 }
 
 int List::getSize() {
-	int nCount = 0;
+	int count = 0;
 	if (isEmpty())
-		nCount= 0;
+		count= 0;
 	else
 	{
 		Node* temp = pHead;
 		while (temp != nullptr)
 		{
-			nCount++;
+			count++;
 			temp = (temp->getNext());
 		}
 	}
-	return nCount;
+	return count;
 }
 
 int List::calculateSum() {
@@ -86,20 +109,20 @@ int List::calculateSum() {
 }
 
 int List::coutEvenElements() {
-	int countEven = 0;
+	int evenElements = 0;
 	if (isEmpty())
-		countEven = 0;
+		evenElements = 0;
 	else
 	{
 		Node* current = pHead;
 		while (current != nullptr)
 		{
 			if ((current->getData()) % 2 == 0)
-				countEven++;
+				evenElements++;
 			current = (current->getNext());
 		}
 	}
-	return countEven;
+	return evenElements;
 }
 
 void List::printPositiveNode() {
@@ -123,16 +146,15 @@ void List::addNodeAfterK(int data, int k) {
 			if (current->getData() == k) {
 				Node* newNode = new Node(data, current->getNext());
 				current->setNext(newNode);
-				std::cout << "\nAdded a node after the first element has " << k << " value !";
 				break;
 			}
 			current = (current->getNext());
-			if (current == nullptr)
-				std::cout << "\nNo element has data is " << k << " in the list";
+			if (current == nullptr);
 		}
 	}
 
 }
+
 
 Node* List::removeHead() {
 	if (isEmpty()) {

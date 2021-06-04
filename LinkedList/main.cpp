@@ -130,7 +130,8 @@ void addFirst(List* list) {
     std::cout << "data : ";
     int data;
     std::cin >> data;
-    list->addHead(new Node(data));
+    //list->addHead(new Node(data));
+    list->addHead(data);
 }
 
 
