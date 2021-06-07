@@ -121,7 +121,7 @@ List *createList() {
         std::cout << "data : ";
         int data;
         std::cin >> data;
-        newList->addTail(new Node(data));
+        newList->addTail(data);
     }
     return newList;
 }

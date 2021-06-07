@@ -1,28 +1,28 @@
 #include "list.h"
 
 List::List() {
-	pHead = nullptr;
-	pTail = nullptr;
+	head = nullptr;
+	tail = nullptr;
 }
 
 List::~List() {
-	Node* current = pHead;
-	for (Node* current = pHead; current != nullptr;) {
-		Node* nodeDistructed = current;
-		current = (current->getNext());
-		deleteNode(nodeDistructed);
-	
+	Node* current = head;
+	for (Node* current = head; current != nullptr;) {
+		Node* nodeDestructed = current;
+		current = current->getNext();
+		deleteNode(nodeDestructed);
 	}
+	deleteNode(current);
 }
 
 void List::addHead(Node * p) {
 	if (isEmpty()) {
-		pHead = p;
-		pTail = p;
+		head = p;
+		tail = p;
 	}
 	else {
-		p->setNext(pHead);
-		pHead = p;
+		p->setNext(head);
+		head = p;
 	}
 
 }
@@ -30,23 +30,23 @@ void List::addHead(Node * p) {
 void List::addHead(int data) {
 	Node* newHead = new Node(data);
 	if (isEmpty()) {
-		pHead = newHead;
-		pTail = newHead;
+		head = newHead;
+		tail = newHead;
 	}
 	else {
-		newHead->setNext(pHead);
-		pHead = newHead;
+		newHead->setNext(head);
+		head = newHead;
 	}
 }
 
 void List::addTail(Node* p) {
 	if (isEmpty()) {
-		pHead = p;
-		pTail = p;
+		head = p;
+		tail = p;
 	}
 	else {
-		pTail->setNext(p);
-		pTail = p;
+		tail->setNext(p);
+		tail = p;
 	}
 
 }
@@ -54,12 +54,12 @@ void List::addTail(Node* p) {
 void List::addTail(int data) {
 	Node* newTail = new Node(data);
 	if (isEmpty()) {
-		pHead = newTail;
-		pTail = newTail;
+		head = newTail;
+		tail = newTail;
 	}
 	else {
-		pTail->setNext(newTail);
-		pTail = newTail;
+		tail->setNext(newTail);
+		tail = newTail;
 	}
 }
 
@@ -68,7 +68,7 @@ void List::printList(){
 		std::cout << "\nNo element in the list!!\n";
 	}
 	else {
-		Node* current = pHead;
+		Node* current = head;
 		while (current != nullptr) {
 			std::cout << current->getData() << "\t";
 			current = (current->getNext());
@@ -77,7 +77,7 @@ void List::printList(){
 }
 
 bool List::isEmpty() {
-	if (pHead == nullptr)
+	if (head == nullptr)
 		return true;
 	return false;
 }
@@ -88,7 +88,7 @@ int List::getSize() {
 		count= 0;
 	else
 	{
-		Node* temp = pHead;
+		Node* temp = head;
 		while (temp != nullptr)
 		{
 			count++;
@@ -100,7 +100,7 @@ int List::getSize() {
 
 int List::calculateSum() {
 	int sum = 0;
-	Node* current = pHead;
+	Node* current = head;
 	while (current != nullptr) {
 		sum += current->getData();
 		current = current->getNext();
@@ -114,7 +114,7 @@ int List::coutEvenElements() {
 		evenElements = 0;
 	else
 	{
-		Node* current = pHead;
+		Node* current = head;
 		while (current != nullptr)
 		{
 			if ((current->getData()) % 2 == 0)
@@ -126,7 +126,7 @@ int List::coutEvenElements() {
 }
 
 void List::printPositiveNode() {
-	Node* current= pHead;
+	Node* current= head;
 	while (current != nullptr)
 	{
 		if ((current->getData()) >= 0)
@@ -140,56 +140,70 @@ void List::addNodeAfterK(int data, int k) {
 	if (isEmpty())
 		std::cout << "\nThe list is empty!!\n";
 	else {
-		Node* current = pHead;
-		while (current != nullptr)
+		Node* nodeK = findNode(k);
+		if (nodeK == nullptr) {
+			std::cout << "Node K is not in the list!";
+		}
+		else
 		{
-			if (current->getData() == k) {
-				Node* newNode = new Node(data, current->getNext());
-				current->setNext(newNode);
-				break;
+			Node* newNode = new Node(data);
+			newNode->setNext(nodeK->getNext());
+			nodeK->setNext(newNode);
+			if (nodeK == tail)
+			{
+				tail = newNode;
 			}
-			current = (current->getNext());
-			if (current == nullptr);
 		}
 	}
 
+}
+
+Node* List::findNode(int k) {
+	Node* current = head;
+	while (current != nullptr) {
+		if (current->getData() == k) {
+			break;
+		}
+		current = current->getNext();
+	}
+	return current;
 }
 
 
 Node* List::removeHead() {
 	if (isEmpty()) {
 		std::cout << "\nThe list is empty!!\n";
-		pHead = nullptr;
+		head = nullptr;
 	}
 	else
 	{
-		Node* current = pHead;
-		Node* previous = new Node();
+		Node* current = head;
+		Node* previous = nullptr;
 		previous->setNext(current);
 		removeNode(previous, current);
 		std::cout << "The first element in the list was removed.";
 	}
 
-	return pHead;
+	return head;
 }
 
 Node* List::removeTail() {
 	if (isEmpty()) {
 		std::cout << "\nThe list is empty!!\n";
-		pTail = nullptr;
+		tail = nullptr;
 	}
 	else {
-		Node* current = pHead;
-		Node* previous = new Node();
+		Node* current = head;
+		Node* previous = nullptr;
 		previous->setNext(current);
-		while (current != pTail) {
+		while (current != tail) {
+			previous = current;
 			current = current->getNext();
-			previous = previous->getNext();
 		}
 		removeNode(previous, current);
 		std::cout << "The last element in the list was removed.";
 	}
-	return pTail;
+	return tail;
 }
 
 void List::removeNodeHasKValue(int k) {
@@ -197,8 +211,8 @@ void List::removeNodeHasKValue(int k) {
 		std::cout << "\nThe list is empty!!\n";
 	else {
 		bool isHasKValue = false;
-		Node* current = pHead;
-		Node* previous = new Node();
+		Node* current = head;
+		Node* previous = nullptr;
 		previous->setNext(current);
 		while (current != nullptr)
 		{
@@ -207,11 +221,10 @@ void List::removeNodeHasKValue(int k) {
 				removeNode(previous, current);
 			}
 			else {
-				previous = previous->getNext();
+				previous = current;
 				current = current->getNext();
 			}
 		}
-
 		if (isHasKValue)
 			std::cout << "\nRemoved all elements have " << k << " value !";
 		else
@@ -220,14 +233,18 @@ void List::removeNodeHasKValue(int k) {
 }
 
 void List::removeNode(Node * &previous, Node * &current) {
-	if (current == pHead) {
-		Node* temp = pHead;
-		pHead = pHead->getNext();
+	if (current == head) {
+		if (current == tail)
+			tail = nullptr;
+		Node* temp = head;
+		head = head->getNext();
 		deleteNode(temp);
-		current = pHead;
+		current = head;
 		previous->setNext(current);
 	}
 	else {
+		if (current == tail)
+			tail = previous;
 		previous->setNext(current->getNext());
 		deleteNode(current);
 		current = previous->getNext();

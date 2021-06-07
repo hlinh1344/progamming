@@ -4,8 +4,8 @@
 class List : public Node
 {
 private:
-	Node* pHead;
-	Node* pTail;
+	Node* head;
+	Node* tail;
 public:
 	List();
 	~List();
@@ -26,5 +26,6 @@ public:
 	void deleteNode(Node* &current);
 	void addHead(int data);
 	void addTail(int data);
+	Node* findNode(int k);
 };
 
