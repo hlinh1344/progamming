@@ -8,14 +8,16 @@
 #include "Header.h"
 #include "List.h"
 
+//template <class T>
 int main() {
     runProgram();
     system("pause");
     return 0;
 }
 
+
 void runProgram() {
-    List* list = new List;
+    List<Pet*>* list = new List<Pet*>;
     bool willExit = false;
     int select;
     do {
@@ -78,7 +80,7 @@ void exitProgram(bool& willExit) {
     willExit = true;
 }
 
-void display(List* list) {
+void display(List<Pet*>* list) {
     list->printList(std::cout);
 }
 
@@ -86,18 +88,18 @@ void display(List* list) {
 
 
 
-void untilNextHealthCheck(List * list) {
+void untilNextHealthCheck(List<Pet*> * list) {
     list->showHealthCheck();
 }
 
 
-List* createPetList() {
+List<Pet*>* createPetList() {
     std::ifstream myFile("petInfo.txt");
-    List* newList = new List;
+    List<Pet*>* newList = new List<Pet*>;
     if (myFile.is_open()) {
         while (!myFile.eof())
         {
-             newList->addTail(Node::getNewNode(myFile));
+             newList->addTail(Node<Pet*>::getNewNode(myFile));
         }
         std::cout << "\nCreate the list of pet from file!\n";
         myFile.close();
@@ -109,11 +111,11 @@ List* createPetList() {
     return newList;
 }
 
-void showRation(List* list) {
+void showRation(List<Pet*>* list) {
     list->Ration();
 }
 
-void addPet(List* list) {
+void addPet(List<Pet*>* list) {
     int type;
     do {
         std::cout << "\nPress 1 or 2 to select the pet you want to add:";
@@ -127,7 +129,7 @@ void addPet(List* list) {
     list->addPetToList(type);
 }
 
-void removePet(List* list) {
+void removePet(List<Pet*>* list) {
     int idRemove;
     int listSize = list->getSize();
     do {

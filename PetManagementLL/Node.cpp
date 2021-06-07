@@ -1,30 +1,38 @@
 #include "Node.h"
 
-Node::Node() {
+template <class T>
+Node<T>::Node() {
 	next_ = nullptr;
 }
-Node::~Node() {
+
+template <class T>
+Node<T>::~Node() {
 	next_ = NULL;
 }
 
-Pet *Node::getData() {
+template <class T>
+T Node<T>::getData() {
 	return data_;
 }
 
-void Node::setData(Pet *data) {
+template <class T>
+void Node<T>::setData(T data) {
 	this->data_ = data;
 }
 
-Node* Node::getNext() {
+template <class T>
+Node<T>* Node<T>::getNext() {
 	return next_;
 }
 
-void Node::setNext(Node* next) {
+template <class T>
+void Node<T>::setNext(Node<T>* next) {
 	this->next_ = next;
 }
 
-Node* Node::getNewNode(std::istream& is) {
-	Node* newNode = new Node();
+template <class T>
+Node<T>* getNewNode(std::istream& is) {
+	Node<T>* newNode = new Node<T>();
 	if (newNode == NULL) {
 		std::cout << "\nCan't create new node!\n";
 		return NULL;
@@ -33,13 +41,13 @@ Node* Node::getNewNode(std::istream& is) {
 		char line[10] = {};
 		is.getline(line, 100);
 		if (line[0] == '1') {
-			Pet* newPet = new Dog();
+			T newPet = new Dog();
 			newPet->enterInfo(is);
 			newNode->setData(newPet);
 		}
 		else if (line[0] == '2')
 		{
-			Pet* newPet = new Cat();
+			T newPet = new Cat();
 			newPet->enterInfo(is);
 			newNode->setData(newPet);
 		}

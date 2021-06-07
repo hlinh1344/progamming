@@ -1,17 +1,18 @@
 #pragma once
 #include "Node.h"
 
-class List : public Node
+template <class T>
+class List : public Node<T>
 {
 private:
-	Node* head;
-	Node* tail;
+	Node<T>* head;
+	Node<T>* tail;
 public:
 	List();
 	~List();
-	void addTail(Node* p);
+	void addTail(Node<T>* p);
 	bool isEmpty();
-	void addHead(Node* p);
+	void addHead(Node<T>* p);
 	void printList(std::ostream& os);
 	void petInfoHeader();
 	int getSize();
@@ -20,8 +21,8 @@ public:
 	void petHealthCheckHeader();
 	void showHealthCheck();
 	void addPetToList(int type);
-	void removeNode(Node* previous, Node*& current);
-	void deleteNode(Node* current);
-	Node* findNode(int id);
+	void removeNode(Node<T>* previous, Node<T>*& current);
+	void deleteNode(Node<T>* current);
+	Node<T>* findNode(int id);
 	void remove(int id);
 };

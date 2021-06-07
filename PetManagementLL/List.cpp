@@ -1,11 +1,14 @@
 #include "List.h"
-List::List() {
+
+template <class T>
+List<T>::List<T>() {
 	head = nullptr;
 	tail = nullptr;
 }
 
-List::~List() {
-	Node* temp = head;
+template <class T>
+List<T>::~List<T>() {
+	Node <T>* temp = head;
 	while (temp != nullptr) {
 		Node* nodeDistructed = temp;
 		temp = (temp->getNext());
@@ -14,8 +17,8 @@ List::~List() {
 	}
 }
 
-
-void List::addTail(Node* p) {
+template <class T>
+void List<T>::addTail(Node<T>* p) {
 	if (isEmpty()) {
 		head = p;
 		tail = p;
@@ -27,13 +30,14 @@ void List::addTail(Node* p) {
 
 }
 
-bool List::isEmpty() {
+template <class T>
+bool List<T>::isEmpty() {
 	if (head == nullptr)
 		return true;
 	return false;
 }
-
-void List::addHead(Node* p) {
+template <class T>
+void List<T>::addHead(Node<T>* p) {
 	if (isEmpty()) {
 		head = p;
 		tail = p;
@@ -45,7 +49,8 @@ void List::addHead(Node* p) {
 
 }
 
-void List::printList(std::ostream& os) {
+template <class T>
+void List<T>::printList(std::ostream& os) {
 	if (isEmpty()) {
 		std::cout << "\nNo element in the list!!\n";
 	}
@@ -61,7 +66,8 @@ void List::printList(std::ostream& os) {
 	}
 }
 
-void List::petInfoHeader() {
+template <class T>
+void List<T>::petInfoHeader() {
 	std::cout << std::setw(3) << std::right << "ID"
 		<< std::setw(7) << std::right << "Type"
 		<< std::setw(10) << std::right << "Weight"
@@ -71,7 +77,8 @@ void List::petInfoHeader() {
 		<< std::setw(25) << std::right << "Hair color" << std::endl;
 }
 
-int List::getSize() {
+template <class T>
+int List<T>::getSize() {
 	int nCount = 0;
 	if (isEmpty())
 		nCount = 0;
@@ -86,8 +93,8 @@ int List::getSize() {
 	}
 	return nCount;
 }
-
-void List::Ration() {
+template <class T>
+void List<T>::Ration() {
 	List::petRationHeader();
 	int n = 1;
 	Node* current = head;
@@ -98,14 +105,16 @@ void List::Ration() {
 	}
 }
 
-void List::petRationHeader() {
+template <class T>
+void List<T>::petRationHeader() {
 	std::cout << std::setw(3) << std::right << "ID"
 		<< std::setw(7) << std::right << "Type"
 		<< std::setw(25) << std::right << "Morning ration"
 		<< std::setw(25) << std::right << "Afternoon ration" << std::endl;
 }
 
-void List::petHealthCheckHeader() {
+template <class T>
+void List<T>::petHealthCheckHeader() {
 	std::cout << std::setw(3) << std::right << "ID"
 		<< std::setw(7) << std::right << "Type"
 		<< std::setw(30) << std::right << "Recent health check day"
@@ -113,7 +122,8 @@ void List::petHealthCheckHeader() {
 		<< std::setw(25) << std::right << "Remaining days" << std::endl;
 }
 
-void List::showHealthCheck() {
+template <class T>
+void List<T>::showHealthCheck() {
 	List::petHealthCheckHeader();
 	Node* current = head;
 	int i = 1;
@@ -124,7 +134,8 @@ void List::showHealthCheck() {
 	}
 }
 
-void List::addPetToList(int type) {
+template <class T>
+void List<T>::addPetToList(int type) {
 	Node* newNode = new Node();
 	if (type == 1) {
 		Pet* newPet = new Dog();
@@ -139,8 +150,8 @@ void List::addPetToList(int type) {
 	addHead(newNode);
 }
 
-
-void List::removeNode(Node* previous, Node*& current) {
+template <class T>
+void List<T>::removeNode(Node<T>* previous, Node<T>*& current) {
 	if (current == head) {
 		if (current == tail)
 			tail = nullptr;
@@ -158,13 +169,15 @@ void List::removeNode(Node* previous, Node*& current) {
 	}
 }
 
-void List::deleteNode(Node *current) {
+template <class T>
+void List<T>::deleteNode(Node<T> *current) {
 	delete current;
 	current = nullptr;
 }
 
-Node* List::findNode(int id) {
-	Node* current = head;
+template <class T>
+Node<T>* List<T>::findNode(int id) {
+	Node<T>* current = head;
 	int idNumber = 0;
 	while (current != nullptr) {
 		idNumber++;
@@ -176,7 +189,8 @@ Node* List::findNode(int id) {
 	return current;
 }
 
-void List::remove(int id) {
+template <class T>
+void List<T>::remove(int id) {
 	if (isEmpty()) {
 		std::cout << "\nThe list is empty!!\n";
 		head = nullptr;
