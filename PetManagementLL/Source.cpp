@@ -116,7 +116,6 @@ void showRation(List* list) {
 void addPet(List* list) {
     int type;
     do {
-      
         std::cout << "\nPress 1 or 2 to select the pet you want to add:";
         std::cout << "\n1. Dog\t\t2. Cat\n";
         std::cout << "\nYour selection: ";
@@ -138,5 +137,5 @@ void removePet(List* list) {
             std::cout << "\n\nThe ID you entered is wrong, please re-enter!\n";
         }
     } while ((idRemove < 1) || (idRemove > listSize));
-    list->removeNode(idRemove);
+    list->remove(idRemove);
 }

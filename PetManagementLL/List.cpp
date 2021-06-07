@@ -1,14 +1,14 @@
 #include "List.h"
 List::List() {
-	pHead = nullptr;
-	pTail = nullptr;
+	head = nullptr;
+	tail = nullptr;
 }
 
 List::~List() {
-	Node* temp = pHead;
+	Node* temp = head;
 	while (temp != nullptr) {
 		Node* nodeDistructed = temp;
-		temp = (temp->getpNext());
+		temp = (temp->getNext());
 		delete nodeDistructed;
 		nodeDistructed = NULL;
 	}
@@ -17,30 +17,30 @@ List::~List() {
 
 void List::addTail(Node* p) {
 	if (isEmpty()) {
-		pHead = p;
-		pTail = p;
+		head = p;
+		tail = p;
 	}
 	else {
-		pTail->setpNext(p);
-		pTail = p;
+		tail->setNext(p);
+		tail = p;
 	}
 
 }
 
 bool List::isEmpty() {
-	if (pHead == nullptr)
+	if (head == nullptr)
 		return true;
 	return false;
 }
 
 void List::addHead(Node* p) {
 	if (isEmpty()) {
-		pHead = p;
-		pTail = p;
+		head = p;
+		tail = p;
 	}
 	else {
-		p->setpNext(pHead);
-		pHead = p;
+		p->setNext(head);
+		head = p;
 	}
 
 }
@@ -52,11 +52,11 @@ void List::printList(std::ostream& os) {
 	else {
 		List::petInfoHeader();
 		int n = 1;
-		Node* current = pHead;
+		Node* current = head;
 		while (current != nullptr) {
 			os << std::setw(3) << std::right << n++;
 			current->getData()->showPetInfo(os);
-			current = (current->getpNext());
+			current = (current->getNext());
 		}
 	}
 }
@@ -77,11 +77,11 @@ int List::getSize() {
 		nCount = 0;
 	else
 	{
-		Node* temp = pHead;
+		Node* temp = head;
 		while (temp != nullptr)
 		{
 			nCount++;
-			temp = (temp->getpNext());
+			temp = (temp->getNext());
 		}
 	}
 	return nCount;
@@ -90,11 +90,11 @@ int List::getSize() {
 void List::Ration() {
 	List::petRationHeader();
 	int n = 1;
-	Node* current = pHead;
+	Node* current = head;
 	while (current != nullptr) {
 		std::cout << std::setw(3) << std::right << n++;
 		current->getData()->showPetRation();
-		current = (current->getpNext());
+		current = (current->getNext());
 	}
 }
 
@@ -115,12 +115,12 @@ void List::petHealthCheckHeader() {
 
 void List::showHealthCheck() {
 	List::petHealthCheckHeader();
-	Node* current = pHead;
+	Node* current = head;
 	int i = 1;
 	while (current != nullptr) {
 		std::cout << std::setw(3) << std::right << i++;
 		current->getData()->showPetHealCheckInfo();
-		current = (current->getpNext());
+		current = (current->getNext());
 	}
 }
 
@@ -139,18 +139,61 @@ void List::addPetToList(int type) {
 	addHead(newNode);
 }
 
-void List::removeNode(int idRemove) {
-	if (idRemove == 1) {
-		pHead = pHead->getpNext();
+
+void List::removeNode(Node* previous, Node*& current) {
+	if (current == head) {
+		if (current == tail)
+			tail = nullptr;
+		Node* temp = head;
+		head = head->getNext();
+		deleteNode(temp);
+		current = head;
 	}
-	else
-	{
-		Node* current = pHead;
-		//move current pointer to the previous idRemove
-		for (int i = 1; i < idRemove - 1; i++) {
-			current = current->getpNext();
+	else {
+		if (current == tail)
+			tail = previous;
+		previous->setNext(current->getNext());
+		deleteNode(current);
+		current = previous->getNext();
+	}
+}
+
+void List::deleteNode(Node *current) {
+	delete current;
+	current = nullptr;
+}
+
+Node* List::findNode(int id) {
+	Node* current = head;
+	int idNumber = 0;
+	while (current != nullptr) {
+		idNumber++;
+		if (id == idNumber) {
+			break;
 		}
-		current->setpNext(current->getpNext()->getpNext());
+		current = current->getNext();
 	}
-	std::cout << "\n\nThe pet has been removed from the list !\n";
+	return current;
+}
+
+void List::remove(int id) {
+	if (isEmpty()) {
+		std::cout << "\nThe list is empty!!\n";
+		head = nullptr;
+	}
+	else {
+		Node* current = head;
+		Node* previous = nullptr;
+		int idNumber = 0;
+		while (current != nullptr) {
+			idNumber++;
+			if (id == idNumber) {
+				break;
+			}
+			previous = current;
+			current = current->getNext();
+		}
+		removeNode(previous, current);
+	}
+	
 }

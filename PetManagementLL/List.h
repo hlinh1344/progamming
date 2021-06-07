@@ -4,8 +4,8 @@
 class List : public Node
 {
 private:
-	Node* pHead;
-	Node* pTail;
+	Node* head;
+	Node* tail;
 public:
 	List();
 	~List();
@@ -20,5 +20,8 @@ public:
 	void petHealthCheckHeader();
 	void showHealthCheck();
 	void addPetToList(int type);
-	void removeNode(int idRemove);
+	void removeNode(Node* previous, Node*& current);
+	void deleteNode(Node* current);
+	Node* findNode(int id);
+	void remove(int id);
 };

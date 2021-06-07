@@ -1,10 +1,10 @@
 #include "Node.h"
 
 Node::Node() {
-	pNext_ = nullptr;
+	next_ = nullptr;
 }
 Node::~Node() {
-	pNext_ = NULL;
+	next_ = NULL;
 }
 
 Pet *Node::getData() {
@@ -15,12 +15,12 @@ void Node::setData(Pet *data) {
 	this->data_ = data;
 }
 
-Node* Node::getpNext() {
-	return pNext_;
+Node* Node::getNext() {
+	return next_;
 }
 
-void Node::setpNext(Node* pNext) {
-	this->pNext_ = pNext;
+void Node::setNext(Node* next) {
+	this->next_ = next;
 }
 
 Node* Node::getNewNode(std::istream& is) {
