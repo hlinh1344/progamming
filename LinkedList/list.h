@@ -22,8 +22,8 @@ public:
 	Node* removeHead();
 	Node* removeTail();
 	void removeNodeHasKValue(int k);
-	void removeNode(Node* &previous, Node* &current);
-	void deleteNode(Node* &current);
+	void removeNode(Node* previous, Node*& current);
+	void deleteNode(Node*& current);
 	void addHead(int data);
 	void addTail(int data);
 	Node* findNode(int k);
