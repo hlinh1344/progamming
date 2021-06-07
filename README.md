@@ -10,5 +10,7 @@ This is a repository for myself to pratice programming with the following topics
 - String
 - File stream
 - Struct
+- OOP
 - Linked list
+- Mario game
 - Binary search tree
