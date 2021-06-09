@@ -1,7 +1,7 @@
 #pragma once
 #include "node.h"
 
-class List : public Node
+class List 
 {
 private:
 	Node* head;

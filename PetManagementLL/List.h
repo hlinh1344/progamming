@@ -2,7 +2,7 @@
 #include "Node.h"
 
 template <class T>
-class List : public Node<T>
+class List 
 {
 private:
 	Node<T>* head;
@@ -20,11 +20,9 @@ public:
 	void petRationHeader();
 	void petHealthCheckHeader();
 	void showHealthCheck();
-	void addPetToList(int type);
 	void removeNode(Node<T>* previous, Node<T>*& current);
 	void deleteNode(Node<T>* current);
-	Node<T>* findNode(int id);
-	void remove(int id);
+	Node<T>* getHead();
 };
 
 
@@ -162,21 +160,6 @@ void List<T>::showHealthCheck() {
 	}
 }
 
-template <class T>
-void List<T>::addPetToList(int type) {
-	Node<T>* newNode = new Node<T>();
-	if (type == 1) {
-		Pet* newPet = new Dog();
-		newPet->addPet();
-		newNode->setData(newPet);
-	}
-	else if (type == 2) {
-		Pet* newPet = new Cat();
-		newPet->addPet();
-		newNode->setData(newPet);
-	}
-	addHead(newNode);
-}
 
 template <class T>
 void List<T>::removeNode(Node<T>* previous, Node<T>*& current) {
@@ -203,39 +186,8 @@ void List<T>::deleteNode(Node<T>* current) {
 	current = nullptr;
 }
 
-template <class T>
-Node<T>* List<T>::findNode(int id) {
-	Node<T>* current = head;
-	int idNumber = 0;
-	while (current != nullptr) {
-		idNumber++;
-		if (id == idNumber) {
-			break;
-		}
-		current = current->getNext();
-	}
-	return current;
-}
 
 template <class T>
-void List<T>::remove(int id) {
-	if (isEmpty()) {
-		std::cout << "\nThe list is empty!!\n";
-		head = nullptr;
-	}
-	else {
-		Node<T>* current = head;
-		Node<T>* previous = nullptr;
-		int idNumber = 0;
-		while (current != nullptr) {
-			idNumber++;
-			if (id == idNumber) {
-				break;
-			}
-			previous = current;
-			current = current->getNext();
-		}
-		removeNode(previous, current);
-	}
-
+Node<T>* List<T>::getHead() {
+	return head;
 }

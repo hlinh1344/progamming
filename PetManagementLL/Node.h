@@ -7,8 +7,8 @@ template <class T>
 class Node
 {
 protected:
-	T data_;
-	Node<T>* next_;
+	T data;
+	Node<T>* next;
 public:
 	Node();
 	~Node();
@@ -46,30 +46,30 @@ public:
 
 template <class T>
 Node<T>::Node() {
-	next_ = nullptr;
+	next = nullptr;
 }
 
 template <class T>
 Node<T>::~Node() {
-	next_ = NULL;
+	next = NULL;
 }
 
 template <class T>
 T Node<T>::getData() {
-	return data_;
+	return data;
 }
 
 template <class T>
-void Node<T>::setData(T data) {
-	this->data_ = data;
+void Node<T>::setData(T a_data) {
+	this->data = a_data;
 }
 
 template <class T>
 Node<T>* Node<T>::getNext() {
-	return next_;
+	return next;
 }
 
 template <class T>
-void Node<T>::setNext(Node<T>* next) {
-	this->next_ = next;
+void Node<T>::setNext(Node<T>* a_next) {
+	this->next = a_next;
 }
