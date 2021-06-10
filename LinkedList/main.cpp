@@ -10,7 +10,7 @@ int main() {
 }
 
 void runProgram() {
-    List *list = new List;
+    List* list = nullptr;
 	bool willExit = false;
 	int select;
 	do {
@@ -35,7 +35,7 @@ void runProgram() {
         switch (select)
         {
         case 1:
-            list = createList();
+            createList(list);
             std::cout << "\n\n";
             system("pause");
             break;
@@ -90,6 +90,8 @@ void runProgram() {
             system("pause");
             break;
         case 12:
+            delete list;
+            list = nullptr;
             exitProgram(willExit);
             std::cout << "\nBye!\n\n";
             system("pause");
@@ -98,56 +100,81 @@ void runProgram() {
             break;
         }
 	} while (!willExit);
-
+  
 }
 
-bool exitProgram(bool& willExit) {
+void exitProgram(bool& willExit){
     willExit = true;
-    return willExit;
 }
 
 
 void displayList(List *list) {
-    list->printList();
+    if (list->isEmpty()) 
+        std::cout << "\nNo element in the list!!\n";
+    else
+    list->printList(std::cout);
 }
 
-List *createList() {
+void createList(List* &list) {
+    delete list;
+    list = nullptr;
+    list = new List();
     std::cout << "\nNumber of elements of the list : ";
     int n;
     std::cin >> n;
-    List* newList = new List;
     for (int i = 0; i < n; i++) {
-        std::cout << i + 1<< ".";
+        std::cout << i + 1 << ".";
         std::cout << "data : ";
         int data;
         std::cin >> data;
-        newList->addTail(data);
+        Node* newNode = new Node(data);
+        list->addTail(newNode);
     }
-    return newList;
 }
 
 void addFirst(List* list) {
     std::cout << "data : ";
     int data;
     std::cin >> data;
-    //list->addHead(new Node(data));
-    list->addHead(data);
+    Node* newNode = new Node(data);
+    list->addHead(newNode);
 }
 
 
 void addAfterValueK(List* list) {
-    std::cout << "Enter K value : ";
-    int kValue;
-    std::cin >> kValue;
-    std::cout << "Enter data you want to add : ";
-    int data;
-    std::cin >> data;
-    list->addNodeAfterK(data, kValue);
+    if (list->isEmpty())
+        std::cout << "\nNo element in the list!!\n";
+    else
+    {
+        std::cout << "\nEnter K value : ";
+        int kValue;
+        std::cin >> kValue;
+        Node* nodeK = findNode(list, kValue);
+        if (nodeK == nullptr) {
+            std::cout << "Node K is not in the list!";
+        }
+        else
+        {
+            std::cout << "Enter data you want to add : ";
+            int data;
+            std::cin >> data;
+            Node* newNode = new Node(data);
+            newNode->setNext(nodeK->getNext());
+            nodeK->setNext(newNode);
+            if (nodeK == list->getTail())
+                list->setTail(newNode);
+        }
+    }
 }
 
-void sumList(List *list) {
-    int sumAllElements = list->calculateSum();
-    std::cout << "\nSum of all elements in the list : "<< sumAllElements;
+void sumList(List* list) {
+    int sum = 0;
+    Node* current = list->getHead();
+    while (current != nullptr) {
+        sum += current->getData();
+        current = current->getNext();
+    }
+    std::cout << "\nSum of all elements in the list : " << sum;
 }
 
 void calculateNumberOfElements( List *list) {
@@ -156,25 +183,93 @@ void calculateNumberOfElements( List *list) {
 }
 
 void calculateNumberOEvenElements(List* list) {
-    int numberOfEvenElements = list->coutEvenElements();
-    std::cout << "\nNumber of even elements : " << numberOfEvenElements;
+    int evenElements = 0;
+    if (list->isEmpty())
+        evenElements = 0;
+    else
+    {
+        Node* current = list->getHead();
+        while (current != nullptr)
+        {
+            if (current->getData() % 2 == 0)
+                evenElements++;
+            current = current->getNext();
+        }
+    }
+    std::cout << "\nNumber of even elements : " << evenElements;
 }
 
 void printPositiveElements(List* list) {
-    list->printPositiveNode();
+    Node* current = list->getHead();
+    while (current != nullptr)
+    {
+        if ((current->getData()) >= 0)
+            std::cout << current->getData() << "\t";
+        current = current->getNext();
+    }
 }
 
 void removeFirst(List* list) {
-    Node* newHead = list->removeHead();
+    if (list->isEmpty())
+        std::cout << "\nThe list is empty!!\n";
+    else
+    {
+        Node* head = list->getHead();
+        list->removeNode(nullptr, head);
+        std::cout << "The first element in the list was removed.";
+    }
 }
 
 void removeLast(List* list) {
-    list->removeTail();
+    if (list->isEmpty())
+        std::cout << "\nTthe list is empty!!\n";
+    else {
+        Node* current = list->getHead();
+        Node* previous = nullptr;
+        while (current != list->getTail()) {
+            previous = current;
+            current = current->getNext();
+        }
+        list->removeNode(previous, current);
+        std::cout << "The last element in the list was removed.";
+    }
 }
 
 void removeAfterValueK(List* list) {
-    std::cout << "Enter K value : ";
-    int kValue;
-    std::cin >> kValue;
-    list->removeNodeHasKValue(kValue);
+    if (list->isEmpty())
+        std::cout << "\ninthe list is empty!!\n";
+    else {
+        std::cout << "Enter K value : ";
+        int kValue;
+        std::cin >> kValue;
+        bool isHasKValue = false;
+        Node* current = list->getHead();
+        Node* previous = nullptr;
+        while (current != nullptr)
+        {
+            if (current->getData() == kValue) {
+                isHasKValue = true;
+                list->removeNode(previous, current);
+            }
+            else {
+                previous = current;
+                current = current->getNext();
+            }
+        }
+        if (isHasKValue)
+            std::cout << "\nRemoved all elements have " << kValue << " value !";
+        else
+            std::cout << "\nNo element has " << kValue << " value.";
+    }
+}
+
+Node* findNode(List* list, int k) {
+    Node* current = list->getHead();
+    while (current != nullptr) {
+        if (current->getData() == k) {
+            break;
+        }
+        current = current->getNext();
+    }
+    return current;
 }

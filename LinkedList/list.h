@@ -12,20 +12,17 @@ public:
 
 	void addHead(Node* p);
 	void addTail(Node* p);
-	void printList();
+	void printList(std::ostream & os);
 	bool isEmpty();
 	int getSize();
-	int calculateSum();
-	int coutEvenElements();
-	void printPositiveNode();
-	void addNodeAfterK(int data, int k);
-	Node* removeHead();
-	Node* removeTail();
-	void removeNodeHasKValue(int k);
 	void removeNode(Node* previous, Node*& current);
 	void deleteNode(Node*& current);
+	Node* getHead();
+	Node* getTail();
+	void setHead(Node* a_head);
+	void setTail(Node* a_tail);
 	void addHead(int data);
 	void addTail(int data);
-	Node* findNode(int k);
+
 };
 
