@@ -1,3 +1,4 @@
+#pragma once
 void runProgram();
 void exitProgram(bool& willExit);
 void displayList(List<int>* list);

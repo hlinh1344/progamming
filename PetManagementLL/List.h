@@ -1,41 +1,85 @@
 #pragma once
 #include "Node.h"
+//#include <string> 
 
 template <class T>
 class List 
 {
 private:
-	Node<T>* head;
+	Node<T>* head ;
 	Node<T>* tail;
 public:
 	List();
 	~List();
-	void addTail(Node<T>* p);
-	bool isEmpty();
+	
 	void addHead(Node<T>* p);
+	void addTail(Node<T>* p);
 	void printList(std::ostream& os);
-	void petInfoHeader();
+	bool isEmpty();
 	int getSize();
-	void Ration();
-	void petRationHeader();
-	void petHealthCheckHeader();
-	void showHealthCheck();
 	void removeNode(Node<T>* previous, Node<T>*& current);
 	void deleteNode(Node<T>* current);
 	Node<T>* getHead();
+	Node<T>* getTail();
+	void setHead(Node<T>* a_head);
+	void setTail(Node<T>* a_tail);
+	void addHead(T data);
+	void addTail(T data);
+	friend std::ostream& operator << (std::ostream& os, Pet* a_data);
 };
 
 
 template <class T>
-List<T>::List<T>() {
+void List<T>::addTail(T data)
+{
+	Node* newTail = new Node(data);
+	addTail(newTail);
+}
+
+template <class T>
+void List<T>::addHead(T data)
+{
+	Node* newHead = new Node(data);
+	addHead(newHead);
+}
+
+template <class T>
+Node<T>* List<T>::getHead() 
+{
+	return head;
+}
+
+template <class T>
+Node<T>* List<T>::getTail()
+{
+	return tail;
+}
+
+template <class T>
+void List<T>::setHead(Node<T>* a_head)
+{
+	this->head = a_head;
+}
+
+template <class T>
+void List<T>::setTail(Node<T>* a_tail)
+{
+	this->head = a_tail;
+}
+
+template <class T>
+List<T>::List<T>() 
+{
 	head = nullptr;
 	tail = nullptr;
 }
 
 template <class T>
-List<T>::~List<T>() {
+List<T>::~List<T>()
+{
 	Node <T>* temp = head;
-	while (temp != nullptr) {
+	while (temp != nullptr) 
+	{
 		Node<T>* nodeDistructed = temp;
 		temp = (temp->getNext());
 		delete nodeDistructed;
@@ -44,8 +88,10 @@ List<T>::~List<T>() {
 }
 
 template <class T>
-void List<T>::addTail(Node<T>* p) {
-	if (isEmpty()) {
+void List<T>::addTail(Node<T>* p)
+{
+	if (isEmpty())
+	{
 		head = p;
 		tail = p;
 	}
@@ -57,113 +103,65 @@ void List<T>::addTail(Node<T>* p) {
 }
 
 template <class T>
-bool List<T>::isEmpty() {
+bool List<T>::isEmpty() 
+{
 	if (head == nullptr)
 		return true;
 	return false;
 }
+
 template <class T>
-void List<T>::addHead(Node<T>* p) {
-	if (isEmpty()) {
+void List<T>::addHead(Node<T>* p)
+{
+	if (isEmpty()) 
+	{
 		head = p;
 		tail = p;
 	}
-	else {
+	else 
+	{
 		p->setNext(head);
 		head = p;
 	}
 
 }
 
+int n = 1;
 template <class T>
-void List<T>::printList(std::ostream& os) {
-	if (isEmpty()) {
-		std::cout << "\nNo element in the list!!\n";
+void List<T>::printList(std::ostream& os)
+{
+	Node<T>* current = head;
+	while (current != nullptr) 
+	{
+		os << current->getData();
+		current = (current->getNext());
 	}
-	else {
-		List::petInfoHeader();
-		int n = 1;
-		Node<T>* current = head;
-		while (current != nullptr) {
-			os << std::setw(3) << std::right << n++;
-			current->getData()->showPetInfo(os);
-			current = (current->getNext());
-		}
-	}
+	n = 1;
 }
 
 template <class T>
-void List<T>::petInfoHeader() {
-	std::cout << std::setw(3) << std::right << "ID"
-		<< std::setw(7) << std::right << "Type"
-		<< std::setw(10) << std::right << "Weight"
-		<< std::setw(10) << std::right << "Length"
-		<< std::setw(10) << std::right << "Height"
-		<< std::setw(25) << std::right << "Breed"
-		<< std::setw(25) << std::right << "Hair color" << std::endl;
-}
-
-template <class T>
-int List<T>::getSize() {
-	int nCount = 0;
+int List<T>::getSize() 
+{
+	int count = 0;
 	if (isEmpty())
-		nCount = 0;
+		count = 0;
 	else
 	{
 		Node<T>* temp = head;
 		while (temp != nullptr)
 		{
-			nCount++;
+			count++;
 			temp = (temp->getNext());
 		}
 	}
-	return nCount;
-}
-template <class T>
-void List<T>::Ration() {
-	List::petRationHeader();
-	int n = 1;
-	Node<T>* current = head;
-	while (current != nullptr) {
-		std::cout << std::setw(3) << std::right << n++;
-		current->getData()->showPetRation();
-		current = (current->getNext());
-	}
+	return count;
 }
 
 template <class T>
-void List<T>::petRationHeader() {
-	std::cout << std::setw(3) << std::right << "ID"
-		<< std::setw(7) << std::right << "Type"
-		<< std::setw(25) << std::right << "Morning ration"
-		<< std::setw(25) << std::right << "Afternoon ration" << std::endl;
-}
-
-template <class T>
-void List<T>::petHealthCheckHeader() {
-	std::cout << std::setw(3) << std::right << "ID"
-		<< std::setw(7) << std::right << "Type"
-		<< std::setw(30) << std::right << "Recent health check day"
-		<< std::setw(30) << std::right << "The next health check day"
-		<< std::setw(25) << std::right << "Remaining days" << std::endl;
-}
-
-template <class T>
-void List<T>::showHealthCheck() {
-	List::petHealthCheckHeader();
-	Node<T>* current = head;
-	int i = 1;
-	while (current != nullptr) {
-		std::cout << std::setw(3) << std::right << i++;
-		current->getData()->showPetHealCheckInfo();
-		current = (current->getNext());
-	}
-}
-
-
-template <class T>
-void List<T>::removeNode(Node<T>* previous, Node<T>*& current) {
-	if (current == head) {
+void List<T>::removeNode(Node<T>* previous, Node<T>*& current) 
+{
+	if (current == head) 
+	{
 		if (current == tail)
 			tail = nullptr;
 		Node<T>* temp = head;
@@ -171,7 +169,8 @@ void List<T>::removeNode(Node<T>* previous, Node<T>*& current) {
 		deleteNode(temp);
 		current = head;
 	}
-	else {
+	else 
+	{
 		if (current == tail)
 			tail = previous;
 		previous->setNext(current->getNext());
@@ -181,13 +180,37 @@ void List<T>::removeNode(Node<T>* previous, Node<T>*& current) {
 }
 
 template <class T>
-void List<T>::deleteNode(Node<T>* current) {
+void List<T>::deleteNode(Node<T>* current)
+{
 	delete current;
 	current = nullptr;
 }
 
+std::ostream& operator << (std::ostream& os, Pet* a_data)
+{
+	os << std::setw(3) << std::right;
+	if (n < 10) {
+		std::string ID;
+		ID = "0" + std::to_string(n++);
+		os << ID;
+	}
+	else {
+		std::string ID;
+		ID = std::to_string(n++);
+		os << ID;
+	}
 
-template <class T>
-Node<T>* List<T>::getHead() {
-	return head;
+	os << std::setw(7) << std::right;
+
+	if (a_data->getType() == 1)
+		os << "Dog";
+	else if (a_data->getType() == 2) 
+		os << "Cat";
+
+	os << std::setw(10) << std::right << a_data->getWeight()
+		<< std::setw(10) << std::right << a_data->getLength()
+		<< std::setw(10) << std::right << a_data->getHeight()
+		<< std::setw(25) << std::right << a_data->getBreed()
+		<< std::setw(25) << std::right << a_data->getHairColor() << std::endl;
+	return os;
 }

@@ -8,9 +8,11 @@ void petHeaderInfo();
 void petHeaderHealthCheck();
 void untilNextHealthCheck(List <Pet*> * list);
 void addPet(List<Pet*> *list);
-void createPetList(List<Pet*>* list);
+void createPetList(List<Pet*>* &list);
 void display(List<Pet*> *list);
 void showRation(List<Pet*> *list);
 void removePet(List<Pet*> *list);
-
-
+void petRationHeader();
+void petHeaderInfo();
+void petHealthCheckHeader();
+void petInfoHeader();

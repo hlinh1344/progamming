@@ -16,31 +16,31 @@ public:
 	void setData(T data);
 	Node<T>* getNext();
 	void setNext(Node<T>* next);
-	static Node<T>* getNewNode(std::istream& is)
-	{
-		Node<T>* newNode = new Node<T>();
-		if (newNode == NULL) {
-			std::cout << "\nCan't create new node!\n";
-			return NULL;
-		}
-		else {
-			char line[10] = {};
-			is.getline(line, 100);
-			if (line[0] == '1') {
-				T newPet = new Dog();
-				newPet->enterInfo(is);
-				newNode->setData(newPet);
-			}
-			else if (line[0] == '2')
-			{
-				T newPet = new Cat();
-				newPet->enterInfo(is);
-				newNode->setData(newPet);
-			}
-		}
-		return newNode;
-	}
-
+//	static Node<T>* getNewNode(std::istream& is)
+//	{
+//		Node<T>* newNode = new Node<T>();
+//		if (newNode == NULL) {
+//			std::cout << "\nCan't create new node!\n";
+//			return NULL;
+//		}
+//		else {
+//			char line[10] = {};
+//			is.getline(line, 100);
+//			if (line[0] == '1') {
+//				T newPet = new Dog();
+//				newPet->enterInfo(is);
+//				newNode->setData(newPet);
+//			}
+//			else if (line[0] == '2')
+//			{
+//				T newPet = new Cat();
+//				newPet->enterInfo(is);
+//				newNode->setData(newPet);
+//			}
+//		}
+//		return newNode;
+//	}
+//
 };
 
 

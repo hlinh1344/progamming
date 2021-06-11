@@ -3,17 +3,20 @@
 #include "List.h"
 #include "Header.h"
 
-int main() {
+int main() 
+{
     runProgram();
     system("pause");
     return 0;
 }
 
-void runProgram() {
+void runProgram() 
+{
     List<int>* list = nullptr;
     bool willExit = false;
     int select;
-    do {
+    do
+    {
         system("cls");
         std::cout << "1.Create a new list.\n";
         std::cout << "2.Display the list.\n";
@@ -103,26 +106,30 @@ void runProgram() {
 
 }
 
-void exitProgram(bool& willExit) {
+void exitProgram(bool& willExit)
+{
     willExit = true;
 }
 
 
-void displayList(List<int>* list) {
+void displayList(List<int>* list)
+{
     if (list->isEmpty())
         std::cout << "\nNo element in the list!!\n";
     else
         list->printList(std::cout);
 }
 
-void createList(List<int>*& list) {
+void createList(List<int>*& list) 
+{
     delete list;
     list = nullptr;
     list = new List<int>();
     std::cout << "\nNumber of elements of the list : ";
     int n;
     std::cin >> n;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) 
+    {
         std::cout << i + 1 << ".";
         std::cout << "data : ";
         int data;
@@ -132,7 +139,8 @@ void createList(List<int>*& list) {
     }
 }
 
-void addFirst(List<int>* list) {
+void addFirst(List<int>* list) 
+{
     std::cout << "data : ";
     int data;
     std::cin >> data;
@@ -141,7 +149,8 @@ void addFirst(List<int>* list) {
 }
 
 
-void addAfterValueK(List<int>* list) {
+void addAfterValueK(List<int>* list)
+{
     if (list->isEmpty())
         std::cout << "\nNo element in the list!!\n";
     else
@@ -150,9 +159,8 @@ void addAfterValueK(List<int>* list) {
         int kValue;
         std::cin >> kValue;
         Node<int>* nodeK = findNode(list, kValue);
-        if (nodeK == nullptr) {
+        if (nodeK == nullptr)
             std::cout << "Node K is not in the list!";
-        }
         else
         {
             std::cout << "Enter data you want to add : ";
@@ -167,22 +175,26 @@ void addAfterValueK(List<int>* list) {
     }
 }
 
-void sumList(List<int>* list) {
+void sumList(List<int>* list)
+{
     int sum = 0;
     Node<int>* current = list->getHead();
-    while (current != nullptr) {
+    while (current != nullptr)
+    {
         sum += current->getData();
         current = current->getNext();
     }
     std::cout << "\nSum of all elements in the list : " << sum;
 }
 
-void calculateNumberOfElements(List<int>* list) {
+void calculateNumberOfElements(List<int>* list)
+{
     int numberOfNode = list->getSize();
     std::cout << "\nNumber of elements : " << numberOfNode;
 }
 
-void calculateNumberOEvenElements(List<int>* list) {
+void calculateNumberOEvenElements(List<int>* list)
+{
     int evenElements = 0;
     if (list->isEmpty())
         evenElements = 0;
@@ -199,7 +211,8 @@ void calculateNumberOEvenElements(List<int>* list) {
     std::cout << "\nNumber of even elements : " << evenElements;
 }
 
-void printPositiveElements(List<int>* list) {
+void printPositiveElements(List<int>* list)
+{
     Node<int>* current = list->getHead();
     while (current != nullptr)
     {
@@ -209,7 +222,8 @@ void printPositiveElements(List<int>* list) {
     }
 }
 
-void removeFirst(List<int>* list) {
+void removeFirst(List<int>* list) 
+{
     if (list->isEmpty())
         std::cout << "\nThe list is empty!!\n";
     else
@@ -220,13 +234,15 @@ void removeFirst(List<int>* list) {
     }
 }
 
-void removeLast(List<int>* list) {
+void removeLast(List<int>* list)
+{
     if (list->isEmpty())
         std::cout << "\nTthe list is empty!!\n";
     else {
         Node<int>* current = list->getHead();
         Node<int>* previous = nullptr;
-        while (current != list->getTail()) {
+        while (current != list->getTail())
+        {
             previous = current;
             current = current->getNext();
         }
@@ -235,10 +251,12 @@ void removeLast(List<int>* list) {
     }
 }
 
-void removeAfterValueK(List<int>* list) {
+void removeAfterValueK(List<int>* list)
+{
     if (list->isEmpty())
         std::cout << "\ninthe list is empty!!\n";
-    else {
+    else 
+    {
         std::cout << "Enter K value : ";
         int kValue;
         std::cin >> kValue;
@@ -247,11 +265,13 @@ void removeAfterValueK(List<int>* list) {
         Node<int>* previous = nullptr;
         while (current != nullptr)
         {
-            if (current->getData() == kValue) {
+            if (current->getData() == kValue) 
+            {
                 isHasKValue = true;
                 list->removeNode(previous, current);
             }
-            else {
+            else
+            {
                 previous = current;
                 current = current->getNext();
             }
@@ -263,12 +283,13 @@ void removeAfterValueK(List<int>* list) {
     }
 }
 
-Node<int>* findNode(List<int>* list, int k) {
+Node<int>* findNode(List<int>* list, int k)
+{
     Node<int>* current = list->getHead();
-    while (current != nullptr) {
-        if (current->getData() == k) {
-            break;
-        }
+    while (current != nullptr) 
+    {
+        if (current->getData() == k) 
+            break; 
         current = current->getNext();
     }
     return current;

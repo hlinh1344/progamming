@@ -16,42 +16,62 @@ double Pet::untilHealthCheck()
     return 0;
 }
 
-double Pet::getWeight() {
+int Pet::getType() 
+{
+    return type;
+}
+
+void Pet::setType(int type) 
+{
+    this->type = type;
+}
+
+double Pet::getWeight() 
+{
     return weight;
 }
 
-void Pet::setWeight(double weight) {
+void Pet::setWeight(double weight)
+{
     this->weight = weight;
 }
 
-double Pet::getLength() {
+double Pet::getLength()
+{
     return length;
 }
 
-void Pet::setLength(double length) {
+void Pet::setLength(double length) 
+{
     this->length = length;
 }
 
-double Pet::getHeight() {
+double Pet::getHeight()
+{
     return height;
 }
 
-void Pet::setHeight(double height) {
+void Pet::setHeight(double height) 
+{
     this->height = height;
 }
 
-std::string Pet::getBreed() {
+std::string Pet::getBreed()
+{
     return breed;
 }
 
-void Pet::setBreed(std::string breed) {
+void Pet::setBreed(std::string breed) 
+{
     this->breed = breed;
 }
-std::string Pet::getHairColor() {
+std::string Pet::getHairColor() 
+{
     return hairColor;
 }
 
-void Pet::setHairColor(std::string hairColor) {
+void Pet::setHairColor(std::string hairColor)
+{
     this->hairColor = hairColor;
 }
 
@@ -63,15 +83,6 @@ void Pet::inputDateFromString(std::string date)
     recentHealthCheck.tm_mon = atoi(month.c_str()) - 1;
     std::string year = date.substr(6, 4);
     recentHealthCheck.tm_year = atoi(year.c_str()) - 1900;
-}
-
-
-void Pet::showPetInfo(std::ostream& os) {
-    os << std::setw(10) << std::right << weight
-        << std::setw(10) << std::right << length
-        << std::setw(10) << std::right << height
-        << std::setw(25) << std::right << breed
-        << std::setw(25) << std::right << hairColor << std::endl;
 }
 
 void Pet::enterInfo(std::istream& is)
@@ -95,20 +106,15 @@ void Pet::showPetHealCheckInfo() {
 std::string Pet::printDate(int day, int month, int year) {
     std::string temp = {};
     //print with format dd/mm/yy
-    if ((day >= 0) && (day <= 9)) {
+    if ((day >= 0) && (day <= 9)) 
         temp = "0" + std::to_string(day) + "/";
-    }
-
-    else {
+    else 
         temp = std::to_string(day) + "/";
-    }
 
-    if ((month >= 0) && (month <= 9)) {
+    if ((month >= 0) && (month <= 9)) 
         temp = temp + "0" + std::to_string(month) + "/";
-    }
-    else {
+    else 
         temp = temp + std::to_string(month) + "/";
-    }
 
     temp = temp + std::to_string(year);
     return temp;
@@ -118,7 +124,8 @@ tm Pet::nextHealthCheck(tm recentHealthCheck) {
     return recentHealthCheck;
 }
 
-void Pet::addPet() {
+void Pet::addPet()
+{
     double weight;
     double length;
     double height;
@@ -146,3 +153,4 @@ void Pet::addPet() {
     getline(std::cin, recentHealthCheck);
     inputDateFromString(recentHealthCheck);
 }
+

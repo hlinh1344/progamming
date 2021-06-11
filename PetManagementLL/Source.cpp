@@ -8,19 +8,20 @@
 #include "Header.h"
 #include "List.h"
 
-//template <class T>
-int main() {
+int main() 
+{
     runProgram();
     system("pause");
     return 0;
 }
 
-
-void runProgram() {
-    List<Pet*>* list = new  List<Pet*>;
+void runProgram() 
+{
+    List<Pet*>* list = nullptr;
     bool willExit = false;
     int select;
-    do {
+    do 
+    {
         system("cls");
         std::cout << "1.Enter all pet's properties from file.\n";
         std::cout << "2.Display information of all pet.\n";
@@ -67,8 +68,6 @@ void runProgram() {
             system("pause");
             break;
         case 7:
-            delete list;
-            list = nullptr;
             exitProgram(willExit);
             std::cout << "\nBye!\n\n";
             system("pause");
@@ -77,82 +76,177 @@ void runProgram() {
             break;
         }
     } while (!willExit);
+    delete list;
+    list = nullptr;
 }
-void exitProgram(bool& willExit) {
+void exitProgram(bool& willExit) 
+{
     willExit = true;
 }
 
-void display(List<Pet*>* list) {
-    list->printList(std::cout);
+void display(List<Pet*>* list) 
+{
+    if (list->isEmpty()) 
+        std::cout << "\nNo element in the list!!\n";
+    else 
+    {
+        petInfoHeader();
+        list->printList(std::cout);
+    }
+   
 }
 
-void untilNextHealthCheck(List<Pet*> * list) {
-    list->showHealthCheck();
+void untilNextHealthCheck(List<Pet*> * list) 
+{
+    if (list->isEmpty())
+        std::cout << "\nNo element in the list!!\n";
+    else 
+    {
+        petHealthCheckHeader();
+        Node<Pet*>* current = list->getHead();
+        int n = 1;
+        while (current != nullptr)
+        {
+            std::cout << std::setw(3) << std::right;
+
+            if (n < 10) 
+            {
+                std::string ID;
+                ID = "0" + std::to_string(n++);
+                std::cout << ID;
+            }
+            else 
+            {
+                std::string ID;
+                ID = std::to_string(n++);
+                std::cout << ID;
+            }
+            current->getData()->showPetHealCheckInfo();
+            current = (current->getNext());
+        }
+    }
 }
 
-void createPetList(List<Pet*> *list) {
+void createPetList(List<Pet*> *&list)
+{
+    delete list;
+    list = nullptr;
+    list = new  List<Pet*>;
     std::ifstream myFile("petInfo.txt");
-    if (myFile.is_open()) {
+    if (myFile.is_open())
+    {
         while (!myFile.eof())
         {
-             list->addTail(Node<Pet*>::getNewNode(myFile));
+            Node<Pet*>* newNode = new Node<Pet*>();
+            if (newNode == nullptr)
+                std::cout << "\nCan't create new node!\n";
+            else {
+                char line[10] = {};
+                myFile.getline(line, 100);
+                if (line[0] == '1') 
+                {
+                    Pet* newPet = new Dog();
+                    newPet->enterInfo(myFile);
+                    newNode->setData(newPet);
+                }
+                else if (line[0] == '2')
+                {
+                    Pet* newPet = new Cat();
+                    newPet->enterInfo(myFile);
+                    newNode->setData(newPet);
+                }
+                list->addTail(newNode);
+            }
         }
-        std::cout << "\nCreate the list of pet from file!\n";
         myFile.close();
+        std::cout << "\nCreate the list of pet from file!\n";
     }
-    else {
+    else 
+    {
         std::cout << "\nCan't open file\n";
         list = nullptr;
     }
 }
 
-void showRation(List<Pet*>* list) {
-    list->Ration();
+void showRation(List<Pet*>* list) 
+{
+    if (list->isEmpty())
+        std::cout << "\nNo element in the list!!\n";
+    else
+    {
+        petRationHeader();
+        int n = 1;
+        Node<Pet*>* current = list->getHead();
+        while (current != nullptr)
+        {
+            std::cout << std::setw(3) << std::right;
+            if (n < 10) 
+            {
+                std::string ID;
+                ID = "0" + std::to_string(n++);
+                std::cout << ID;
+            }
+            else
+            {
+                std::string ID;
+                ID = std::to_string(n++);
+                std::cout << ID;
+            }
+            current->getData()->showPetRation();
+            current = (current->getNext());
+        }
+    }
 }
 
-void addPet(List<Pet*>* list) {
+void addPet(List<Pet*>* list) 
+{
     int type;
-    do {
+    do 
+    {
         std::cout << "\nPress 1 or 2 to select the pet you want to add:";
         std::cout << "\n1. Dog\t\t2. Cat\n";
         std::cout << "\nYour selection: ";
         std::cin >> type;
-        if ((type != 1) && (type != 2)) {
+        if ((type != 1) && (type != 2)) 
+        {
             std::cout << "\n\nPlease choose again !\n";
         }  
     } while ((type != 1) && (type != 2));
 
     Node<Pet*>* newNode = new Node<Pet*>();
-    if (type == 1) {
+    if (type == 1)
+    {
         Pet* newPet = new Dog();
         newPet->addPet();
         newNode->setData(newPet);
     }
-    else if (type == 2) {
+    else if (type == 2) 
+    {
         Pet* newPet = new Cat();
         newPet->addPet();
         newNode->setData(newPet);
     }
     list->addHead(newNode);
-
 }
 
-void removePet(List<Pet*>* list) {
+void removePet(List<Pet*>* list) 
+{
     int idRemove;
     int listSize = list->getSize();
     if (list->isEmpty()) 
         std::cout << "\nThe list is empty!!\n";
-    else {
+    else
+    {
         std::cout << "\nEnter ID number of pet you want to remove : ";
         std::cin >> idRemove;
         Node<Pet*>* current = list->getHead();
         Node<Pet*>* previous = nullptr;
         int idNumber = 0;
-        while (current != nullptr) {
+        while (current != nullptr) 
+        {
             idNumber++;
-            if (idRemove == idNumber) {
+            if (idRemove == idNumber)
                 break;
-            }
             previous = current;
             current = current->getNext();
         }
@@ -161,4 +255,32 @@ void removePet(List<Pet*>* list) {
         else 
             list->removeNode(previous, current);
     }
+}
+
+void petRationHeader() 
+{
+    std::cout << std::setw(3) << std::right << "ID"
+        << std::setw(7) << std::right << "Type"
+        << std::setw(25) << std::right << "Morning ration"
+        << std::setw(25) << std::right << "Afternoon ration" << std::endl;
+}
+
+void petHealthCheckHeader()
+{
+    std::cout << std::setw(3) << std::right << "ID"
+        << std::setw(7) << std::right << "Type"
+        << std::setw(30) << std::right << "Recent health check day"
+        << std::setw(30) << std::right << "The next health check day"
+        << std::setw(25) << std::right << "Remaining days" << std::endl;
+}
+
+void petInfoHeader()
+{
+    std::cout << std::setw(3) << std::right << "ID"
+        << std::setw(7) << std::right << "Type"
+        << std::setw(10) << std::right << "Weight"
+        << std::setw(10) << std::right << "Length"
+        << std::setw(10) << std::right << "Height"
+        << std::setw(25) << std::right << "Breed"
+        << std::setw(25) << std::right << "Hair color" << std::endl;
 }

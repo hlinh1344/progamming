@@ -19,35 +19,50 @@ public:
 };
 
 template <class T>
-Node<T>::Node() {
+Node<T>::Node()
+{
 	next = nullptr;
 }
+
 template <class T>
-Node<T>::Node(T a_data) {
+Node<T>::Node(T a_data) 
+{
 	data = a_data;
 }
+
 template <class T>
-Node<T>::Node(T a_data, Node<T>* a_next) {
+Node<T>::Node(T a_data, Node<T>* a_next)
+{
 	data = a_data;
 	next = a_next;
 }
+
 template <class T>
-Node<T>::~Node() {
+Node<T>::~Node() 
+{
 	next = NULL;
 }
+
 template <class T>
-T Node<T>::getData() {
+T Node<T>::getData()
+{
 	return data;
 }
+
 template <class T>
-void Node<T>::setData(T a_data) {
+void Node<T>::setData(T a_data)
+{
 	this->data = a_data;
 }
+
 template <class T>
-Node<T>* Node<T>::getNext() {
+Node<T>* Node<T>::getNext() 
+{
 	return next;
 }
+
 template <class T>
-void Node<T>::setNext(Node<T>* a_next) {
+void Node<T>::setNext(Node<T>* a_next) 
+{
 	this->next = a_next;
 }
