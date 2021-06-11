@@ -19,14 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source.h" />
-    <ClInclude Include="list.h" />
-    <ClInclude Include="node.h" />
+    <ClInclude Include="Header.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="Node.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="list.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="node.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

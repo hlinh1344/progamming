@@ -1,19 +1,19 @@
 #pragma once
-#include "node.h"
-#include "list.h"
-#include "source.h"
+#include "Node.h"
+#include "List.h"
+#include "Header.h"
 
 int main() {
-	runProgram();
-	system("pause");
-	return 0;
+    runProgram();
+    system("pause");
+    return 0;
 }
 
 void runProgram() {
-    List* list = nullptr;
-	bool willExit = false;
-	int select;
-	do {
+    List<int>* list = nullptr;
+    bool willExit = false;
+    int select;
+    do {
         system("cls");
         std::cout << "1.Create a new list.\n";
         std::cout << "2.Display the list.\n";
@@ -99,26 +99,26 @@ void runProgram() {
         default:
             break;
         }
-	} while (!willExit);
-  
+    } while (!willExit);
+
 }
 
-void exitProgram(bool& willExit){
+void exitProgram(bool& willExit) {
     willExit = true;
 }
 
 
-void displayList(List *list) {
-    if (list->isEmpty()) 
+void displayList(List<int>* list) {
+    if (list->isEmpty())
         std::cout << "\nNo element in the list!!\n";
     else
-    list->printList(std::cout);
+        list->printList(std::cout);
 }
 
-void createList(List* &list) {
+void createList(List<int>*& list) {
     delete list;
     list = nullptr;
-    list = new List();
+    list = new List<int>();
     std::cout << "\nNumber of elements of the list : ";
     int n;
     std::cin >> n;
@@ -127,21 +127,21 @@ void createList(List* &list) {
         std::cout << "data : ";
         int data;
         std::cin >> data;
-        Node* newNode = new Node(data);
+        Node<int>* newNode = new Node<int>(data);
         list->addTail(newNode);
     }
 }
 
-void addFirst(List* list) {
+void addFirst(List<int>* list) {
     std::cout << "data : ";
     int data;
     std::cin >> data;
-    Node* newNode = new Node(data);
+    Node<int>* newNode = new Node<int>(data);
     list->addHead(newNode);
 }
 
 
-void addAfterValueK(List* list) {
+void addAfterValueK(List<int>* list) {
     if (list->isEmpty())
         std::cout << "\nNo element in the list!!\n";
     else
@@ -149,7 +149,7 @@ void addAfterValueK(List* list) {
         std::cout << "\nEnter K value : ";
         int kValue;
         std::cin >> kValue;
-        Node* nodeK = findNode(list, kValue);
+        Node<int>* nodeK = findNode(list, kValue);
         if (nodeK == nullptr) {
             std::cout << "Node K is not in the list!";
         }
@@ -158,7 +158,7 @@ void addAfterValueK(List* list) {
             std::cout << "Enter data you want to add : ";
             int data;
             std::cin >> data;
-            Node* newNode = new Node(data);
+            Node<int>* newNode = new Node<int>(data);
             newNode->setNext(nodeK->getNext());
             nodeK->setNext(newNode);
             if (nodeK == list->getTail())
@@ -167,9 +167,9 @@ void addAfterValueK(List* list) {
     }
 }
 
-void sumList(List* list) {
+void sumList(List<int>* list) {
     int sum = 0;
-    Node* current = list->getHead();
+    Node<int>* current = list->getHead();
     while (current != nullptr) {
         sum += current->getData();
         current = current->getNext();
@@ -177,18 +177,18 @@ void sumList(List* list) {
     std::cout << "\nSum of all elements in the list : " << sum;
 }
 
-void calculateNumberOfElements( List *list) {
+void calculateNumberOfElements(List<int>* list) {
     int numberOfNode = list->getSize();
     std::cout << "\nNumber of elements : " << numberOfNode;
 }
 
-void calculateNumberOEvenElements(List* list) {
+void calculateNumberOEvenElements(List<int>* list) {
     int evenElements = 0;
     if (list->isEmpty())
         evenElements = 0;
     else
     {
-        Node* current = list->getHead();
+        Node<int>* current = list->getHead();
         while (current != nullptr)
         {
             if (current->getData() % 2 == 0)
@@ -199,8 +199,8 @@ void calculateNumberOEvenElements(List* list) {
     std::cout << "\nNumber of even elements : " << evenElements;
 }
 
-void printPositiveElements(List* list) {
-    Node* current = list->getHead();
+void printPositiveElements(List<int>* list) {
+    Node<int>* current = list->getHead();
     while (current != nullptr)
     {
         if ((current->getData()) >= 0)
@@ -209,23 +209,23 @@ void printPositiveElements(List* list) {
     }
 }
 
-void removeFirst(List* list) {
+void removeFirst(List<int>* list) {
     if (list->isEmpty())
         std::cout << "\nThe list is empty!!\n";
     else
     {
-        Node* head = list->getHead();
+        Node<int>* head = list->getHead();
         list->removeNode(nullptr, head);
         std::cout << "The first element in the list was removed.";
     }
 }
 
-void removeLast(List* list) {
+void removeLast(List<int>* list) {
     if (list->isEmpty())
         std::cout << "\nTthe list is empty!!\n";
     else {
-        Node* current = list->getHead();
-        Node* previous = nullptr;
+        Node<int>* current = list->getHead();
+        Node<int>* previous = nullptr;
         while (current != list->getTail()) {
             previous = current;
             current = current->getNext();
@@ -235,7 +235,7 @@ void removeLast(List* list) {
     }
 }
 
-void removeAfterValueK(List* list) {
+void removeAfterValueK(List<int>* list) {
     if (list->isEmpty())
         std::cout << "\ninthe list is empty!!\n";
     else {
@@ -243,8 +243,8 @@ void removeAfterValueK(List* list) {
         int kValue;
         std::cin >> kValue;
         bool isHasKValue = false;
-        Node* current = list->getHead();
-        Node* previous = nullptr;
+        Node<int>* current = list->getHead();
+        Node<int>* previous = nullptr;
         while (current != nullptr)
         {
             if (current->getData() == kValue) {
@@ -263,8 +263,8 @@ void removeAfterValueK(List* list) {
     }
 }
 
-Node* findNode(List* list, int k) {
-    Node* current = list->getHead();
+Node<int>* findNode(List<int>* list, int k) {
+    Node<int>* current = list->getHead();
     while (current != nullptr) {
         if (current->getData() == k) {
             break;
