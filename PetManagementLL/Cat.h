@@ -6,7 +6,7 @@ class Cat : public Pet
 private:
     double sleptHours;
 public:
-    void enterInfo(std::istream& is)  override;
+    void enterInfo(std::istream& is, int &n)  override;
     double calculateMorniingRation() override;
     double afternoonRation() override;
     double getSleptHours();

@@ -9,6 +9,7 @@
 class Pet
 {
 protected:
+    int ID;
     int type;
     double weight;
     double length;
@@ -20,6 +21,8 @@ public:
     virtual double calculateMorniingRation();
     virtual double afternoonRation();
     virtual double untilHealthCheck();
+    int getID();
+    void setID(int ID);
     int getType();
     void setType(int type);
     double getWeight();
@@ -33,12 +36,13 @@ public:
     std::string getHairColor();
     void setHairColor(std::string hairColor);
     void inputDateFromString(std::string date);
-    virtual void enterInfo(std::istream& is);
+    virtual void enterInfo(std::istream& is, int &n);
     virtual void showPetRation();
     virtual void showPetHealCheckInfo();
     std::string printDate(int day, int month, int year);
     virtual tm nextHealthCheck(tm recentHealthCheck);
     virtual void addPet();
+    friend std::ostream& operator << (std::ostream& os, Pet* a_data);
 };
 
 

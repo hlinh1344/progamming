@@ -132,9 +132,11 @@ void createPetList(List<Pet*> *&list)
     delete list;
     list = nullptr;
     list = new  List<Pet*>;
+
     std::ifstream myFile("petInfo.txt");
     if (myFile.is_open())
     {
+        int n = 1;
         while (!myFile.eof())
         {
             Node<Pet*>* newNode = new Node<Pet*>();
@@ -146,13 +148,13 @@ void createPetList(List<Pet*> *&list)
                 if (line[0] == '1') 
                 {
                     Pet* newPet = new Dog();
-                    newPet->enterInfo(myFile);
+                    newPet->enterInfo(myFile, n);
                     newNode->setData(newPet);
                 }
                 else if (line[0] == '2')
                 {
                     Pet* newPet = new Cat();
-                    newPet->enterInfo(myFile);
+                    newPet->enterInfo(myFile, n);
                     newNode->setData(newPet);
                 }
                 list->addTail(newNode);
@@ -175,10 +177,11 @@ void showRation(List<Pet*>* list)
     else
     {
         petRationHeader();
-        int n = 1;
+       // int n = 1;
         Node<Pet*>* current = list->getHead();
         while (current != nullptr)
         {
+            int n = current->getData()->getID();
             std::cout << std::setw(3) << std::right;
             if (n < 10) 
             {
@@ -217,23 +220,25 @@ void addPet(List<Pet*>* list)
     if (type == 1)
     {
         Pet* newPet = new Dog();
+        newPet->setID(list->getTail()->getData()->getID() + 1);
         newPet->addPet();
         newNode->setData(newPet);
     }
     else if (type == 2) 
     {
         Pet* newPet = new Cat();
+        newPet->setID( list->getTail()->getData()->getID() + 1);
         newPet->addPet();
         newNode->setData(newPet);
     }
-    list->addHead(newNode);
+    list->addTail(newNode);
 }
 
 void removePet(List<Pet*>* list) 
 {
     int idRemove;
     int listSize = list->getSize();
-    if (list->isEmpty()) 
+    if (list->isEmpty())
         std::cout << "\nThe list is empty!!\n";
     else
     {
@@ -241,19 +246,23 @@ void removePet(List<Pet*>* list)
         std::cin >> idRemove;
         Node<Pet*>* current = list->getHead();
         Node<Pet*>* previous = nullptr;
-        int idNumber = 0;
         while (current != nullptr) 
         {
-            idNumber++;
-            if (idRemove == idNumber)
+            if (idRemove == current->getData()->getID())
                 break;
             previous = current;
             current = current->getNext();
         }
         if (current == nullptr)
             std::cout << "No Pet has ID = " << idRemove << " ! ";
-        else 
+        else {
             list->removeNode(previous, current);
+            while (current != nullptr)
+            {
+                current->getData()->setID(current->getData()->getID()-1);
+                current = current->getNext();
+            }
+        }
     }
 }
 

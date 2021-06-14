@@ -16,6 +16,16 @@ double Pet::untilHealthCheck()
     return 0;
 }
 
+int Pet::getID()
+{
+    return ID;
+}
+
+void Pet::setID(int ID)
+{
+    this->ID = ID;
+}
+
 int Pet::getType() 
 {
     return type;
@@ -85,7 +95,7 @@ void Pet::inputDateFromString(std::string date)
     recentHealthCheck.tm_year = atoi(year.c_str()) - 1900;
 }
 
-void Pet::enterInfo(std::istream& is)
+void Pet::enterInfo(std::istream& is, int &n)
 {
     is >> weight;
     is >> length;
@@ -93,6 +103,7 @@ void Pet::enterInfo(std::istream& is)
     is.ignore();
     getline(is, breed);
     getline(is, hairColor);
+    Pet::setID(n++);
 }
 
 void Pet::showPetRation() {
@@ -154,3 +165,32 @@ void Pet::addPet()
     inputDateFromString(recentHealthCheck);
 }
 
+std::ostream& operator << (std::ostream& os, Pet* a_data)
+{
+    os << std::setw(3) << std::right;
+    int n = a_data->getID();
+    if (n < 10) {
+        std::string ID;
+        ID = "0" + std::to_string(n);
+        os << ID;
+    }
+    else {
+        std::string ID;
+        ID = std::to_string(n);
+        os << ID;
+    }
+
+    os << std::setw(7) << std::right;
+
+    if (a_data->getType() == 1)
+        os << "Dog";
+    else if (a_data->getType() == 2)
+        os << "Cat";
+
+    os << std::setw(10) << std::right << a_data->getWeight()
+        << std::setw(10) << std::right << a_data->getLength()
+        << std::setw(10) << std::right << a_data->getHeight()
+        << std::setw(25) << std::right << a_data->getBreed()
+        << std::setw(25) << std::right << a_data->getHairColor();
+    return os;
+}

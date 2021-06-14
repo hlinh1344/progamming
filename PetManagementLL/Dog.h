@@ -6,7 +6,7 @@ class Dog :public Pet
 private:
     double playedHours;
 public:
-    void enterInfo(std::istream& is) override;
+    void enterInfo(std::istream& is, int &n) override;
     double calculateMorniingRation() override;
     double afternoonRation() override;
     double getPlayedHours();

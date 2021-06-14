@@ -1,7 +1,5 @@
 #include "Cat.h"
 
-
-
 double Cat::calculateMorniingRation() 
 {
     return height * 5;
@@ -22,10 +20,10 @@ void Cat::setSleptHours(double sleptHours)
     this->sleptHours = sleptHours;
 }
 
-void Cat::enterInfo(std::istream& is)
+void Cat::enterInfo(std::istream& is, int &n)
 {
     type = 2;
-    Pet::enterInfo(is);
+    Pet::enterInfo(is,n);
     std::string line;
     is >> sleptHours;
     is.ignore();
@@ -45,7 +43,6 @@ tm Cat::nextHealthCheck(tm recentHealthCheck)
         temp.tm_mon += 3;
     return temp;
 }
-
 
 double Cat::untilHealthCheck() 
 {

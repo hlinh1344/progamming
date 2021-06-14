@@ -23,10 +23,10 @@ void Dog::setPlayedHours(double playedHours)
 }
 
 
-void Dog::enterInfo(std::istream& is)
+void Dog::enterInfo(std::istream& is, int &n)
 {
     type = 1;
-    Pet::enterInfo(is);
+    Pet::enterInfo(is,n);
     std::string line;
     is >> playedHours;
     is.ignore();
