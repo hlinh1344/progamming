@@ -6,11 +6,11 @@ class Node
 {
 protected:
 	T data;
-	Node* next;
+	Node<T>* next;
 public:
 	Node();
 	Node(T a_data);
-	Node(T a_data, Node* a_next);
+	Node(T a_data, Node<T>* a_next);
 	~Node();
 	T getData();
 	void setData(T data);
