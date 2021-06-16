@@ -25,7 +25,7 @@ Node<T>::Node()
 }
 
 template <class T>
-Node<T>::Node(T a_data) 
+Node<T>::Node(T a_data)
 {
 	data = a_data;
 }
@@ -38,7 +38,7 @@ Node<T>::Node(T a_data, Node<T>* a_next)
 }
 
 template <class T>
-Node<T>::~Node() 
+Node<T>::~Node()
 {
 	next = NULL;
 }
@@ -56,13 +56,13 @@ void Node<T>::setData(T a_data)
 }
 
 template <class T>
-Node<T>* Node<T>::getNext() 
+Node<T>* Node<T>::getNext()
 {
 	return next;
 }
 
 template <class T>
-void Node<T>::setNext(Node<T>* a_next) 
+void Node<T>::setNext(Node<T>* a_next)
 {
 	this->next = a_next;
 }

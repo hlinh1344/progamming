@@ -31,7 +31,7 @@ List<T>::List() {
 }
 
 template <class T>
-List<T>::~List() 
+List<T>::~List()
 {
 	Node<T>* current = nullptr;
 	for (current = head; current != nullptr;)
@@ -40,7 +40,6 @@ List<T>::~List()
 		current = current->getNext();
 		deleteNode(nodeDestructed);
 	}
-	deleteNode(current);
 }
 
 template <class T>
@@ -51,7 +50,7 @@ void List<T>::addHead(Node<T>* p)
 		head = p;
 		tail = p;
 	}
-	else 
+	else
 	{
 		p->setNext(head);
 		head = p;
@@ -59,7 +58,7 @@ void List<T>::addHead(Node<T>* p)
 }
 
 template <class T>
-void List<T>::addHead(T data) 
+void List<T>::addHead(T data)
 {
 	Node* newHead = new Node(data);
 	addHead(newHead);
@@ -68,12 +67,12 @@ void List<T>::addHead(T data)
 template <class T>
 void List<T>::addTail(Node<T>* p)
 {
-	if (isEmpty()) 
+	if (isEmpty())
 	{
 		head = p;
 		tail = p;
 	}
-	else 
+	else
 	{
 		tail->setNext(p);
 		tail = p;
@@ -81,14 +80,14 @@ void List<T>::addTail(Node<T>* p)
 }
 
 template <class T>
-void List<T>::addTail(T data) 
+void List<T>::addTail(T data)
 {
 	Node* newTail = new Node(data);
 	addTail(newTail);
 }
 
 template <class T>
-void List<T>::printList(std::ostream& os) 
+void List<T>::printList(std::ostream& os)
 {
 	Node<T>* current = head;
 	while (current != nullptr)
@@ -99,7 +98,7 @@ void List<T>::printList(std::ostream& os)
 }
 
 template <class T>
-bool List<T>::isEmpty() 
+bool List<T>::isEmpty()
 {
 	if (head == nullptr)
 		return true;
@@ -107,7 +106,7 @@ bool List<T>::isEmpty()
 }
 
 template <class T>
-int List<T>::getSize() 
+int List<T>::getSize()
 {
 	int count = 0;
 	if (isEmpty())
@@ -136,7 +135,7 @@ void List<T>::removeNode(Node<T>* previous, Node<T>*& current)
 		deleteNode(temp);
 		current = head;
 	}
-	else 
+	else
 	{
 		if (current == tail)
 			tail = previous;
@@ -154,7 +153,7 @@ void List<T>::deleteNode(Node<T>*& current)
 }
 
 template <class T>
-Node<T>* List<T>::getHead() 
+Node<T>* List<T>::getHead()
 {
 	return head;
 }
