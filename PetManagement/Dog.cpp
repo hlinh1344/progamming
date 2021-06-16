@@ -37,18 +37,13 @@ tm Dog::nextHealthCheck(tm recentHealthCheck) {
     return temp;
 }
 
-int Dog::untilHealthCheck(tm recentHealthCheck) {
+double Dog::untilHealthCheck() {
     time_t currentTime = time(NULL);   // get time now
     tm now;
     localtime_s(&now, &currentTime);
-    if (recentHealthCheck.tm_mon + 6 > 11) {
-        recentHealthCheck.tm_year++;
-        recentHealthCheck.tm_mon = 5 - (11 - recentHealthCheck.tm_mon);
-    }
-    else
-        recentHealthCheck.tm_mon += 6;
-    double  diff = (double) difftime(currentTime, mktime(&recentHealthCheck));
-    diff = (-1)* (diff / 86400);
+    tm timeToHealthCheck = Dog::nextHealthCheck(recentHealthCheck);
+    double  diff = (double)difftime(currentTime, mktime(&timeToHealthCheck));
+    diff = -(1) * (diff / 86400);
     return round(diff);
 }
 
@@ -70,5 +65,5 @@ void Dog::showPetHealCheckInfo() {
         << Pet::printDate(recentHealthCheck.tm_mday,recentHealthCheck.tm_mon + 1,recentHealthCheck.tm_year + 1900)
         << std::setw(30) << std::right 
         << Pet::printDate(nextHealthCheck.tm_mday, nextHealthCheck.tm_mon + 1, nextHealthCheck.tm_year + 1900)
-        << std::setw(25) << std::right << Dog::untilHealthCheck(recentHealthCheck) << std::endl;
+        << std::setw(25) << std::right << Dog::untilHealthCheck() << std::endl;
 }

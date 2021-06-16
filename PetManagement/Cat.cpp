@@ -38,21 +38,16 @@ tm Cat::nextHealthCheck(tm recentHealthCheck) {
 }
 
 
-int Cat::untilHealthCheck(tm recentHealthCheck) {
+double Cat::untilHealthCheck() {
     time_t currentTime = time(NULL);   // get time now
     tm now;
     localtime_s(&now, &currentTime);
-    if (recentHealthCheck.tm_mon + 3 > 11) {
-        recentHealthCheck.tm_year++;
-        recentHealthCheck.tm_mon = 2 - (11 - recentHealthCheck.tm_mon);
-    }
-    else
-        recentHealthCheck.tm_mon += 3;
-    double  diff = (double)difftime(currentTime, mktime(&recentHealthCheck));
-    diff = -(1)*(diff / 86400);
-    
+    tm timeToHealthCheck = Cat::nextHealthCheck(recentHealthCheck);
+    double  diff = (double)difftime(currentTime, mktime(&timeToHealthCheck));
+    diff = -(1) * (diff / 86400);
     return round(diff);
 }
+
 void Cat::showPetRation() {
     std::cout << std::setw(7) << std::right << "Cat"
         << std::setw(22) << std::right << Cat::calculateMorniingRation() << " g"
@@ -71,5 +66,5 @@ void Cat::showPetHealCheckInfo() {
         << Pet::printDate(recentHealthCheck.tm_mday, recentHealthCheck.tm_mon + 1, recentHealthCheck.tm_year + 1900)
         << std::setw(30) << std::right
         << Pet::printDate(nextHealthCheck.tm_mday, nextHealthCheck.tm_mon + 1, nextHealthCheck.tm_year + 1900)
-        << std::setw(25) << std::right << Cat::untilHealthCheck(recentHealthCheck) << std::endl;
+        << std::setw(25) << std::right << Cat::untilHealthCheck() << std::endl;
 }

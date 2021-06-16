@@ -23,7 +23,7 @@ public:
   
     virtual float calculateMorniingRation();
     virtual float afternoonRation();
-    virtual int untilHealthCheck(tm recentHealthCheck);
+    virtual double untilHealthCheck();
     float getWeight();
     void setWeight(float weight);
     float getLength();
