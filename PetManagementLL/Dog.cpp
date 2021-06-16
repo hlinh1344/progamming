@@ -22,18 +22,6 @@ void Dog::setPlayedHours(double playedHours)
     this->playedHours = playedHours;
 }
 
-
-void Dog::enterInfo(std::istream& is, int &n)
-{
-    type = 1;
-    Pet::enterInfo(is,n);
-    std::string line;
-    is >> playedHours;
-    is.ignore();
-    getline(is, line);
-    Pet::inputDateFromString(line);
-}
-
 tm Dog::nextHealthCheck(tm recentHealthCheck)
 {
     tm temp = recentHealthCheck;
@@ -86,4 +74,17 @@ void Dog::addPet()
     std::cin >> hour;
     Dog::setPlayedHours(hour);
     std::cout << "\n\nA new dog has been added to the list!";
+}
+
+std::istream& operator >> (std::istream& is, Dog* a_data)
+{
+    //is >> (Pet*)a_data;
+    a_data->type = 1;
+    is >> (Pet*)a_data;
+    std::string line;
+    is >> a_data->playedHours;
+    is.ignore();
+    getline(is, line);
+    a_data->inputDateFromString(line);
+    return is;
 }

@@ -20,17 +20,6 @@ void Cat::setSleptHours(double sleptHours)
     this->sleptHours = sleptHours;
 }
 
-void Cat::enterInfo(std::istream& is, int &n)
-{
-    type = 2;
-    Pet::enterInfo(is,n);
-    std::string line;
-    is >> sleptHours;
-    is.ignore();
-    getline(is, line);
-    Pet::inputDateFromString(line);
-}
-
 tm Cat::nextHealthCheck(tm recentHealthCheck) 
 {
     tm temp = recentHealthCheck;
@@ -84,4 +73,17 @@ void Cat::addPet()
     std::cin >> hour;
     Cat::setSleptHours(hour);
     std::cout << "\n\nA new cat has been added to the list!";
+}
+
+std::istream& operator >> (std::istream& is, Cat* a_data)
+{
+    //is >> (Pet*)a_data;
+    a_data->type = 2;
+    is >> (Pet*)a_data;
+    std::string line;
+    is >> a_data->sleptHours;
+    is.ignore();
+    getline(is, line);
+    a_data->inputDateFromString(line);
+    return is;
 }

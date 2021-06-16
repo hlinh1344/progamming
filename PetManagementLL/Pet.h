@@ -36,13 +36,13 @@ public:
     std::string getHairColor();
     void setHairColor(std::string hairColor);
     void inputDateFromString(std::string date);
-    virtual void enterInfo(std::istream& is, int &n);
     virtual void showPetRation();
     virtual void showPetHealCheckInfo();
     std::string printDate(int day, int month, int year);
     virtual tm nextHealthCheck(tm recentHealthCheck);
     virtual void addPet();
     friend std::ostream& operator << (std::ostream& os, Pet* a_data);
+    friend std::istream& operator >> (std::istream& is, Pet* a_data);
 };
 
 

@@ -95,17 +95,6 @@ void Pet::inputDateFromString(std::string date)
     recentHealthCheck.tm_year = atoi(year.c_str()) - 1900;
 }
 
-void Pet::enterInfo(std::istream& is, int &n)
-{
-    is >> weight;
-    is >> length;
-    is >> height;
-    is.ignore();
-    getline(is, breed);
-    getline(is, hairColor);
-    Pet::setID(n++);
-}
-
 void Pet::showPetRation() {
 
 }
@@ -193,4 +182,16 @@ std::ostream& operator << (std::ostream& os, Pet* a_data)
         << std::setw(25) << std::right << a_data->getBreed()
         << std::setw(25) << std::right << a_data->getHairColor();
     return os;
+}
+
+std::istream& operator >> (std::istream& is, Pet* a_data)
+{
+    //is >> (Pet*)a_data;
+    is >> a_data->weight;
+    is >> a_data->length;
+    is >> a_data->height;
+    is.ignore();
+    getline(is, a_data->breed);
+    getline(is, a_data->hairColor);
+    return is;
 }

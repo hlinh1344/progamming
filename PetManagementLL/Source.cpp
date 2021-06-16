@@ -147,14 +147,17 @@ void createPetList(List<Pet*> *&list)
                 myFile.getline(line, 100);
                 if (line[0] == '1') 
                 {
-                    Pet* newPet = new Dog();
-                    newPet->enterInfo(myFile, n);
+                    Dog* newPet = new Dog();
+                    myFile >> newPet;
+                    newPet->setID(n++);
                     newNode->setData(newPet);
+
                 }
                 else if (line[0] == '2')
                 {
-                    Pet* newPet = new Cat();
-                    newPet->enterInfo(myFile, n);
+                    Cat* newPet = new Cat();
+                    myFile >> newPet;
+                    newPet->setID(n++);
                     newNode->setData(newPet);
                 }
                 list->addTail(newNode);
