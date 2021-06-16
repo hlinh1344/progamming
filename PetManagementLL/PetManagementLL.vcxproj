@@ -116,6 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)LinkedList;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,6 +131,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)LinkedList;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,15 +144,11 @@
     <ClInclude Include="Cat.h" />
     <ClInclude Include="Dog.h" />
     <ClInclude Include="Header.h" />
-    <ClInclude Include="List.h" />
-    <ClInclude Include="Node.h" />
     <ClInclude Include="Pet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cat.cpp" />
     <ClCompile Include="Dog.cpp" />
-    <ClCompile Include="List.cpp" />
-    <ClCompile Include="Node.cpp" />
     <ClCompile Include="Pet.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>

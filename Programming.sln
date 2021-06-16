@@ -25,8 +25,14 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleString", "String\String.vcxproj", "{EA80E6FB-690E-49E9-8BEE-802A7137BB0A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PigLatinString", "String2\String2.vcxproj", "{BB8B3C77-C4E7-495B-8B38-929832092E4E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E57F4DAD-D3E4-4A83-B904-87B05C8E6BD1} = {E57F4DAD-D3E4-4A83-B904-87B05C8E6BD1}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StringManipulate", "String3\String3.vcxproj", "{ADD72418-6F01-4463-89D8-E1213D5D0CE5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7B6306DA-5873-46FF-A984-CEE570384FEF} = {7B6306DA-5873-46FF-A984-CEE570384FEF}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StringManipulateLib", "String3DLL\String3DLL.vcxproj", "{7B6306DA-5873-46FF-A984-CEE570384FEF}"
 EndProject

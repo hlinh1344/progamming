@@ -16,42 +16,72 @@ double Pet::untilHealthCheck()
     return 0;
 }
 
-double Pet::getWeight() {
+int Pet::getID()
+{
+    return ID;
+}
+
+void Pet::setID(int ID)
+{
+    this->ID = ID;
+}
+
+int Pet::getType() 
+{
+    return type;
+}
+
+void Pet::setType(int type) 
+{
+    this->type = type;
+}
+
+double Pet::getWeight() 
+{
     return weight;
 }
 
-void Pet::setWeight(double weight) {
+void Pet::setWeight(double weight)
+{
     this->weight = weight;
 }
 
-double Pet::getLength() {
+double Pet::getLength()
+{
     return length;
 }
 
-void Pet::setLength(double length) {
+void Pet::setLength(double length) 
+{
     this->length = length;
 }
 
-double Pet::getHeight() {
+double Pet::getHeight()
+{
     return height;
 }
 
-void Pet::setHeight(double height) {
+void Pet::setHeight(double height) 
+{
     this->height = height;
 }
 
-std::string Pet::getBreed() {
+std::string Pet::getBreed()
+{
     return breed;
 }
 
-void Pet::setBreed(std::string breed) {
+void Pet::setBreed(std::string breed) 
+{
     this->breed = breed;
 }
-std::string Pet::getHairColor() {
+std::string Pet::getHairColor() 
+{
     return hairColor;
 }
 
-void Pet::setHairColor(std::string hairColor) {
+void Pet::setHairColor(std::string hairColor)
+{
     this->hairColor = hairColor;
 }
 
@@ -65,25 +95,6 @@ void Pet::inputDateFromString(std::string date)
     recentHealthCheck.tm_year = atoi(year.c_str()) - 1900;
 }
 
-
-void Pet::showPetInfo(std::ostream& os) {
-    os << std::setw(10) << std::right << weight
-        << std::setw(10) << std::right << length
-        << std::setw(10) << std::right << height
-        << std::setw(25) << std::right << breed
-        << std::setw(25) << std::right << hairColor << std::endl;
-}
-
-void Pet::enterInfo(std::istream& is)
-{
-    is >> weight;
-    is >> length;
-    is >> height;
-    is.ignore();
-    getline(is, breed);
-    getline(is, hairColor);
-}
-
 void Pet::showPetRation() {
 
 }
@@ -95,20 +106,15 @@ void Pet::showPetHealCheckInfo() {
 std::string Pet::printDate(int day, int month, int year) {
     std::string temp = {};
     //print with format dd/mm/yy
-    if ((day >= 0) && (day <= 9)) {
+    if ((day >= 0) && (day <= 9)) 
         temp = "0" + std::to_string(day) + "/";
-    }
-
-    else {
+    else 
         temp = std::to_string(day) + "/";
-    }
 
-    if ((month >= 0) && (month <= 9)) {
+    if ((month >= 0) && (month <= 9)) 
         temp = temp + "0" + std::to_string(month) + "/";
-    }
-    else {
+    else 
         temp = temp + std::to_string(month) + "/";
-    }
 
     temp = temp + std::to_string(year);
     return temp;
@@ -118,7 +124,8 @@ tm Pet::nextHealthCheck(tm recentHealthCheck) {
     return recentHealthCheck;
 }
 
-void Pet::addPet() {
+void Pet::addPet()
+{
     double weight;
     double length;
     double height;
@@ -145,4 +152,46 @@ void Pet::addPet() {
     std::cout << "Recent health check day (dd/mm/yyyy): ";
     getline(std::cin, recentHealthCheck);
     inputDateFromString(recentHealthCheck);
+}
+
+std::ostream& operator << (std::ostream& os, Pet* a_data)
+{
+    os << std::setw(3) << std::right;
+    int n = a_data->getID();
+    if (n < 10) {
+        std::string ID;
+        ID = "0" + std::to_string(n);
+        os << ID;
+    }
+    else {
+        std::string ID;
+        ID = std::to_string(n);
+        os << ID;
+    }
+
+    os << std::setw(7) << std::right;
+
+    if (a_data->getType() == 1)
+        os << "Dog";
+    else if (a_data->getType() == 2)
+        os << "Cat";
+
+    os << std::setw(10) << std::right << a_data->getWeight()
+        << std::setw(10) << std::right << a_data->getLength()
+        << std::setw(10) << std::right << a_data->getHeight()
+        << std::setw(25) << std::right << a_data->getBreed()
+        << std::setw(25) << std::right << a_data->getHairColor();
+    return os;
+}
+
+std::istream& operator >> (std::istream& is, Pet* a_data)
+{
+    //is >> (Pet*)a_data;
+    is >> a_data->weight;
+    is >> a_data->length;
+    is >> a_data->height;
+    is.ignore();
+    getline(is, a_data->breed);
+    getline(is, a_data->hairColor);
+    return is;
 }
