@@ -12,7 +12,7 @@ int main()
 
 void runProgram() 
 {
-    List<int>* list = nullptr;
+    List<int>* list = new List<int>();
     bool willExit = false;
     int select;
     do

@@ -17,7 +17,7 @@ int main()
 
 void runProgram()
 {
-	List<Pet*>* list = nullptr;
+	List<Pet*>* list = new List<Pet*>();
 	bool willExit = false;
 	int select;
 	do
