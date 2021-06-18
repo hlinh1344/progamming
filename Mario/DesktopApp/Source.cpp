@@ -3,7 +3,6 @@
 #endif 
 
 #include <windows.h>
-#include "resource.h"
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
@@ -69,7 +68,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
     case WM_CREATE:
         hBitmap = (HBITMAP)LoadImage(hInst, L"mario.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-        //hBitmap = LoadBitmapW(hInst, MAKEINTRESOURCE(IDB_BITMAP1));
         break;
     case WM_KEYDOWN:
         switch (wParam)
@@ -105,7 +103,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             Rectangle(hdc, rc1.left, rc1.top, rc1.right, rc1.bottom);
             SelectObject(hdc, hpenOld);
             SelectObject(hdc, hbrushOld);
-            hbrushOld = CreateSolidBrush(RGB(150, 255, 50));
+            hbrushOld = CreateSolidBrush(RGB(255, 155, 50));
             FillRect(hdc, &rc1, hbrushOld);
 
             //load bitmap
