@@ -59,7 +59,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		
 	}
 	return msg.wParam;
 }
@@ -105,7 +104,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		} break;
 		}
 
-
 	default:
 		return DefWindowProc(hwnd, uMsg, wParam, lParam);
 	}
@@ -121,7 +119,6 @@ BOOL OnCreate(HWND hwnd, LPCREATESTRUCT lpCreateStruct)
 
 void OnPaint(HWND hwnd)
 {
-
 	PAINTSTRUCT ps;
 	HDC hdc = BeginPaint(hwnd, &ps);
 		BITMAP          bitmap;
@@ -134,19 +131,14 @@ void OnPaint(HWND hwnd)
 		FillRect(hdc, &ps.rcPaint, hbrushOld);
 		GetWindowRect(hwnd, &rc1);
 		GetClientRect(hwnd, &rc1);
-
 		rc1.left = 0;
 		rc1.right = 1900;
 		rc1.top = 470;
 		rc1.bottom = 475;
-
 		rc2.left = 200;
 		rc2.right = 205;
 		rc2.top = 400;
 		rc2.bottom = 475;
-
-
-
 		Rectangle(hdc, rc1.left, rc1.top, rc1.right, rc1.bottom);
 		Rectangle(hdc, 200, 400, 205, 475);
 		Ellipse(hdc, 500, 300, 600, 350);
@@ -165,8 +157,7 @@ void OnPaint(HWND hwnd)
 		BitBlt(hdc, x, y, bitmap.bmWidth, bitmap.bmHeight, hdcMem, 0, 0, SRCCOPY);
 		SelectObject(hdcMem, oldBitmap);
 		DeleteDC(hdcMem);
-
-	EndPaint(hwnd, &ps);
+		EndPaint(hwnd, &ps);
 }
 
 void OnClose(HWND hwnd)
