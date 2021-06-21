@@ -1,27 +1,51 @@
-Mario/DesktopApp/.vs/DesktopApp/v16/Browse.VC.db-shm
-Mario/DesktopApp/.vs/DesktopApp/v16/Browse.VC.db-wal
-Mario/DesktopApp/.vs/DesktopApp/v16/Browse.VC.opendb
-Mario/DesktopApp/.vs/DesktopApp/v16/ipch/AutoPCH/5d6b0b236a4aef5e/SOURCE.ipch
-Mario/DesktopApp/Debug/DesktopApp.Build.CppClean.log
-Mario/DesktopApp/Debug/DesktopApp.tlog/rc.write.1.tlog
-Mario/DesktopApp/Debug/DesktopApp.tlog/rc.read.1.tlog
-Mario/DesktopApp/Debug/DesktopApp.tlog/rc.command.1.tlog
-Mario/DesktopApp/Debug/DesktopApp.tlog/link.write.1.tlog
-Mario/DesktopApp/Debug/DesktopApp.tlog/link.read.1.tlog
-Mario/DesktopApp/Debug/DesktopApp.tlog/link.command.1.tlog
-Mario/DesktopApp/Debug/DesktopApp.tlog/DesktopApp.lastbuildstate
-Mario/DesktopApp/Debug/DesktopApp.tlog/CL.write.1.tlog
-Mario/DesktopApp/Debug/DesktopApp.tlog/CL.read.1.tlog
-Mario/DesktopApp/Debug/DesktopApp.tlog/CL.command.1.tlog
-Mario/DesktopApp/Debug/vc142.pdb
-Mario/DesktopApp/Debug/vc142.idb
-Mario/DesktopApp/Resource.aps
-Mario/DesktopApp/Resource.rc
-Mario/DesktopApp/Debug/DesktopApp.exe
-Mario/DesktopApp/Debug/DesktopApp.pdb
-Mario/DesktopApp/Debug/DesktopApp.log
-Mario/DesktopApp/Debug/DesktopApp.ilk
-Mario/DesktopApp/Debug/DesktopApp.exe.recipe
-Mario/DesktopApp/Debug/DesktopApp.vcxproj.FileListAbsolute.txt
-Mario/DesktopApp/Debug/Resource.res
-Mario/DesktopApp/Debug/Source.obj
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*.iobj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.ipch
+*.db
+*.idb
+*.pdb
+*.ipdb
+
+*/.vs/
+*/Debug/
+AlgorithmChart/x64/Debug/
+*.suo
+*.Build.CppClean.log
+*.exe.recipe
+*ilk
+*.vcxproj.FileListAbsolute.txt
+*.tlog
+*.log
+*.vcxproj.user
+*.recipe
