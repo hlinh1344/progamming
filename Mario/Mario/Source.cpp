@@ -53,6 +53,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 	// Run the message loop.
 	MSG msg = { };
+	float framePerSecond = 60.0;
+	float frameInterval = 1000.0 / framePerSecond;
 	while (globalRunning)
 	{
 		while (PeekMessage(&msg, hwnd, 0, 0, PM_REMOVE))
@@ -60,7 +62,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		
+		Sleep(frameInterval);
 	}
 	return msg.wParam;
 }
