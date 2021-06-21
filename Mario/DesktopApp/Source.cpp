@@ -1,17 +1,18 @@
 #ifndef UNICODE
 #define UNICODE
 #endif 
-
 #include <windows.h>
 #include <WindowsX.h>
+
+
 BOOL OnCreate(HWND hwnd, LPCREATESTRUCT lpCreateStruct);
 void OnPaint(HWND hwnd);
 void OnClose(HWND hwnd);
-void OnDestroy(HWND hwnd);
-void clear_screen(HWND hwnd);
+
 
 int x = 300;
 int y = 400;
+int globalRunning = 1;
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
@@ -28,7 +29,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		0,
 		CLASS_NAME,
 		L"Mario Game",
-		WS_OVERLAPPEDWINDOW,
+		//Disable window resizing
+		WS_OVERLAPPEDWINDOW & ~WS_THICKFRAME & ~WS_MAXIMIZEBOX,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
 		1000,
@@ -38,6 +40,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		hInstance,
 		NULL
 	);
+
 
 	if (hwnd == NULL)
 	{
@@ -49,10 +52,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 	// Run the message loop.
 	MSG msg = { };
-	while (GetMessage(&msg, NULL, 0, 0) > 0)
+	while (globalRunning)
 	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+		while (PeekMessage(&msg, hwnd, 0, 0, PM_REMOVE))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		
 	}
 	return msg.wParam;
 }
@@ -65,6 +72,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
+
 		HANDLE_MSG(hwnd, WM_CREATE, OnCreate);
 		HANDLE_MSG(hwnd, WM_PAINT, OnPaint);
 		HANDLE_MSG(hwnd, WM_CLOSE, OnClose);
@@ -75,29 +83,25 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 		case VK_ESCAPE:
 		{
-			DestroyWindow(hwnd);
+			OnClose(hwnd);
 		} break;
 		case VK_LEFT:
 		{
 			x -= 10;
-			OnPaint(hwnd);
 		} break;
 
 		case VK_RIGHT:
 		{
 			x += 10;
-			OnPaint(hwnd);
 		} break;
 		case VK_UP:
 		{
 			y -= 10;
-			OnPaint(hwnd);
 		} break;
 
 		case VK_DOWN:
 		{
 			y += 10;
-			OnPaint(hwnd);
 		} break;
 		}
 
@@ -105,7 +109,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	default:
 		return DefWindowProc(hwnd, uMsg, wParam, lParam);
 	}
-
+	
 	return 0;
 }
 
@@ -167,13 +171,10 @@ void OnPaint(HWND hwnd)
 
 void OnClose(HWND hwnd)
 {
-	if (MessageBox(hwnd, L"Really quit?", L"My application", MB_OKCANCEL) == IDOK)
+	if (MessageBox(hwnd, L"Are you sure you want to exit?", L"Confirmation", MB_OKCANCEL) == IDOK)
 	{
-		DestroyWindow(hwnd);
+		globalRunning = 0;
 	}
 }
 
-void OnDestroy(HWND hwnd)
-{
-	PostQuitMessage(0);
-}
+
