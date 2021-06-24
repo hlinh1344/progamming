@@ -124,30 +124,46 @@ void Character::draw(HWND hwnd)
 	HBRUSH hbrushOld = CreateSolidBrush(RGB(20, 95, 155));
 	FillRect(hdc, &ps.rcPaint, hbrushOld);
 	hBitmap = (HBITMAP)LoadImage(hInst, L"mario.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-	
+
 
 	hdcMem = CreateCompatibleDC(hdc);
 
-	oldBitmap = SelectObject(hdcMem, hBitmap);
-	GetObject(hBitmap, sizeof(bitmap), &bitmap);
+	//oldBitmap = SelectObject(hdcMem, hBitmap);
+	//GetObject(hBitmap, sizeof(bitmap), &bitmap);
+	//BitBlt
+	//(
+	//	hdc,
+	//	posX,
+	//	posY,
+	//	CHARACTER_WIDTH,
+	//	CHARACTER_HEIGHT,
+	//	hdcMem,
+	//	CHARACTER_WIDTH * formX,
+	//	CHARACTER_HEIGHT * formY,
+	//	SRCINVERT
+	//);
+	//oldBitmap = SelectObject(hdcMem, hBitmap);
+	//GetObject(hBitmap, sizeof(bitmap), &bitmap);
+	//BitBlt
+	//(
+	//	hdc,
+	//	posX + 90,
+	//	posY,
+	//	CHARACTER_WIDTH,
+	//	CHARACTER_HEIGHT,
+	//	hdcMem,
+	//	CHARACTER_WIDTH * formX,
+	//	CHARACTER_HEIGHT * formY,
+	//	SRCAND
+	//);
+
+	hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
+	oldBitmap = SelectObject(hdcMem, hbmMask);
+	GetObject(hbmMask, sizeof(bitmap), &bitmap);
 	BitBlt
 	(
 		hdc,
-		posX,
-		posY,
-		CHARACTER_WIDTH,
-		CHARACTER_HEIGHT,
-		hdcMem,
-		CHARACTER_WIDTH * formX,
-		CHARACTER_HEIGHT * formY,
-		SRCINVERT
-	);
-	oldBitmap = SelectObject(hdcMem, hBitmap);
-	GetObject(hBitmap, sizeof(bitmap), &bitmap);
-	BitBlt
-	(
-		hdc,
-		posX + 90,
+		posX + 90 + 90,
 		posY,
 		CHARACTER_WIDTH,
 		CHARACTER_HEIGHT,
@@ -172,21 +188,6 @@ void Character::draw(HWND hwnd)
 		SRCPAINT
 	);
 
-	hbmMask = CreateBitmapMask(hBitmap, RGB(0, 0, 0));
-	oldBitmap = SelectObject(hdcMem, hbmMask);
-	GetObject(hbmMask, sizeof(bitmap), &bitmap);
-	BitBlt
-	(
-		hdc,
-		posX + 90 + 90 + 90,
-		posY,
-		CHARACTER_WIDTH,
-		CHARACTER_HEIGHT,
-		hdcMem,
-		CHARACTER_WIDTH * formX,
-		CHARACTER_HEIGHT * formY,
-		SRCAND
-	);
 	SelectObject(hdcMem, oldBitmap);
 	DeleteDC(hdcMem);
 	EndPaint(hwnd, &ps);
