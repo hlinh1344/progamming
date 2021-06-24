@@ -18,10 +18,18 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="mario.bmp">
       <Filter>Source Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
