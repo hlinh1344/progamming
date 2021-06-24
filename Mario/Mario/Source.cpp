@@ -9,16 +9,12 @@
 #define WINDOW_HEIGHT 600;
 
 void OnCreate(HWND hwnd);
-void OnPaint(HWND hwnd, Character &Mario);
-void OnKeyDown(HWND hwnd, WPARAM wParam, Character &Mario);
-void OnKeyUp(HWND hwnd, WPARAM wParam, Character &Mario);
+void OnPaint(HWND hwnd);
+void OnKeyDown(HWND hwnd, WPARAM wParam);
+void OnKeyUp(HWND hwnd, WPARAM wParam);
 void OnClose(HWND hwnd);
+Character Mario;
 
-
-int posX = 0;
-int posY = 400;
-int characterX = 0;
-int characterY = 0;
 int globalRunning = 1;
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -60,7 +56,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	// Run the message loop.
 	MSG msg = { };
 	float framePerSecond = 60.0;
-	float frameInterval = 1000.0 / framePerSecond;
+	float frameInterval = 4000.0 / framePerSecond;
 	while (globalRunning)
 	{
 		while (PeekMessage(&msg, hwnd, 0, 0, PM_REMOVE))
@@ -81,23 +77,23 @@ HINSTANCE hInst = NULL;
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	Character Mario;
+	
 	switch (uMsg)
 	{
 	case WM_CLOSE:
 		OnClose(hwnd);
 		return 0;
 	case WM_PAINT:
-		OnPaint(hwnd, Mario);
+		OnPaint(hwnd);
 		return 0;
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
 	case WM_KEYDOWN:
-		OnKeyDown(hwnd, wParam, Mario);
+		OnKeyDown(hwnd, wParam);
 		return 0;
 	case WM_KEYUP:
-		OnKeyUp(hwnd, wParam, Mario);
+		OnKeyUp(hwnd, wParam);
 		return 0;
 	case WM_CREATE:
 		OnCreate(hwnd);
@@ -113,7 +109,7 @@ void OnCreate(HWND hwnd)
 	//hBitmap = (HBITMAP)LoadImage(hInst, L"mario.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 }
 
-void OnKeyDown(HWND hwnd, WPARAM wParam, Character &Mario)
+void OnKeyDown(HWND hwnd, WPARAM wParam)
 {
 	
 	switch (wParam)
@@ -122,106 +118,45 @@ void OnKeyDown(HWND hwnd, WPARAM wParam, Character &Mario)
 		OnClose(hwnd);
 		break;
 	case VK_LEFT:
-		Mario.setPosX(Mario.getPosX() - 10);
-		//posX -= 10;
-		if (Mario.getPosX() <= 0)
-		{
-			Mario.setPosX(Mario.getPosX() + 10);
-		}
-		Mario.setFormY(1);
-
-		if (Mario.getFormX() >=3)
-		{
-			Mario.setFormX(0);
-		}
-		else
-		{
-			Mario.setFormX(Mario.getFormX() + 1);
-		}
-
-		Mario.draw(hwnd);
+		Mario.moveLeft();
 		break;
 	case VK_RIGHT:
-		//posX += 10;
-		Mario.setPosX(Mario.getPosX() + 10);
-
-		//if (posX >= (1000 - 90))
-		//{
-		//	posX -= 10;
-		//}
-		if (Mario.getPosX() >= (1000 - 90))
-		{
-			Mario.setPosX(Mario.getPosX() - 10);
-		}
-		//characterY = 0;
-		Mario.setFormY(0);
-
-		//if (characterX >= 3)
-		//{
-		//	characterX = 0;
-		//}
-		//else
-		//{
-		//	characterX++;
-		//}
-		if (Mario.getFormX() >= 3)
-		{
-			Mario.setFormX(0);
-		}
-		else
-		{
-			Mario.setFormX(Mario.getFormX() + 1);
-		}
-		Mario.draw(hwnd);
-
+		Mario.moveRight();
 		break;
 	case VK_UP:
-		posY -= 40;
-		if (posY <= 350)
-		{
-			posY += 40;
-		}
-		characterX = 4;
+		Mario.moveUp();
 		break;
 	case VK_DOWN:
-		characterX = 5;
+		Mario.moveDown();
 		break;
 	}
 	InvalidateRect(hwnd, NULL, FALSE);
 }
 
-void OnKeyUp(HWND hwnd, WPARAM wParam, Character &Mario)
+void OnKeyUp(HWND hwnd, WPARAM wParam)
 {
 	switch (wParam)
 	{
 	case VK_LEFT:
-		//characterX = 0;
 		Mario.setFormX(0);
-		Mario.draw(hwnd);
-
 		break;
 	case VK_RIGHT:
-		//characterX = 0;
 		Mario.setFormX(0);
-		Mario.draw(hwnd);
-
 		break;
 	case VK_UP:
-		posY += 40;
-		characterX = 0;
+		Mario.incresePosY(40);
+		Mario.setFormX(0);
 		break;
 	case VK_DOWN:
-		characterX = 0;
+		Mario.setFormX(0);
 		break;
 	}
 	InvalidateRect(hwnd, NULL, FALSE);
 }
 
-void OnPaint(HWND hwnd, Character &Mario)
+void OnPaint(HWND hwnd)
 {
-	//PAINTSTRUCT ps;
 	Mario.draw(hwnd);
-	//EndPaint(hwnd, &ps);
 }
 
 void OnClose(HWND hwnd)
@@ -231,5 +166,4 @@ void OnClose(HWND hwnd)
 		globalRunning = 0;
 		DestroyWindow(hwnd);
 	}
-	// Else: User canceled. Do nothing.	
 }

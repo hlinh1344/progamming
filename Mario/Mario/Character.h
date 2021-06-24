@@ -24,7 +24,15 @@ public:
 	void setPosY(int a_posY);
 	void setFormX(int a_formX);
 	void setFormY(int a_formY);
+	void incresePosX(int a);
+	void incresePosY(int a);
+	void increseFormX(int a);
 	void draw(HWND hwnd);
+	void moveLeft();
+	void moveRight();
+	void moveUp();
+	void moveDown();
+	HBITMAP CreateBitmapMask(HBITMAP hbmColour, COLORREF crTransparent);
 };
 
 
