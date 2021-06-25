@@ -52,8 +52,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 	ShowWindow(hwnd, nCmdShow);
 	UpdateWindow(hwnd);
-
-	// Run the message loop.
 	MSG msg = { };
 	float framePerSecond = 60.0;
 	float frameInterval = 1000.0 / framePerSecond;
@@ -69,7 +67,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	return msg.wParam;
 }
 
-//WndProc 
+
 HBITMAP hBitmap = NULL;
 HINSTANCE hInst = NULL;
 
@@ -106,7 +104,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 void OnCreate(HWND hwnd)
 {
-	//hBitmap = (HBITMAP)LoadImage(hInst, L"mario.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+
 }
 
 void OnKeyDown(HWND hwnd, WPARAM wParam)

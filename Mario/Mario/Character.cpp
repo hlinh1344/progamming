@@ -10,6 +10,12 @@ Character::Character()
 	isJump = false;
 	isDead = false;
 	life = 3;
+	hdcMem = NULL;
+	oldBitmap = NULL;
+	hbrushOld = NULL;
+	hInst = NULL;
+	hBitmap = (HBITMAP)LoadImage(hInst, L"mario.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+	hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 }
 
 Character::~Character()
@@ -86,7 +92,6 @@ void Character::moveLeft()
 			else
 				formX--;
 		}
-	
 }
 
 void Character::moveRight()
@@ -124,22 +129,13 @@ void Character::moveDown()
 		formX = 0;
 }
 
-
 void Character::draw(HWND hwnd) 
 {
-
 	PAINTSTRUCT ps;
 	HDC hdc = BeginPaint(hwnd, &ps);
-	HBITMAP hBitmap, hbmMask = NULL;
-	HINSTANCE hInst = NULL;
-	HDC hdcMem = NULL;
-	HGDIOBJ oldBitmap = NULL;
-	BITMAP bitmap;
-	HBRUSH hbrushOld = CreateSolidBrush(RGB(20, 95, 155));
+	hbrushOld = CreateSolidBrush(RGB(20, 95, 155));
 	FillRect(hdc, &ps.rcPaint, hbrushOld);
-	hBitmap = (HBITMAP)LoadImage(hInst, L"mario.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hdcMem = CreateCompatibleDC(hdc);
-	hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	oldBitmap = SelectObject(hdcMem, hbmMask);
 	GetObject(hbmMask, sizeof(bitmap), &bitmap);
 	BitBlt

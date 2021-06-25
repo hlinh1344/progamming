@@ -12,8 +12,13 @@ private:
 	int formY;
 	bool isJump;
 	bool isDead;
-	
 	int life;
+	HBITMAP hBitmap, hbmMask;
+	HINSTANCE hInst;
+	HDC hdcMem;
+	HGDIOBJ oldBitmap;
+	BITMAP bitmap;
+	HBRUSH hbrushOld;
 public:
 	Character();
 	~Character();
