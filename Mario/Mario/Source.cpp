@@ -56,7 +56,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	// Run the message loop.
 	MSG msg = { };
 	float framePerSecond = 60.0;
-	float frameInterval = 4000.0 / framePerSecond;
+	float frameInterval = 1000.0 / framePerSecond;
 	while (globalRunning)
 	{
 		while (PeekMessage(&msg, hwnd, 0, 0, PM_REMOVE))
@@ -64,7 +64,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		Sleep(frameInterval);
+		//Sleep(frameInterval);
 	}
 	return msg.wParam;
 }
@@ -138,17 +138,23 @@ void OnKeyUp(HWND hwnd, WPARAM wParam)
 	switch (wParam)
 	{
 	case VK_LEFT:
-		Mario.setFormX(0);
+		Mario.setFormX(6);
 		break;
 	case VK_RIGHT:
-		Mario.setFormX(0);
+		Mario.setFormX(7);
 		break;
 	case VK_UP:
 		Mario.incresePosY(40);
-		Mario.setFormX(0);
+		if(Mario.isGoRight())
+			Mario.setFormX(7);
+		else
+			Mario.setFormX(6);
 		break;
 	case VK_DOWN:
-		Mario.setFormX(0);
+		if (Mario.isGoRight())
+			Mario.setFormX(7);
+		else
+			Mario.setFormX(6);
 		break;
 	}
 	InvalidateRect(hwnd, NULL, FALSE);
@@ -156,6 +162,12 @@ void OnKeyUp(HWND hwnd, WPARAM wParam)
 
 void OnPaint(HWND hwnd)
 {
+	if (Mario.getPosX() < 330)
+		Mario.setFormY(0);
+	else if (Mario.getPosX() > 660)
+		Mario.setFormY(2);
+	else
+		Mario.setFormY(1);
 	Mario.draw(hwnd);
 }
 

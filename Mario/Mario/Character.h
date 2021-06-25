@@ -1,8 +1,8 @@
 #pragma once
 #include <windows.h>
 
-#define CHARACTER_WIDTH 90
-#define CHARACTER_HEIGHT 70
+#define CHARACTER_WIDTH 62.5
+#define CHARACTER_HEIGHT 93
 class Character
 {
 private:
@@ -12,6 +12,7 @@ private:
 	int formY;
 	bool isJump;
 	bool isDead;
+	
 	int life;
 public:
 	Character();
@@ -33,6 +34,9 @@ public:
 	void moveUp();
 	void moveDown();
 	HBITMAP CreateBitmapMask(HBITMAP hbmColour, COLORREF crTransparent);
+	bool isGoLeft();
+	bool isGoRight();
+
 };
 
 
