@@ -1,10 +1,10 @@
-#include <WindowsX.h>
+
 #include "Character.h"
 
 Character::Character() 
 {
 	posX = 0;
-	posY = 400;
+	posY = 372;
 	formX = 7;
 	formY = 0;
 	isJump = false;
@@ -15,6 +15,7 @@ Character::Character()
 	hbrushOld = NULL;
 	hInst = NULL;
 	hBitmap = (HBITMAP)LoadImage(hInst, L"mario.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+	hBitmap2 = (HBITMAP)LoadImage(hInst, L"mario_map.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 }
 
@@ -81,8 +82,13 @@ void Character::increseFormX(int a)
 void Character::moveLeft()
 {
 		posX -= 10;
-		if (posX <= -20)
+		mapSlider -= 2;
+		if (posX <= 0)
+		{
 			posX += 10;
+			mapSlider += 2;
+		}
+			
 		if (isGoRight())
 			formX = 2;
 		else
@@ -96,9 +102,14 @@ void Character::moveLeft()
 
 void Character::moveRight()
 {
-	posX += 10;
-	if (posX >= (1000-63))
-		posX -= 10;
+	posX += 6;
+	if (posX >= (500 - 63))
+	{
+		posX -= 5;
+		mapSlider += 5;
+	}
+	else
+		mapSlider += 2;
 	if (isGoLeft())
 		formX = 11;
 	else
@@ -113,7 +124,7 @@ void Character::moveRight()
 void Character::moveUp()
 {
 	posY -= 40;
-	if (posY <= 350)
+	if (posY <= 320)
 		posY +=40;
 	if (isGoRight())
 		formX = 12;
@@ -134,10 +145,26 @@ void Character::draw(HWND hwnd)
 	PAINTSTRUCT ps;
 	HDC hdc = BeginPaint(hwnd, &ps);
 	hbrushOld = CreateSolidBrush(RGB(20, 95, 155));
-	FillRect(hdc, &ps.rcPaint, hbrushOld);
+	//FillRect(hdc, &ps.rcPaint, hbrushOld);
+
 	hdcMem = CreateCompatibleDC(hdc);
+	oldBitmap = SelectObject(hdcMem, hBitmap2);
+	GetObject(hBitmap2, sizeof(bitmap), &bitmap);
+	BitBlt
+	(
+		hdc,
+		0,
+		0,
+		MAP_WIDTH,
+		MAP_HEIGHT,
+		hdcMem,
+		mapSlider,
+		0,
+		SRCCOPY
+	);
 	oldBitmap = SelectObject(hdcMem, hbmMask);
 	GetObject(hbmMask, sizeof(bitmap), &bitmap);
+	
 	BitBlt
 	(
 		hdc,
@@ -150,7 +177,6 @@ void Character::draw(HWND hwnd)
 		CHARACTER_HEIGHT * formY,
 		SRCAND
 	);
-
 	oldBitmap = SelectObject(hdcMem, hBitmap);
 	GetObject(hBitmap, sizeof(bitmap), &bitmap);
 	BitBlt

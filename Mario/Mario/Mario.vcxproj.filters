@@ -21,14 +21,23 @@
     <ClCompile Include="Character.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BaseObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="mario.bmp">
       <Filter>Source Files</Filter>
     </Image>
+    <Image Include="mario_map.bmp">
+      <Filter>Source Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,8 +5,8 @@
 #include <WindowsX.h>
 #include "Character.h"
 
-#define WINDOW_WIDTH 1000;
-#define WINDOW_HEIGHT 600;
+#define WINDOW_WIDTH 1000
+#define WINDOW_HEIGHT 575
 
 void OnCreate(HWND hwnd);
 void OnPaint(HWND hwnd);
@@ -36,8 +36,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		WS_OVERLAPPEDWINDOW & ~WS_THICKFRAME & ~WS_MAXIMIZEBOX,
 		0,
 		0,
-		1000,
-		600,
+		WINDOW_WIDTH,
+		WINDOW_HEIGHT,
 		NULL,
 		NULL,
 		hInstance,
@@ -160,12 +160,13 @@ void OnKeyUp(HWND hwnd, WPARAM wParam)
 
 void OnPaint(HWND hwnd)
 {
-	if (Mario.getPosX() < 330)
-		Mario.setFormY(0);
-	else if (Mario.getPosX() > 660)
-		Mario.setFormY(2);
-	else
-		Mario.setFormY(1);
+	//if (Mario.getPosX() < 330)
+	//	Mario.setFormY(0);
+	//else if (Mario.getPosX() > 660)
+	//	Mario.setFormY(2);
+	//else
+	//	Mario.setFormY(1);
+	Mario.setFormY(2);
 	Mario.draw(hwnd);
 }
 

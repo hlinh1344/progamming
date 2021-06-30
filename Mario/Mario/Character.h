@@ -1,8 +1,13 @@
 #pragma once
 #include <windows.h>
+#include <WindowsX.h>
 
 #define CHARACTER_WIDTH 62.5
 #define CHARACTER_HEIGHT 93
+#define MAP_WIDTH 984
+#define MAP_HEIGHT 540
+#define PLAYER_SPEED 0.5
+
 class Character
 {
 private:
@@ -13,7 +18,7 @@ private:
 	bool isJump;
 	bool isDead;
 	int life;
-	HBITMAP hBitmap, hbmMask;
+	HBITMAP hBitmap, hbmMask, hBitmap2;
 	HINSTANCE hInst;
 	HDC hdcMem;
 	HGDIOBJ oldBitmap;
@@ -41,8 +46,7 @@ public:
 	HBITMAP CreateBitmapMask(HBITMAP hbmColour, COLORREF crTransparent);
 	bool isGoLeft();
 	bool isGoRight();
-
 };
 
-
+static int mapSlider = 0;
 
