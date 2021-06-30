@@ -4,7 +4,7 @@
 #include <windows.h>
 #include <WindowsX.h>
 #include "Character.h"
-
+#include "BaseObject.h"
 #define WINDOW_WIDTH 1000
 #define WINDOW_HEIGHT 575
 
@@ -14,7 +14,7 @@ void OnKeyDown(HWND hwnd, WPARAM wParam);
 void OnKeyUp(HWND hwnd, WPARAM wParam);
 void OnClose(HWND hwnd);
 Character Mario;
-
+BaseObject e1;
 int globalRunning = 1;
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -160,14 +160,9 @@ void OnKeyUp(HWND hwnd, WPARAM wParam)
 
 void OnPaint(HWND hwnd)
 {
-	//if (Mario.getPosX() < 330)
-	//	Mario.setFormY(0);
-	//else if (Mario.getPosX() > 660)
-	//	Mario.setFormY(2);
-	//else
-	//	Mario.setFormY(1);
 	Mario.setFormY(2);
 	Mario.draw(hwnd);
+	e1.draw(hwnd);
 }
 
 void OnClose(HWND hwnd)

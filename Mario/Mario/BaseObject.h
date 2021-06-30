@@ -15,5 +15,6 @@ public:
 	BaseObject();
 	~BaseObject();
 	void draw(HWND hwnd);
+	HBITMAP CreateBitmapMask(HBITMAP hbmColour, COLORREF crTransparent);
 };
 

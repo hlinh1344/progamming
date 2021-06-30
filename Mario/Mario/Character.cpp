@@ -103,10 +103,10 @@ void Character::moveLeft()
 void Character::moveRight()
 {
 	posX += 6;
-	if (posX >= (500 - 63))
+	if (posX >= (400 - 63))
 	{
 		posX -= 5;
-		mapSlider += 5;
+		mapSlider += 7;
 	}
 	else
 		mapSlider += 2;

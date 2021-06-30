@@ -32,6 +32,9 @@
     <Image Include="mario_map.bmp">
       <Filter>Source Files</Filter>
     </Image>
+    <Image Include="mario_e1.bmp">
+      <Filter>Source Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">

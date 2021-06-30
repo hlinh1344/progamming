@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="mario.bmp" />
+    <Image Include="mario_e1.bmp" />
     <Image Include="mario_map.bmp" />
   </ItemGroup>
   <ItemGroup>
