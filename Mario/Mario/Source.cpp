@@ -5,6 +5,8 @@
 #include <WindowsX.h>
 #include "Character.h"
 #include "BaseObject.h"
+#include "EnemyMushroom.h"
+#include "EnemyDuck.h"
 #define WINDOW_WIDTH 1000
 #define WINDOW_HEIGHT 575
 
@@ -14,7 +16,8 @@ void OnKeyDown(HWND hwnd, WPARAM wParam);
 void OnKeyUp(HWND hwnd, WPARAM wParam);
 void OnClose(HWND hwnd);
 Character Mario;
-BaseObject e1;
+EnemyMushroom e1;
+EnemyDuck e2;
 int globalRunning = 1;
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -117,9 +120,11 @@ void OnKeyDown(HWND hwnd, WPARAM wParam)
 		break;
 	case VK_LEFT:
 		Mario.moveLeft();
+		e1.incresePosX(3);
 		break;
 	case VK_RIGHT:
 		Mario.moveRight();
+		e1.incresePosX(-3);
 		break;
 	case VK_UP:
 		Mario.moveUp();
@@ -160,9 +165,13 @@ void OnKeyUp(HWND hwnd, WPARAM wParam)
 
 void OnPaint(HWND hwnd)
 {
+	PAINTSTRUCT ps;
+	HDC hdc = BeginPaint(hwnd, &ps);
 	Mario.setFormY(2);
-	Mario.draw(hwnd);
-	e1.draw(hwnd);
+	Mario.draw(hwnd, hdc);
+	e1.draw(hwnd, hdc);
+	//e2.draw(hwnd, hdc);
+	EndPaint(hwnd, &ps);
 }
 
 void OnClose(HWND hwnd)

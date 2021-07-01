@@ -26,14 +26,17 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="mario.bmp">
-      <Filter>Source Files</Filter>
-    </Image>
     <Image Include="mario_map.bmp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </Image>
     <Image Include="mario_e1.bmp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="mario.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="smb_enemies_sheet.bmp">
+      <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -41,6 +44,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BaseObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyMushroom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyDuck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

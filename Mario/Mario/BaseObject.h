@@ -4,17 +4,25 @@
 
 class BaseObject
 {
-private:
-	HBITMAP hBitmap, hbmMask, hBitmap2;
+protected:
+	int posX;
+	int posY;
+	bool isDead;
+	HBITMAP hBitmap, hbmMask;
 	HINSTANCE hInst;
 	HDC hdcMem;
 	HGDIOBJ oldBitmap;
 	BITMAP bitmap;
-	HBRUSH hbrushOld;
+	
 public:
 	BaseObject();
 	~BaseObject();
-	void draw(HWND hwnd);
+	int getPosX();
+	int getPosY();
+	void setPosX(int a_posX);
+	void setPosY(int a_posY);
+	void incresePosX(int a);
+	void incresePosY(int a);
+	virtual void draw(HWND hwnd, HDC hdc);
 	HBITMAP CreateBitmapMask(HBITMAP hbmColour, COLORREF crTransparent);
 };
-

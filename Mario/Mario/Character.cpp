@@ -1,4 +1,3 @@
-
 #include "Character.h"
 
 Character::Character() 
@@ -8,12 +7,8 @@ Character::Character()
 	formX = 7;
 	formY = 0;
 	isJump = false;
-	isDead = false;
 	life = 3;
-	hdcMem = NULL;
-	oldBitmap = NULL;
-	hbrushOld = NULL;
-	hInst = NULL;
+
 	hBitmap = (HBITMAP)LoadImage(hInst, L"mario.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hBitmap2 = (HBITMAP)LoadImage(hInst, L"mario_map.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
@@ -22,16 +17,6 @@ Character::Character()
 Character::~Character()
 {
 
-}
-
-int Character::getPosX()
-{
-	return posX;
-}
-
-int Character::getPosY()
-{
-	return posY;
 }
 
 int Character::getFormX()
@@ -44,16 +29,6 @@ int Character::getFormY()
 	return formY;
 }
 
-void Character::setPosX(int a_posX)
-{
-	this->posX = a_posX;
-}
-
-void Character::setPosY(int a_posY)
-{
-	this->posY = a_posY;
-}
-
 void Character::setFormX(int a_formX)
 {
 	this->formX = a_formX;
@@ -62,16 +37,6 @@ void Character::setFormX(int a_formX)
 void Character::setFormY(int a_formY)
 {
 	this->formY = a_formY;
-}
-
-void Character::incresePosX(int a)
-{
-	this->posX = this->posX + a;
-}
-
-void Character::incresePosY(int a)
-{
-	this->posY = this->posY + a;
 }
 
 void Character::increseFormX(int a)
@@ -140,13 +105,8 @@ void Character::moveDown()
 		formX = 0;
 }
 
-void Character::draw(HWND hwnd) 
+void Character::draw(HWND hwnd, HDC hdc)
 {
-	PAINTSTRUCT ps;
-	HDC hdc = BeginPaint(hwnd, &ps);
-	hbrushOld = CreateSolidBrush(RGB(20, 95, 155));
-	//FillRect(hdc, &ps.rcPaint, hbrushOld);
-
 	hdcMem = CreateCompatibleDC(hdc);
 	oldBitmap = SelectObject(hdcMem, hBitmap2);
 	GetObject(hBitmap2, sizeof(bitmap), &bitmap);
@@ -164,7 +124,6 @@ void Character::draw(HWND hwnd)
 	);
 	oldBitmap = SelectObject(hdcMem, hbmMask);
 	GetObject(hbmMask, sizeof(bitmap), &bitmap);
-	
 	BitBlt
 	(
 		hdc,
@@ -193,27 +152,8 @@ void Character::draw(HWND hwnd)
 	);
 	SelectObject(hdcMem, oldBitmap);
 	DeleteDC(hdcMem);
-	EndPaint(hwnd, &ps);
 }
 
-HBITMAP Character::CreateBitmapMask(HBITMAP hbmColour, COLORREF crTransparent)
-{
-	HDC hdcMem, hdcMem2;
-	HBITMAP hbmMask;
-	BITMAP bm;
-	GetObject(hbmColour, sizeof(BITMAP), &bm);
-	hbmMask = CreateBitmap(bm.bmWidth, bm.bmHeight, 1, 1, NULL);
-	hdcMem = CreateCompatibleDC(0);
-	hdcMem2 = CreateCompatibleDC(0);
-	SelectBitmap(hdcMem, hbmColour);
-	SelectBitmap(hdcMem2, hbmMask);
-	SetBkColor(hdcMem, crTransparent);
-	BitBlt(hdcMem2, 0, 0, bm.bmWidth, bm.bmHeight, hdcMem, 0, 0, SRCCOPY);
-	BitBlt(hdcMem, 0, 0, bm.bmWidth, bm.bmHeight, hdcMem2, 0, 0, SRCINVERT);
-	DeleteDC(hdcMem);
-	DeleteDC(hdcMem2);
-	return hbmMask;
-}
 
 bool Character::isGoLeft()
 {
