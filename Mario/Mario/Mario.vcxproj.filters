@@ -35,7 +35,13 @@
     <Image Include="mario.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="smb_enemies_sheet.bmp">
+    <Image Include="mario_e2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="mario_e3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="mario_e4.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
@@ -50,6 +56,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EnemyDuck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBuzzyBeetle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpinyBeetle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

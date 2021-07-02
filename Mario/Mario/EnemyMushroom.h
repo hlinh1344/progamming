@@ -1,8 +1,9 @@
 #pragma once
 #include "BaseObject.h"
-//44x20
-#define ENEMY_WIDTH 44
+//44x43
 #define ENEMY_HEIGHT 43
+#define ENEMY_WIDTH 44
+
 class EnemyMushroom : public BaseObject
 {
 private:

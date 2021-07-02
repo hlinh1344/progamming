@@ -146,14 +146,18 @@
   <ItemGroup>
     <Image Include="mario.bmp" />
     <Image Include="mario_e1.bmp" />
+    <Image Include="mario_e2.bmp" />
+    <Image Include="mario_e3.bmp" />
+    <Image Include="mario_e4.bmp" />
     <Image Include="mario_map.bmp" />
-    <Image Include="smb_enemies_sheet.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="EnemyBuzzyBeetle.h" />
     <ClInclude Include="EnemyMushroom.h" />
     <ClInclude Include="EnemyDuck.h" />
+    <ClInclude Include="EnemySpinyBeetle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

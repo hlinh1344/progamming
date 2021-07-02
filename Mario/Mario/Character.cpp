@@ -46,35 +46,69 @@ void Character::increseFormX(int a)
 
 void Character::moveLeft()
 {
-		posX -= 10;
-		mapSlider -= 2;
-		if (posX <= 0)
-		{
-			posX += 10;
-			mapSlider += 2;
-		}
+	//posX -= 6;
+	//if (posX <= 0)
+	//{
+	//	posX += 6;
+	//	mapSlider -= 6;
+	//}
+
+	//if (mapSlider <= 0)
+	//{
+	//	posX -= 6;
+	//	mapSlider -= 6;
+	//}
+
+	posX -= 5;
+	mapSlider -= 5;
+	if (posX <= 0)
+	{
+		posX += 5;
+		mapSlider += 5;
+	}
 			
-		if (isGoRight())
-			formX = 2;
+	if (isGoRight())
+		formX = 2;
+	else
+	{
+		if (formX <= 3)
+			formX = 5;
 		else
-		{
-			if (formX <= 3)
-				formX = 5;
-			else
-				formX--;
-		}
+			formX--;
+	}
 }
 
 void Character::moveRight()
 {
-	posX += 6;
-	if (posX >= (400 - 63))
+	posX += 5;
+	if (posX >= (550))
 	{
 		posX -= 5;
-		mapSlider += 7;
+		mapSlider += 5;
 	}
-	else
-		mapSlider += 2;
+
+	if ((mapSlider >= 1313) && (mapSlider <= 1457))
+	{
+		if (posY < 372)
+		{
+			posY = 290;
+		}
+		else if(posY = 372)
+		{
+			posX -= 5;
+			mapSlider -= 5;
+		}
+	}
+
+	if (mapSlider == 1460)
+		posY = 372;
+	
+	if (mapSlider >= 3155)
+	{
+		posX -= 5;
+		mapSlider -= 5;
+	}
+
 	if (isGoLeft())
 		formX = 11;
 	else
@@ -88,9 +122,9 @@ void Character::moveRight()
 
 void Character::moveUp()
 {
-	posY -= 40;
-	if (posY <= 320)
-		posY +=40;
+	posY -= 83;
+	if (posY <= 277)
+		posY +=83;
 	if (isGoRight())
 		formX = 12;
 	else

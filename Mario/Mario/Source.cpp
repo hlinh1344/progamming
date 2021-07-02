@@ -7,6 +7,9 @@
 #include "BaseObject.h"
 #include "EnemyMushroom.h"
 #include "EnemyDuck.h"
+#include "EnemyBuzzyBeetle.h"
+#include "EnemySpinyBeetle.h"
+
 #define WINDOW_WIDTH 1000
 #define WINDOW_HEIGHT 575
 
@@ -15,9 +18,14 @@ void OnPaint(HWND hwnd);
 void OnKeyDown(HWND hwnd, WPARAM wParam);
 void OnKeyUp(HWND hwnd, WPARAM wParam);
 void OnClose(HWND hwnd);
+
 Character Mario;
 EnemyMushroom e1;
 EnemyDuck e2;
+EnemyBuzzyBeetle e3;
+EnemySpinyBeetle e4;
+
+
 int globalRunning = 1;
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -147,7 +155,19 @@ void OnKeyUp(HWND hwnd, WPARAM wParam)
 		Mario.setFormX(7);
 		break;
 	case VK_UP:
-		Mario.incresePosY(40);
+		if ((mapSlider > 1313) && (mapSlider < 1455))
+		{
+			if (Mario.getPosY() <= 372)
+			{
+				Mario.setPosY(290);
+			}
+			
+		}
+		else
+		{
+			Mario.setPosY(372);
+		}
+		
 		if(Mario.isGoRight())
 			Mario.setFormX(7);
 		else
@@ -169,8 +189,10 @@ void OnPaint(HWND hwnd)
 	HDC hdc = BeginPaint(hwnd, &ps);
 	Mario.setFormY(2);
 	Mario.draw(hwnd, hdc);
-	e1.draw(hwnd, hdc);
+	//e1.draw(hwnd, hdc);
 	//e2.draw(hwnd, hdc);
+	//e3.draw(hwnd, hdc);
+	//e4.draw(hwnd, hdc);
 	EndPaint(hwnd, &ps);
 }
 

@@ -1,19 +1,20 @@
 #pragma once
 #include "BaseObject.h"
-//45x58
+//60x45
+#define ENEMY_HEIGHT 60
 #define ENEMY_WIDTH 45
-#define ENEMY_HEIGHT 58
-class EnemyDuck : public BaseObject
+
+class EnemyBuzzyBeetle : public BaseObject
 {
 private:
 
 public:
-	EnemyDuck()
+	EnemyBuzzyBeetle()
 	{
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e2.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
-	~EnemyDuck()
+	~EnemyBuzzyBeetle()
 	{
 
 	}
@@ -25,8 +26,8 @@ public:
 		BitBlt
 		(
 			hdc,
-			0,
-			0,
+			200,
+			406,
 			ENEMY_WIDTH,
 			ENEMY_HEIGHT,
 			hdcMem,
@@ -39,8 +40,8 @@ public:
 		BitBlt
 		(
 			hdc,
-			0,
-			0,
+			200,
+			405,
 			ENEMY_WIDTH,
 			ENEMY_HEIGHT,
 			hdcMem,
