@@ -2,7 +2,13 @@
 #include <windows.h>
 #include <WindowsX.h>
 #include <ctime>
+#include <chrono>
 #include <time.h>
+
+#define MAP_WIDTH 984
+#define MAP_HEIGHT 290
+#define CLOUD_HEIGHT 246
+
 class BaseObject
 {
 protected:

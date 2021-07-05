@@ -84,7 +84,6 @@ HINSTANCE hInst = NULL;
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	
 	switch (uMsg)
 	{
 	case WM_CLOSE:
@@ -126,7 +125,7 @@ void OnKeyDown(HWND hwnd, WPARAM wParam)
 		break;
 	case VK_LEFT:
 		Mario.moveLeft();
-		e1.incresePosX(5);
+		//e1.incresePosX(5);
 		break;
 	case VK_RIGHT:
 		Mario.moveRight();
