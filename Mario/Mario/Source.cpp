@@ -37,13 +37,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	wc.hInstance = hInstance;
 	wc.lpszClassName = CLASS_NAME;
 	RegisterClass(&wc);
-	// Create the window.
 	HWND hwnd = CreateWindowEx
 	(
 		0,
 		CLASS_NAME,
 		L"Mario Game",
-		//Disable window resizing
 		WS_OVERLAPPEDWINDOW & ~WS_THICKFRAME & ~WS_MAXIMIZEBOX,
 		0,
 		0,
@@ -73,7 +71,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		//Sleep(frameInterval);
+		Sleep(frameInterval);
 	}
 	return msg.wParam;
 }
@@ -128,11 +126,11 @@ void OnKeyDown(HWND hwnd, WPARAM wParam)
 		break;
 	case VK_LEFT:
 		Mario.moveLeft();
-		e1.incresePosX(3);
+		e1.incresePosX(5);
 		break;
 	case VK_RIGHT:
 		Mario.moveRight();
-		e1.incresePosX(-3);
+		e1.incresePosX(-5);
 		break;
 	case VK_UP:
 		Mario.moveUp();
@@ -155,19 +153,7 @@ void OnKeyUp(HWND hwnd, WPARAM wParam)
 		Mario.setFormX(7);
 		break;
 	case VK_UP:
-		if ((mapSlider > 1313) && (mapSlider < 1455))
-		{
-			if (Mario.getPosY() <= 372)
-			{
-				Mario.setPosY(290);
-			}
-			
-		}
-		else
-		{
-			Mario.setPosY(372);
-		}
-		
+		Mario.setPosY(0);
 		if(Mario.isGoRight())
 			Mario.setFormX(7);
 		else
@@ -189,10 +175,10 @@ void OnPaint(HWND hwnd)
 	HDC hdc = BeginPaint(hwnd, &ps);
 	Mario.setFormY(2);
 	Mario.draw(hwnd, hdc);
-	//e1.draw(hwnd, hdc);
-	//e2.draw(hwnd, hdc);
-	//e3.draw(hwnd, hdc);
-	//e4.draw(hwnd, hdc);
+	e1.draw(hwnd, hdc);
+	e2.draw(hwnd, hdc);
+	e3.draw(hwnd, hdc);
+	e4.draw(hwnd, hdc);
 	EndPaint(hwnd, &ps);
 }
 

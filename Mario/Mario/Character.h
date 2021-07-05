@@ -1,10 +1,13 @@
 #pragma once
+#include <cmath>
 #include "BaseObject.h"
+
 
 #define CHARACTER_WIDTH 62.5
 #define CHARACTER_HEIGHT 93
 #define MAP_WIDTH 984
-#define MAP_HEIGHT 540
+#define MAP_HEIGHT 290
+#define CLOUD_HEIGHT 246
 #define PLAYER_SPEED 0.5
 
 class Character : public BaseObject
@@ -12,9 +15,11 @@ class Character : public BaseObject
 private:
 	int formX;
 	int formY;
-	bool isJump;
 	int life;
-	HBITMAP hBitmap2;
+	int ground;
+	HBITMAP hBitmap2, hBitmap3;
+	int clousDrifting;
+
 public:
 	Character();
 	~Character();
@@ -30,7 +35,8 @@ public:
 	void moveDown();
 	bool isGoLeft();
 	bool isGoRight();
+	bool isJump();
 };
 
-static int mapSlider = 0;
+
 

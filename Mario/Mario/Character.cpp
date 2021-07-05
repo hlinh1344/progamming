@@ -3,14 +3,15 @@
 Character::Character() 
 {
 	posX = 0;
-	posY = 372;
+	posY = 0;
 	formX = 7;
 	formY = 0;
-	isJump = false;
 	life = 3;
-
+	ground = 372;
+	clousDrifting = 0;
 	hBitmap = (HBITMAP)LoadImage(hInst, L"mario.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hBitmap2 = (HBITMAP)LoadImage(hInst, L"mario_map.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+	hBitmap3 = (HBITMAP)LoadImage(hInst, L"cloud.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 }
 
@@ -46,29 +47,30 @@ void Character::increseFormX(int a)
 
 void Character::moveLeft()
 {
-	//posX -= 6;
-	//if (posX <= 0)
-	//{
-	//	posX += 6;
-	//	mapSlider -= 6;
-	//}
-
-	//if (mapSlider <= 0)
-	//{
-	//	posX -= 6;
-	//	mapSlider -= 6;
-	//}
-
 	posX -= 5;
-	mapSlider -= 5;
+	clousDrifting -= 2.5;
 	if (posX <= 0)
 	{
 		posX += 5;
-		mapSlider += 5;
+		clousDrifting += 2.5;
 	}
+
+	if ((mapSlider + posX == 1985) && !isJump())
+	{
+		ground = 372;
+		posX += 5;
+		mapSlider += 5;
+		clousDrifting += 2.5;
+	}
+	else if ((mapSlider + posX > 1850) && (mapSlider + posX < 1985))
+	{
+		ground = 290;
+	}
+	else if (mapSlider + posX < 1850)
+		ground = 372;
 			
 	if (isGoRight())
-		formX = 2;
+		formX = 2.5;
 	else
 	{
 		if (formX <= 3)
@@ -81,32 +83,32 @@ void Character::moveLeft()
 void Character::moveRight()
 {
 	posX += 5;
+	clousDrifting += 2.5;
 	if (posX >= (550))
 	{
 		posX -= 5;
 		mapSlider += 5;
 	}
 
-	if ((mapSlider >= 1313) && (mapSlider <= 1457))
+	if ((mapSlider + posX == 1850) && !isJump())
 	{
-		if (posY < 372)
-		{
-			posY = 290;
-		}
-		else if(posY = 372)
-		{
-			posX -= 5;
-			mapSlider -= 5;
-		}
+		ground = 372;
+		posX -= 5;
+		mapSlider -= 5;
+		clousDrifting -= 2.5;
 	}
+	else if ((mapSlider + posX > 1850) && (mapSlider+ posX < 1985))
+	{
+		ground = 290;
+	}
+	else if (mapSlider + posX >= 1985)
+		ground = 372;
 
-	if (mapSlider == 1460)
-		posY = 372;
-	
 	if (mapSlider >= 3155)
 	{
 		posX -= 5;
 		mapSlider -= 5;
+		clousDrifting -= 2.5;
 	}
 
 	if (isGoLeft())
@@ -122,9 +124,7 @@ void Character::moveRight()
 
 void Character::moveUp()
 {
-	posY -= 83;
-	if (posY <= 277)
-		posY +=83;
+	posY = 83;
 	if (isGoRight())
 		formX = 12;
 	else
@@ -141,6 +141,7 @@ void Character::moveDown()
 
 void Character::draw(HWND hwnd, HDC hdc)
 {
+	//Sleep(50);
 	hdcMem = CreateCompatibleDC(hdc);
 	oldBitmap = SelectObject(hdcMem, hBitmap2);
 	GetObject(hBitmap2, sizeof(bitmap), &bitmap);
@@ -148,7 +149,7 @@ void Character::draw(HWND hwnd, HDC hdc)
 	(
 		hdc,
 		0,
-		0,
+		CLOUD_HEIGHT,
 		MAP_WIDTH,
 		MAP_HEIGHT,
 		hdcMem,
@@ -156,13 +157,29 @@ void Character::draw(HWND hwnd, HDC hdc)
 		0,
 		SRCCOPY
 	);
+
+	oldBitmap = SelectObject(hdcMem, hBitmap3);
+	GetObject(hBitmap3, sizeof(bitmap), &bitmap);
+	BitBlt
+	(
+		hdc,
+		0,
+		0,
+		MAP_WIDTH,
+		CLOUD_HEIGHT,
+		hdcMem,
+		clousDrifting + 360,
+		0,
+		SRCCOPY
+	);
+
 	oldBitmap = SelectObject(hdcMem, hbmMask);
 	GetObject(hbmMask, sizeof(bitmap), &bitmap);
 	BitBlt
 	(
 		hdc,
 		posX,
-		posY,
+		ground - posY,
 		CHARACTER_WIDTH,
 		CHARACTER_HEIGHT,
 		hdcMem,
@@ -176,7 +193,7 @@ void Character::draw(HWND hwnd, HDC hdc)
 	(
 		hdc,
 		posX,
-		posY,
+		ground - posY,
 		CHARACTER_WIDTH,
 		CHARACTER_HEIGHT,
 		hdcMem,
@@ -184,8 +201,10 @@ void Character::draw(HWND hwnd, HDC hdc)
 		CHARACTER_HEIGHT * formY,
 		SRCPAINT
 	);
+
 	SelectObject(hdcMem, oldBitmap);
 	DeleteDC(hdcMem);
+	//InvalidateRect(hwnd, NULL, FALSE);
 }
 
 
@@ -199,6 +218,13 @@ bool Character::isGoLeft()
 bool  Character::isGoRight()
 {
 	if ((formY != 3) && (formX >= 7) && (formX != 11))
+		return true;
+	return false;
+}
+
+bool Character::isJump()
+{
+	if (posY > 0)
 		return true;
 	return false;
 }

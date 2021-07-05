@@ -44,6 +44,9 @@
     <Image Include="mario_e4.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="cloud.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">

@@ -144,6 +144,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="cloud.bmp" />
     <Image Include="mario.bmp" />
     <Image Include="mario_e1.bmp" />
     <Image Include="mario_e2.bmp" />

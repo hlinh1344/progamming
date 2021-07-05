@@ -1,7 +1,8 @@
 #pragma once
 #include <windows.h>
 #include <WindowsX.h>
-
+#include <ctime>
+#include <time.h>
 class BaseObject
 {
 protected:
@@ -26,3 +27,5 @@ public:
 	virtual void draw(HWND hwnd, HDC hdc);
 	HBITMAP CreateBitmapMask(HBITMAP hbmColour, COLORREF crTransparent);
 };
+
+static int mapSlider;

@@ -8,10 +8,11 @@ class EnemyMushroom : public BaseObject
 {
 private:
 	int enemyForm;
+	clock_t start = clock();
 public:
 	EnemyMushroom()
 	{
-		posX = 1100;
+		posX = 1600;
 		posY = 422;
 		enemyForm  = 0;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e1.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -24,8 +25,6 @@ public:
 
 	void draw(HWND hwnd, HDC hdc) override 
 	{
-		
-		if (isDead == false && (posX >= 800 && posX <= 900 + 1000 ))
 		{
 			hdcMem = CreateCompatibleDC(hdc);
 			oldBitmap = SelectObject(hdcMem, hbmMask);
@@ -33,7 +32,7 @@ public:
 			BitBlt
 			(
 				hdc,
-				posX,
+				posX ,
 				posY,
 				ENEMY_WIDTH,
 				ENEMY_HEIGHT,
@@ -47,7 +46,7 @@ public:
 			BitBlt
 			(
 				hdc,
-				posX,
+				posX - mapSlider,
 				posY,
 				ENEMY_WIDTH,
 				ENEMY_HEIGHT,
@@ -56,16 +55,12 @@ public:
 				0,
 				SRCPAINT
 			);
-			if (enemyForm == 0)
-				enemyForm = 1;
-			else
+			if (enemyForm == 1)
 				enemyForm = 0;
+			else
+				enemyForm = 1;
 			SelectObject(hdcMem, oldBitmap);
 			DeleteDC(hdcMem);
-		}
-
-		
-		
+		}		
 	}
-
 };
