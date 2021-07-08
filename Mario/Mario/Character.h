@@ -14,8 +14,6 @@ private:
 	int formY;
 	int life;
 	int ground;
-	HBITMAP hBitmap2, hBitmap3;
-	int clousDrifting;
 
 public:
 	Character();

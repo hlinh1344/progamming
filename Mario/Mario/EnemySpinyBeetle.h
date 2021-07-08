@@ -3,12 +3,23 @@
 //42x42
 #define ENEMY_HEIGHT 42
 #define ENEMY_WIDTH 42
-
+//posx= 300
+//posY = 422
 class EnemySpinyBeetle : public BaseObject
 {
 private:
 
 public:
+
+	EnemySpinyBeetle(int a_x, int a_y)
+	{
+		posX = a_x;
+		posY = a_y;
+		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e4.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
+
+	}
+
 	EnemySpinyBeetle()
 	{
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e4.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -26,8 +37,8 @@ public:
 		BitBlt
 		(
 			hdc,
-			300,
-			422,
+			posX - mapSlider,
+			posY,
 			ENEMY_WIDTH,
 			ENEMY_HEIGHT,
 			hdcMem,
@@ -40,8 +51,8 @@ public:
 		BitBlt
 		(
 			hdc,
-			300,
-			422,
+			posX - mapSlider,
+			posY,
 			ENEMY_WIDTH,
 			ENEMY_HEIGHT,
 			hdcMem,

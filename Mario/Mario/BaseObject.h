@@ -35,3 +35,4 @@ public:
 };
 
 static int mapSlider;
+static int clousDrifting;

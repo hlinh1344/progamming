@@ -3,12 +3,16 @@
 #endif 
 #include <windows.h>
 #include <WindowsX.h>
+#include <vector>
+
 #include "Character.h"
 #include "BaseObject.h"
 #include "EnemyMushroom.h"
 #include "EnemyDuck.h"
 #include "EnemyBuzzyBeetle.h"
 #include "EnemySpinyBeetle.h"
+#include "Map.h"
+#include "GamePlay.h"
 
 #define WINDOW_WIDTH 1000
 #define WINDOW_HEIGHT 575
@@ -19,11 +23,7 @@ void OnKeyDown(HWND hwnd, WPARAM wParam);
 void OnKeyUp(HWND hwnd, WPARAM wParam);
 void OnClose(HWND hwnd);
 
-Character Mario;
-EnemyMushroom e1;
-EnemyDuck e2;
-EnemyBuzzyBeetle e3;
-EnemySpinyBeetle e4;
+GamePlay gamePlay;
 
 
 int globalRunning = 1;
@@ -59,6 +59,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		return 0;
 	}
 
+
+	
+
+
 	ShowWindow(hwnd, nCmdShow);
 	UpdateWindow(hwnd);
 	MSG msg = { };
@@ -68,9 +72,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	{
 		while (PeekMessage(&msg, hwnd, 0, 0, PM_REMOVE))
 		{
+			
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
+		// gamePlay.run()
 		Sleep(frameInterval);
 	}
 	return msg.wParam;
@@ -124,18 +130,16 @@ void OnKeyDown(HWND hwnd, WPARAM wParam)
 		OnClose(hwnd);
 		break;
 	case VK_LEFT:
-		Mario.moveLeft();
-		//e1.incresePosX(5);
+		gamePlay.moveMarioLeft();
 		break;
 	case VK_RIGHT:
-		Mario.moveRight();
-		e1.incresePosX(-5);
+		gamePlay.moveMarioRight();
 		break;
 	case VK_UP:
-		Mario.moveUp();
+		gamePlay.moveMarioUp();
 		break;
 	case VK_DOWN:
-		Mario.moveDown();
+		gamePlay.moveMarioDown();
 		break;
 	}
 	InvalidateRect(hwnd, NULL, FALSE);
@@ -146,23 +150,16 @@ void OnKeyUp(HWND hwnd, WPARAM wParam)
 	switch (wParam)
 	{
 	case VK_LEFT:
-		Mario.setFormX(6);
+		gamePlay.keyUpMarioLeft();
 		break;
 	case VK_RIGHT:
-		Mario.setFormX(7);
+		gamePlay.keyUpMarioRight();
 		break;
 	case VK_UP:
-		Mario.setPosY(0);
-		if(Mario.isGoRight())
-			Mario.setFormX(7);
-		else
-			Mario.setFormX(6);
+		gamePlay.keyUpMarioUp();
 		break;
 	case VK_DOWN:
-		if (Mario.isGoRight())
-			Mario.setFormX(7);
-		else
-			Mario.setFormX(6);
+		gamePlay.keyUpMarioDown();
 		break;
 	}
 	InvalidateRect(hwnd, NULL, FALSE);
@@ -170,14 +167,16 @@ void OnKeyUp(HWND hwnd, WPARAM wParam)
 
 void OnPaint(HWND hwnd)
 {
+	//Mario.setFormY(2);
 	PAINTSTRUCT ps;
 	HDC hdc = BeginPaint(hwnd, &ps);
-	Mario.setFormY(2);
-	Mario.draw(hwnd, hdc);
-	e1.draw(hwnd, hdc);
-	e2.draw(hwnd, hdc);
-	e3.draw(hwnd, hdc);
-	e4.draw(hwnd, hdc);
+	gamePlay.draw(hwnd, hdc);
+	//map.draw(hwnd, hdc);
+	//Mario.draw(hwnd, hdc);
+	//e1.draw(hwnd, hdc);
+	//e2.draw(hwnd, hdc);
+	//e3.draw(hwnd, hdc);
+	//e4.draw(hwnd, hdc);
 	EndPaint(hwnd, &ps);
 }
 

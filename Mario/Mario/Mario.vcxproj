@@ -141,6 +141,8 @@
   <ItemGroup>
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="GamePlay.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +161,8 @@
     <ClInclude Include="EnemyMushroom.h" />
     <ClInclude Include="EnemyDuck.h" />
     <ClInclude Include="EnemySpinyBeetle.h" />
+    <ClInclude Include="GamePlay.h" />
+    <ClInclude Include="Map.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
