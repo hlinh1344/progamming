@@ -1,12 +1,14 @@
 #pragma once
-#include "BaseObject.h"
 #include <ctime>
 #include <chrono>
 #include <time.h>
 #include <iomanip>
+#include "BaseObject.h"
+#include "Map.h"
+
 //44x43
-#define ENEMY_HEIGHT 43
-#define ENEMY_WIDTH 44
+#define MUSHROOM_HEIGHT 43
+#define MUSHROOM_WIDTH 44
 
 class EnemyMushroom : public BaseObject
 {
@@ -16,10 +18,17 @@ private:
 	tm now;
 public:
 
-	EnemyMushroom(int a_x, int a_y)
+	EnemyMushroom *clone(int a_x)
+	{
+		EnemyMushroom clone(a_x);
+		EnemyMushroom* clonePtr = &clone;
+		return clonePtr;
+	}
+
+	EnemyMushroom(int a_x)
 	{
 		posX = a_x;
-		posY = a_y;
+		posY = 422;
 		enemyForm = 0;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e1.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
@@ -28,7 +37,7 @@ public:
 
 	EnemyMushroom()
 	{
-		posX = 2200;
+		posX = 0;
 		posY = 422;
 		enemyForm  = 0;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e1.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -67,10 +76,10 @@ public:
 					hdc,
 					posX ,
 					posY,
-					ENEMY_WIDTH,
-					ENEMY_HEIGHT,
+					MUSHROOM_WIDTH,
+					MUSHROOM_HEIGHT,
 					hdcMem,
-					ENEMY_WIDTH * enemyForm,
+					MUSHROOM_WIDTH * enemyForm,
 					0,
 					SRCAND
 				);
@@ -81,10 +90,10 @@ public:
 					hdc,
 					posX,
 					posY,
-					ENEMY_WIDTH,
-					ENEMY_HEIGHT,
+					MUSHROOM_WIDTH,
+					MUSHROOM_HEIGHT,
 					hdcMem,
-					ENEMY_WIDTH * enemyForm,
+					MUSHROOM_WIDTH * enemyForm,
 					0,
 					SRCPAINT
 				);

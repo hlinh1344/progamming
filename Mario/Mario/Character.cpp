@@ -3,12 +3,11 @@
 Character::Character() 
 {
 	posX = 0;
-	posY = 0;
+	posY = 372;
 	formX = 7;
 	formY = 0;
 	life = 3;
-	ground = 372;
-	clousDrifting = 0;
+	jumpHeight = 0;
 	hBitmap = (HBITMAP)LoadImage(hInst, L"mario.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 }
@@ -45,96 +44,25 @@ void Character::increseFormX(int a)
 
 void Character::moveLeft()
 {
-	posX -= 5;
-	//clousDrifting -= 2.5;
-	//if (posX <= 0)
-	//{
-	//	posX += 5;
-	//	clousDrifting += 2.5;
-	//}
-
-	//if ((mapSlider + posX == 1985) && !isJump())
-	//{
-	//	ground = 372;
-	//	posX += 5;
-	//	mapSlider += 5;
-	//	clousDrifting += 2.5;
-	//}
-	//else if ((mapSlider + posX > 1850) && (mapSlider + posX < 1985))
-	//{
-	//	ground = 290;
-	//}
-	//else if (mapSlider + posX < 1850)
-	//	ground = 372;
-	//		
-	//if (isGoRight())
-	//	formX = 2.5;
-	//else
-	//{
-	//	if (formX <= 3)
-	//		formX = 5;
-	//	else
-	//		formX--;
-	//}
+	posX -= PLAYER_SPEED;
 }
 
 void Character::moveRight()
 {
-	posX += 5;
-	//clousDrifting += 2.5;
-	//if (posX >= (550))
-	//{
-	//	posX -= 5;
-	//	mapSlider += 5;
-	//}
-
-	//if ((mapSlider + posX == 1850) && !isJump())
-	//{
-	//	ground = 372;
-	//	posX -= 5;
-	//	mapSlider -= 5;
-	//	clousDrifting -= 2.5;
-	//}
-	//else if ((mapSlider + posX > 1850) && (mapSlider+ posX < 1985))
-	//{
-	//	ground = 290;
-	//}
-	//else if (mapSlider + posX >= 1985)
-	//	ground = 372;
-
-	//if (mapSlider >= 3155)
-	//{
-	//	posX -= 5;
-	//	mapSlider -= 5;
-	//	clousDrifting -= 2.5;
-	//}
-
-	//if (isGoLeft())
-	//	formX = 11;
-	//else
-	//{
-	//	if (formX >= 10)
-	//		formX = 8;
-	//	else
-	//		formX++;
-	//}
+	posX += PLAYER_SPEED;
 }
 
 void Character::moveUp()
 {
-	posY = 83;
-	if (isGoRight())
-		formX = 12;
-	else
-		formX = 1;
+	jumpHeight += 84;
+	if (jumpHeight > 84)
+		jumpHeight = 84;
+
 }
 
 void Character::moveDown()
 {
-	if (isGoRight())
-		formX = 13;
-	else
-		formX = 0;
+	jumpHeight = 0;
 }
 
 void Character::draw(HWND hwnd, HDC hdc)
@@ -146,7 +74,7 @@ void Character::draw(HWND hwnd, HDC hdc)
 	(
 		hdc,
 		posX - mapSlider,
-		ground - posY,
+		posY - jumpHeight,
 		CHARACTER_WIDTH,
 		CHARACTER_HEIGHT,
 		hdcMem,
@@ -160,7 +88,7 @@ void Character::draw(HWND hwnd, HDC hdc)
 	(
 		hdc,
 		posX - mapSlider,
-		ground - posY,
+		posY - jumpHeight,
 		CHARACTER_WIDTH,
 		CHARACTER_HEIGHT,
 		hdcMem,
@@ -192,4 +120,19 @@ bool Character::isJump()
 	if (posY > 0)
 		return true;
 	return false;
+}
+
+void Character::setJumpHeight(int a_jumpHeight)
+{
+	this->jumpHeight = a_jumpHeight;
+}
+
+void Character::increseJumpHeight(int a)
+{
+	this->jumpHeight += a;
+}
+
+int Character::getJumpHeight()
+{
+	return jumpHeight;
 }

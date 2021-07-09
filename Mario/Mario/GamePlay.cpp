@@ -2,6 +2,7 @@
 
 void GamePlay::init()
 {
+
 	//objects.push_back(e1);
 	//objects.push_back(e2);
 	//objects.push_back(e3);
@@ -9,9 +10,14 @@ void GamePlay::init()
 }
 void GamePlay::run()
 {
+	if (map.checkToAddEnemy(mapSlider + MAP_WIDTH))
+	{
+		EnemyMushroom* mushroom = e1->clone(mapSlider + MAP_WIDTH);
+		objects.push_back(mushroom);
+	}
 	// check to add monster
 	// based map settings
-	// draw()
+	// draw
 	// check to move mario
 	// moveMonster()
 	// handle collision
@@ -20,8 +26,9 @@ void GamePlay::run()
 void GamePlay::draw(HWND hwnd, HDC hdc)
 {
 	map.draw(hwnd, hdc);
-	Mario.draw(hwnd,hdc);
+	mario.draw(hwnd,hdc);
 	// for monster in object
+	objects[0]->draw(hwnd, hdc);
 	// monster.draw()
 }
 void GamePlay::moveMonsters()
@@ -31,47 +38,95 @@ void GamePlay::moveMonsters()
 }
 void GamePlay::moveMarioLeft()
 {
-	Mario.moveLeft();
+	mario.moveLeft();
+	if (mario.getPosX() - mapSlider <= 0)
+	{
+		mario.incresePosX(PLAYER_SPEED);
+	}
+	//change sprite
+	if (mario.isGoRight())
+		mario.setFormX(2);
+	else
+	{
+		if (mario.getFormX() <= 3)
+			mario.setFormX(5);
+		else
+			mario.increseFormX(-1);
+	}
 }
 
 void GamePlay::moveMarioRight()
 {
-	Mario.moveRight();
+	mario.moveRight();
+	map.increseClousDrifting(CLOUD_SPEED);
+	if (mario.getPosX() - mapSlider >= 500)
+	{
+		mario.incresePosX(-PLAYER_SPEED);
+		map.increseMapSlider(PLAYER_SPEED);
+	}
+	
+	//change sprite
+	if (mario.isGoLeft())
+		mario.setFormX(11);
+	else
+	{
+		if (mario.getFormX() >= 10)
+			mario.setFormX(8);
+		else
+			mario.increseFormX(1);
+	}
 }
 
 void GamePlay::moveMarioUp()
 {
-	Mario.moveUp();
+	mario.moveUp();
+	if (mario.isGoRight())
+		mario.setFormX(12);
+	else
+		mario.setFormX(1);
 }
 
 void GamePlay::moveMarioDown()
 {
-	Mario.moveDown();
+	mario.moveDown();
+	if (mario.isGoRight())
+		mario.setFormX(13);
+	else
+		mario.setFormX(0);
 }
 
 void GamePlay::keyUpMarioDown()
 {
-	if (Mario.isGoRight())
-		Mario.setFormX(7);
+	if (mario.isGoRight())
+		mario.setFormX(7);
 	else
-		Mario.setFormX(6);
+		mario.setFormX(6);
 }
 
 void GamePlay::keyUpMarioUp()
 {
-	Mario.setPosY(0);
-	if(Mario.isGoRight())
-		Mario.setFormX(7);
+
+	while (mario.getJumpHeight() <= 0)
+	{
+		mario.increseJumpHeight(-4);
+	}
+	mario.setJumpHeight(0);
+	
+	//if(mario.getJumpHeight() <=0)
+	//	mario.setJumpHeight(0);
+
+	if(mario.isGoRight())
+		mario.setFormX(7);
 	else
-		Mario.setFormX(6);
+		mario.setFormX(6);
 }
 
 void GamePlay::keyUpMarioRight()
 {
-	Mario.setFormX(7);
+	mario.setFormX(7);
 }
 
 void GamePlay::keyUpMarioLeft()
 {
-	Mario.setFormX(6);
+	mario.setFormX(6);
 }

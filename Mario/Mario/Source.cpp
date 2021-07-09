@@ -76,7 +76,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		// gamePlay.run()
+		//gamePlay.run();
+
 		Sleep(frameInterval);
 	}
 	return msg.wParam;

@@ -5,9 +5,7 @@
 #include <chrono>
 #include <time.h>
 
-#define MAP_WIDTH 984
-#define MAP_HEIGHT 290
-#define CLOUD_HEIGHT 246
+
 
 class BaseObject
 {
@@ -34,5 +32,3 @@ public:
 	HBITMAP CreateBitmapMask(HBITMAP hbmColour, COLORREF crTransparent);
 };
 
-static int mapSlider;
-static int clousDrifting;

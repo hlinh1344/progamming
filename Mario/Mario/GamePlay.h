@@ -17,11 +17,11 @@ public:
 	std::vector <BaseObject*> objects; // static objects
 
 	Map map;
-	Character Mario;
-	//EnemyMushroom* e1;
-	//EnemyDuck* e2;
-	//EnemyBuzzyBeetle* e3;
-	//EnemySpinyBeetle* e4;
+	Character mario;
+	EnemyMushroom* e1;
+	EnemyDuck* e2;
+	EnemyBuzzyBeetle* e3;
+	EnemySpinyBeetle* e4;
 
 	void init();
 	void run();

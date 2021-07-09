@@ -1,8 +1,9 @@
 #pragma once
 #include "BaseObject.h"
+#include "Map.h"
 //45x44
-#define ENEMY_HEIGHT 45
-#define ENEMY_WIDTH 44
+#define BUZZY_HEIGHT 45
+#define BUZZY_WIDTH 44
 //posx = 100;
 //posY = 421;
 
@@ -11,10 +12,10 @@ class EnemyDuck : public BaseObject
 private:
 
 public:
-	EnemyDuck(int a_x, int a_y)
+	EnemyDuck(int a_x)
 	{
 		posX = a_x;
-		posY = a_y;
+		posY = 421;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e3.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 
@@ -22,6 +23,8 @@ public:
 
 	EnemyDuck()
 	{
+		posX = 0;
+		posY = 421;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e3.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
@@ -39,8 +42,8 @@ public:
 			hdc,
 			posX - mapSlider,
 			posY,
-			ENEMY_WIDTH,
-			ENEMY_HEIGHT,
+			BUZZY_WIDTH,
+			BUZZY_HEIGHT,
 			hdcMem,
 			0,
 			0,
@@ -53,8 +56,8 @@ public:
 			hdc,
 			posX - mapSlider,
 			posY,
-			ENEMY_WIDTH,
-			ENEMY_HEIGHT,
+			BUZZY_WIDTH,
+			BUZZY_HEIGHT,
 			hdcMem,
 			0,
 			0,

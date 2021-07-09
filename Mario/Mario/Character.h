@@ -1,11 +1,11 @@
 #pragma once
 #include <cmath>
 #include "BaseObject.h"
-
+#include "Map.h"
 
 #define CHARACTER_WIDTH 62.5
 #define CHARACTER_HEIGHT 93
-#define PLAYER_SPEED 0.5
+#define PLAYER_SPEED 4
 
 class Character : public BaseObject
 {
@@ -13,7 +13,7 @@ private:
 	int formX;
 	int formY;
 	int life;
-	int ground;
+	int jumpHeight;
 
 public:
 	Character();
@@ -31,6 +31,9 @@ public:
 	bool isGoLeft();
 	bool isGoRight();
 	bool isJump();
+	void setJumpHeight(int a_jumpHeight);
+	void increseJumpHeight(int a);
+	int getJumpHeight();
 };
 
 
