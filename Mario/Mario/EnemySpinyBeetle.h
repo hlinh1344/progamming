@@ -40,7 +40,7 @@ public:
 		BitBlt
 		(
 			hdc,
-			posX - mapSlider,
+			posX - BaseObject::mapSlider,
 			posY,
 			SPINY_WIDTH,
 			SPINY_HEIGHT,
@@ -54,7 +54,7 @@ public:
 		BitBlt
 		(
 			hdc,
-			posX - mapSlider,
+			posX - BaseObject::mapSlider,
 			posY,
 			SPINY_WIDTH,
 			SPINY_HEIGHT,

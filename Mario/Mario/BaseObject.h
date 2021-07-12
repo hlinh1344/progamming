@@ -20,8 +20,10 @@ protected:
 	BITMAP bitmap;
 	
 public:
+	
 	BaseObject();
 	~BaseObject();
+
 	int getPosX();
 	int getPosY();
 	void setPosX(int a_posX);
@@ -30,5 +32,8 @@ public:
 	void incresePosY(int a);
 	virtual void draw(HWND hwnd, HDC hdc);
 	HBITMAP CreateBitmapMask(HBITMAP hbmColour, COLORREF crTransparent);
+
+	static int mapSlider;
+	static int clousDrifting;
 };
 

@@ -1,34 +1,90 @@
 #include "GamePlay.h"
 
+
+
+GamePlay::GamePlay()
+{
+
+}
+
+GamePlay::~GamePlay()
+{
+	for (auto object : objects) {
+		delete(object);
+		object = nullptr;
+	}
+}
+
+
 void GamePlay::init()
 {
 
-	//objects.push_back(e1);
-	//objects.push_back(e2);
-	//objects.push_back(e3);
-	//objects.push_back(e4);
+
 }
+
 void GamePlay::run()
 {
-	if (map.checkToAddEnemy(mapSlider + MAP_WIDTH))
+	/*int count = 0;
+	if (map.checkToAddEnemy(BaseObject::mapSlider + MAP_WIDTH))
 	{
-		EnemyMushroom* mushroom = e1->clone(mapSlider + MAP_WIDTH);
-		objects.push_back(mushroom);
-	}
+		count++;
+		switch (count)
+		{
+		case 1:
+			objects.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
+			break;
+		case2:
+			objects.push_back(new EnemyDuck(BaseObject::mapSlider + MAP_WIDTH));
+			break;
+		case 3:
+			objects.push_back(new EnemySpinyBeetle(BaseObject::mapSlider + MAP_WIDTH));
+			break;
+		case 4:
+			objects.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
+			break;
+		case 5:
+			objects.push_back(new EnemyBuzzyBeetle(BaseObject::mapSlider + MAP_WIDTH));
+			break;
+		case 6:
+			objects.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
+			break;
+		case 7:
+			objects.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
+			break;
+		default:
+			break;
+		}
+	}*/
+
+	if (BaseObject::mapSlider + MAP_WIDTH == 1000)
+		objects.push_back(new EnemyMushroom(1000));
+	else if (BaseObject::mapSlider + MAP_WIDTH == 1400)
+		objects.push_back(new EnemyDuck(1400));
+	else if (BaseObject::mapSlider + MAP_WIDTH == 1800)
+		objects.push_back(new EnemySpinyBeetle(1800));
+	else if (BaseObject::mapSlider + MAP_WIDTH == 2400)
+		objects.push_back(new EnemyBuzzyBeetle(2400));
 	// check to add monster
 	// based map settings
 	// draw
 	// check to move mario
 	// moveMonster()
 	// handle collision
-	// 
+
 }
+
 void GamePlay::draw(HWND hwnd, HDC hdc)
 {
 	map.draw(hwnd, hdc);
 	mario.draw(hwnd,hdc);
+	//for () 
+	for (auto object : objects) {
+		object->draw(hwnd, hdc);
+	}
+
+	//e1->draw(hwnd, hdc);
 	// for monster in object
-	objects[0]->draw(hwnd, hdc);
+	
 	// monster.draw()
 }
 void GamePlay::moveMonsters()
@@ -39,7 +95,7 @@ void GamePlay::moveMonsters()
 void GamePlay::moveMarioLeft()
 {
 	mario.moveLeft();
-	if (mario.getPosX() - mapSlider <= 0)
+	if (mario.getPosX() - map.getMapSlider() <= 0)
 	{
 		mario.incresePosX(PLAYER_SPEED);
 	}
@@ -59,9 +115,8 @@ void GamePlay::moveMarioRight()
 {
 	mario.moveRight();
 	map.increseClousDrifting(CLOUD_SPEED);
-	if (mario.getPosX() - mapSlider >= 500)
+	if (mario.getPosX() - map.getMapSlider() >= 500)
 	{
-		mario.incresePosX(-PLAYER_SPEED);
 		map.increseMapSlider(PLAYER_SPEED);
 	}
 	

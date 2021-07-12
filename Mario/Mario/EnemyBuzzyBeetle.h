@@ -7,12 +7,12 @@
 //posx = 100;
 //posY = 421;
 
-class EnemyDuck : public BaseObject
+class EnemyBuzzyBeetle : public BaseObject
 {
 private:
 
 public:
-	EnemyDuck(int a_x)
+	EnemyBuzzyBeetle(int a_x)
 	{
 		posX = a_x;
 		posY = 421;
@@ -21,14 +21,14 @@ public:
 
 	}
 
-	EnemyDuck()
+	EnemyBuzzyBeetle()
 	{
 		posX = 0;
 		posY = 421;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e3.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
-	~EnemyDuck()
+	~EnemyBuzzyBeetle()
 	{
 
 	}
@@ -40,7 +40,7 @@ public:
 		BitBlt
 		(
 			hdc,
-			posX - mapSlider,
+			posX - BaseObject::mapSlider,
 			posY,
 			BUZZY_WIDTH,
 			BUZZY_HEIGHT,
@@ -54,7 +54,7 @@ public:
 		BitBlt
 		(
 			hdc,
-			posX - mapSlider,
+			posX - BaseObject::mapSlider,
 			posY,
 			BUZZY_WIDTH,
 			BUZZY_HEIGHT,

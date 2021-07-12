@@ -18,13 +18,6 @@ private:
 	tm now;
 public:
 
-	EnemyMushroom *clone(int a_x)
-	{
-		EnemyMushroom clone(a_x);
-		EnemyMushroom* clonePtr = &clone;
-		return clonePtr;
-	}
-
 	EnemyMushroom(int a_x)
 	{
 		posX = a_x;
@@ -37,7 +30,7 @@ public:
 
 	EnemyMushroom()
 	{
-		posX = 0;
+		posX = 1000;
 		posY = 422;
 		enemyForm  = 0;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e1.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -74,7 +67,7 @@ public:
 				BitBlt
 				(
 					hdc,
-					posX ,
+					posX - BaseObject::mapSlider,
 					posY,
 					MUSHROOM_WIDTH,
 					MUSHROOM_HEIGHT,
@@ -88,7 +81,7 @@ public:
 				BitBlt
 				(
 					hdc,
-					posX,
+					posX - BaseObject::mapSlider,
 					posY,
 					MUSHROOM_WIDTH,
 					MUSHROOM_HEIGHT,

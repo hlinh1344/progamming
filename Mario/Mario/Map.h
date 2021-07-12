@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseObject.h"
+
 #define MAP_WIDTH 984
 #define MAP_HEIGHT 290
 #define CLOUD_HEIGHT 246
@@ -22,5 +23,4 @@ public:
 	bool checkToAddEnemy(int a_posX);
 };
 
-static int mapSlider;
-static int clousDrifting;
+

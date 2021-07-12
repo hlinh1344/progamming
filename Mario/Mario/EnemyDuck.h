@@ -6,30 +6,30 @@
 #define DUCK_WIDTH 45
 
 //pos x = 200
-//pos y = 202
+//pos y = 406
 
-class EnemyBuzzyBeetle : public BaseObject
+class EnemyDuck : public BaseObject
 {
 private:
 
 public:
 
-	EnemyBuzzyBeetle(int a_x, int a_y)
+	EnemyDuck(int a_x)
 	{
 		posX = a_x;
-		posY = 202;
+		posY = 406;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e2.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
 
-	EnemyBuzzyBeetle()
+	EnemyDuck()
 	{
 		posX = 0;
-		posY = 202;
+		posY = 406;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e2.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
-	~EnemyBuzzyBeetle()
+	~EnemyDuck()
 	{
 
 	}
@@ -41,7 +41,7 @@ public:
 		BitBlt
 		(
 			hdc,
-			posX - mapSlider,
+			posX - BaseObject::mapSlider,
 			posY,
 			DUCK_WIDTH,
 			DUCK_HEIGHT,
@@ -55,7 +55,7 @@ public:
 		BitBlt
 		(
 			hdc,
-			posX - mapSlider,
+			posX - BaseObject::mapSlider,
 			posY,
 			DUCK_WIDTH,
 			DUCK_HEIGHT,

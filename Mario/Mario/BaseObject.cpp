@@ -1,5 +1,8 @@
 #include "BaseObject.h"
 
+int BaseObject::clousDrifting = 0;
+int BaseObject::mapSlider = 0;
+
 BaseObject::BaseObject()
 {
 	isDead = false;
@@ -66,3 +69,4 @@ HBITMAP BaseObject::CreateBitmapMask(HBITMAP hbmColour, COLORREF crTransparent)
 	DeleteDC(hdcMem2);
 	return hbmMask;
 }
+

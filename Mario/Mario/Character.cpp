@@ -44,12 +44,12 @@ void Character::increseFormX(int a)
 
 void Character::moveLeft()
 {
-	posX -= PLAYER_SPEED;
+	posX = posX - PLAYER_SPEED;
 }
 
 void Character::moveRight()
 {
-	posX += PLAYER_SPEED;
+	posX = posX + PLAYER_SPEED;
 }
 
 void Character::moveUp()
@@ -74,6 +74,7 @@ void Character::draw(HWND hwnd, HDC hdc)
 	(
 		hdc,
 		posX - mapSlider,
+		//posX,
 		posY - jumpHeight,
 		CHARACTER_WIDTH,
 		CHARACTER_HEIGHT,
@@ -88,6 +89,7 @@ void Character::draw(HWND hwnd, HDC hdc)
 	(
 		hdc,
 		posX - mapSlider,
+		//posX,
 		posY - jumpHeight,
 		CHARACTER_WIDTH,
 		CHARACTER_HEIGHT,

@@ -2,8 +2,6 @@
 
 Map::Map()
 {
-	mapSlider = 0;
-	clousDrifting = 0;
 	posX = 0;
 	posY = 0;
 	hbmGround = (HBITMAP)LoadImage(hInst, L"mario_map.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -16,24 +14,24 @@ Map::~Map()
 
 void Map::increseMapSlider(int a)
 {
-	mapSlider += a;
+	BaseObject::mapSlider = BaseObject::mapSlider + a;
 }
 
 void Map::increseClousDrifting(int a)
 {
-	clousDrifting += a;
+	BaseObject::clousDrifting = BaseObject::clousDrifting + a;
 }
 
 int Map::getMapSlider()
 {
-	return mapSlider;
+	return BaseObject::mapSlider;
 }
 
 void Map::draw(HWND hwnd, HDC hdc)
 {
-	if (clousDrifting >= CLOUD_WIDTH - MAP_WIDTH - 2)
+	if (BaseObject::clousDrifting >= CLOUD_WIDTH - MAP_WIDTH - 2)
 	{
-		clousDrifting = 0;
+		BaseObject::clousDrifting = 0;
 	}
 	hdcMem = CreateCompatibleDC(hdc);
 	oldBitmap = SelectObject(hdcMem, hbmGround);
@@ -46,7 +44,7 @@ void Map::draw(HWND hwnd, HDC hdc)
 		MAP_WIDTH,
 		MAP_HEIGHT,
 		hdcMem,
-		mapSlider,
+		BaseObject::mapSlider,
 		0,
 		SRCCOPY
 	);
@@ -55,12 +53,12 @@ void Map::draw(HWND hwnd, HDC hdc)
 	BitBlt
 	(
 		hdc,
-		posX ,
+		posX,
 		posY,
 		MAP_WIDTH,
 		CLOUD_HEIGHT,
 		hdcMem,
-		clousDrifting,
+		BaseObject::clousDrifting,
 		0,
 		SRCCOPY
 	);
