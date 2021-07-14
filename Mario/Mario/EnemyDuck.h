@@ -4,20 +4,24 @@
 //60x45
 #define DUCK_HEIGHT 60
 #define DUCK_WIDTH 45
-
+#define DUCK_AREA 300
+#define DUCK_SPEED 2
 //pos x = 200
 //pos y = 406
 
 class EnemyDuck : public BaseObject
 {
 private:
-
+	int originalLocation;
 public:
 
 	EnemyDuck(int a_x)
 	{
 		posX = a_x;
 		posY = 406;
+		formX = 4;
+		formY = 0;
+		originalLocation = a_x;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e2.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
@@ -26,6 +30,9 @@ public:
 	{
 		posX = 0;
 		posY = 406;
+		formX = 4;
+		formY = 0;
+		originalLocation = 0;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e2.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
@@ -46,8 +53,8 @@ public:
 			DUCK_WIDTH,
 			DUCK_HEIGHT,
 			hdcMem,
-			0,
-			0,
+			DUCK_WIDTH * formX,
+			DUCK_HEIGHT * formY,
 			SRCAND
 		);
 		oldBitmap = SelectObject(hdcMem, hBitmap);
@@ -60,12 +67,85 @@ public:
 			DUCK_WIDTH,
 			DUCK_HEIGHT,
 			hdcMem,
-			0,
-			0,
+			DUCK_WIDTH * formX,
+			DUCK_HEIGHT * formY,
 			SRCPAINT
 		);
 		SelectObject(hdcMem, oldBitmap);
 		DeleteDC(hdcMem);
+	}
+
+	void moveLeft() override
+	{
+		posX = posX - DUCK_SPEED;
+	}
+
+	void moveRight() override
+	{
+		posX = posX + DUCK_SPEED;
+	}
+
+	bool isGoLeft() override
+	{
+		if ((formX >= 0) && (formX <= 3))
+			return true;
+		return false;
+	}
+
+	bool isGoRight()override
+	{
+		if ((formX >= 4) && (formX <= 7))
+			return true;
+		return false;
+	}
+
+	void makeAnimation() override
+	{
+		if (!isDead)
+		{
+			if (EnemyDuck::isGoRight())
+			{
+				if (formX >= 7)
+					formX = 4;
+				else
+					formX = formX + 1;
+
+				EnemyDuck::moveRight();
+
+				if (posX >= originalLocation + DUCK_AREA)
+				{
+					//EnemyDuck::moveLeft();
+					formX = 3;
+				}
+			}
+			else if (EnemyDuck::isGoLeft())
+			{
+				if (formX <= 0)
+					formX = 3;
+				else
+					formX = formX - 1;
+
+				EnemyDuck::moveLeft();
+
+				if (posX <= originalLocation)
+				{
+					//EnemyDuck::moveRight();
+					formX = 4;
+				}
+			}
+
+			
+			//if (posX <= originalLocation)
+			//{
+			//	EnemyDuck::moveRight();
+			//	formX = 4;
+			//}
+			//else if (posX >= originalLocation + DUCK_AREA)
+			//{
+			//	EnemyDuck::moveLeft();
+			//	formX = 3;
+			//}
+		}
 	}
 
 };

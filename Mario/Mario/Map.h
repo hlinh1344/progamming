@@ -6,12 +6,13 @@
 #define CLOUD_HEIGHT 246
 #define CLOUD_WIDTH 5218
 #define CLOUD_SPEED 2
-#define NUMBER_OF_MONSTERS 7
+#define NUMBER_OF_MONSTERS 6
+#define END_OF_MAP 3690
 class Map :public BaseObject
 {
 private:
 	HBITMAP hbmGround, hbmCloud;
-	int enemiesPosition[NUMBER_OF_MONSTERS] = { 500, 1000, 1400, 1800, 2300, 2700, 3200 };
+	int enemiesPosition[NUMBER_OF_MONSTERS] = { 1000, 1400, 1800, 2300, 2700, 3200 };
 public:
 	
 	Map();
@@ -20,7 +21,7 @@ public:
 	void increseMapSlider(int a);
 	void increseClousDrifting(int a);
 	int getMapSlider();
-	bool checkToAddEnemy(int a_posX);
+	int checkToAddEnemy(int a_posX);
 };
 
 

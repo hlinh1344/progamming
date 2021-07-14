@@ -9,33 +9,37 @@
 //44x43
 #define MUSHROOM_HEIGHT 43
 #define MUSHROOM_WIDTH 44
-
+#define MUSHROOM_AREA 300
+#define MUSHROOM_SPEED 2
 class EnemyMushroom : public BaseObject
 {
 private:
-	int enemyForm;
-	time_t currentTime = time(NULL);   // get time now
-	tm now;
+	int originalLocation;
+	bool isGoToRight;
 public:
 
 	EnemyMushroom(int a_x)
 	{
 		posX = a_x;
 		posY = 422;
-		enemyForm = 0;
+		formX = 0;
+		formY = 0;
+		originalLocation = a_x;
+		isGoToRight = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e1.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
-		localtime_s(&now, &currentTime);
 	}
 
 	EnemyMushroom()
 	{
 		posX = 1000;
 		posY = 422;
-		enemyForm  = 0;
+		formX = 0;
+		formY = 0;
+		originalLocation = 1000;
+		isGoToRight = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e1.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
-		localtime_s(&now, &currentTime);
 	}
 	~EnemyMushroom()
 	{
@@ -44,21 +48,6 @@ public:
 
 	void draw(HWND hwnd, HDC hdc) override 
 	{
-		//time_t currentTime2 = time(NULL);   // get time now
-		//tm now2;
-		//localtime_s(&now2, &currentTime2);
-		//double  diff = (-1) * (double)difftime(currentTime, mktime(&now2));
-
-		//if (diff >= 0.5)
-		//{
-		//	if (enemyForm == 1)
-		//		enemyForm = 0;
-		//	else
-		//		enemyForm = 1;
-		//	currentTime = currentTime2;
-		//	localtime_s(&now, &currentTime);
-		//}
-
 		{
 			hdcMem = CreateCompatibleDC(hdc);
 
@@ -72,8 +61,8 @@ public:
 					MUSHROOM_WIDTH,
 					MUSHROOM_HEIGHT,
 					hdcMem,
-					MUSHROOM_WIDTH * enemyForm,
-					0,
+					MUSHROOM_WIDTH * formX,
+					MUSHROOM_HEIGHT * formY,
 					SRCAND
 				);
 				oldBitmap = SelectObject(hdcMem, hBitmap);
@@ -86,12 +75,84 @@ public:
 					MUSHROOM_WIDTH,
 					MUSHROOM_HEIGHT,
 					hdcMem,
-					MUSHROOM_WIDTH * enemyForm,
-					0,
+					MUSHROOM_WIDTH * formX,
+					MUSHROOM_HEIGHT * formY,
 					SRCPAINT
 				);
 			SelectObject(hdcMem, oldBitmap);
 			DeleteDC(hdcMem);
 		}		
 	}
+
+	void moveLeft() override
+	{
+		posX = posX - MUSHROOM_SPEED;
+	}
+
+	void moveRight() override
+	{
+		posX = posX + MUSHROOM_SPEED;
+	}
+
+	bool isGoLeft() override
+	{
+		if ((formX >= 0) && (formX <= 3))
+			return true;
+		return false;
+	}
+
+	bool isGoRight()override
+	{
+		if ((formX >= 4) && (formX <= 7))
+			return true;
+		return false;
+	}
+
+	void makeAnimation() override
+	{
+		if (!isDead)
+		{
+			if (isGoToRight)
+			{
+				if (formX == 0)
+					formX = 1;
+				else
+					formX = 0;
+
+				EnemyMushroom::moveRight();
+
+				if (posX >= originalLocation + MUSHROOM_AREA)
+				{
+					isGoToRight = false;
+				}
+			}
+			else if (!isGoToRight)
+			{
+				if (formX == 0)
+					formX = 1;
+				else
+					formX = 0;
+
+				EnemyMushroom::moveLeft();
+
+				if (posX <= originalLocation)
+				{
+					isGoToRight = true;
+				}
+			}
+
+			
+			//if (posX < originalLocation + MUSHROOM_AREA)
+			//{
+			//	EnemyMushroom::moveRight();
+			//}
+
+			//if (posX > originalLocation)
+			//{
+			//	EnemyMushroom::moveLeft();
+			//}
+		}
+	}
+
+
 };

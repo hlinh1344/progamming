@@ -70,3 +70,7 @@ HBITMAP BaseObject::CreateBitmapMask(HBITMAP hbmColour, COLORREF crTransparent)
 	return hbmMask;
 }
 
+void BaseObject::makeAnimation()
+{
+
+}

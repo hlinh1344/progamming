@@ -10,11 +10,8 @@
 class Character : public BaseObject
 {
 private:
-	int formX;
-	int formY;
 	int life;
 	int jumpHeight;
-
 public:
 	Character();
 	~Character();
@@ -24,12 +21,8 @@ public:
 	void setFormY(int a_formY);
 	void increseFormX(int a);
 	void draw(HWND hwnd, HDC hdc) override;
-	void moveLeft();
-	void moveRight();
 	void moveUp();
 	void moveDown();
-	bool isGoLeft();
-	bool isGoRight();
 	bool isJump();
 	void setJumpHeight(int a_jumpHeight);
 	void increseJumpHeight(int a);

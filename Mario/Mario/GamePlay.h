@@ -17,6 +17,9 @@ private:
 	std::vector <BaseObject*> objects; // static objects
 	Map map;
 	Character mario;
+	int enemyID;
+	time_t currentTime;   // get time now
+	tm now;
 public:
 	GamePlay();
 	~GamePlay();

@@ -6,6 +6,7 @@ Map::Map()
 	posY = 0;
 	hbmGround = (HBITMAP)LoadImage(hInst, L"mario_map.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hbmCloud = (HBITMAP)LoadImage(hInst, L"cloud.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+	
 }
 Map::~Map()
 {
@@ -66,14 +67,14 @@ void Map::draw(HWND hwnd, HDC hdc)
 	DeleteDC(hdcMem);
 }
 
-bool Map::checkToAddEnemy(int a_posX)
+int Map::checkToAddEnemy(int a_posX)
 {
-	bool checkPosition = false;
+	int checkPosition = 0;
 	for (int i = 0; i < NUMBER_OF_MONSTERS; i++)
 	{
 		if (a_posX == enemiesPosition[i])
 		{
-			checkPosition = true;
+			checkPosition = i+1;
 		}
 	}
 	return checkPosition;

@@ -4,7 +4,9 @@
 
 GamePlay::GamePlay()
 {
-
+	enemyID = 0;
+	currentTime = time(NULL);
+	localtime_s(&now, &currentTime);
 }
 
 GamePlay::~GamePlay()
@@ -24,46 +26,49 @@ void GamePlay::init()
 
 void GamePlay::run()
 {
-	/*int count = 0;
-	if (map.checkToAddEnemy(BaseObject::mapSlider + MAP_WIDTH))
-	{
-		count++;
-		switch (count)
-		{
-		case 1:
-			objects.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case2:
-			objects.push_back(new EnemyDuck(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 3:
-			objects.push_back(new EnemySpinyBeetle(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 4:
-			objects.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 5:
-			objects.push_back(new EnemyBuzzyBeetle(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 6:
-			objects.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 7:
-			objects.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		default:
-			break;
-		}
-	}*/
 
-	if (BaseObject::mapSlider + MAP_WIDTH == 1000)
-		objects.push_back(new EnemyMushroom(1000));
-	else if (BaseObject::mapSlider + MAP_WIDTH == 1400)
-		objects.push_back(new EnemyDuck(1400));
-	else if (BaseObject::mapSlider + MAP_WIDTH == 1800)
-		objects.push_back(new EnemySpinyBeetle(1800));
-	else if (BaseObject::mapSlider + MAP_WIDTH == 2400)
-		objects.push_back(new EnemyBuzzyBeetle(2400));
+	enemyID = (map.checkToAddEnemy(BaseObject::mapSlider + MAP_WIDTH));
+
+	switch (enemyID)
+	{
+	case 1:
+		objects.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
+		enemyID = 0;
+		break;
+	case 2:
+		objects.push_back(new EnemyDuck(BaseObject::mapSlider + MAP_WIDTH));
+		enemyID = 0;
+		break;
+	case 3:
+		objects.push_back(new EnemySpinyBeetle(BaseObject::mapSlider + MAP_WIDTH));
+		enemyID = 0;
+		break;
+	case 4:
+		objects.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
+		enemyID = 0;
+		break;
+	case 5:
+		objects.push_back(new EnemyBuzzyBeetle(BaseObject::mapSlider + MAP_WIDTH));
+		enemyID = 0;
+		break;
+	case 6:
+		objects.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
+		enemyID = 0;
+		break;
+	default:
+		break;
+	}
+	
+
+	//if (BaseObject::mapSlider + MAP_WIDTH == 1000)
+	//	objects.push_back(new EnemyMushroom(1000));
+	//else if (BaseObject::mapSlider + MAP_WIDTH == 1400)
+	//	objects.push_back(new EnemyDuck(1400));
+	//else if (BaseObject::mapSlider + MAP_WIDTH == 1800)
+	//	objects.push_back(new EnemySpinyBeetle(1800));
+	//else if (BaseObject::mapSlider + MAP_WIDTH == 2400)
+	//	objects.push_back(new EnemyBuzzyBeetle(2400));
+
 	// check to add monster
 	// based map settings
 	// draw
@@ -78,6 +83,24 @@ void GamePlay::draw(HWND hwnd, HDC hdc)
 	map.draw(hwnd, hdc);
 	mario.draw(hwnd,hdc);
 	//for () 
+	time_t currentTime2 = time(NULL);   // get time now
+	tm now2;
+	localtime_s(&now2, &currentTime2);
+	double  diff = (-1) * (double)difftime(currentTime, mktime(&now2));
+
+	if (diff >= 0.001)
+	{
+		for (auto object : objects) {
+			object->makeAnimation();
+			//object->draw(hwnd, hdc);
+		}
+		currentTime = currentTime2;
+		localtime_s(&now, &currentTime);
+	}
+
+
+
+
 	for (auto object : objects) {
 		object->draw(hwnd, hdc);
 	}
@@ -99,6 +122,7 @@ void GamePlay::moveMarioLeft()
 	{
 		mario.incresePosX(PLAYER_SPEED);
 	}
+
 	//change sprite
 	if (mario.isGoRight())
 		mario.setFormX(2);
@@ -120,6 +144,12 @@ void GamePlay::moveMarioRight()
 		map.increseMapSlider(PLAYER_SPEED);
 	}
 	
+	if (mario.getPosX() >= END_OF_MAP)
+	{
+		map.increseMapSlider(-PLAYER_SPEED);
+		mario.moveLeft();
+	}
+
 	//change sprite
 	if (mario.isGoLeft())
 		mario.setFormX(11);

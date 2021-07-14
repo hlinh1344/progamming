@@ -42,12 +42,12 @@ void Character::increseFormX(int a)
 	this->formX = this->formX + a;
 }
 
-void Character::moveLeft()
+void BaseObject::moveLeft()
 {
 	posX = posX - PLAYER_SPEED;
 }
 
-void Character::moveRight()
+void BaseObject::moveRight()
 {
 	posX = posX + PLAYER_SPEED;
 }
@@ -103,14 +103,14 @@ void Character::draw(HWND hwnd, HDC hdc)
 }
 
 
-bool Character::isGoLeft()
+bool BaseObject::isGoLeft()
 {
 	if ((formY != 3) && (formX <= 6) && (formX != 2))
 		return true;
 	return false;
 }
 
-bool  Character::isGoRight()
+bool  BaseObject::isGoRight()
 {
 	if ((formY != 3) && (formX >= 7) && (formX != 11))
 		return true;
