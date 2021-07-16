@@ -25,6 +25,7 @@ public:
 		formX = 0;
 		formY = 0;
 		originalLocation = a_x;
+		life = 1;
 		isGoToRight = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e1.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
@@ -32,11 +33,12 @@ public:
 
 	EnemyMushroom()
 	{
-		posX = 1000;
+		posX = 0;
 		posY = 422;
 		formX = 0;
 		formY = 0;
-		originalLocation = 1000;
+		originalLocation = 0;
+		life = 1;
 		isGoToRight = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e1.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
@@ -46,7 +48,7 @@ public:
 
 	}
 
-	void draw(HWND hwnd, HDC hdc) override 
+	void Draw(HWND hwnd, HDC hdc) override 
 	{
 		{
 			hdcMem = CreateCompatibleDC(hdc);
@@ -84,31 +86,31 @@ public:
 		}		
 	}
 
-	void moveLeft() override
+	void MoveLeft() override
 	{
 		posX = posX - MUSHROOM_SPEED;
 	}
 
-	void moveRight() override
+	void MoveRight() override
 	{
 		posX = posX + MUSHROOM_SPEED;
 	}
 
-	bool isGoLeft() override
+	bool IsGoLeft() override
 	{
 		if ((formX >= 0) && (formX <= 3))
 			return true;
 		return false;
 	}
 
-	bool isGoRight()override
+	bool IsGoRight()override
 	{
 		if ((formX >= 4) && (formX <= 7))
 			return true;
 		return false;
 	}
 
-	void makeAnimation() override
+	void MakeAnimation() override
 	{
 		if (!isDead)
 		{
@@ -119,7 +121,7 @@ public:
 				else
 					formX = 0;
 
-				EnemyMushroom::moveRight();
+				EnemyMushroom::MoveRight();
 
 				if (posX >= originalLocation + MUSHROOM_AREA)
 				{
@@ -133,24 +135,13 @@ public:
 				else
 					formX = 0;
 
-				EnemyMushroom::moveLeft();
+				EnemyMushroom::MoveLeft();
 
 				if (posX <= originalLocation)
 				{
 					isGoToRight = true;
 				}
 			}
-
-			
-			//if (posX < originalLocation + MUSHROOM_AREA)
-			//{
-			//	EnemyMushroom::moveRight();
-			//}
-
-			//if (posX > originalLocation)
-			//{
-			//	EnemyMushroom::moveLeft();
-			//}
 		}
 	}
 

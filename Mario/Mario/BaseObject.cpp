@@ -16,37 +16,37 @@ BaseObject::~BaseObject()
 
 }
 
-void BaseObject::draw(HWND hwnd, HDC hdc)
+void BaseObject::Draw(HWND hwnd, HDC hdc)
 {
 
 }
 
-void BaseObject::incresePosX(int a)
+void BaseObject::IncresePosX(int a)
 {
 	this->posX = this->posX + a;
 }
 
-void BaseObject::incresePosY(int a)
+void BaseObject::IncresePosY(int a)
 {
 	this->posY = this->posY + a;
 }
 
-int BaseObject::getPosX()
+int BaseObject::GetPosX()
 {
 	return posX;
 }
 
-int BaseObject::getPosY()
+int BaseObject::GetPosY()
 {
 	return posY;
 }
 
-void BaseObject::setPosX(int a_posX)
+void BaseObject::SetPosX(int a_posX)
 {
 	this->posX = a_posX;
 }
 
-void BaseObject::setPosY(int a_posY)
+void BaseObject::SetPosY(int a_posY)
 {
 	this->posY = a_posY;
 }
@@ -70,7 +70,7 @@ HBITMAP BaseObject::CreateBitmapMask(HBITMAP hbmColour, COLORREF crTransparent)
 	return hbmMask;
 }
 
-void BaseObject::makeAnimation()
+void BaseObject::MakeAnimation()
 {
 
 }

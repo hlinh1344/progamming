@@ -21,6 +21,7 @@ public:
 		formX = 2;
 		formY = 0;
 		originalLocation = a_x;
+		life = 1;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e4.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 
@@ -33,6 +34,7 @@ public:
 		formX = 2;
 		formY = 0;
 		originalLocation = 0;
+		life = 1;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e4.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
@@ -40,7 +42,7 @@ public:
 	{
 
 	}
-	void draw(HWND hwnd, HDC hdc) override
+	void Draw(HWND hwnd, HDC hdc) override
 	{
 		hdcMem = CreateCompatibleDC(hdc);
 		oldBitmap = SelectObject(hdcMem, hbmMask);
@@ -75,56 +77,56 @@ public:
 		DeleteDC(hdcMem);
 	}
 
-	void moveLeft() override
+	void MoveLeft() override
 	{
 		posX = posX - SPINY_SPEED;
 	}
 
-	void moveRight() override
+	void MoveRight() override
 	{
 		posX = posX + SPINY_SPEED;
 	}
 
-	bool isGoLeft() override
+	bool IsGoLeft() override
 	{
 		if ((formX == 0) || (formX == 1))
 			return true;
 		return false;
 	}
 
-	bool isGoRight()override
+	bool IsGoRight()override
 	{
 		if ((formX == 2) || (formX == 3))
 			return true;
 		return false;
 	}
 
-	void makeAnimation() override
+	void MakeAnimation() override
 	{
 		if (!isDead)
 		{
-			if (EnemySpinyBeetle::isGoRight())
+			if (EnemySpinyBeetle::IsGoRight())
 			{
 				if (formX >= 3)
 					formX = 2;
 				else
 					formX = formX + 1;
 
-				EnemySpinyBeetle::moveRight();
+				EnemySpinyBeetle::MoveRight();
 
 				if (posX >= originalLocation + SPINY_AREA)
 				{
 					formX = 1;
 				}
 			}
-			else if (EnemySpinyBeetle::isGoLeft())
+			else if (EnemySpinyBeetle::IsGoLeft())
 			{
 				if (formX <= 0)
 					formX = 1;
 				else
 					formX = formX - 1;
 
-				EnemySpinyBeetle::moveLeft();
+				EnemySpinyBeetle::MoveLeft();
 
 				if (posX <= originalLocation)
 				{

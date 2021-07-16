@@ -17,7 +17,7 @@ public:
 	
 	Map();
 	~Map();
-	void draw(HWND hwnd, HDC hdc) override;
+	void Draw(HWND hwnd, HDC hdc) override;
 	void increseMapSlider(int a);
 	void increseClousDrifting(int a);
 	int getMapSlider();

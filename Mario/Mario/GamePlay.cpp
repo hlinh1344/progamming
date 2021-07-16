@@ -15,14 +15,7 @@ GamePlay::~GamePlay()
 	}
 }
 
-
-void GamePlay::init()
-{
-
-
-}
-
-void GamePlay::run()
+void GamePlay::Run()
 {
 
 	enemyID = (map.checkToAddEnemy(BaseObject::mapSlider + MAP_WIDTH));
@@ -53,48 +46,51 @@ void GamePlay::run()
 		break;
 	}
 	
-
-	//time_t currentTime2 = time(NULL);   // get time now
-	//tm now2;
-	//localtime_s(&now2, &currentTime2);
-	//double  diff = (-1) * (double)difftime(currentTime, mktime(&now2));
-
-	//if (diff > 0.0000001)
-	//{
-	//	currentTime = currentTime2;
-	//	localtime_s(&now, &currentTime);
-	//	for (auto object : objects) {
-	//		object->makeAnimation();
-	//	}
-	//}
-
+	for (auto object : objects) {
+		Collision(mario, object);
+	}
 	// check to add monster
 	// based map settings
-	// draw
+	// Draw
 	// check to move mario
 	// moveMonster()
 	// handle collision
 
 }
 
-void GamePlay::draw(HWND hwnd, HDC hdc)
+void GamePlay::Draw(HWND hwnd, HDC hdc)
 {
 	timer++;
-	map.draw(hwnd, hdc);
-	mario.draw(hwnd,hdc);
+	map.Draw(hwnd, hdc);
+	mario.Draw(hwnd,hdc);
 	//for () 
 	if (timer >= 2)
 	{
 		for (auto object : objects) {
-			object->draw(hwnd, hdc);
-			object->makeAnimation();
+			object->Draw(hwnd, hdc);
+			object->MakeAnimation();
+
+			if (mario.CheckDeath())
+			{
+				mario.IncreseJumpHeight(10);
+			}
+
+			if (mario.GetJumpHeight() > 0)
+			{
+				mario.IncreseJumpHeight(-1);
+			}
 		}
 		timer = 0;
 	}
 	else
 	{
+		if (mario.GetJumpHeight() > 0)
+		{
+			mario.IncreseJumpHeight(-1);
+		}
+
 		for (auto object : objects) {
-			object->draw(hwnd, hdc);
+			object->Draw(hwnd, hdc);
 		}
 	}
 		
@@ -102,119 +98,161 @@ void GamePlay::draw(HWND hwnd, HDC hdc)
 
 	// for monster in object
 	
-	// monster.draw()
+	// monster.Draw()
 }
-void GamePlay::moveMonsters()
+void GamePlay::MoveMonsters()
 {
 	// for monster in object
 	// monster.move()
 }
-void GamePlay::moveMarioLeft()
+void GamePlay::MoveMarioLeft()
 {
-	mario.moveLeft();
-	if (mario.getPosX() - map.getMapSlider() <= 0)
+	if (!mario.CheckDeath())
 	{
-		mario.incresePosX(PLAYER_SPEED);
+		mario.MoveLeft();
+		if (mario.GetPosX() - map.getMapSlider() <= 0)
+		{
+			mario.IncresePosX(PLAYER_SPEED);
+		}
+
+		//change sprite
+		if (mario.IsGoRight())
+			mario.SetFormX(2);
+		else
+		{
+			if (mario.GetFormX() <= 3)
+				mario.SetFormX(5);
+			else
+				mario.IncreseFormX(-1);
+		}
 	}
 
-	//change sprite
-	if (mario.isGoRight())
-		mario.setFormX(2);
-	else
-	{
-		if (mario.getFormX() <= 3)
-			mario.setFormX(5);
-		else
-			mario.increseFormX(-1);
-	}
 
 	//for (auto object : objects) {
-	//	object->makeAnimation();
+	//	object->MakeAnimation();
 	//}
 }
 
-void GamePlay::moveMarioRight()
+void GamePlay::MoveMarioRight()
 {
-	mario.moveRight();
-	map.increseClousDrifting(CLOUD_SPEED);
-	if (mario.getPosX() - map.getMapSlider() >= 500)
+	if (!mario.CheckDeath())
 	{
-		map.increseMapSlider(PLAYER_SPEED);
-	}
-	
-	if (mario.getPosX() >= END_OF_MAP)
-	{
-		map.increseMapSlider(-PLAYER_SPEED);
-		mario.moveLeft();
+		mario.MoveRight();
+		map.increseClousDrifting(CLOUD_SPEED);
+		if (mario.GetPosX() - map.getMapSlider() >= 500)
+		{
+			map.increseMapSlider(PLAYER_SPEED);
+		}
+
+		if (mario.GetPosX() >= END_OF_MAP)
+		{
+			map.increseMapSlider(-PLAYER_SPEED);
+			mario.MoveLeft();
+		}
+
+		//change sprite
+		if (mario.IsGoLeft())
+			mario.SetFormX(11);
+		else
+		{
+			if (mario.GetFormX() >= 10)
+				mario.SetFormX(8);
+			else
+				mario.IncreseFormX(1);
+		}
 	}
 
-	//change sprite
-	if (mario.isGoLeft())
-		mario.setFormX(11);
-	else
-	{
-		if (mario.getFormX() >= 10)
-			mario.setFormX(8);
-		else
-			mario.increseFormX(1);
-	}
 
 	//for (auto object : objects) {
-	//	object->makeAnimation();
+	//	object->MakeAnimation();
 	//}
 }
 
-void GamePlay::moveMarioUp()
+void GamePlay::MoveMarioUp()
 {
-	mario.moveUp();
-	if (mario.isGoRight())
-		mario.setFormX(12);
-	else
-		mario.setFormX(1);
-}
-
-void GamePlay::moveMarioDown()
-{
-	mario.moveDown();
-	if (mario.isGoRight())
-		mario.setFormX(13);
-	else
-		mario.setFormX(0);
-}
-
-void GamePlay::keyUpMarioDown()
-{
-	if (mario.isGoRight())
-		mario.setFormX(7);
-	else
-		mario.setFormX(6);
-
-}
-
-void GamePlay::keyUpMarioUp()
-{
-
-	while (mario.getJumpHeight() <= 0)
+	if (!mario.CheckDeath())
 	{
-		mario.increseJumpHeight(-4);
+		mario.MoveUp();
+		if (mario.IsGoRight())
+			mario.SetFormX(12);
+		else
+			mario.SetFormX(1);
 	}
-	mario.setJumpHeight(0);
+
+}
+
+void GamePlay::MoveMarioDown()
+{
+	if (!mario.CheckDeath())
+	{
+		mario.MoveDown();
+		if (mario.IsGoRight())
+			mario.SetFormX(13);
+		else
+			mario.SetFormX(0);
+	}
+
+}
+
+void GamePlay::KeyUpMarioDown()
+{
+	if (!mario.CheckDeath())
+	{
+		if (mario.IsGoRight())
+			mario.SetFormX(7);
+		else
+			mario.SetFormX(6);
+
+	}
+}
+
+void GamePlay::KeyUpMarioUp()
+{
+	if (!mario.CheckDeath())
+	{
+		if (mario.IsGoRight())
+			mario.SetFormX(7);
+		else
+			mario.SetFormX(6);
+	}
+
+}
+
+void GamePlay::KeyUpMarioRight()
+{
+	if (!mario.CheckDeath())
+	{
+		mario.SetFormX(7);
+	}
 	
-	//if(mario.getJumpHeight() <=0)
-	//	mario.setJumpHeight(0);
-
-	if(mario.isGoRight())
-		mario.setFormX(7);
-	else
-		mario.setFormX(6);
 }
 
-void GamePlay::keyUpMarioRight()
+void GamePlay::KeyUpMarioLeft()
 {
-	mario.setFormX(7);
+	if (!mario.CheckDeath())
+	{
+		mario.SetFormX(6);
+	}
+	
 }
 
-void GamePlay::keyUpMarioLeft()
+void GamePlay::Collision(Character &mario, BaseObject* monster)
 {
-	mario.setFormX(6);
+	//horizontal
+	int marioLeftEdge = mario.GetPosX();
+	int marioRightEdge = mario.GetPosX() + CHARACTER_WIDTH;
+	int marioTopEdge = mario.GetPosY();
+	int marioBottomEdge = mario.GetPosY() + CHARACTER_HEIGHT;
+	int monsterLeftEdge = monster->GetPosX();
+	int monsterRightEdge = monster->GetPosX() + 45 ;
+	int monsterTopEdge = monster->GetPosY();
+	int monsterBottomEdge = monster->GetPosY() + 42 ;
+
+	if ((marioRightEdge > monsterLeftEdge) && (marioRightEdge < monsterRightEdge))
+	{
+		if (!mario.IsJump())
+		{
+			mario.SetDeath();
+		}
+	}
 }

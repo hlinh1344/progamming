@@ -23,17 +23,17 @@ public:
 	GamePlay();
 	~GamePlay();
 
-	void init();
-	void run();
-	void draw(HWND hwnd, HDC hdc);
-	void moveMonsters();
-	void moveMarioLeft();
-	void moveMarioRight();
-	void moveMarioUp();
-	void moveMarioDown();
-	void keyUpMarioDown();
-	void keyUpMarioUp();
-	void keyUpMarioLeft();
-	void keyUpMarioRight();
+	void Run();
+	void Draw(HWND hwnd, HDC hdc);
+	void MoveMonsters();
+	void MoveMarioLeft();
+	void MoveMarioRight();
+	void MoveMarioUp();
+	void MoveMarioDown();
+	void KeyUpMarioDown();
+	void KeyUpMarioUp();
+	void KeyUpMarioLeft();
+	void KeyUpMarioRight();
+	void Collision(Character &mario, BaseObject * monster);
 };
 

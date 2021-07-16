@@ -17,55 +17,54 @@ Character::~Character()
 
 }
 
-int Character::getFormX()
+int Character::GetFormX()
 {
 	return formX;
 }
 
-int Character::getFormY() 
+int Character::GetFormY() 
 {
 	return formY;
 }
 
-void Character::setFormX(int a_formX)
+void Character::SetFormX(int a_formX)
 {
 	this->formX = a_formX;
 }
 
-void Character::setFormY(int a_formY)
+void Character::SetFormY(int a_formY)
 {
 	this->formY = a_formY;
 }
 
-void Character::increseFormX(int a)
+void Character::IncreseFormX(int a)
 {
 	this->formX = this->formX + a;
 }
 
-void BaseObject::moveLeft()
+void BaseObject::MoveLeft()
 {
 	posX = posX - PLAYER_SPEED;
 }
 
-void BaseObject::moveRight()
+void BaseObject::MoveRight()
 {
 	posX = posX + PLAYER_SPEED;
 }
 
-void Character::moveUp()
+void Character::MoveUp()
 {
-	jumpHeight += 84;
-	if (jumpHeight > 84)
-		jumpHeight = 84;
-
+	jumpHeight += 90;
+	if (jumpHeight > 90)
+		jumpHeight = 90;
 }
 
-void Character::moveDown()
+void Character::MoveDown()
 {
 	jumpHeight = 0;
 }
 
-void Character::draw(HWND hwnd, HDC hdc)
+void Character::Draw(HWND hwnd, HDC hdc)
 {
 	hdcMem = CreateCompatibleDC(hdc);
 	oldBitmap = SelectObject(hdcMem, hbmMask);
@@ -103,38 +102,58 @@ void Character::draw(HWND hwnd, HDC hdc)
 }
 
 
-bool BaseObject::isGoLeft()
+bool BaseObject::IsGoLeft()
 {
 	if ((formY != 3) && (formX <= 6) && (formX != 2))
 		return true;
 	return false;
 }
 
-bool  BaseObject::isGoRight()
+bool  BaseObject::IsGoRight()
 {
 	if ((formY != 3) && (formX >= 7) && (formX != 11))
 		return true;
 	return false;
 }
 
-bool Character::isJump()
+bool Character::IsJump()
 {
-	if (posY > 0)
+	if (jumpHeight > 0)
 		return true;
 	return false;
 }
 
-void Character::setJumpHeight(int a_jumpHeight)
+void Character::SetJumpHeight(int a_jumpHeight)
 {
 	this->jumpHeight = a_jumpHeight;
 }
 
-void Character::increseJumpHeight(int a)
+void Character::IncreseJumpHeight(int a)
 {
 	this->jumpHeight += a;
 }
 
-int Character::getJumpHeight()
+int Character::GetJumpHeight()
 {
 	return jumpHeight;
+}
+
+void BaseObject::SetDeath()
+{
+	this->isDead = true;
+	if ((formY > 0) && (formY < 3))
+	{
+		formY--;
+	}
+	else if (formY == 0)
+	{
+		this->life--;
+		formX = 0;
+		formY = 3;
+	}
+}
+
+bool Character::CheckDeath()
+{
+	return this->isDead;
 }

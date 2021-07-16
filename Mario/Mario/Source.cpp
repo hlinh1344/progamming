@@ -77,7 +77,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 			DispatchMessage(&msg);
 		}
 
-		gamePlay.run();
+		gamePlay.Run();
 		InvalidateRect(hwnd, NULL, FALSE);
 		Sleep(frameInterval);
 	}
@@ -129,16 +129,16 @@ void OnKeyDown(HWND hwnd, WPARAM wParam)
 		OnClose(hwnd);
 		break;
 	case VK_LEFT:
-		gamePlay.moveMarioLeft();
+		gamePlay.MoveMarioLeft();
 		break;
 	case VK_RIGHT:
-		gamePlay.moveMarioRight();
+		gamePlay.MoveMarioRight();
 		break;
 	case VK_UP:
-		gamePlay.moveMarioUp();
+		gamePlay.MoveMarioUp();
 		break;
 	case VK_DOWN:
-		gamePlay.moveMarioDown();
+		gamePlay.MoveMarioDown();
 		break;
 	}
 	InvalidateRect(hwnd, NULL, FALSE);
@@ -149,16 +149,17 @@ void OnKeyUp(HWND hwnd, WPARAM wParam)
 	switch (wParam)
 	{
 	case VK_LEFT:
-		gamePlay.keyUpMarioLeft();
+		gamePlay.KeyUpMarioLeft();
 		break;
 	case VK_RIGHT:
-		gamePlay.keyUpMarioRight();
+		gamePlay.KeyUpMarioRight();
 		break;
 	case VK_UP:
-		gamePlay.keyUpMarioUp();
+		gamePlay.KeyUpMarioUp();
+		InvalidateRect(hwnd, NULL, FALSE);
 		break;
 	case VK_DOWN:
-		gamePlay.keyUpMarioDown();
+		gamePlay.KeyUpMarioDown();
 		break;
 	}
 	InvalidateRect(hwnd, NULL, FALSE);
@@ -166,16 +167,16 @@ void OnKeyUp(HWND hwnd, WPARAM wParam)
 
 void OnPaint(HWND hwnd)
 {
-	//Mario.setFormY(2);
+	//Mario.SetFormY(2);
 	PAINTSTRUCT ps;
 	HDC hdc = BeginPaint(hwnd, &ps);
-	gamePlay.draw(hwnd, hdc);
-	//map.draw(hwnd, hdc);
-	//Mario.draw(hwnd, hdc);
-	//e1.draw(hwnd, hdc);
-	//e2.draw(hwnd, hdc);
-	//e3.draw(hwnd, hdc);
-	//e4.draw(hwnd, hdc);
+	gamePlay.Draw(hwnd, hdc);
+	//map.Draw(hwnd, hdc);
+	//Mario.Draw(hwnd, hdc);
+	//e1.Draw(hwnd, hdc);
+	//e2.Draw(hwnd, hdc);
+	//e3.Draw(hwnd, hdc);
+	//e4.Draw(hwnd, hdc);
 	EndPaint(hwnd, &ps);
 
 }

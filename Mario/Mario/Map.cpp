@@ -28,7 +28,7 @@ int Map::getMapSlider()
 	return BaseObject::mapSlider;
 }
 
-void Map::draw(HWND hwnd, HDC hdc)
+void Map::Draw(HWND hwnd, HDC hdc)
 {
 	if (BaseObject::clousDrifting >= CLOUD_WIDTH - MAP_WIDTH - 2)
 	{

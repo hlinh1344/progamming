@@ -10,23 +10,23 @@
 class Character : public BaseObject
 {
 private:
-	int life;
 	int jumpHeight;
 public:
 	Character();
 	~Character();
-	int getFormX();
-	int getFormY();
-	void setFormX(int a_formX);
-	void setFormY(int a_formY);
-	void increseFormX(int a);
-	void draw(HWND hwnd, HDC hdc) override;
-	void moveUp();
-	void moveDown();
-	bool isJump();
-	void setJumpHeight(int a_jumpHeight);
-	void increseJumpHeight(int a);
-	int getJumpHeight();
+	int GetFormX();
+	int GetFormY();
+	void SetFormX(int a_formX);
+	void SetFormY(int a_formY);
+	void IncreseFormX(int a);
+	void Draw(HWND hwnd, HDC hdc) override;
+	void MoveUp();
+	void MoveDown();
+	bool IsJump();
+	void SetJumpHeight(int a_jumpHeight);
+	void IncreseJumpHeight(int a);
+	int GetJumpHeight();
+	bool CheckDeath();
 };
 
 

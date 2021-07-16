@@ -22,6 +22,7 @@ public:
 		formX = 4;
 		formY = 0;
 		originalLocation = a_x;
+		life = 1;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e2.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
@@ -33,6 +34,7 @@ public:
 		formX = 4;
 		formY = 0;
 		originalLocation = 0;
+		life = 1;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e2.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
@@ -40,7 +42,7 @@ public:
 	{
 
 	}
-	void draw(HWND hwnd, HDC hdc) override
+	void Draw(HWND hwnd, HDC hdc) override
 	{
 		hdcMem = CreateCompatibleDC(hdc);
 		oldBitmap = SelectObject(hdcMem, hbmMask);
@@ -75,56 +77,56 @@ public:
 		DeleteDC(hdcMem);
 	}
 
-	void moveLeft() override
+	void MoveLeft() override
 	{
 		posX = posX - DUCK_SPEED;
 	}
 
-	void moveRight() override
+	void MoveRight() override
 	{
 		posX = posX + DUCK_SPEED;
 	}
 
-	bool isGoLeft() override
+	bool IsGoLeft() override
 	{
 		if ((formX >= 0) && (formX <= 3))
 			return true;
 		return false;
 	}
 
-	bool isGoRight()override
+	bool IsGoRight()override
 	{
 		if ((formX >= 4) && (formX <= 7))
 			return true;
 		return false;
 	}
 
-	void makeAnimation() override
+	void MakeAnimation() override
 	{
 		if (!isDead)
 		{
-			if (EnemyDuck::isGoRight())
+			if (EnemyDuck::IsGoRight())
 			{
 				if (formX >= 7)
 					formX = 4;
 				else
 					formX = formX + 1;
 
-				EnemyDuck::moveRight();
+				EnemyDuck::MoveRight();
 
 				if (posX >= originalLocation + DUCK_AREA)
 				{
 					formX = 3;
 				}
 			}
-			else if (EnemyDuck::isGoLeft())
+			else if (EnemyDuck::IsGoLeft())
 			{
 				if (formX <= 0)
 					formX = 3;
 				else
 					formX = formX - 1;
 
-				EnemyDuck::moveLeft();
+				EnemyDuck::MoveLeft();
 
 				if (posX <= originalLocation)
 				{
