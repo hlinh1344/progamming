@@ -4,8 +4,8 @@
 //45x44
 #define BUZZY_HEIGHT 45
 #define BUZZY_WIDTH 44
-#define BUZZY_AREA 300
-#define BUZZY_SPEED 3
+#define BUZZY_AREA 100
+#define BUZZY_SPEED 5
 //posx = 100;
 //posY = 421;
 
@@ -87,14 +87,14 @@ public:
 
 	bool isGoLeft() override
 	{
-		if ((formX == 0) && (formX == 1))
+		if ((formX == 0) || (formX == 1))
 			return true;
 		return false;
 	}
 
 	bool isGoRight( )override
 	{
-		if ((formX == 3) && (formX == 4))
+		if ((formX == 3) || (formX == 4))
 			return true;
 		return false;
 	}
@@ -105,47 +105,33 @@ public:
 		{
 			if (EnemyBuzzyBeetle::isGoRight())
 			{
-				if (formX == 3)
-					formX = 4;
-				else
+				if (formX >= 4)
 					formX = 3;
+				else
+					formX = formX + 1;
 
 				EnemyBuzzyBeetle::moveRight();
 
 				if (posX >= originalLocation + BUZZY_AREA)
 				{
-					//EnemyBuzzyBeetle::moveLeft();
 					formX = 1;
 				}
 			}
 
 			else if (EnemyBuzzyBeetle::isGoLeft())
 			{
-				if (formX == 0)
+				if (formX <= 0)
 					formX = 1;
 				else
-					formX = 0;
+					formX = formX - 1;
 
 				EnemyBuzzyBeetle::moveLeft();
 
 				if (posX <= originalLocation)
 				{
-					//EnemyBuzzyBeetle::moveRight();
 					formX = 3;
 				}
 			}
-
-			
-			//if (posX <= originalLocation)
-			//{
-			//	EnemyBuzzyBeetle::moveRight();
-			//	formX = 3;
-			//}
-			//else if (posX >= originalLocation + BUZZY_AREA)
-			//{
-			//	EnemyBuzzyBeetle::moveLeft();
-			//	formX = 1;
-			//}
 		}
 	}
 

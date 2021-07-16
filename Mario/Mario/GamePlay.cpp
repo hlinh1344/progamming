@@ -5,8 +5,6 @@
 GamePlay::GamePlay()
 {
 	enemyID = 0;
-	currentTime = time(NULL);
-	localtime_s(&now, &currentTime);
 }
 
 GamePlay::~GamePlay()
@@ -51,23 +49,24 @@ void GamePlay::run()
 		objects.push_back(new EnemyBuzzyBeetle(BaseObject::mapSlider + MAP_WIDTH));
 		enemyID = 0;
 		break;
-	case 6:
-		objects.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
-		enemyID = 0;
-		break;
 	default:
 		break;
 	}
 	
 
-	//if (BaseObject::mapSlider + MAP_WIDTH == 1000)
-	//	objects.push_back(new EnemyMushroom(1000));
-	//else if (BaseObject::mapSlider + MAP_WIDTH == 1400)
-	//	objects.push_back(new EnemyDuck(1400));
-	//else if (BaseObject::mapSlider + MAP_WIDTH == 1800)
-	//	objects.push_back(new EnemySpinyBeetle(1800));
-	//else if (BaseObject::mapSlider + MAP_WIDTH == 2400)
-	//	objects.push_back(new EnemyBuzzyBeetle(2400));
+	//time_t currentTime2 = time(NULL);   // get time now
+	//tm now2;
+	//localtime_s(&now2, &currentTime2);
+	//double  diff = (-1) * (double)difftime(currentTime, mktime(&now2));
+
+	//if (diff > 0.0000001)
+	//{
+	//	currentTime = currentTime2;
+	//	localtime_s(&now, &currentTime);
+	//	for (auto object : objects) {
+	//		object->makeAnimation();
+	//	}
+	//}
 
 	// check to add monster
 	// based map settings
@@ -80,32 +79,27 @@ void GamePlay::run()
 
 void GamePlay::draw(HWND hwnd, HDC hdc)
 {
+	timer++;
 	map.draw(hwnd, hdc);
 	mario.draw(hwnd,hdc);
 	//for () 
-	time_t currentTime2 = time(NULL);   // get time now
-	tm now2;
-	localtime_s(&now2, &currentTime2);
-	double  diff = (-1) * (double)difftime(currentTime, mktime(&now2));
-
-	if (diff >= 0.001)
+	if (timer >= 2)
 	{
 		for (auto object : objects) {
+			object->draw(hwnd, hdc);
 			object->makeAnimation();
-			//object->draw(hwnd, hdc);
 		}
-		currentTime = currentTime2;
-		localtime_s(&now, &currentTime);
+		timer = 0;
 	}
-
-
-
-
-	for (auto object : objects) {
-		object->draw(hwnd, hdc);
+	else
+	{
+		for (auto object : objects) {
+			object->draw(hwnd, hdc);
+		}
 	}
+		
 
-	//e1->draw(hwnd, hdc);
+
 	// for monster in object
 	
 	// monster.draw()
@@ -133,6 +127,10 @@ void GamePlay::moveMarioLeft()
 		else
 			mario.increseFormX(-1);
 	}
+
+	//for (auto object : objects) {
+	//	object->makeAnimation();
+	//}
 }
 
 void GamePlay::moveMarioRight()
@@ -160,6 +158,10 @@ void GamePlay::moveMarioRight()
 		else
 			mario.increseFormX(1);
 	}
+
+	//for (auto object : objects) {
+	//	object->makeAnimation();
+	//}
 }
 
 void GamePlay::moveMarioUp()
@@ -186,6 +188,7 @@ void GamePlay::keyUpMarioDown()
 		mario.setFormX(7);
 	else
 		mario.setFormX(6);
+
 }
 
 void GamePlay::keyUpMarioUp()

@@ -4,8 +4,8 @@
 //60x45
 #define DUCK_HEIGHT 60
 #define DUCK_WIDTH 45
-#define DUCK_AREA 300
-#define DUCK_SPEED 2
+#define DUCK_AREA 150
+#define DUCK_SPEED 2.5
 //pos x = 200
 //pos y = 406
 
@@ -114,7 +114,6 @@ public:
 
 				if (posX >= originalLocation + DUCK_AREA)
 				{
-					//EnemyDuck::moveLeft();
 					formX = 3;
 				}
 			}
@@ -129,22 +128,9 @@ public:
 
 				if (posX <= originalLocation)
 				{
-					//EnemyDuck::moveRight();
 					formX = 4;
 				}
 			}
-
-			
-			//if (posX <= originalLocation)
-			//{
-			//	EnemyDuck::moveRight();
-			//	formX = 4;
-			//}
-			//else if (posX >= originalLocation + DUCK_AREA)
-			//{
-			//	EnemyDuck::moveLeft();
-			//	formX = 3;
-			//}
 		}
 	}
 

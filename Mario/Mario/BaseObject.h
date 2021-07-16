@@ -1,11 +1,6 @@
 #pragma once
 #include <windows.h>
 #include <WindowsX.h>
-#include <ctime>
-#include <chrono>
-#include <time.h>
-
-
 
 class BaseObject
 {

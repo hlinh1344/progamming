@@ -18,8 +18,7 @@ private:
 	Map map;
 	Character mario;
 	int enemyID;
-	time_t currentTime;   // get time now
-	tm now;
+	int timer;
 public:
 	GamePlay();
 	~GamePlay();

@@ -66,7 +66,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	ShowWindow(hwnd, nCmdShow);
 	UpdateWindow(hwnd);
 	MSG msg = { };
-	float framePerSecond = 60.0;
+	float framePerSecond = 25.0;
 	float frameInterval = 1000.0 / framePerSecond;
 	while (globalRunning)
 	{
@@ -78,17 +78,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		}
 
 		gamePlay.run();
-
+		InvalidateRect(hwnd, NULL, FALSE);
 		Sleep(frameInterval);
 	}
 	return msg.wParam;
 }
 
-
 HBITMAP hBitmap = NULL;
 HINSTANCE hInst = NULL;
-
-
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -180,6 +177,7 @@ void OnPaint(HWND hwnd)
 	//e3.draw(hwnd, hdc);
 	//e4.draw(hwnd, hdc);
 	EndPaint(hwnd, &ps);
+
 }
 
 void OnClose(HWND hwnd)

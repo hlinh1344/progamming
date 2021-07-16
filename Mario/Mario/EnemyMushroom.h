@@ -9,7 +9,7 @@
 //44x43
 #define MUSHROOM_HEIGHT 43
 #define MUSHROOM_WIDTH 44
-#define MUSHROOM_AREA 300
+#define MUSHROOM_AREA 120
 #define MUSHROOM_SPEED 2
 class EnemyMushroom : public BaseObject
 {

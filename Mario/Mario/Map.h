@@ -12,7 +12,7 @@ class Map :public BaseObject
 {
 private:
 	HBITMAP hbmGround, hbmCloud;
-	int enemiesPosition[NUMBER_OF_MONSTERS] = { 1000, 1400, 1800, 2300, 2700, 3200 };
+	int enemiesPosition[NUMBER_OF_MONSTERS] = {1000, 1600, 2100, 2700, 3200 };
 public:
 	
 	Map();

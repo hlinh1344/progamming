@@ -4,8 +4,8 @@
 //42x42
 #define SPINY_HEIGHT 42
 #define SPINY_WIDTH 42
-#define SPINY_AREA 300
-#define SPINY_SPEED 2
+#define SPINY_AREA 100
+#define SPINY_SPEED 3
 //posx= 300
 //posY = 422
 class EnemySpinyBeetle : public BaseObject
@@ -87,14 +87,14 @@ public:
 
 	bool isGoLeft() override
 	{
-		if ((formX == 0) && (formX == 1))
+		if ((formX == 0) || (formX == 1))
 			return true;
 		return false;
 	}
 
 	bool isGoRight()override
 	{
-		if ((formX == 2) && (formX == 3))
+		if ((formX == 2) || (formX == 3))
 			return true;
 		return false;
 	}
@@ -105,48 +105,32 @@ public:
 		{
 			if (EnemySpinyBeetle::isGoRight())
 			{
-				if (formX == 2)
-					formX = 3;
-				else
+				if (formX >= 3)
 					formX = 2;
+				else
+					formX = formX + 1;
 
 				EnemySpinyBeetle::moveRight();
 
 				if (posX >= originalLocation + SPINY_AREA)
 				{
-					//EnemySpinyBeetle::moveLeft();
 					formX = 1;
 				}
 			}
 			else if (EnemySpinyBeetle::isGoLeft())
 			{
-				
-				if (formX == 0)
+				if (formX <= 0)
 					formX = 1;
 				else
-					formX = 0;
+					formX = formX - 1;
 
 				EnemySpinyBeetle::moveLeft();
 
 				if (posX <= originalLocation)
 				{
-					//EnemySpinyBeetle::moveRight();
 					formX = 2;
 				}
 			}
-
-			
-			//if (posX <= originalLocation)
-			//{
-			//	EnemySpinyBeetle::moveRight();
-			//	formX = 2;
-			//}
-			//else if (posX >= originalLocation + SPINY_AREA)
-			//{
-			//	EnemySpinyBeetle::moveLeft();
-			//	formX = 1;
-			//}
-
 		}
 	}
 };
