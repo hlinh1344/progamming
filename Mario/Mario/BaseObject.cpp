@@ -74,3 +74,8 @@ void BaseObject::MakeAnimation()
 {
 
 }
+
+bool BaseObject::GetDeath()
+{
+	return this->isDead;
+}

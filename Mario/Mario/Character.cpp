@@ -8,6 +8,8 @@ Character::Character()
 	formY = 0;
 	life = 3;
 	jumpHeight = 0;
+	isJump = false;
+	isFalling = false;
 	hBitmap = (HBITMAP)LoadImage(hInst, L"mario.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 }
@@ -54,14 +56,31 @@ void BaseObject::MoveRight()
 
 void Character::MoveUp()
 {
-	jumpHeight += 90;
-	if (jumpHeight > 90)
-		jumpHeight = 90;
+	
+	this->isJump = true;
+	if (jumpHeight >= 100)
+	{
+		this->isFalling = true;
+	}
+	else
+	{
+		jumpHeight += 70;
+		this->isFalling = false;
+	}
+		
+
+	
 }
 
 void Character::MoveDown()
 {
-	jumpHeight = 0;
+	if (jumpHeight > 0)
+	{
+		jumpHeight -= 10;
+		this->isFalling = true;
+	}
+	else
+		this->isFalling = true;
 }
 
 void Character::Draw(HWND hwnd, HDC hdc)
@@ -115,12 +134,24 @@ bool  BaseObject::IsGoRight()
 		return true;
 	return false;
 }
+void Character::SetJump(bool trueOrFalse)
+{
+	this->isJump = trueOrFalse;
+}
 
-bool Character::IsJump()
+bool Character::CheckJump()
 {
 	if (jumpHeight > 0)
-		return true;
-	return false;
+		this->isJump = true;
+	else
+		this->isJump = false;
+
+	return this->isJump;
+}
+
+bool Character::CheckFalling()
+{
+	return this->isJump;
 }
 
 void Character::SetJumpHeight(int a_jumpHeight)
@@ -135,12 +166,12 @@ void Character::IncreseJumpHeight(int a)
 
 int Character::GetJumpHeight()
 {
-	return jumpHeight;
+	return this->jumpHeight;
 }
 
-void BaseObject::SetDeath()
+void BaseObject::SetDeath(bool a_isDead)
 {
-	this->isDead = true;
+	this->isDead = a_isDead;
 	if ((formY > 0) && (formY < 3))
 	{
 		formY--;

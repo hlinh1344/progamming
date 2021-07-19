@@ -101,6 +101,12 @@ public:
 		return false;
 	}
 
+	void SetDeath(bool a_isDead) override
+	{
+		this->isDead = a_isDead;
+		formX = 4;
+	}
+
 	void MakeAnimation() override
 	{
 		if (!isDead)

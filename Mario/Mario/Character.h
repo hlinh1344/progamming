@@ -11,6 +11,9 @@ class Character : public BaseObject
 {
 private:
 	int jumpHeight;
+	bool isJump;
+	bool isFalling;
+
 public:
 	Character();
 	~Character();
@@ -22,7 +25,9 @@ public:
 	void Draw(HWND hwnd, HDC hdc) override;
 	void MoveUp();
 	void MoveDown();
-	bool IsJump();
+	void SetJump(bool trueOrFalse);
+	bool CheckJump();
+	bool CheckFalling();
 	void SetJumpHeight(int a_jumpHeight);
 	void IncreseJumpHeight(int a);
 	int GetJumpHeight();

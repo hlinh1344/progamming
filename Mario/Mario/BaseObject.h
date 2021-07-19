@@ -34,8 +34,8 @@ public:
 	virtual void MoveRight();
 	virtual bool IsGoLeft();
 	virtual bool IsGoRight();
-	virtual void SetDeath();
-
+	virtual void SetDeath(bool a_isDead);
+	bool GetDeath();
 	static int mapSlider;
 	static int clousDrifting;
 };

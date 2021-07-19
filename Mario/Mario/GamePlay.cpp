@@ -66,31 +66,58 @@ void GamePlay::Draw(HWND hwnd, HDC hdc)
 	//for () 
 	if (timer >= 2)
 	{
+		if (mario.CheckDeath())
+		{
+			mario.IncreseJumpHeight(10);
+		}
+		else if (mario.GetJumpHeight() > 0 && (mario.CheckFalling()))
+		{
+			mario.IncreseJumpHeight(-5);
+		}
+		else if (mario.CheckJump() && (mario.GetJumpHeight() < 100) && (!mario.CheckFalling()))
+		{
+			mario.MoveUp();
+		}
+
 		for (auto object : objects) {
-			object->Draw(hwnd, hdc);
-			object->MakeAnimation();
-
-			if (mario.CheckDeath())
+			if (object->GetDeath() == true)
 			{
-				mario.IncreseJumpHeight(10);
+				//object->SetDeath(false);
+				objects.erase(objects.begin());
 			}
-
-			if (mario.GetJumpHeight() > 0)
+			else
 			{
-				mario.IncreseJumpHeight(-1);
+				object->Draw(hwnd, hdc);
+				object->MakeAnimation();
 			}
 		}
 		timer = 0;
 	}
 	else
 	{
-		if (mario.GetJumpHeight() > 0)
+		if (mario.CheckDeath())
 		{
-			mario.IncreseJumpHeight(-1);
+			mario.IncreseJumpHeight(10);
+		}
+		else if (mario.GetJumpHeight() > 0 && (mario.CheckFalling()))
+		{
+			mario.IncreseJumpHeight(-5);
+		}
+		else if (mario.CheckJump() && (mario.GetJumpHeight() < 100) && (!mario.CheckFalling()))
+		{
+			mario.MoveUp();
 		}
 
 		for (auto object : objects) {
-			object->Draw(hwnd, hdc);
+			if (object->GetDeath() == true)
+			{
+				//object->SetDeath(false);
+				objects.erase(objects.begin());
+			}
+			else
+			{
+				object->Draw(hwnd, hdc);
+			}	
 		}
 	}
 		
@@ -238,21 +265,30 @@ void GamePlay::KeyUpMarioLeft()
 
 void GamePlay::Collision(Character &mario, BaseObject* monster)
 {
-	//horizontal
-	int marioLeftEdge = mario.GetPosX();
-	int marioRightEdge = mario.GetPosX() + CHARACTER_WIDTH;
-	int marioTopEdge = mario.GetPosY();
-	int marioBottomEdge = mario.GetPosY() + CHARACTER_HEIGHT;
-	int monsterLeftEdge = monster->GetPosX();
-	int monsterRightEdge = monster->GetPosX() + 45 ;
-	int monsterTopEdge = monster->GetPosY();
-	int monsterBottomEdge = monster->GetPosY() + 42 ;
+	//int marioLeftEdge = mario.GetPosX();
+	//int marioRightEdge = mario.GetPosX() + CHARACTER_WIDTH;
+	//int marioTopEdge = mario.GetPosY();
+	//int marioBottomEdge = mario.GetPosY() + CHARACTER_HEIGHT;
+	//int monsterLeftEdge = monster->GetPosX();
+	//int monsterRightEdge = monster->GetPosX() + 45 ;
+	//int monsterTopEdge = monster->GetPosY();
+	//int monsterBottomEdge = monster->GetPosY() + 45 ;
 
-	if ((marioRightEdge > monsterLeftEdge) && (marioRightEdge < monsterRightEdge))
+	if ((mario.GetPosX() + CHARACTER_WIDTH >= monster->GetPosX())
+		&& (mario.GetPosX() + CHARACTER_WIDTH <= monster->GetPosX() + 45)
+		&& (mario.GetPosY() + CHARACTER_HEIGHT <= monster->GetPosY() + 45)
+		&& (mario.GetPosY() + CHARACTER_HEIGHT >= monster->GetPosY())
+		&& (!mario.CheckJump()))
 	{
-		if (!mario.IsJump())
-		{
-			mario.SetDeath();
-		}
+		mario.SetDeath(true);
 	}
+	else if ((mario.GetPosX() + CHARACTER_WIDTH >= monster->GetPosX())
+		&& (mario.GetPosX() + CHARACTER_WIDTH <= monster->GetPosX() + 45)
+		&& (mario.GetPosY() + CHARACTER_HEIGHT <= monster->GetPosY() + 45)
+		&& (mario.GetPosY() + CHARACTER_HEIGHT >= monster->GetPosY())
+		&& (mario.CheckJump()))
+	{
+		monster->SetDeath(true);
+	}
+	
 }
