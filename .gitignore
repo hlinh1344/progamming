@@ -49,3 +49,4 @@ AlgorithmChart/x64/Debug/
 *.log
 *.vcxproj.user
 *.recipe
+*.enc

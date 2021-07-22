@@ -140,6 +140,8 @@ void OnKeyDown(HWND hwnd, WPARAM wParam)
 	case VK_DOWN:
 		gamePlay.MoveMarioDown();
 		break;
+	case VK_SPACE:
+		gamePlay.Attack();
 	}
 	InvalidateRect(hwnd, NULL, FALSE);
 }
@@ -161,6 +163,8 @@ void OnKeyUp(HWND hwnd, WPARAM wParam)
 	case VK_DOWN:
 		gamePlay.KeyUpMarioDown();
 		break;
+	case VK_SPACE:
+		gamePlay.KeyUpSpace();
 	}
 	InvalidateRect(hwnd, NULL, FALSE);
 }

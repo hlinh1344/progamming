@@ -13,7 +13,7 @@ private:
 	int jumpHeight;
 	bool isJump;
 	bool isFalling;
-
+	bool isSitting;
 public:
 	Character();
 	~Character();
@@ -28,6 +28,8 @@ public:
 	void SetJump(bool trueOrFalse);
 	bool CheckJump();
 	bool CheckFalling();
+	bool CheckSitting();
+	void SetSitting(bool a_isSitting);
 	void SetJumpHeight(int a_jumpHeight);
 	void IncreseJumpHeight(int a);
 	int GetJumpHeight();

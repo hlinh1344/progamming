@@ -5,11 +5,12 @@ Character::Character()
 	posX = 0;
 	posY = 372;
 	formX = 7;
-	formY = 0;
+	formY = 2;
 	life = 3;
 	jumpHeight = 0;
 	isJump = false;
 	isFalling = false;
+	isSitting = false;
 	hBitmap = (HBITMAP)LoadImage(hInst, L"mario.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 }
@@ -74,13 +75,14 @@ void Character::MoveUp()
 
 void Character::MoveDown()
 {
+
 	if (jumpHeight > 0)
 	{
 		jumpHeight -= 10;
-		this->isFalling = true;
+		this->isSitting = false;
 	}
 	else
-		this->isFalling = true;
+		this->isSitting = true;
 }
 
 void Character::Draw(HWND hwnd, HDC hdc)
@@ -147,6 +149,16 @@ bool Character::CheckJump()
 		this->isJump = false;
 
 	return this->isJump;
+}
+
+bool Character::CheckSitting()
+{
+	return this->isSitting;
+}
+
+void Character::SetSitting(bool a_isSitting)
+{
+	this->isSitting = a_isSitting;
 }
 
 bool Character::CheckFalling()

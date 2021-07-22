@@ -10,13 +10,14 @@
 #include "EnemyBuzzyBeetle.h"
 #include "EnemySpinyBeetle.h"
 #include "Map.h"
-
+#include "Bullet.h"
 class GamePlay
 {
 private:
 	std::vector <BaseObject*> objects; // static objects
+	std::vector <Bullet*> bullets;
 	Map map;
-	Character mario;
+	Character* mario = new Character();
 	int enemyID;
 	int timer;
 public:
@@ -30,10 +31,12 @@ public:
 	void MoveMarioRight();
 	void MoveMarioUp();
 	void MoveMarioDown();
+	void Attack();
 	void KeyUpMarioDown();
 	void KeyUpMarioUp();
 	void KeyUpMarioLeft();
 	void KeyUpMarioRight();
-	void Collision(Character &mario, BaseObject * monster);
+	void KeyUpSpace();
+	void Collision(Character* mario, BaseObject * monster);
 };
 

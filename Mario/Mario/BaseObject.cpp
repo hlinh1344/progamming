@@ -79,3 +79,13 @@ bool BaseObject::GetDeath()
 {
 	return this->isDead;
 }
+
+int BaseObject::GetWidth()
+{
+	return 0;
+}
+
+int BaseObject::GetHeight()
+{
+	return 0;
+}
