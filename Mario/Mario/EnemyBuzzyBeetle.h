@@ -1,18 +1,16 @@
 #pragma once
-#include "BaseObject.h"
+#include "Enemy.h"
 #include "Map.h"
-//45x44
+
 #define BUZZY_HEIGHT 45
 #define BUZZY_WIDTH 44
 #define BUZZY_AREA 100
-#define BUZZY_SPEED 5
-//posx = 100;
-//posY = 421;
+#define BUZZY_SPEED 14
 
-class EnemyBuzzyBeetle : public BaseObject
+class EnemyBuzzyBeetle : public Enemy
 {
 private:
-	int originalLocation;
+
 public:
 	EnemyBuzzyBeetle(int a_x)
 	{
@@ -22,7 +20,7 @@ public:
 		formY = 0;
 		originalLocation = a_x;
 		life = 1;
-		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e3.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+		hBitmap = (HBITMAP)LoadImage(hInst, L"BuzzyBeetle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 
 	}
@@ -35,13 +33,15 @@ public:
 		formY = 0;
 		originalLocation = 0;
 		life = 1;
-		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e3.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+		hBitmap = (HBITMAP)LoadImage(hInst, L"BuzzyBeetle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
+
 	~EnemyBuzzyBeetle()
 	{
 
 	}
+
 	void Draw(HWND hwnd, HDC hdc) override
 	{
 		hdcMem = CreateCompatibleDC(hdc);
@@ -94,7 +94,7 @@ public:
 		return false;
 	}
 
-	bool IsGoRight( )override
+	bool IsGoRight() override
 	{
 		if ((formX == 3) || (formX == 4))
 			return true;
@@ -106,19 +106,22 @@ public:
 		formX = 2;
 	}
 
-
-
-
 	void MakeAnimation() override
 	{
+		clock++;
 		if (!isDead)
 		{
 			if (EnemyBuzzyBeetle::IsGoRight())
 			{
-				if (formX >= 4)
-					formX = 3;
-				else
-					formX = formX + 1;
+				if (clock >= 3)
+				{
+					clock = 0;
+					if (formX >= 4)
+						formX = 3;
+					else
+						formX = formX + 1;
+				}
+
 
 				EnemyBuzzyBeetle::MoveRight();
 
@@ -130,10 +133,15 @@ public:
 
 			else if (EnemyBuzzyBeetle::IsGoLeft())
 			{
-				if (formX <= 0)
-					formX = 1;
-				else
-					formX = formX - 1;
+				if (clock >= 3)
+				{
+					clock = 0;
+					if (formX <= 0)
+						formX = 1;
+					else
+						formX = formX - 1;
+				}
+
 
 				EnemyBuzzyBeetle::MoveLeft();
 
@@ -143,6 +151,16 @@ public:
 				}
 			}
 		}
+	}
+
+	int GetWidth() override
+	{
+		return BUZZY_WIDTH;
+	}
+
+	int GetHeight() override
+	{
+		return BUZZY_HEIGHT;
 	}
 
 };

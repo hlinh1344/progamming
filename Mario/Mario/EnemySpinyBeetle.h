@@ -1,17 +1,16 @@
 #pragma once
 #include "Map.h"
-#include "BaseObject.h"
-//42x42
+#include "Enemy.h"
+
 #define SPINY_HEIGHT 42
 #define SPINY_WIDTH 42
-#define SPINY_AREA 100
-#define SPINY_SPEED 3
-//posx= 300
-//posY = 422
-class EnemySpinyBeetle : public BaseObject
+#define SPINY_AREA 90
+#define SPINY_SPEED 12
+
+class EnemySpinyBeetle : public Enemy
 {
 private:
-	int originalLocation;
+
 public:
 
 	EnemySpinyBeetle(int a_x)
@@ -22,7 +21,7 @@ public:
 		formY = 0;
 		originalLocation = a_x;
 		life = 1;
-		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e4.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+		hBitmap = (HBITMAP)LoadImage(hInst, L"SpinyBeetle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 
 	}
@@ -35,7 +34,7 @@ public:
 		formY = 0;
 		originalLocation = 0;
 		life = 1;
-		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e4.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+		hBitmap = (HBITMAP)LoadImage(hInst, L"SpinyBeetle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
 	~EnemySpinyBeetle()
@@ -109,14 +108,20 @@ public:
 
 	void MakeAnimation() override
 	{
+		clock++;
 		if (!isDead)
 		{
 			if (EnemySpinyBeetle::IsGoRight())
 			{
-				if (formX >= 3)
-					formX = 2;
-				else
-					formX = formX + 1;
+				if (clock >= 3)
+				{
+					clock = 0;
+					if (formX >= 3)
+						formX = 2;
+					else
+						formX = formX + 1;
+				}
+
 
 				EnemySpinyBeetle::MoveRight();
 
@@ -127,10 +132,15 @@ public:
 			}
 			else if (EnemySpinyBeetle::IsGoLeft())
 			{
-				if (formX <= 0)
-					formX = 1;
-				else
-					formX = formX - 1;
+				if (clock >= 3)
+				{
+					clock = 0;
+					if (formX <= 0)
+						formX = 1;
+					else
+						formX = formX - 1;
+				}
+
 
 				EnemySpinyBeetle::MoveLeft();
 
@@ -140,5 +150,16 @@ public:
 				}
 			}
 		}
+	}
+
+
+	int GetWidth() override
+	{
+		return SPINY_WIDTH;
+	}
+
+	int GetHeight() override
+	{
+		return SPINY_HEIGHT;
 	}
 };

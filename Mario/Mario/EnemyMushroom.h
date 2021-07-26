@@ -3,18 +3,18 @@
 #include <chrono>
 #include <time.h>
 #include <iomanip>
-#include "BaseObject.h"
+
+#include "Enemy.h"
 #include "Map.h"
 
-//44x43
+
 #define MUSHROOM_HEIGHT 43
 #define MUSHROOM_WIDTH 44
-#define MUSHROOM_AREA 120
-#define MUSHROOM_SPEED 2
-class EnemyMushroom : public BaseObject
+#define MUSHROOM_AREA 100
+#define MUSHROOM_SPEED 10
+class EnemyMushroom : public Enemy
 {
 private:
-	int originalLocation;
 	bool isGoToRight;
 public:
 
@@ -27,7 +27,7 @@ public:
 		originalLocation = a_x;
 		life = 1;
 		isGoToRight = true;
-		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e1.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+		hBitmap = (HBITMAP)LoadImage(hInst, L"Mushroom.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
 
@@ -40,7 +40,7 @@ public:
 		originalLocation = 0;
 		life = 1;
 		isGoToRight = true;
-		hBitmap = (HBITMAP)LoadImage(hInst, L"mario_e1.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+		hBitmap = (HBITMAP)LoadImage(hInst, L"Mushroom.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
 	~EnemyMushroom()
@@ -48,42 +48,42 @@ public:
 
 	}
 
-	void Draw(HWND hwnd, HDC hdc) override 
+	void Draw(HWND hwnd, HDC hdc) override
 	{
 		{
 			hdcMem = CreateCompatibleDC(hdc);
 
-				oldBitmap = SelectObject(hdcMem, hbmMask);
-				GetObject(hbmMask, sizeof(bitmap), &bitmap);
-				BitBlt
-				(
-					hdc,
-					posX - BaseObject::mapSlider,
-					posY,
-					MUSHROOM_WIDTH,
-					MUSHROOM_HEIGHT,
-					hdcMem,
-					MUSHROOM_WIDTH * formX,
-					MUSHROOM_HEIGHT * formY,
-					SRCAND
-				);
-				oldBitmap = SelectObject(hdcMem, hBitmap);
-				GetObject(hBitmap, sizeof(bitmap), &bitmap);
-				BitBlt
-				(
-					hdc,
-					posX - BaseObject::mapSlider,
-					posY,
-					MUSHROOM_WIDTH,
-					MUSHROOM_HEIGHT,
-					hdcMem,
-					MUSHROOM_WIDTH * formX,
-					MUSHROOM_HEIGHT * formY,
-					SRCPAINT
-				);
+			oldBitmap = SelectObject(hdcMem, hbmMask);
+			GetObject(hbmMask, sizeof(bitmap), &bitmap);
+			BitBlt
+			(
+				hdc,
+				posX - BaseObject::mapSlider,
+				posY,
+				MUSHROOM_WIDTH,
+				MUSHROOM_HEIGHT,
+				hdcMem,
+				MUSHROOM_WIDTH * formX,
+				MUSHROOM_HEIGHT * formY,
+				SRCAND
+			);
+			oldBitmap = SelectObject(hdcMem, hBitmap);
+			GetObject(hBitmap, sizeof(bitmap), &bitmap);
+			BitBlt
+			(
+				hdc,
+				posX - BaseObject::mapSlider,
+				posY,
+				MUSHROOM_WIDTH,
+				MUSHROOM_HEIGHT,
+				hdcMem,
+				MUSHROOM_WIDTH * formX,
+				MUSHROOM_HEIGHT * formY,
+				SRCPAINT
+			);
 			SelectObject(hdcMem, oldBitmap);
 			DeleteDC(hdcMem);
-		}		
+		}
 	}
 
 	void MoveLeft() override
@@ -118,14 +118,20 @@ public:
 
 	void MakeAnimation() override
 	{
+		clock++;
 		if (!isDead)
 		{
 			if (isGoToRight)
 			{
-				if (formX == 0)
-					formX = 1;
-				else
-					formX = 0;
+				if (clock >= 10)
+				{
+					clock = 0;
+					if (formX == 0)
+						formX = 1;
+					else
+						formX = 0;
+				}
+
 
 				EnemyMushroom::MoveRight();
 
@@ -136,10 +142,15 @@ public:
 			}
 			else if (!isGoToRight)
 			{
-				if (formX == 0)
-					formX = 1;
-				else
-					formX = 0;
+				if (clock >= 10)
+				{
+					clock = 0;
+					if (formX == 0)
+						formX = 1;
+					else
+						formX = 0;
+				}
+
 
 				EnemyMushroom::MoveLeft();
 
@@ -152,4 +163,13 @@ public:
 	}
 
 
+	int GetWidth() override
+	{
+		return MUSHROOM_WIDTH;
+	}
+
+	int GetHeight() override
+	{
+		return MUSHROOM_HEIGHT;
+	}
 };

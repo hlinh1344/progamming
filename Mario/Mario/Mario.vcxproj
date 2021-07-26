@@ -140,31 +140,45 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseObject.cpp" />
-    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GamePlay.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="LiveObject.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="Source.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="cloud.bmp" />
-    <Image Include="mario.bmp" />
-    <Image Include="mario_e1.bmp" />
-    <Image Include="mario_e2.bmp" />
-    <Image Include="mario_e3.bmp" />
-    <Image Include="mario_e4.bmp" />
-    <Image Include="mario_map.bmp" />
+    <ClCompile Include="Point2D.cpp" />
+    <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h" />
-    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BlueSwordItem.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyBird.h" />
     <ClInclude Include="EnemyBuzzyBeetle.h" />
+    <ClInclude Include="EnemyDarkDragon.h" />
+    <ClInclude Include="EnemyDarkGirl.h" />
+    <ClInclude Include="EnemyDarkRaven.h" />
+    <ClInclude Include="EnemyMonsterGirl.h" />
     <ClInclude Include="EnemyMushroom.h" />
-    <ClInclude Include="EnemyDuck.h" />
     <ClInclude Include="EnemySpinyBeetle.h" />
+    <ClInclude Include="EnemyWhiteGhost.h" />
+    <ClInclude Include="FlameItem.h" />
     <ClInclude Include="GamePlay.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="KunaiItem.h" />
+    <ClInclude Include="LiveObject.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Point2D.h" />
+    <ClInclude Include="ShurikenItem.h" />
+    <ClInclude Include="ThunderDragonItem.h" />
+    <ClInclude Include="Weapon.h" />
+    <ClInclude Include="WeaponBlueSword.h" />
+    <ClInclude Include="WeaponFire.h" />
+    <ClInclude Include="WeaponKunai.h" />
+    <ClInclude Include="WeaponShuriken.h" />
+    <ClInclude Include="WeaponThunder.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

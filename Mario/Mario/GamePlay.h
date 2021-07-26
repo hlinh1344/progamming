@@ -3,40 +3,73 @@
 #include <WindowsX.h>
 #include <vector>
 
-#include "Character.h"
 #include "BaseObject.h"
+#include "Map.h"
+#include "LiveObject.h"
+#include "Point2D.h"
+#include "Character.h"
+
+#include "Enemy.h"
 #include "EnemyMushroom.h"
-#include "EnemyDuck.h"
 #include "EnemyBuzzyBeetle.h"
 #include "EnemySpinyBeetle.h"
-#include "Map.h"
-#include "Bullet.h"
+#include "EnemyWhiteGhost.h"
+#include "EnemyBird.h"
+#include "EnemyDarkDragon.h"
+#include "EnemyMonsterGirl.h"
+#include "EnemyDarkGirl.h"
+#include "EnemyDarkRaven.h"
+
+#include "Weapon.h"
+#include "WeaponBlueSword.h"
+#include "WeaponKunai.h"
+#include "WeaponShuriken.h"
+#include "WeaponFire.h"
+#include "WeaponThunder.h"
+
+#include "Item.h"
+#include "BlueSwordItem.h"
+#include "ShurikenItem.h"
+#include "KunaiItem.h"
+#include "FlameItem.h"
+#include "ThunderDragonItem.h"
+
 class GamePlay
 {
 private:
-	std::vector <BaseObject*> objects; // static objects
-	std::vector <Bullet*> bullets;
+	std::vector <Enemy*> enemies;
+	std::vector <Weapon*> weapons;
+	std::vector <Item*> items;
+
 	Map map;
-	Character* mario = new Character();
+	Character* ninja;
 	int enemyID;
+	int itemID;
 	int timer;
+	int countID;
+	bool checkToAdd;
+	int clock;
+
 public:
 	GamePlay();
 	~GamePlay();
 
 	void Run();
 	void Draw(HWND hwnd, HDC hdc);
-	void MoveMonsters();
-	void MoveMarioLeft();
-	void MoveMarioRight();
-	void MoveMarioUp();
-	void MoveMarioDown();
 	void Attack();
-	void KeyUpMarioDown();
-	void KeyUpMarioUp();
-	void KeyUpMarioLeft();
-	void KeyUpMarioRight();
+	void MoveNinjaLeft();
+	void MoveNinjaRight();
+	void MoveNinjaUp();
+	void MoveNinjaDown();
+	void KeyUpDown();
+	void KeyUpUp();
+	void KeyUpLeft();
+	void KeyUpRight();
 	void KeyUpSpace();
-	void Collision(Character* mario, BaseObject * monster);
+	bool CheckCollision(BaseObject* object1, BaseObject* object2);
+	void RemoveObject(BaseObject* object);
+	void AddWeapon(int type, int dir_Moving, int stage);
+	void ResetClock();
+	bool CheckClock();
 };
 

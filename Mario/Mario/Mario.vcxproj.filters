@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
+    <ClCompile Include="WinMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
@@ -30,32 +30,21 @@
     <ClCompile Include="GamePlay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
+    <ClCompile Include="LiveObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="mario_map.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="mario_e1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="mario.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="mario_e2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="mario_e3.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="mario_e4.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="cloud.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Point2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -65,9 +54,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EnemyMushroom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyDuck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBuzzyBeetle.h">
@@ -82,7 +68,67 @@
     <ClInclude Include="GamePlay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
+    <ClInclude Include="LiveObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlueSwordItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KunaiItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FlameItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThunderDragonItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponBlueSword.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponShuriken.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponKunai.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponFire.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponThunder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBird.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyDarkDragon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyDarkGirl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyDarkRaven.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyMonsterGirl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyWhiteGhost.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Point2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
