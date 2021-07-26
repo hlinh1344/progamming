@@ -47,19 +47,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		NULL
 	);
 
-	HWND Name = CreateWindow
-	(
-		L"STATIC",
-		L" LeHoangLinh_1720136",
-		//WS_VISIBLE | WS_CHILD | WS_BORDER| SS_LEFT,
-		WS_VISIBLE | WS_CHILD | SS_LEFT,
-		0, 0, 157, 17,
-		hwnd,
-		NULL,
-		hInstance,
-		NULL
-	);
-
 	if (hwnd == NULL)
 	{
 		return 0;
