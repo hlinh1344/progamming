@@ -14,7 +14,7 @@ class BlueSwordItem : public Item
 private:
 
 public:
-
+	
 	BlueSwordItem()
 	{
 		posX = 1100;
@@ -100,7 +100,7 @@ public:
 
 	void SetDeath(bool a_isDead) override
 	{
-		this->isDead = a_isDead;
+		isDead = a_isDead;
 
 	}
 

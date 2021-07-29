@@ -102,7 +102,7 @@ public:
 
 	void SetDeath(bool a_isDead) override
 	{
-		this->isDead = a_isDead;
+		isDead = a_isDead;
 		formX = 4;
 	}
 
@@ -121,7 +121,7 @@ public:
 					else
 						formX = formX + 1;
 				}
-
+				
 
 				EnemySpinyBeetle::MoveRight();
 
@@ -140,7 +140,7 @@ public:
 					else
 						formX = formX - 1;
 				}
-
+				
 
 				EnemySpinyBeetle::MoveLeft();
 

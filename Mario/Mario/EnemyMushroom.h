@@ -112,7 +112,7 @@ public:
 
 	void SetDeath(bool a_isDead) override
 	{
-		this->isDead = a_isDead;
+		isDead = a_isDead;
 		formX = 2;
 	}
 
@@ -131,7 +131,7 @@ public:
 					else
 						formX = 0;
 				}
-
+			
 
 				EnemyMushroom::MoveRight();
 
@@ -150,7 +150,7 @@ public:
 					else
 						formX = 0;
 				}
-
+				
 
 				EnemyMushroom::MoveLeft();
 

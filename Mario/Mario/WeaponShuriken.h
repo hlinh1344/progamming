@@ -5,7 +5,7 @@
 #define SHURIKEN_HEIGHT 40
 #define SHURIKEN_WIDTH 45
 #define SHURIKEN_AREA 300
-#define SHURIKEN_SPEED 12
+#define SHURIKEN_SPEED 10
 
 //L = 0, R = 1;
 
@@ -126,7 +126,7 @@ public:
 
 	void SetDeath(bool a_isDead) override
 	{
-		this->isDead = a_isDead;
+		isDead = a_isDead;
 		//formX = 2;
 	}
 
@@ -135,13 +135,13 @@ public:
 		int distance = abs(originalLocation - posX);
 		if (distance >= SHURIKEN_AREA)
 		{
-			this->isDead = true;
+			isDead = true;
 		}
 	}
 
 	bool IsGoLeft() override
 	{
-		if ((formX >= 0) && (formX <= 2))
+		if ((formX >= 0) && (formX <=2))
 			return true;
 		return false;
 	}

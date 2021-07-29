@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="BlueSwordItem.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBird.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="KunaiItem.h" />
     <ClInclude Include="LiveObject.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Moon.h" />
     <ClInclude Include="Point2D.h" />
     <ClInclude Include="ShurikenItem.h" />
     <ClInclude Include="ThunderDragonItem.h" />

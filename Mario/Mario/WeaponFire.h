@@ -43,7 +43,7 @@ public:
 		originalLocation = 0;
 		life = 1;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Fire.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-		hbmMask = CreateBitmapMask(hBitmap, RGB(0, 128, 0));
+		hbmMask = CreateBitmapMask(hBitmap, RGB( 0, 128, 0));
 	}
 	~WeaponFire()
 	{
@@ -104,7 +104,7 @@ public:
 				else
 					formX++;
 			}
-			CheckDistance();
+		CheckDistance();
 		}
 	}
 
@@ -124,7 +124,7 @@ public:
 
 	void SetDeath(bool a_isDead) override
 	{
-		this->isDead = a_isDead;
+		isDead = a_isDead;
 
 	}
 
@@ -133,7 +133,7 @@ public:
 		int distance = abs(originalLocation - posX);
 		if (distance >= FIRE_AREA)
 		{
-			this->isDead = true;
+			isDead = true;
 		}
 	}
 

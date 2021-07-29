@@ -89,7 +89,7 @@ public:
 
 	bool IsGoLeft() override
 	{
-		if ((formX >= 0) && (formX <= 3))
+		if ((formX >= 0) && (formX <=3))
 			return true;
 		return false;
 	}
@@ -102,7 +102,7 @@ public:
 	}
 	void SetDeath(bool a_isDead) override
 	{
-		this->isDead = a_isDead;
+		isDead = a_isDead;
 	}
 
 	void MakeAnimation() override
@@ -120,7 +120,7 @@ public:
 					else
 						formX = formX + 1;
 				}
-
+				
 
 				EnemyDarkDragon::MoveRight();
 
@@ -140,7 +140,7 @@ public:
 					else
 						formX = formX - 1;
 				}
-
+			
 
 				EnemyDarkDragon::MoveLeft();
 

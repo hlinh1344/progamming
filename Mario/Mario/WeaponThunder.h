@@ -5,7 +5,7 @@
 #define THUNDER_HEIGHT 58
 #define THUNDER_WIDTH 78
 #define THUNDER_AREA 800
-#define THUNDER_SPEED 15
+#define THUNDER_SPEED 10
 
 //L = 0, R = 1;
 
@@ -142,7 +142,7 @@ public:
 
 	void SetDeath(bool a_isDead) override
 	{
-		this->isDead = a_isDead;
+		isDead = a_isDead;
 
 	}
 
@@ -151,7 +151,7 @@ public:
 		int distance = abs(originalLocation - posX);
 		if (distance >= THUNDER_AREA)
 		{
-			this->isDead = true;
+			isDead = true;
 		}
 	}
 

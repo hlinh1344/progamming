@@ -91,7 +91,7 @@ public:
 				else
 					formX--;
 			}
-
+			
 
 			if (posY >= 20 + DARK_GIRL_AREA)
 			{
@@ -111,7 +111,7 @@ public:
 				else
 					formX++;
 			}
-
+			
 
 			if (posY <= 20)
 			{
@@ -147,7 +147,7 @@ public:
 	}
 	void SetDeath(bool a_isDead) override
 	{
-		this->isDead = a_isDead;
+		isDead = a_isDead;
 	}
 
 

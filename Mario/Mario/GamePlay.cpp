@@ -8,7 +8,7 @@ GamePlay::GamePlay()
 	countID = 0;
 	checkToAdd = false;
 	ninja = new Character();
-
+	boss = new Boss();
 }
 
 GamePlay::~GamePlay()
@@ -41,7 +41,7 @@ void GamePlay::Run()
 		switch (enemyID)
 		{
 		case 1:
-			enemies.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH ));
+			enemies.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
 			break;
 		case 2:
 			enemies.push_back(new EnemyBird(BaseObject::mapSlider + MAP_WIDTH));
@@ -102,81 +102,9 @@ void GamePlay::Run()
 			break;
 		default:
 			break;
-
-			//case 1:
-			//	enemies.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 2:
-			//	enemies.push_back(new EnemyBuzzyBeetle(BaseObject::mapSlider + MAP_WIDTH));
-			//	enemies.push_back(new EnemyBird(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 3:
-			//	enemies.push_back(new EnemyWhiteGhost(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 4:
-			//	enemies.push_back(new EnemyDarkRaven(BaseObject::mapSlider + MAP_WIDTH));
-			//	enemies.push_back(new EnemySpinyBeetle(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 5:
-			//	enemies.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 6:
-			//	enemies.push_back(new EnemyDarkGirl(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 7:
-			//	enemies.push_back(new EnemyWhiteGhost(BaseObject::mapSlider + MAP_WIDTH));
-			//	enemies.push_back(new EnemySpinyBeetle(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 8:
-			//	enemies.push_back(new EnemyBuzzyBeetle(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 9:
-			//	enemies.push_back(new EnemyBird(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 10:
-			//	enemies.push_back(new EnemySpinyBeetle(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 11:
-			//	enemies.push_back(new EnemyDarkGirl(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 12:
-			//	enemies.push_back(new EnemyMonsterGirl(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 13:
-			//	enemies.push_back(new EnemyBird(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 14:
-			//	enemies.push_back(new EnemyDarkDragon(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 15:
-			//	enemies.push_back(new EnemyWhiteGhost(BaseObject::mapSlider + MAP_WIDTH));
-			//	enemies.push_back(new EnemyDarkRaven(BaseObject::mapSlider + MAP_WIDTH));
-			//case 16:
-			//	enemies.push_back(new EnemyBird(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 17:
-			//	enemies.push_back(new EnemyDarkRaven(BaseObject::mapSlider + MAP_WIDTH));
-			//	enemies.push_back(new EnemyDarkGirl(BaseObject::mapSlider + MAP_WIDTH));
-			//case 18:
-			//	enemies.push_back(new EnemyMonsterGirl(BaseObject::mapSlider + MAP_WIDTH));
-			//	enemies.push_back(new EnemyWhiteGhost(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 19:
-			//	enemies.push_back(new EnemyDarkRaven(BaseObject::mapSlider + MAP_WIDTH));
-			//	enemies.push_back(new EnemyDarkGirl(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//case 20:
-			//	enemies.push_back(new EnemyDarkDragon(BaseObject::mapSlider + MAP_WIDTH));
-			//	enemies.push_back(new EnemyBird(BaseObject::mapSlider + MAP_WIDTH));
-			//	enemies.push_back(new EnemyWhiteGhost(BaseObject::mapSlider + MAP_WIDTH));
-			//	enemies.push_back(new EnemyDarkRaven(BaseObject::mapSlider + MAP_WIDTH));
-			//	enemies.push_back(new EnemyMonsterGirl(BaseObject::mapSlider + MAP_WIDTH));
-			//	break;
-			//default:
-			//	break;
 		}
 	}
-
+	
 
 	map.checkToAddItem(BaseObject::mapSlider + MAP_WIDTH, itemID, checkToAdd);
 	if (checkToAdd == true)
@@ -218,7 +146,7 @@ void GamePlay::Run()
 		}
 	}
 
-
+	
 
 	//main character
 	ninja->MakeAnimation();
@@ -231,9 +159,9 @@ void GamePlay::Run()
 		{
 			if (CheckCollision(ninja, enemy))
 			{
-				enemy->SetDeath(true);
-				ninja->SetDeath(true);
-				ninja->IncreseLife(-1);
+					//enemy->SetDeath(true);
+					//ninja->SetDeath(true);
+					//ninja->IncreseLife(-1);
 			}
 		}
 
@@ -255,7 +183,7 @@ void GamePlay::Run()
 
 	}
 
-
+	
 	//weapon
 	for (auto weapon : weapons) {
 		for (auto enemy : enemies)
@@ -265,17 +193,13 @@ void GamePlay::Run()
 			{
 				enemy->SetDeath(true);
 				weapon->SetDeath(true);
+				//ninja->IncreaseScore();
+
 			}
 		}
 
-		//if (weapon->CheckDeath() == true)
-		//{
-		//	RemoveObject(weapon);
-		//	weapons.erase(weapons.begin());
-		//	
-		//}
 	}
-
+		
 	//enemy
 
 	for (auto enemy : enemies) {
@@ -284,7 +208,7 @@ void GamePlay::Run()
 		{
 			//RemoveObject(enemy);
 			enemies.erase(enemies.begin() + countID);
-
+			
 		}
 		countID++;
 	}
@@ -326,8 +250,9 @@ void GamePlay::Draw(HWND hwnd, HDC hdc)
 			enemy->Draw(hwnd, hdc);
 	}
 
-
+	boss->Draw(hwnd, hdc);
 	ninja->Draw(hwnd, hdc);
+
 }
 
 
@@ -357,7 +282,7 @@ void GamePlay::MoveNinjaLeft()
 			ninja->IncresePosX(PLAYER_SPEED);
 		}
 
-
+		
 	}
 }
 
@@ -380,7 +305,7 @@ void GamePlay::MoveNinjaRight()
 			ninja->Win();
 		}
 
-
+		
 	}
 }
 
@@ -435,7 +360,7 @@ void GamePlay::MoveNinjaDown()
 				ninja->SetFormY(2);
 			}
 		}
-
+		
 	}
 }
 
@@ -560,7 +485,7 @@ void  GamePlay::AddWeapon(int type, int dir_Moving, int stage)
 		{
 			if (stage == 0)
 			{
-				weapons.push_back(new WeaponBlueSword(ninja->GetPosX() - BLUE_SWORD_WIDTH + 40, dir_Moving, ninja->GetPosY() + 65));
+				weapons.push_back(new WeaponBlueSword(ninja->GetPosX() - BLUE_SWORD_WIDTH + 40 , dir_Moving, ninja->GetPosY()  + 65));
 			}
 			else if (stage == 1)
 			{
@@ -575,11 +500,11 @@ void  GamePlay::AddWeapon(int type, int dir_Moving, int stage)
 		{
 			if (stage == 0)
 			{
-				weapons.push_back(new WeaponBlueSword(ninja->GetPosX() + 80, dir_Moving, ninja->GetPosY() + 65));
+				weapons.push_back(new WeaponBlueSword(ninja->GetPosX()  + 80, dir_Moving, ninja->GetPosY()  + 65));
 			}
 			else if (stage == 1)
 			{
-				weapons.push_back(new WeaponBlueSword(ninja->GetPosX() + 85, dir_Moving, ninja->GetPosY() + 60));
+				weapons.push_back(new WeaponBlueSword(ninja->GetPosX()  + 85, dir_Moving, ninja->GetPosY() + 60));
 			}
 			else if (stage == 2)
 			{
@@ -593,7 +518,7 @@ void  GamePlay::AddWeapon(int type, int dir_Moving, int stage)
 		{
 			if (stage == 0)
 			{
-				weapons.push_back(new WeaponShuriken(ninja->GetPosX() - SHURIKEN_WIDTH, dir_Moving, ninja->GetPosY() + 65));
+				weapons.push_back(new WeaponShuriken(ninja->GetPosX() - SHURIKEN_WIDTH , dir_Moving, ninja->GetPosY() + 65));
 			}
 			else if (stage == 1)
 			{
@@ -687,7 +612,7 @@ void  GamePlay::AddWeapon(int type, int dir_Moving, int stage)
 		}
 	}
 	else if (type == 4)
-	{
+		{
 		if (dir_Moving == 0)
 		{
 			if (stage == 0)
@@ -775,12 +700,12 @@ void GamePlay::Attack()
 
 void GamePlay::ResetClock()
 {
-	this->clock = 0;
+	clock = 0;
 }
 
 bool GamePlay::CheckClock()
 {
-	if (this->clock >= 1)
+	if (clock >= 2)
 		return true;
 	return false;
 }

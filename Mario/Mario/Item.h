@@ -11,6 +11,6 @@ public:
 
     int GetTypeOfWeapn();
     bool CheckDeath();
-
+   
 };
 

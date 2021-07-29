@@ -11,6 +11,9 @@
 #define NOTIFICATION_HEIGHT 270
 #define HEAR_WIDTH 40
 #define HEAR_HEIGHT 30
+#define	NUMBER_WIDTH 25
+#define NUMBER_HEIGHT 29
+#define NUMBER_LENGTH 350
 
 class Character : public LiveObject
 {
@@ -20,8 +23,20 @@ private:
 	bool isSitting;
 	bool isAttack;
 	int typeOfWeapon;
+	int formOfUnits;
+	int formOfTens;
+	int formOfHundreds;
+	int formOfThousands;
+	int score;
+	//int numberOfZero;
+	bool isTens;
+	bool isHundreds;
+	bool isThousands;
+
 	HBITMAP hBitmap_GameOver, hbmMask_GameOver, hBitmap_YouWin, hbmMask_YouWin;
 	HBITMAP hBitmap_Hear, hbmMask_Hear;
+	HBITMAP hBitmap_Number, hbmMask_Number;
+
 	int countGameOver;
 	int formXOver;
 	bool isWin;
@@ -62,6 +77,8 @@ public:
 	void IncreseClock();
 	int GetClock();
 	void ResetClock();
+	//void IncreaseScore();
+	void IncreaseScore(int n);
 };
 
 

@@ -122,7 +122,7 @@ public:
 	}
 	void SetDeath(bool a_isDead) override
 	{
-		this->isDead = a_isDead;
+		isDead = a_isDead;
 	}
 
 
@@ -143,7 +143,7 @@ public:
 					else
 						formX = formX + 1;
 				}
-
+				
 
 				EnemyWhiteGhost::MoveRight();
 
@@ -163,7 +163,7 @@ public:
 					else
 						formX = formX - 1;
 				}
-
+				
 
 				EnemyWhiteGhost::MoveLeft();
 

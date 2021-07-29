@@ -6,7 +6,7 @@ LiveObject::LiveObject()
 }
 
 
-LiveObject::~LiveObject()
+LiveObject::~LiveObject() 
 {
 
 }
@@ -43,7 +43,7 @@ bool LiveObject::IsGoRight()
 
 bool LiveObject::CheckDeath()
 {
-	return this->isDead;
+	return isDead;
 }
 
 
