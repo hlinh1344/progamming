@@ -8,7 +8,7 @@ Character::Character()
 	formY = 0;
 	life = 3;
 	jumpHeight = 0;
-	typeOfWeapon = 4;
+	typeOfWeapon = -1;
 	isJumping = false;
 	isSitting = false;
 	isAttack = false;
@@ -18,7 +18,7 @@ Character::Character()
 	hBitmap_GameOver = (HBITMAP)LoadImage(hInst, L"GameOver.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hBitmap_YouWin = (HBITMAP)LoadImage(hInst, L"YouWin.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hBitmap = (HBITMAP)LoadImage(hInst, L"NinjaBoy.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-	hBitmap_Number = (HBITMAP)LoadImage(hInst, L"FirstNumber.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+	hBitmap_Number = (HBITMAP)LoadImage(hInst, L"Number.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 
 
 	hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -140,14 +140,6 @@ void Character::MoveUp()
 		jumpHeight += 60;
 	}
 
-	//-----------
-
-	Character::IncreaseScore(1);
-	
-
-
-
-
 }
 
 void Character::MoveDown()
@@ -167,7 +159,7 @@ void Character::Draw(HWND hwnd, HDC hdc)
 	BitBlt
 	(
 		hdc,
-		90,
+		0,
 		0,
 		HEAR_WIDTH * life,
 		HEAR_HEIGHT,
@@ -181,7 +173,7 @@ void Character::Draw(HWND hwnd, HDC hdc)
 	BitBlt
 	(
 		hdc,
-		90,
+		0,
 		0,
 		HEAR_WIDTH * life,
 		HEAR_HEIGHT,
@@ -378,7 +370,7 @@ void Character::Draw(HWND hwnd, HDC hdc)
 
 			if (countGameOver > 50)
 			{
-				countGameOver = countGameOver - 3;
+				countGameOver = countGameOver - 20;
 			}
 
 			if (formXOver >= 7)
@@ -474,7 +466,7 @@ void Character::Draw(HWND hwnd, HDC hdc)
 		//Game Over
 		if (countGameOver > 50)
 		{
-			countGameOver = countGameOver - 3;
+			countGameOver = countGameOver - 20;
 		}
 
 		if (formXOver >= 7)
@@ -579,6 +571,7 @@ int Character::GetJumpingHeight()
 void Character::SetDeath(bool a_isDead)
 {
 	isDead = a_isDead;
+	life--;
 }
 
 bool Character::CheckDeath()
