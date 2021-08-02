@@ -16,7 +16,7 @@ private:
 	bool isFalling;
 	int originalposY;
 public:
-	Moon( int a_posY)
+	Moon(int a_posY)
 	{
 		posX = 3500;
 		posY = a_posY;
@@ -61,11 +61,11 @@ public:
 	{
 
 	}
-	void Draw(HWND hwnd, HDC hdc) override
+	void Draw(HWND hwnd, HDC hdc, HDC hdcMem) override
 	{
 		if (!isDead)
 		{
-			hdcMem = CreateCompatibleDC(hdc);
+			//hdcMem = CreateCompatibleDC(hdc);
 			oldBitmap = SelectObject(hdcMem, hbmMask);
 			GetObject(hbmMask, sizeof(bitmap), &bitmap);
 			BitBlt
@@ -94,8 +94,8 @@ public:
 				MOON_HEIGHT * formY,
 				SRCPAINT
 			);
-			SelectObject(hdcMem, oldBitmap);
-			DeleteDC(hdcMem);
+			//SelectObject(hdcMem, oldBitmap);
+			//DeleteDC(hdcMem);
 			if (dir == 0)
 			{
 				MoveLeft();
@@ -106,7 +106,7 @@ public:
 				else
 					formX--;
 			}
-			
+
 			CheckDistance();
 
 			if (isFalling)
@@ -120,7 +120,7 @@ public:
 			else if (!isFalling)
 			{
 				posY = posY - 20;
-				if (posY <= originalposY -70)
+				if (posY <= originalposY - 70)
 				{
 					isFalling = true;
 				}

@@ -5,7 +5,6 @@ Map::Map()
 	posX = 0;
 	posY = 0;
 	hbmGround = (HBITMAP)LoadImage(hInst, L"Map2.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-	hbmMask = CreateBitmapMask(hbmCloud, RGB(255, 255, 255));
 }
 Map::~Map()
 {
@@ -23,10 +22,10 @@ int Map::getMapSlider()
 	return BaseObject::mapSlider;
 }
 
-void Map::Draw(HWND hwnd, HDC hdc)
+void Map::Draw(HWND hwnd, HDC hdc, HDC hdcMem)
 {
 
-	hdcMem = CreateCompatibleDC(hdc);
+	//hdcMem = CreateCompatibleDC(hdc);
 	oldBitmap = SelectObject(hdcMem, hbmGround);
 	GetObject(hbmGround, sizeof(bitmap), &bitmap);
 	BitBlt
@@ -41,8 +40,8 @@ void Map::Draw(HWND hwnd, HDC hdc)
 		0,
 		SRCCOPY
 	);
-	SelectObject(hdcMem, oldBitmap);
-	DeleteDC(hdcMem);
+	//SelectObject(hdcMem, oldBitmap);
+	//DeleteDC(hdcMem);
 }
 
 void Map::checkToAddEnemy(int a_posX, int& enemyID, bool& checkToAdd)

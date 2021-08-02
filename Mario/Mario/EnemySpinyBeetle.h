@@ -4,8 +4,8 @@
 
 #define SPINY_HEIGHT 42
 #define SPINY_WIDTH 42
-#define SPINY_AREA 90
-#define SPINY_SPEED 12
+#define SPINY_AREA 290
+#define SPINY_SPEED 2
 
 class EnemySpinyBeetle : public Enemy
 {
@@ -41,9 +41,9 @@ public:
 	{
 
 	}
-	void Draw(HWND hwnd, HDC hdc) override
+	void Draw(HWND hwnd, HDC hdc, HDC hdcMem) override
 	{
-		hdcMem = CreateCompatibleDC(hdc);
+		//hdcMem = CreateCompatibleDC(hdc);
 		oldBitmap = SelectObject(hdcMem, hbmMask);
 		GetObject(hbmMask, sizeof(bitmap), &bitmap);
 		BitBlt
@@ -72,8 +72,8 @@ public:
 			SPINY_HEIGHT * formY,
 			SRCPAINT
 		);
-		SelectObject(hdcMem, oldBitmap);
-		DeleteDC(hdcMem);
+		//SelectObject(hdcMem, oldBitmap);
+		//DeleteDC(hdcMem);
 	}
 
 	void MoveLeft() override
@@ -113,7 +113,7 @@ public:
 		{
 			if (EnemySpinyBeetle::IsGoRight())
 			{
-				if (clock >= 3)
+				if (clock >= 18)
 				{
 					clock = 0;
 					if (formX >= 3)
@@ -132,7 +132,7 @@ public:
 			}
 			else if (EnemySpinyBeetle::IsGoLeft())
 			{
-				if (clock >= 3)
+				if (clock >= 18)
 				{
 					clock = 0;
 					if (formX <= 0)

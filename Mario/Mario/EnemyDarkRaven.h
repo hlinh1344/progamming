@@ -5,7 +5,7 @@
 #define DARK_RAVEN_HEIGHT 55
 #define DARK_RAVEN_WIDTH 45
 #define DARK_RAVEN_AREA 1000
-#define DARK_RAVEN_SPEED 20
+#define DARK_RAVEN_SPEED 5
 
 
 class EnemyDarkRaven : public Enemy
@@ -47,9 +47,9 @@ public:
 
 	}
 
-	void Draw(HWND hwnd, HDC hdc) override
+	void Draw(HWND hwnd, HDC hdc, HDC hdcMem) override
 	{
-		hdcMem = CreateCompatibleDC(hdc);
+		//hdcMem = CreateCompatibleDC(hdc);
 		oldBitmap = SelectObject(hdcMem, hbmMask);
 		GetObject(hbmMask, sizeof(bitmap), &bitmap);
 		BitBlt
@@ -95,8 +95,8 @@ public:
 				isFalling = true;
 			}
 		}
-		SelectObject(hdcMem, oldBitmap);
-		DeleteDC(hdcMem);
+		//SelectObject(hdcMem, oldBitmap);
+		//DeleteDC(hdcMem);
 	}
 
 	void MoveLeft() override
@@ -137,7 +137,7 @@ public:
 		{
 			if (EnemyDarkRaven::IsGoRight())
 			{
-				if (clock >= 2)
+				if (clock >= 8)
 				{
 					clock = 0;
 					if (formX >= 11)
@@ -157,7 +157,7 @@ public:
 
 			else if (EnemyDarkRaven::IsGoLeft())
 			{
-				if (clock >= 2)
+				if (clock >= 8)
 				{
 					clock = 0;
 					if (formX <= 0)

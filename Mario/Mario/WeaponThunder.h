@@ -5,7 +5,7 @@
 #define THUNDER_HEIGHT 58
 #define THUNDER_WIDTH 78
 #define THUNDER_AREA 800
-#define THUNDER_SPEED 10
+#define THUNDER_SPEED 15
 
 //L = 0, R = 1;
 
@@ -54,11 +54,11 @@ public:
 	{
 
 	}
-	void Draw(HWND hwnd, HDC hdc) override
+	void Draw(HWND hwnd, HDC hdc, HDC hdcMem) override
 	{
 		if (!isDead)
 		{
-			hdcMem = CreateCompatibleDC(hdc);
+			//hdcMem = CreateCompatibleDC(hdc);
 			oldBitmap = SelectObject(hdcMem, hbmMask);
 			GetObject(hbmMask, sizeof(bitmap), &bitmap);
 			BitBlt
@@ -87,8 +87,8 @@ public:
 				THUNDER_HEIGHT * formY,
 				SRCPAINT
 			);
-			SelectObject(hdcMem, oldBitmap);
-			DeleteDC(hdcMem);
+			//SelectObject(hdcMem, oldBitmap);
+			//DeleteDC(hdcMem);
 			if (dir == 0)
 			{
 				MoveLeft();

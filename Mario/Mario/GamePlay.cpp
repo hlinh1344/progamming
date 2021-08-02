@@ -9,6 +9,9 @@ GamePlay::GamePlay()
 	checkToAdd = false;
 	ninja = new Character();
 	boss = new Boss(3600);
+	hdcMem = NULL;
+	inMenu = true;
+
 }
 
 GamePlay::~GamePlay()
@@ -55,10 +58,10 @@ void GamePlay::Run()
 			enemies.push_back(new EnemySpinyBeetle(BaseObject::mapSlider + MAP_WIDTH));
 			break;
 		case 6:
-			enemies.push_back(new EnemyBuzzyBeetle(BaseObject::mapSlider + MAP_WIDTH));
+			enemies.push_back(new EnemyDarkRaven(BaseObject::mapSlider + MAP_WIDTH));
 			break;
 		case 7:
-			enemies.push_back(new EnemyDarkRaven(BaseObject::mapSlider + MAP_WIDTH));
+			enemies.push_back(new EnemySlime(BaseObject::mapSlider + MAP_WIDTH));
 			break;
 		case 8:
 			enemies.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
@@ -76,16 +79,16 @@ void GamePlay::Run()
 			enemies.push_back(new EnemyDarkDragon(BaseObject::mapSlider + MAP_WIDTH));
 			break;
 		case 13:
-			enemies.push_back(new EnemyBird(BaseObject::mapSlider + MAP_WIDTH));
+			enemies.push_back(new EnemyWhiteGhost(BaseObject::mapSlider + MAP_WIDTH));
 			break;
 		case 14:
 			enemies.push_back(new EnemyBuzzyBeetle(BaseObject::mapSlider + MAP_WIDTH));
 			break;
 		case 15:
-			enemies.push_back(new EnemyWhiteGhost(BaseObject::mapSlider + MAP_WIDTH));
+			enemies.push_back(new EnemyMonsterGirl(BaseObject::mapSlider + MAP_WIDTH));
 			break;
 		case 16:
-			enemies.push_back(new EnemyMonsterGirl(BaseObject::mapSlider + MAP_WIDTH));
+			enemies.push_back(new EnemySlime(BaseObject::mapSlider + MAP_WIDTH));
 			break;
 		case 17:
 			enemies.push_back(new EnemyDarkRaven(BaseObject::mapSlider + MAP_WIDTH));
@@ -164,8 +167,8 @@ void GamePlay::Run()
 			if (CheckCollision(ninja, enemy))
 			{
 					//enemy->SetDeath(true);
-					ninja->SetDeath(true);
-					ninja->IncreseLife(-1);
+					//ninja->SetDeath(true);
+					//ninja->IncreseLife(-1);
 			}
 		}
 
@@ -193,8 +196,8 @@ void GamePlay::Run()
 			if (CheckCollision(ninja, moon) == true)
 			{
 				moon->SetDeath(true);
-				ninja->SetDeath(true);
-				ninja->IncreseLife(-1);
+				//ninja->SetDeath(true);
+				//ninja->IncreseLife(-1);
 			}
 		}
 	}
@@ -254,55 +257,66 @@ void GamePlay::Run()
 
 void GamePlay::Draw(HWND hwnd, HDC hdc)
 {
-	timer++;
-	map.Draw(hwnd, hdc);
 
-	for (auto item : items) {
-		if (item->CheckDeath() == true)
-		{
-			RemoveObject(item);
-		}
-		else
-			item->Draw(hwnd, hdc);
-	}
-
-	for (auto weapon : weapons)
+	hdcMem = CreateCompatibleDC(hdc);
+	
+	if (inMenu == false)
 	{
-		if (weapon->CheckDeath() == true)
-		{
-			weapons.erase(weapons.begin());
+		timer++;
+		map.Draw(hwnd, hdc, hdcMem);
+
+		for (auto item : items) {
+			if (item->CheckDeath() == true)
+			{
+				RemoveObject(item);
+			}
+			else
+				item->Draw(hwnd, hdc, hdcMem);
 		}
-		else
-			weapon->Draw(hwnd, hdc);
-	}
 
-	for (auto moon : moons)
-	{
-		if (moon->CheckDeath() == true)
+		for (auto weapon : weapons)
 		{
-			moons.erase(moons.begin());
+			if (weapon->CheckDeath() == true)
+			{
+				weapons.erase(weapons.begin());
+			}
+			else
+				weapon->Draw(hwnd, hdc, hdcMem);
 		}
-		else
-			moon->Draw(hwnd, hdc);
-	}
 
-
-	for (auto enemy : enemies)
-	{
-		if (enemy->CheckDeath() == true)
+		for (auto moon : moons)
 		{
-			RemoveObject(enemy);
+			if (moon->CheckDeath() == true)
+			{
+				moons.erase(moons.begin());
+			}
+			else
+				moon->Draw(hwnd, hdc, hdcMem);
 		}
-		else
-			enemy->Draw(hwnd, hdc);
+
+
+		for (auto enemy : enemies)
+		{
+			if (enemy->CheckDeath() == true)
+			{
+				RemoveObject(enemy);
+			}
+			else
+				enemy->Draw(hwnd, hdc, hdcMem);
+		}
+
+
+
+		boss->Draw(hwnd, hdc, hdcMem);
+
+		ninja->Draw(hwnd, hdc, hdcMem);
 	}
+	else if(inMenu == true)
+		//-----------------------
+		//Menu
+		menu.Draw(hwnd, hdc, hdcMem);
 
-
-
-	boss->Draw(hwnd, hdc);
-
-	ninja->Draw(hwnd, hdc);
-
+	DeleteDC(hdcMem);
 }
 
 
@@ -357,6 +371,8 @@ void GamePlay::MoveNinjaRight()
 
 		
 	}
+
+	DeleteDC(hdcMem);
 }
 
 void GamePlay::MoveNinjaUp()
@@ -755,7 +771,29 @@ void GamePlay::ResetClock()
 
 bool GamePlay::CheckClock()
 {
-	if (clock >= 2)
+	if (clock >= 6)
 		return true;
 	return false;
+}
+
+bool GamePlay::InMenu()
+{
+	return inMenu;
+}
+
+bool GamePlay::Exit()
+{
+	if (menu.CheckExit() == true)
+		return true;
+	return false;
+}
+
+void  GamePlay::ChangeMenuSelection()
+{
+	menu.ChangeSelection();
+}
+
+void GamePlay::Play()
+{
+	inMenu = false;
 }

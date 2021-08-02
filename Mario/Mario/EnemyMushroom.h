@@ -10,8 +10,8 @@
 
 #define MUSHROOM_HEIGHT 43
 #define MUSHROOM_WIDTH 44
-#define MUSHROOM_AREA 100
-#define MUSHROOM_SPEED 10
+#define MUSHROOM_AREA 200
+#define MUSHROOM_SPEED 1
 class EnemyMushroom : public Enemy
 {
 private:
@@ -48,10 +48,10 @@ public:
 
 	}
 
-	void Draw(HWND hwnd, HDC hdc) override
+	void Draw(HWND hwnd, HDC hdc, HDC hdcMem) override
 	{
 		{
-			hdcMem = CreateCompatibleDC(hdc);
+			//hdcMem = CreateCompatibleDC(hdc);
 
 			oldBitmap = SelectObject(hdcMem, hbmMask);
 			GetObject(hbmMask, sizeof(bitmap), &bitmap);
@@ -81,8 +81,8 @@ public:
 				MUSHROOM_HEIGHT * formY,
 				SRCPAINT
 			);
-			SelectObject(hdcMem, oldBitmap);
-			DeleteDC(hdcMem);
+			//SelectObject(hdcMem, oldBitmap);
+			//DeleteDC(hdcMem);
 		}
 	}
 

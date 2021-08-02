@@ -5,7 +5,7 @@
 #define DARK_DRAGON_HEIGHT 108
 #define DARK_DRAGON_WIDTH 120
 #define DARK_DRAGON_AREA 1200
-#define DARK_DRAGON_SPEED 17
+#define DARK_DRAGON_SPEED 5
 
 class EnemyDarkDragon : public Enemy
 {
@@ -42,9 +42,9 @@ public:
 
 	}
 
-	void Draw(HWND hwnd, HDC hdc) override
+	void Draw(HWND hwnd, HDC hdc, HDC hdcMem) override
 	{
-		hdcMem = CreateCompatibleDC(hdc);
+		//hdcMem = CreateCompatibleDC(hdc);
 		oldBitmap = SelectObject(hdcMem, hbmMask);
 		GetObject(hbmMask, sizeof(bitmap), &bitmap);
 		BitBlt
@@ -73,8 +73,8 @@ public:
 			DARK_DRAGON_HEIGHT * formY,
 			SRCPAINT
 		);
-		SelectObject(hdcMem, oldBitmap);
-		DeleteDC(hdcMem);
+		//SelectObject(hdcMem, oldBitmap);
+		//DeleteDC(hdcMem);
 	}
 
 	void MoveLeft() override
@@ -112,7 +112,7 @@ public:
 		{
 			if (EnemyDarkDragon::IsGoRight())
 			{
-				if (clock >= 4)
+				if (clock >= 10)
 				{
 					clock = 0;
 					if (formX >= 7)
@@ -132,7 +132,7 @@ public:
 
 			else if (EnemyDarkDragon::IsGoLeft())
 			{
-				if (clock >= 4)
+				if (clock >= 10)
 				{
 					clock = 0;
 					if (formX <= 0)
