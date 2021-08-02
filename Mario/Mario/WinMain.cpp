@@ -162,7 +162,7 @@ void OnKeyDown(HWND hwnd, WPARAM wParam)
 		case VK_DOWN:
 			gamePlay.ChangeMenuSelection();
 			break;
-		case VK_SPACE:
+		case VK_RETURN:
 			if (gamePlay.Exit() == true)
 			{
 				OnClose(hwnd);
