@@ -26,6 +26,7 @@ public:
 		{
 			formX = 7;
 		}
+
 		dir = a_dir;
 		formY = 0;
 		originalLocation = a_x;

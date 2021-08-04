@@ -59,6 +59,7 @@ private:
 	int clock;
 	HDC hdcMem;
 	bool inMenu;
+	bool bossStillLive;
 
 public:
 	GamePlay();
@@ -83,7 +84,8 @@ public:
 	bool CheckClock();
 	bool InMenu();
 	bool Exit();
-	void ChangeMenuSelection();
+	void UpSelection();
+	void DownSelection();
 	void Play();
 };
 

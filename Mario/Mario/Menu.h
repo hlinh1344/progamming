@@ -4,8 +4,8 @@
 
 #define MENU_HEIGHT 536
 #define MENU_WIDTH 1000
-#define SELECTION_HEIGHT 81
-#define SELECTION_WIDTH 352
+#define SELECTION_HEIGHT 148
+#define SELECTION_WIDTH 347
 
 
 
@@ -17,11 +17,12 @@ public:
 
 	Menu()
 	{
-		posX = 55;
-		posY = 45;
+		posX = 45;
+		posY = 150;
 		formX = 0;
+		formY = 0;
 		hBitmap_Menu = (HBITMAP)LoadImage(hInst, L"Menu.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-		//hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
+
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Selection.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
@@ -31,14 +32,33 @@ public:
 
 	}
 
-	void ChangeSelection()
+	void Up()
 	{
-		if (posY == 155)
+		if (posY == 150)
 		{
-			posY = 45;
+			posY = 150 + (2 * SELECTION_HEIGHT);
+			formY = 2;
 		}
 		else
-			posY = 155;
+		{
+			posY = posY - SELECTION_HEIGHT;
+			formY--;
+		}
+			
+	}
+
+	void Down()
+	{
+		if (posY == 150 + (2 * SELECTION_HEIGHT))
+		{
+			posY = 150;
+			formY = 0;
+		}
+		else
+		{
+			posY = posY + SELECTION_HEIGHT;
+			formY++;
+		}
 	}
 
 
@@ -72,7 +92,7 @@ public:
 			SELECTION_HEIGHT,
 			hdcMem,
 			SELECTION_WIDTH * formX,
-			0,
+			SELECTION_HEIGHT * formY,
 			SRCAND
 		);
 		oldBitmap = SelectObject(hdcMem, hBitmap);
@@ -86,7 +106,7 @@ public:
 			SELECTION_HEIGHT,
 			hdcMem,
 			SELECTION_WIDTH * formX,
-			0,
+			SELECTION_HEIGHT * formY,
 			SRCPAINT
 		);
 		if (formX >= 3)

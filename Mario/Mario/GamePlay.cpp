@@ -11,7 +11,7 @@ GamePlay::GamePlay()
 	boss = new Boss(3600);
 	hdcMem = NULL;
 	inMenu = true;
-
+	bossStillLive = true;
 }
 
 GamePlay::~GamePlay()
@@ -148,10 +148,14 @@ void GamePlay::Run()
 		}
 	}
 
-	if (boss->CheckToAttack() == true)
+	if (bossStillLive == true)
 	{
-		moons.push_back(new Moon(boss->GetPosX() , boss->GetPosY() - 20));
+		if (boss->CheckToAttack() == true)
+		{
+			moons.push_back(new Moon(boss->GetPosX(), boss->GetPosY() - 20));
+		}
 	}
+	
 
 
 
@@ -233,11 +237,15 @@ void GamePlay::Run()
 		}
 
 		//boss
-		if(CheckCollision(weapon, boss))
+		if (bossStillLive == true)
 		{
-			boss->SetDeath(true);
-			ninja->IncreaseScore(2);
+			if (CheckCollision(weapon, boss))
+			{
+				boss->SetDeath(true);
+				ninja->IncreaseScore(2);
+			}
 		}
+		
 	}
 		
 	//enemy
@@ -255,11 +263,15 @@ void GamePlay::Run()
 	countID = 0;
 }
 
-void GamePlay::Draw(HWND hwnd, HDC hdc)
+void GamePlay::Draw(HWND hwnd, HDC hdc2)
 {
 
-	hdcMem = CreateCompatibleDC(hdc);
-	
+	hdcMem = CreateCompatibleDC(hdc2);
+	HDC hdc = CreateCompatibleDC(hdc2);
+	HBITMAP hBitmap = CreateCompatibleBitmap(hdc2, MAP_WIDTH, MAP_HEIGHT);
+	SelectObject(hdc, hBitmap);
+
+
 	if (inMenu == false)
 	{
 		timer++;
@@ -306,8 +318,14 @@ void GamePlay::Draw(HWND hwnd, HDC hdc)
 		}
 
 
-
-		boss->Draw(hwnd, hdc, hdcMem);
+		if (boss->CheckDeath() == true)
+		{
+			bossStillLive = false;
+			//RemoveObject(boss);
+		}
+		else
+			boss->Draw(hwnd, hdc, hdcMem);
+		
 
 		ninja->Draw(hwnd, hdc, hdcMem);
 	}
@@ -316,6 +334,10 @@ void GamePlay::Draw(HWND hwnd, HDC hdc)
 		//Menu
 		menu.Draw(hwnd, hdc, hdcMem);
 
+
+	BitBlt(hdc2, 0, 0, MAP_WIDTH, MAP_HEIGHT, hdc, 0, 0, SRCCOPY);
+	//BitBlt(hdc2, 0, 0, MAP_WIDTH, MAP_HEIGHT, hdc, 0, 0, SRCPAINT);
+	DeleteDC(hdc);
 	DeleteDC(hdcMem);
 }
 
@@ -788,9 +810,14 @@ bool GamePlay::Exit()
 	return false;
 }
 
-void  GamePlay::ChangeMenuSelection()
+void  GamePlay::UpSelection()
 {
-	menu.ChangeSelection();
+	menu.Up();
+}
+
+void  GamePlay::DownSelection()
+{
+	menu.Down();
 }
 
 void GamePlay::Play()

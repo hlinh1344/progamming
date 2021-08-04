@@ -54,9 +54,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		return 0;
 	}
 
-	//PlaySound(TEXT("vexento_lotus.wav"), NULL, SND_SYNC);
-	//PlaySound(L"vexento_lotus.wav", NULL, SND_FILENAME);
-	PlaySound(L"vexento_lotus.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+	//PlaySound(NULL, NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+	//PlaySound(L"SuperFighter.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+	PlaySound(L"PangLand.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+	//PlaySound(L"Camp.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+	//PlaySound(L"Aqua.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+	//PlaySound(L"Christmas.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+	
+
 	ShowWindow(hwnd, nCmdShow);
 	UpdateWindow(hwnd);
 	MSG msg = { };
@@ -157,20 +162,21 @@ void OnKeyDown(HWND hwnd, WPARAM wParam)
 			OnClose(hwnd);
 			break;
 		case VK_UP:
-			gamePlay.ChangeMenuSelection();
+			gamePlay.UpSelection();
 			break;
 		case VK_DOWN:
-			gamePlay.ChangeMenuSelection();
+			gamePlay.DownSelection();
 			break;
 		case VK_RETURN:
-			if (gamePlay.Exit() == true)
-			{
-				OnClose(hwnd);
-			}
-			else if (gamePlay.Exit() == false)
-			{
-				gamePlay.Play();
-			}
+			//if (gamePlay.Exit() == true)
+			//{
+			//	OnClose(hwnd);
+
+			//}
+			//else if (gamePlay.Exit() == false)
+			//{
+			//	gamePlay.Play();
+			//}
 			break;
 		default:
 			break;

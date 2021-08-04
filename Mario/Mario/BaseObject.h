@@ -16,6 +16,8 @@ protected:
 	//HDC hdcMem;
 	HGDIOBJ oldBitmap;
 	BITMAP bitmap;
+	int width;
+	int height;
 
 public:
 
