@@ -58,6 +58,7 @@ private:
 	bool checkToAdd;
 	int clock;
 	HDC hdcMem;
+	HBITMAP hBitmap;
 	bool inMenu;
 	bool bossStillLive;
 
@@ -87,5 +88,6 @@ public:
 	void UpSelection();
 	void DownSelection();
 	void Play();
+	int Select();
 };
 

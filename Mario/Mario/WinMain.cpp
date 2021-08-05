@@ -54,18 +54,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		return 0;
 	}
 
-	//PlaySound(NULL, NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
-	//PlaySound(L"SuperFighter.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
-	PlaySound(L"PangLand.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
-	//PlaySound(L"Camp.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
-	//PlaySound(L"Aqua.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
-	//PlaySound(L"Christmas.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
-	
 
 	ShowWindow(hwnd, nCmdShow);
 	UpdateWindow(hwnd);
 	MSG msg = { };
-	float framePerSecond = 80.0;
+	float framePerSecond = 120.0;
 	float frameInterval = 1000.0 / framePerSecond;
 	while (globalRunning)
 	{
@@ -168,22 +161,48 @@ void OnKeyDown(HWND hwnd, WPARAM wParam)
 			gamePlay.DownSelection();
 			break;
 		case VK_RETURN:
-			//if (gamePlay.Exit() == true)
-			//{
-			//	OnClose(hwnd);
-
-			//}
-			//else if (gamePlay.Exit() == false)
-			//{
-			//	gamePlay.Play();
-			//}
-			break;
+		{
+			int MenuSelection = gamePlay.Select();
+			switch (MenuSelection)
+			{
+			case -1:
+			{
+				globalRunning = 0;
+				DestroyWindow(hwnd);
+			}
+			case 1:
+				PlaySound(L"Camp.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+				break;
+			case 2:
+				PlaySound(L"SuperFighter.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+				break;
+			case 3:
+				PlaySound(L"Christmas.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+				break;
+			case 4:
+				PlaySound(L"PangLand.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+				break;
+			case 5:
+				PlaySound(L"Patrit.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+				break;
+			case 6:
+				PlaySound(L"Cake.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+				break;
+			case 7:
+				PlaySound(L"Aqua.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+				break;
+			case 99:
+				break;
+			default:
+				PlaySound(NULL, NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+				break;
+			}
+		}
+		break;
 		default:
 			break;
 		}
 	}
-
-
 }
 
 void OnKeyUp(HWND hwnd, WPARAM wParam)

@@ -266,12 +266,14 @@ void GamePlay::Run()
 void GamePlay::Draw(HWND hwnd, HDC hdc2)
 {
 
-	hdcMem = CreateCompatibleDC(hdc2);
+
+	
+
+
 	HDC hdc = CreateCompatibleDC(hdc2);
+	hdcMem = CreateCompatibleDC(hdc);
 	HBITMAP hBitmap = CreateCompatibleBitmap(hdc2, MAP_WIDTH, MAP_HEIGHT);
 	SelectObject(hdc, hBitmap);
-
-
 	if (inMenu == false)
 	{
 		timer++;
@@ -336,7 +338,7 @@ void GamePlay::Draw(HWND hwnd, HDC hdc2)
 
 
 	BitBlt(hdc2, 0, 0, MAP_WIDTH, MAP_HEIGHT, hdc, 0, 0, SRCCOPY);
-	//BitBlt(hdc2, 0, 0, MAP_WIDTH, MAP_HEIGHT, hdc, 0, 0, SRCPAINT);
+
 	DeleteDC(hdc);
 	DeleteDC(hdcMem);
 }
@@ -803,11 +805,10 @@ bool GamePlay::InMenu()
 	return inMenu;
 }
 
-bool GamePlay::Exit()
+int GamePlay::Select()
 {
-	if (menu.CheckExit() == true)
-		return true;
-	return false;
+	int select = menu.SelectOption(inMenu);
+	return select;
 }
 
 void  GamePlay::UpSelection()
