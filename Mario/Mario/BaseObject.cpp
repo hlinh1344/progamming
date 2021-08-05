@@ -16,7 +16,7 @@ BaseObject::~BaseObject()
 
 }
 
-void BaseObject::Draw(HWND hwnd, HDC hdc, HDC hdcMem)
+void BaseObject::Draw(HWND hwnd, HDC hdc)
 {
 
 }

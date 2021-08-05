@@ -48,11 +48,10 @@ public:
 
 	}
 
-	void Draw(HWND hwnd, HDC hdc, HDC hdcMem) override
+	void Draw(HWND hwnd, HDC hdc) override
 	{
 		{
-			//hdcMem = CreateCompatibleDC(hdc);
-
+			hdcMem = CreateCompatibleDC(hdc);
 			oldBitmap = SelectObject(hdcMem, hbmMask);
 			GetObject(hbmMask, sizeof(bitmap), &bitmap);
 			BitBlt
@@ -81,8 +80,8 @@ public:
 				MUSHROOM_HEIGHT * formY,
 				SRCPAINT
 			);
-			//SelectObject(hdcMem, oldBitmap);
-			//DeleteDC(hdcMem);
+			SelectObject(hdcMem, oldBitmap);
+			DeleteDC(hdcMem);
 		}
 	}
 

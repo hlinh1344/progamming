@@ -22,10 +22,9 @@ int Map::getMapSlider()
 	return BaseObject::mapSlider;
 }
 
-void Map::Draw(HWND hwnd, HDC hdc, HDC hdcMem)
+void Map::Draw(HWND hwnd, HDC hdc)
 {
-
-	//hdcMem = CreateCompatibleDC(hdc);
+	hdcMem = CreateCompatibleDC(hdc);
 	oldBitmap = SelectObject(hdcMem, hbmGround);
 	GetObject(hbmGround, sizeof(bitmap), &bitmap);
 	BitBlt
@@ -40,8 +39,8 @@ void Map::Draw(HWND hwnd, HDC hdc, HDC hdcMem)
 		0,
 		SRCCOPY
 	);
-	//SelectObject(hdcMem, oldBitmap);
-	//DeleteDC(hdcMem);
+	SelectObject(hdcMem, oldBitmap);
+	DeleteDC(hdcMem);
 }
 
 void Map::checkToAddEnemy(int a_posX, int& enemyID, bool& checkToAdd)

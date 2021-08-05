@@ -25,8 +25,8 @@
 
 #include "Weapon.h"
 #include "WeaponBlueSword.h"
-#include "WeaponKunai.h"
 #include "WeaponShuriken.h"
+#include "WeaponKunai.h"
 #include "WeaponFire.h"
 #include "WeaponThunder.h"
 #include "Moon.h"
@@ -57,7 +57,7 @@ private:
 	int countID;
 	bool checkToAdd;
 	int clock;
-	HDC hdcMem;
+	HDC a_hdc;
 	HBITMAP hBitmap;
 	bool inMenu;
 	bool bossStillLive;

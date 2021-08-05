@@ -13,7 +13,7 @@ protected:
 	bool isDead;
 	HBITMAP hBitmap, hbmMask;
 	HINSTANCE hInst;
-	//HDC hdcMem;
+	HDC hdcMem;
 	HGDIOBJ oldBitmap;
 	BITMAP bitmap;
 	int width;
@@ -30,7 +30,7 @@ public:
 	void SetPosY(int a_posY);
 	void IncresePosX(int a);
 	void IncresePosY(int a);
-	virtual void Draw(HWND hwnd, HDC hdc, HDC hdcMem);
+	virtual void Draw(HWND hwnd, HDC hdc);
 	HBITMAP CreateBitmapMask(HBITMAP hbmColour, COLORREF crTransparent);
 	virtual int GetWidth();
 	virtual int GetHeight();

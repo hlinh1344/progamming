@@ -150,10 +150,10 @@ void Character::MoveDown()
 	}
 }
 
-void Character::Draw(HWND hwnd, HDC hdc, HDC hdcMem)
+void Character::Draw(HWND hwnd, HDC hdc)
 {
 	//Show life
-	//hdcMem = CreateCompatibleDC(hdc);
+	hdcMem = CreateCompatibleDC(hdc);
 	oldBitmap = SelectObject(hdcMem, hbmMask_Hear);
 	GetObject(hbmMask_Hear, sizeof(bitmap), &bitmap);
 	BitBlt
@@ -511,8 +511,8 @@ void Character::Draw(HWND hwnd, HDC hdc, HDC hdcMem)
 		//SelectObject(hdcMem, oldBitmap);
 		//DeleteDC(hdcMem);
 	}
-	//SelectObject(hdcMem, oldBitmap);
-	//DeleteDC(hdcMem);
+	SelectObject(hdcMem, oldBitmap);
+	DeleteDC(hdcMem);
 }
 
 

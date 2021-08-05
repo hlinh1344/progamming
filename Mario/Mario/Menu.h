@@ -66,9 +66,9 @@ public:
 	}
 
 
-	void Draw(HWND hwnd, HDC hdc, HDC hdcMem) override
+	void Draw(HWND hwnd, HDC hdc) override
 	{
-		//hdcMem = CreateCompatibleDC(hdc);
+		hdcMem = CreateCompatibleDC(hdc);
 		oldBitmap = SelectObject(hdcMem, hBitmap_Menu);
 		GetObject(hBitmap_Menu, sizeof(bitmap), &bitmap);
 		BitBlt
@@ -117,14 +117,16 @@ public:
 			SELECTION_HEIGHT * formY,
 			SRCPAINT
 		);
+		SelectObject(hdcMem, oldBitmap);
+		DeleteDC(hdcMem);
+
 		if (formX >= 3)
 		{
 			formX = 0;
 		}
 		else
 			formX++;
-		//SelectObject(hdcMem, oldBitmap);
-		//DeleteDC(hdcMem);
+
 	}
 
 	int SelectOption(bool& inMenu)

@@ -9,7 +9,6 @@ GamePlay::GamePlay()
 	checkToAdd = false;
 	ninja = new Character();
 	boss = new Boss(3600);
-	hdcMem = NULL;
 	inMenu = true;
 	bossStillLive = true;
 }
@@ -263,21 +262,16 @@ void GamePlay::Run()
 	countID = 0;
 }
 
-void GamePlay::Draw(HWND hwnd, HDC hdc2)
+void GamePlay::Draw(HWND hwnd, HDC hdc)
 {
 
-
-	
-
-
-	HDC hdc = CreateCompatibleDC(hdc2);
-	hdcMem = CreateCompatibleDC(hdc);
-	HBITMAP hBitmap = CreateCompatibleBitmap(hdc2, MAP_WIDTH, MAP_HEIGHT);
-	SelectObject(hdc, hBitmap);
+	a_hdc = CreateCompatibleDC(hdc);
+	hBitmap = CreateCompatibleBitmap(hdc, MAP_WIDTH, MAP_HEIGHT);
+	SelectObject(a_hdc, hBitmap);
 	if (inMenu == false)
 	{
 		timer++;
-		map.Draw(hwnd, hdc, hdcMem);
+		map.Draw(hwnd, a_hdc);
 
 		for (auto item : items) {
 			if (item->CheckDeath() == true)
@@ -285,7 +279,7 @@ void GamePlay::Draw(HWND hwnd, HDC hdc2)
 				RemoveObject(item);
 			}
 			else
-				item->Draw(hwnd, hdc, hdcMem);
+				item->Draw(hwnd, a_hdc);
 		}
 
 		for (auto weapon : weapons)
@@ -295,7 +289,7 @@ void GamePlay::Draw(HWND hwnd, HDC hdc2)
 				weapons.erase(weapons.begin());
 			}
 			else
-				weapon->Draw(hwnd, hdc, hdcMem);
+				weapon->Draw(hwnd, a_hdc);
 		}
 
 		for (auto moon : moons)
@@ -305,7 +299,7 @@ void GamePlay::Draw(HWND hwnd, HDC hdc2)
 				moons.erase(moons.begin());
 			}
 			else
-				moon->Draw(hwnd, hdc, hdcMem);
+				moon->Draw(hwnd, a_hdc);
 		}
 
 
@@ -316,7 +310,7 @@ void GamePlay::Draw(HWND hwnd, HDC hdc2)
 				RemoveObject(enemy);
 			}
 			else
-				enemy->Draw(hwnd, hdc, hdcMem);
+				enemy->Draw(hwnd, a_hdc);
 		}
 
 
@@ -326,23 +320,21 @@ void GamePlay::Draw(HWND hwnd, HDC hdc2)
 			//RemoveObject(boss);
 		}
 		else
-			boss->Draw(hwnd, hdc, hdcMem);
+			boss->Draw(hwnd, a_hdc);
 		
 
-		ninja->Draw(hwnd, hdc, hdcMem);
+		ninja->Draw(hwnd, a_hdc);
 	}
 	else if(inMenu == true)
 		//-----------------------
 		//Menu
-		menu.Draw(hwnd, hdc, hdcMem);
+		menu.Draw(hwnd, a_hdc);
 
 
-	BitBlt(hdc2, 0, 0, MAP_WIDTH, MAP_HEIGHT, hdc, 0, 0, SRCCOPY);
+	BitBlt(hdc, 0, 0, MAP_WIDTH, MAP_HEIGHT, a_hdc, 0, 0, SRCCOPY);
 
-	DeleteDC(hdc);
-	DeleteDC(hdcMem);
+	DeleteDC(a_hdc);
 }
-
 
 void GamePlay::KeyUpSpace()
 {
@@ -395,8 +387,6 @@ void GamePlay::MoveNinjaRight()
 
 		
 	}
-
-	DeleteDC(hdcMem);
 }
 
 void GamePlay::MoveNinjaUp()

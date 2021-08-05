@@ -50,11 +50,11 @@ public:
 	{
 
 	}
-	void Draw(HWND hwnd, HDC hdc, HDC hdcMem) override
+	void Draw(HWND hwnd, HDC hdc) override
 	{
 		if (!isDead)
 		{
-			//hdcMem = CreateCompatibleDC(hdc);
+			hdcMem = CreateCompatibleDC(hdc);
 			oldBitmap = SelectObject(hdcMem, hbmMask);
 			GetObject(hbmMask, sizeof(bitmap), &bitmap);
 			BitBlt
@@ -83,8 +83,8 @@ public:
 				FIRE_HEIGHT * formY,
 				SRCPAINT
 			);
-			//SelectObject(hdcMem, oldBitmap);
-			//DeleteDC(hdcMem);
+			SelectObject(hdcMem, oldBitmap);
+			DeleteDC(hdcMem);
 			if (dir == 0)
 			{
 				MoveLeft();
