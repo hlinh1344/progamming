@@ -182,12 +182,11 @@ void Character::Draw(HWND hwnd, HDC hdc)
 		0,
 		SRCPAINT
 	);
-	//SelectObject(hdcMem, oldBitmap);
-	//DeleteDC(hdcMem);
+
 
 	//Show score
 	//Last number
-	//hdcMem = CreateCompatibleDC(hdc);
+
 	oldBitmap = SelectObject(hdcMem, hbmMask_Number);
 	GetObject(hbmMask_Number, sizeof(bitmap), &bitmap);
 	BitBlt
@@ -216,12 +215,9 @@ void Character::Draw(HWND hwnd, HDC hdc)
 		0,
 		SRCPAINT
 	);
-	//SelectObject(hdcMem, oldBitmap);
-	//DeleteDC(hdcMem);
 
 
 	//Units
-	//hdcMem = CreateCompatibleDC(hdc);
 	oldBitmap = SelectObject(hdcMem, hbmMask_Number);
 	GetObject(hbmMask_Number, sizeof(bitmap), &bitmap);
 	BitBlt
@@ -250,13 +246,11 @@ void Character::Draw(HWND hwnd, HDC hdc)
 		0,
 		SRCPAINT
 	);
-	//SelectObject(hdcMem, oldBitmap);
-	//DeleteDC(hdcMem);
+
 
 	//Tens
 	if (isTens == true)
 	{
-		//hdcMem = CreateCompatibleDC(hdc);
 		oldBitmap = SelectObject(hdcMem, hbmMask_Number);
 		GetObject(hbmMask_Number, sizeof(bitmap), &bitmap);
 		BitBlt
@@ -285,14 +279,11 @@ void Character::Draw(HWND hwnd, HDC hdc)
 			0,
 			SRCPAINT
 		);
-		//SelectObject(hdcMem, oldBitmap);
-		//DeleteDC(hdcMem);
 	}
 
 	//Hundreds 
 	if (isHundreds == true)
 	{
-		//hdcMem = CreateCompatibleDC(hdc);
 		oldBitmap = SelectObject(hdcMem, hbmMask_Number);
 		GetObject(hbmMask_Number, sizeof(bitmap), &bitmap);
 		BitBlt
@@ -321,15 +312,12 @@ void Character::Draw(HWND hwnd, HDC hdc)
 			0,
 			SRCPAINT
 		);
-		//SelectObject(hdcMem, oldBitmap);
-		//DeleteDC(hdcMem);
 	}
 
 	//Thousands
 
 	if (isThousands == true)
 	{
-		//hdcMem = CreateCompatibleDC(hdc);
 		oldBitmap = SelectObject(hdcMem, hbmMask_Number);
 		GetObject(hbmMask_Number, sizeof(bitmap), &bitmap);
 		BitBlt
@@ -358,8 +346,6 @@ void Character::Draw(HWND hwnd, HDC hdc)
 			0,
 			SRCPAINT
 		);
-		//SelectObject(hdcMem, oldBitmap);
-		//DeleteDC(hdcMem);
 	}
 
 	//Win game
@@ -383,7 +369,6 @@ void Character::Draw(HWND hwnd, HDC hdc)
 			}
 
 
-			//hdcMem = CreateCompatibleDC(hdc);
 			oldBitmap = SelectObject(hdcMem, hbmMask_YouWin);
 			GetObject(hbmMask_YouWin, sizeof(bitmap), &bitmap);
 			BitBlt
@@ -412,8 +397,6 @@ void Character::Draw(HWND hwnd, HDC hdc)
 				0,
 				SRCPAINT
 			);
-			//SelectObject(hdcMem, oldBitmap);
-			//DeleteDC(hdcMem);
 		}
 		else
 		{
@@ -427,7 +410,6 @@ void Character::Draw(HWND hwnd, HDC hdc)
 				formY = 0;
 			}
 
-			//hdcMem = CreateCompatibleDC(hdc);
 			oldBitmap = SelectObject(hdcMem, hbmMask);
 			GetObject(hbmMask, sizeof(bitmap), &bitmap);
 			BitBlt
@@ -456,8 +438,6 @@ void Character::Draw(HWND hwnd, HDC hdc)
 				CHARACTER_HEIGHT * formY,
 				SRCPAINT
 			);
-			//SelectObject(hdcMem, oldBitmap);
-			//DeleteDC(hdcMem);
 		}
 
 	}
@@ -479,7 +459,6 @@ void Character::Draw(HWND hwnd, HDC hdc)
 		}
 			
 
-		//hdcMem = CreateCompatibleDC(hdc);
 		oldBitmap = SelectObject(hdcMem, hbmMask_GameOver);
 		GetObject(hbmMask_GameOver, sizeof(bitmap), &bitmap);
 		BitBlt
@@ -508,8 +487,6 @@ void Character::Draw(HWND hwnd, HDC hdc)
 			0,
 			SRCPAINT
 		);
-		//SelectObject(hdcMem, oldBitmap);
-		//DeleteDC(hdcMem);
 	}
 	SelectObject(hdcMem, oldBitmap);
 	DeleteDC(hdcMem);
