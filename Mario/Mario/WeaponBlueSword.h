@@ -6,7 +6,7 @@
 #define BLUE_SWORD_HEIGHT 29
 #define BLUE_SWORD_WIDTH 151
 #define BLUE_SWORD_AREA 0
-#define BLUE_SWORD_SPEED 15
+#define BLUE_SWORD_SPEED 0
 
 //posx = 100;
 //posY = 421;
@@ -18,23 +18,29 @@ private:
 public:
 	WeaponBlueSword(int a_x, int a_dir, int	a_posY)
 	{
+		width = BLUE_SWORD_WIDTH;
+		height = BLUE_SWORD_HEIGHT;
+		xArea = BLUE_SWORD_AREA;
+		speed = BLUE_SWORD_SPEED;
 		posX = a_x;
 		posY = a_posY;
 		formX = a_dir;
 		dir = a_dir;
-		formY = 0;
-		xOriginal = a_x;
+		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"BlueSword.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
 	}
 
 	WeaponBlueSword()
 	{
+		width = BLUE_SWORD_WIDTH;
+		height = BLUE_SWORD_HEIGHT;
+		xArea = BLUE_SWORD_AREA;
+		speed = BLUE_SWORD_SPEED;
 		posX = 0;
 		posY = 421;
 		formX = 1;
-		formY = 0;
-		xOriginal = 0;
+		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"BlueSword.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
@@ -42,62 +48,8 @@ public:
 	{
 
 	}
-	void Draw(HWND hwnd, HDC hdc) override
-	{
-		if (!isDead)
-		{
-			hdcMem = CreateCompatibleDC(hdc);
-			oldBitmap = SelectObject(hdcMem, hbmMask);
-			GetObject(hbmMask, sizeof(bitmap), &bitmap);
-			BitBlt
-			(
-				hdc,
-				posX - BaseObject::mapSlider,
-				posY,
-				BLUE_SWORD_WIDTH,
-				BLUE_SWORD_HEIGHT,
-				hdcMem,
-				BLUE_SWORD_WIDTH * formX,
-				BLUE_SWORD_HEIGHT * formY,
-				SRCAND
-			);
-			oldBitmap = SelectObject(hdcMem, hBitmap);
-			GetObject(hBitmap, sizeof(bitmap), &bitmap);
-			BitBlt
-			(
-				hdc,
-				posX - BaseObject::mapSlider,
-				posY,
-				BLUE_SWORD_WIDTH,
-				BLUE_SWORD_HEIGHT,
-				hdcMem,
-				BLUE_SWORD_WIDTH * formX,
-				BLUE_SWORD_HEIGHT * formY,
-				SRCPAINT
-			);
-			SelectObject(hdcMem, oldBitmap);
-			DeleteDC(hdcMem);
-			if (dir == 0)
-			{
-				MoveLeft();
-			}
-			else if (dir == 1)
-			{
-				MoveRight();
-			}
-			CheckDistance();
-		}
-	}
 
-	void MoveLeft() override
-	{
-		posX = posX - BLUE_SWORD_SPEED;
-	}
 
-	void MoveRight() override
-	{
-		posX = posX + BLUE_SWORD_SPEED;
-	}
 
 	bool IsGoLeft() override
 	{
@@ -111,30 +63,6 @@ public:
 		if (formX == 1)
 			return true;
 		return false;
-	}
-
-	void SetDeath(bool a_isDead) override
-	{
-		isDead = a_isDead;
-	}
-
-	void CheckDistance() override
-	{
-		int distance = abs(xOriginal - posX);
-		if (distance >= BLUE_SWORD_AREA)
-		{
-			isDead = true;
-		}
-	}
-
-	int GetWidth() override
-	{
-		return BLUE_SWORD_WIDTH;
-	}
-
-	int GetHeight() override
-	{
-		return BLUE_SWORD_HEIGHT;
 	}
 
 };

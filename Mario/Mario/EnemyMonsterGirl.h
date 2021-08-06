@@ -21,9 +21,9 @@ public:
 		yArea = MONSTER_GIRL_FLY_AREA;
 		posX = a_x;
 		posY = 50;
-		formX = 4;
 		xOriginal = posX;
 		yOriginal = posY;
+		formX = 4;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"MonsterGirl.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
