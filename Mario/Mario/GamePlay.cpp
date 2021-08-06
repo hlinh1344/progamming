@@ -182,6 +182,7 @@ void GamePlay::Run()
 
 		for (auto item : items)
 		{
+			item->MakeAnimation();
 			if (CheckCollision(ninja, item))
 			{
 				ninja->SetTypeOfWeapon(item->GetTypeOfWeapn());
@@ -195,7 +196,7 @@ void GamePlay::Run()
 		//moon
 		for (auto moon : moons)
 		{
-
+			moon->MakeAnimation();
 			if (CheckCollision(ninja, moon) == true)
 			{
 				moon->SetDeath(true);
@@ -253,13 +254,14 @@ void GamePlay::Run()
 		enemy->MakeAnimation();
 		if (enemy->CheckDeath() == true)
 		{
-			//RemoveObject(enemy);
 			enemies.erase(enemies.begin() + countID);
-			
 		}
 		countID++;
 	}
 	countID = 0;
+
+	//item
+
 }
 
 void GamePlay::Draw(HWND hwnd, HDC hdc)

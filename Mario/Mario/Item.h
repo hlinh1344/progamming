@@ -1,16 +1,18 @@
 #pragma once
-#include "BaseObject.h"
-class Item : public BaseObject
+#include "LiveObject.h"
+#include "Map.h"
+class Item : public LiveObject
 {
 protected:
     int typeOfWeapn;
     bool isDead;
+    int originalLocation;
 public:
     Item();
     ~Item();
 
     int GetTypeOfWeapn();
     bool CheckDeath();
-   
+    void MakeAnimation() override;
 };
 

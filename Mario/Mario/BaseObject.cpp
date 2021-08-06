@@ -18,8 +18,40 @@ BaseObject::~BaseObject()
 
 void BaseObject::Draw(HWND hwnd, HDC hdc)
 {
+	hdcMem = CreateCompatibleDC(hdc);
+	oldBitmap = SelectObject(hdcMem, hbmMask);
+	GetObject(hbmMask, sizeof(bitmap), &bitmap);
+	BitBlt
+	(
+		hdc,
+		posX - BaseObject::mapSlider,
+		posY,
+		width,
+		height,
+		hdcMem,
+		width * formX,
+		height * formY,
+		SRCAND
+	);
+	oldBitmap = SelectObject(hdcMem, hBitmap);
+	GetObject(hBitmap, sizeof(bitmap), &bitmap);
+	BitBlt
+	(
+		hdc,
+		posX - BaseObject::mapSlider,
+		posY,
+		width,
+		height,
+		hdcMem,
+		width * formX,
+		height * formY,
+		SRCPAINT
+	);
 
+	SelectObject(hdcMem, oldBitmap);
+	DeleteDC(hdcMem);
 }
+
 
 void BaseObject::IncresePosX(int a)
 {
@@ -73,12 +105,12 @@ HBITMAP BaseObject::CreateBitmapMask(HBITMAP hbmColour, COLORREF crTransparent)
 
 int BaseObject::GetWidth()
 {
-	return 0;
+	return width;
 }
 
 int  BaseObject::GetHeight()
 {
-	return 0;
+	return height;
 }
 
 void BaseObject::SetDeath(bool a_isDead)
