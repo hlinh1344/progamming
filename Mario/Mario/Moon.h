@@ -26,7 +26,6 @@ public:
 		originalLocation = posX;
 		isFalling = true;
 		originalposY = a_posY;
-		life = 1;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Moon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
 	}
@@ -41,7 +40,6 @@ public:
 		originalLocation = posX;
 		isFalling = true;
 		originalposY = a_posY;
-		life = 1;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Moon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
 	}
@@ -52,7 +50,6 @@ public:
 		formX = 1;
 		formY = 0;
 		originalLocation = 0;
-		life = 1;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Moon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));

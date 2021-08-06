@@ -3,7 +3,7 @@
 
 Enemy::Enemy()
 {
-
+	formY = 0;
 }
 
 Enemy::~Enemy()

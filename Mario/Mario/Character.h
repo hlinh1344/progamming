@@ -18,6 +18,7 @@
 class Character : public LiveObject
 {
 private:
+	int life;
 	int jumpHeight;
 	bool isJumping;
 	bool isSitting;
@@ -28,7 +29,6 @@ private:
 	int formOfHundreds;
 	int formOfThousands;
 	int score;
-	//int numberOfZero;
 	bool isTens;
 	bool isHundreds;
 	bool isThousands;

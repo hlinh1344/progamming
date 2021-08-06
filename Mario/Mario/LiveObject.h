@@ -4,7 +4,6 @@ class LiveObject :
     public BaseObject
 {
 protected:
-    int life;
     int clock;
 public:
     LiveObject();

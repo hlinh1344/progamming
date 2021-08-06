@@ -19,7 +19,6 @@ public:
 		formX = 3;
 		formY = 0;
 		originalLocation = a_x;
-		life = 1;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkDragon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
 
@@ -32,7 +31,6 @@ public:
 		formX = 3;
 		formY = 0;
 		originalLocation = 0;
-		life = 1;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkDragon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
 	}

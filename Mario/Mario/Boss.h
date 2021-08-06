@@ -13,6 +13,7 @@ class Boss : public Enemy
 private:
 	bool isFalling;
 	int count;
+	int life;
 public:
 	Boss(int a_x)
 	{

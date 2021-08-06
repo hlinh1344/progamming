@@ -33,7 +33,6 @@ public:
 		originalLocation = a_x;
 		isFalling = true;
 		originalposY = a_posY;
-		life = 1;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Thunder.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(0, 128, 0));
 	}
@@ -45,7 +44,6 @@ public:
 		formX = 1;
 		formY = 0;
 		originalLocation = 0;
-		life = 1;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Thunder.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(0, 128, 0));

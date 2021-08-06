@@ -1,8 +1,4 @@
 #pragma once
-#include <ctime>
-#include <chrono>
-#include <time.h>
-#include <iomanip>
 
 #include "Enemy.h"
 #include "Map.h"
@@ -20,12 +16,12 @@ public:
 
 	EnemyMushroom(int a_x)
 	{
+		width = MUSHROOM_WIDTH;
+		height = MUSHROOM_HEIGHT;
 		posX = a_x;
 		posY = 422;
 		formX = 0;
-		formY = 0;
 		originalLocation = a_x;
-		life = 1;
 		isGoToRight = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Mushroom.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
@@ -33,12 +29,12 @@ public:
 
 	EnemyMushroom()
 	{
+		width = MUSHROOM_WIDTH;
+		height = MUSHROOM_HEIGHT;
 		posX = 0;
 		posY = 422;
 		formX = 0;
-		formY = 0;
 		originalLocation = 0;
-		life = 1;
 		isGoToRight = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Mushroom.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
