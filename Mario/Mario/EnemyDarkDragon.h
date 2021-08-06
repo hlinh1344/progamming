@@ -14,10 +14,12 @@ private:
 public:
 	EnemyDarkDragon(int a_x)
 	{
+		width = DARK_DRAGON_WIDTH;
+		height = DARK_DRAGON_HEIGHT;
+		speed = DARK_DRAGON_SPEED;
 		posX = a_x;
 		posY = 357;
 		formX = 3;
-		formY = 0;
 		originalLocation = a_x;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkDragon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -26,10 +28,12 @@ public:
 
 	EnemyDarkDragon()
 	{
+		width = DARK_DRAGON_WIDTH;
+		height = DARK_DRAGON_HEIGHT;
+		speed = DARK_DRAGON_SPEED;
 		posX = 0;
 		posY = 357;
 		formX = 3;
-		formY = 0;
 		originalLocation = 0;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkDragon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -38,51 +42,6 @@ public:
 	~EnemyDarkDragon()
 	{
 
-	}
-
-	void Draw(HWND hwnd, HDC hdc) override
-	{
-		hdcMem = CreateCompatibleDC(hdc);
-		oldBitmap = SelectObject(hdcMem, hbmMask);
-		GetObject(hbmMask, sizeof(bitmap), &bitmap);
-		BitBlt
-		(
-			hdc,
-			posX - BaseObject::mapSlider,
-			posY,
-			DARK_DRAGON_WIDTH,
-			DARK_DRAGON_HEIGHT,
-			hdcMem,
-			DARK_DRAGON_WIDTH * formX,
-			DARK_DRAGON_HEIGHT * formY,
-			SRCAND
-		);
-		oldBitmap = SelectObject(hdcMem, hBitmap);
-		GetObject(hBitmap, sizeof(bitmap), &bitmap);
-		BitBlt
-		(
-			hdc,
-			posX - BaseObject::mapSlider,
-			posY,
-			DARK_DRAGON_WIDTH,
-			DARK_DRAGON_HEIGHT,
-			hdcMem,
-			DARK_DRAGON_WIDTH * formX,
-			DARK_DRAGON_HEIGHT * formY,
-			SRCPAINT
-		);
-		SelectObject(hdcMem, oldBitmap);
-		DeleteDC(hdcMem);
-	}
-
-	void MoveLeft() override
-	{
-		posX = posX - DARK_DRAGON_SPEED;
-	}
-
-	void MoveRight() override
-	{
-		posX = posX + DARK_DRAGON_SPEED;
 	}
 
 	bool IsGoLeft() override
@@ -98,66 +57,50 @@ public:
 			return true;
 		return false;
 	}
-	void SetDeath(bool a_isDead) override
-	{
-		isDead = a_isDead;
-	}
 
 	void MakeAnimation() override
 	{
 		clock++;
-		if (!isDead)
+		if (EnemyDarkDragon::IsGoRight())
 		{
-			if (EnemyDarkDragon::IsGoRight())
+			if (clock >= 10)
 			{
-				if (clock >= 10)
-				{
-					clock = 0;
-					if (formX >= 7)
-						formX = 4;
-					else
-						formX = formX + 1;
-				}
-				
-
-				EnemyDarkDragon::MoveRight();
-
-				if (posX >= originalLocation + DARK_DRAGON_AREA)
-				{
-					formX = 3;
-				}
+				clock = 0;
+				if (formX >= 7)
+					formX = 4;
+				else
+					formX = formX + 1;
 			}
 
-			else if (EnemyDarkDragon::IsGoLeft())
+
+			EnemyDarkDragon::MoveRight();
+
+			if (posX >= originalLocation + DARK_DRAGON_AREA)
 			{
-				if (clock >= 10)
-				{
-					clock = 0;
-					if (formX <= 0)
-						formX = 3;
-					else
-						formX = formX - 1;
-				}
-			
+				formX = 3;
+			}
+		}
 
-				EnemyDarkDragon::MoveLeft();
+		else if (EnemyDarkDragon::IsGoLeft())
+		{
+			if (clock >= 10)
+			{
+				clock = 0;
+				if (formX <= 0)
+					formX = 3;
+				else
+					formX = formX - 1;
+			}
 
-				if (posX <= originalLocation)
-				{
-					formX = 4;
-				}
+
+			EnemyDarkDragon::MoveLeft();
+
+			if (posX <= originalLocation)
+			{
+				formX = 4;
 			}
 		}
 	}
 
-	int GetWidth() override
-	{
-		return DARK_DRAGON_WIDTH;
-	}
-
-	int GetHeight() override
-	{
-		return DARK_DRAGON_HEIGHT;
-	}
 
 };

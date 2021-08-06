@@ -1,5 +1,5 @@
 #pragma once
-#include "Map.h"
+
 #include "Enemy.h"
 
 #define SPINY_HEIGHT 42
@@ -15,10 +15,12 @@ public:
 
 	EnemySpinyBeetle(int a_x)
 	{
+		width = SPINY_WIDTH;
+		height = SPINY_HEIGHT;
+		speed = SPINY_SPEED;
 		posX = a_x;
 		posY = 422;
 		formX = 2;
-		formY = 0;
 		originalLocation = a_x;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"SpinyBeetle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
@@ -27,10 +29,12 @@ public:
 
 	EnemySpinyBeetle()
 	{
+		width = SPINY_WIDTH;
+		height = SPINY_HEIGHT;
+		speed = SPINY_SPEED;
 		posX = 0;
 		posY = 422;
 		formX = 2;
-		formY = 0;
 		originalLocation = 0;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"SpinyBeetle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
@@ -38,50 +42,6 @@ public:
 	~EnemySpinyBeetle()
 	{
 
-	}
-	void Draw(HWND hwnd, HDC hdc) override
-	{
-		hdcMem = CreateCompatibleDC(hdc);
-		oldBitmap = SelectObject(hdcMem, hbmMask);
-		GetObject(hbmMask, sizeof(bitmap), &bitmap);
-		BitBlt
-		(
-			hdc,
-			posX - BaseObject::mapSlider,
-			posY,
-			SPINY_WIDTH,
-			SPINY_HEIGHT,
-			hdcMem,
-			SPINY_WIDTH * formX,
-			SPINY_HEIGHT * formY,
-			SRCAND
-		);
-		oldBitmap = SelectObject(hdcMem, hBitmap);
-		GetObject(hBitmap, sizeof(bitmap), &bitmap);
-		BitBlt
-		(
-			hdc,
-			posX - BaseObject::mapSlider,
-			posY,
-			SPINY_WIDTH,
-			SPINY_HEIGHT,
-			hdcMem,
-			SPINY_WIDTH * formX,
-			SPINY_HEIGHT * formY,
-			SRCPAINT
-		);
-		SelectObject(hdcMem, oldBitmap);
-		DeleteDC(hdcMem);
-	}
-
-	void MoveLeft() override
-	{
-		posX = posX - SPINY_SPEED;
-	}
-
-	void MoveRight() override
-	{
-		posX = posX + SPINY_SPEED;
 	}
 
 	bool IsGoLeft() override
@@ -98,66 +58,48 @@ public:
 		return false;
 	}
 
-	void SetDeath(bool a_isDead) override
-	{
-		isDead = a_isDead;
-		formX = 4;
-	}
 
 	void MakeAnimation() override
 	{
 		clock++;
-		if (!isDead)
+		if (EnemySpinyBeetle::IsGoRight())
 		{
-			if (EnemySpinyBeetle::IsGoRight())
+			if (clock >= 18)
 			{
-				if (clock >= 18)
-				{
-					clock = 0;
-					if (formX >= 3)
-						formX = 2;
-					else
-						formX = formX + 1;
-				}
-				
-
-				EnemySpinyBeetle::MoveRight();
-
-				if (posX >= originalLocation + SPINY_AREA)
-				{
-					formX = 1;
-				}
-			}
-			else if (EnemySpinyBeetle::IsGoLeft())
-			{
-				if (clock >= 18)
-				{
-					clock = 0;
-					if (formX <= 0)
-						formX = 1;
-					else
-						formX = formX - 1;
-				}
-				
-
-				EnemySpinyBeetle::MoveLeft();
-
-				if (posX <= originalLocation)
-				{
+				clock = 0;
+				if (formX >= 3)
 					formX = 2;
-				}
+				else
+					formX = formX + 1;
+			}
+
+
+			EnemySpinyBeetle::MoveRight();
+
+			if (posX >= originalLocation + SPINY_AREA)
+			{
+				formX = 1;
+			}
+		}
+		else if (EnemySpinyBeetle::IsGoLeft())
+		{
+			if (clock >= 18)
+			{
+				clock = 0;
+				if (formX <= 0)
+					formX = 1;
+				else
+					formX = formX - 1;
+			}
+
+
+			EnemySpinyBeetle::MoveLeft();
+
+			if (posX <= originalLocation)
+			{
+				formX = 2;
 			}
 		}
 	}
 
-
-	int GetWidth() override
-	{
-		return SPINY_WIDTH;
-	}
-
-	int GetHeight() override
-	{
-		return SPINY_HEIGHT;
-	}
 };

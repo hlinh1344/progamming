@@ -1,6 +1,6 @@
 #pragma once
 #include "Enemy.h"
-#include "Map.h"
+
 
 #define BUZZY_HEIGHT 45
 #define BUZZY_WIDTH 44
@@ -14,10 +14,12 @@ private:
 public:
 	EnemyBuzzyBeetle(int a_x)
 	{
+		width = BUZZY_WIDTH;
+		height = BUZZY_HEIGHT;
+		speed = BUZZY_SPEED;
 		posX = a_x;
 		posY = 421;
 		formX = 3;
-		formY = 0;
 		originalLocation = a_x;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"BuzzyBeetle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
@@ -26,10 +28,12 @@ public:
 
 	EnemyBuzzyBeetle()
 	{
+		width = BUZZY_WIDTH;
+		height = BUZZY_HEIGHT;
+		speed = BUZZY_SPEED;
 		posX = 0;
 		posY = 421;
 		formX = 3;
-		formY = 0;
 		originalLocation = 0;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"BuzzyBeetle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
@@ -38,51 +42,6 @@ public:
 	~EnemyBuzzyBeetle()
 	{
 
-	}
-
-	void Draw(HWND hwnd, HDC hdc) override
-	{
-		hdcMem = CreateCompatibleDC(hdc);
-		oldBitmap = SelectObject(hdcMem, hbmMask);
-		GetObject(hbmMask, sizeof(bitmap), &bitmap);
-		BitBlt
-		(
-			hdc,
-			posX - BaseObject::mapSlider,
-			posY,
-			BUZZY_WIDTH,
-			BUZZY_HEIGHT,
-			hdcMem,
-			BUZZY_WIDTH * formX,
-			BUZZY_HEIGHT * formY,
-			SRCAND
-		);
-		oldBitmap = SelectObject(hdcMem, hBitmap);
-		GetObject(hBitmap, sizeof(bitmap), &bitmap);
-		BitBlt
-		(
-			hdc,
-			posX - BaseObject::mapSlider,
-			posY,
-			BUZZY_WIDTH,
-			BUZZY_HEIGHT,
-			hdcMem,
-			BUZZY_WIDTH * formX,
-			BUZZY_HEIGHT * formY,
-			SRCPAINT
-		);
-		SelectObject(hdcMem, oldBitmap);
-		DeleteDC(hdcMem);
-	}
-
-	void MoveLeft() override
-	{
-		posX = posX - BUZZY_SPEED;
-	}
-
-	void MoveRight() override
-	{
-		posX = posX + BUZZY_SPEED;
 	}
 
 	bool IsGoLeft() override
@@ -98,67 +57,49 @@ public:
 			return true;
 		return false;
 	}
-	void SetDeath(bool a_isDead) override
-	{
-		isDead = a_isDead;
-		formX = 2;
-	}
 
 	void MakeAnimation() override
 	{
 		clock++;
-		if (!isDead)
+		if (EnemyBuzzyBeetle::IsGoRight())
 		{
-			if (EnemyBuzzyBeetle::IsGoRight())
+			if (clock >= 20)
 			{
-				if (clock >= 20)
-				{
-					clock = 0;
-					if (formX >= 4)
-						formX = 3;
-					else
-						formX = formX + 1;
-				}
-				
-
-				EnemyBuzzyBeetle::MoveRight();
-
-				if (posX >= originalLocation + BUZZY_AREA)
-				{
-					formX = 1;
-				}
+				clock = 0;
+				if (formX >= 4)
+					formX = 3;
+				else
+					formX = formX + 1;
 			}
 
-			else if (EnemyBuzzyBeetle::IsGoLeft())
+
+			EnemyBuzzyBeetle::MoveRight();
+
+			if (posX >= originalLocation + BUZZY_AREA)
 			{
-				if (clock >= 20)
-				{
-					clock = 0;
-					if (formX <= 0)
-						formX = 1;
-					else
-						formX = formX - 1;
-				}
-				
-
-				EnemyBuzzyBeetle::MoveLeft();
-
-				if (posX <= originalLocation)
-				{
-					formX = 3;
-				}
+				formX = 1;
 			}
 		}
-	}
 
-	int GetWidth() override
-	{
-		return BUZZY_WIDTH;
-	}
+		else if (EnemyBuzzyBeetle::IsGoLeft())
+		{
+			if (clock >= 20)
+			{
+				clock = 0;
+				if (formX <= 0)
+					formX = 1;
+				else
+					formX = formX - 1;
+			}
 
-	int GetHeight() override
-	{
-		return BUZZY_HEIGHT;
+
+			EnemyBuzzyBeetle::MoveLeft();
+
+			if (posX <= originalLocation)
+			{
+				formX = 3;
+			}
+		}
 	}
 
 };

@@ -1,6 +1,5 @@
 #pragma once
 #include "Enemy.h"
-#include "Map.h"
 
 #define WHITE_GHOST_HEIGHT 100
 #define WHITE_GHOST_WIDTH 100
@@ -15,10 +14,12 @@ private:
 public:
 	EnemyWhiteGhost(int a_x)
 	{
+		width = WHITE_GHOST_WIDTH;
+		height = WHITE_GHOST_HEIGHT;
+		speed = WHITE_GHOST_SPEED;
 		posX = a_x;
 		posY = 200;
 		formX = 6;
-		formY = 0;
 		originalLocation = a_x;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"WhiteGhost.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -28,10 +29,12 @@ public:
 
 	EnemyWhiteGhost()
 	{
+		width = WHITE_GHOST_WIDTH;
+		height = WHITE_GHOST_HEIGHT;
+		speed = WHITE_GHOST_SPEED;
 		posX = 0;
 		posY = 370;
 		formX = 6;
-		formY = 0;
 		originalLocation = 0;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"WhiteGhost.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -43,67 +46,6 @@ public:
 
 	}
 
-	void Draw(HWND hwnd, HDC hdc) override
-	{
-		hdcMem = CreateCompatibleDC(hdc);
-		oldBitmap = SelectObject(hdcMem, hbmMask);
-		GetObject(hbmMask, sizeof(bitmap), &bitmap);
-		BitBlt
-		(
-			hdc,
-			posX - BaseObject::mapSlider,
-			posY,
-			WHITE_GHOST_WIDTH,
-			WHITE_GHOST_HEIGHT,
-			hdcMem,
-			WHITE_GHOST_WIDTH * formX,
-			WHITE_GHOST_HEIGHT * formY,
-			SRCAND
-		);
-		oldBitmap = SelectObject(hdcMem, hBitmap);
-		GetObject(hBitmap, sizeof(bitmap), &bitmap);
-		BitBlt
-		(
-			hdc,
-			posX - BaseObject::mapSlider,
-			posY,
-			WHITE_GHOST_WIDTH,
-			WHITE_GHOST_HEIGHT,
-			hdcMem,
-			WHITE_GHOST_WIDTH * formX,
-			WHITE_GHOST_HEIGHT * formY,
-			SRCPAINT
-		);
-
-		if (isFalling)
-		{
-			posY = posY + 7;
-			if (posY >= 400)
-			{
-				isFalling = false;
-			}
-		}
-		else if (!isFalling)
-		{
-			posY = posY - 7;
-			if (posY <= 100)
-			{
-				isFalling = true;
-			}
-		}
-		SelectObject(hdcMem, oldBitmap);
-		DeleteDC(hdcMem);
-	}
-
-	void MoveLeft() override
-	{
-		posX = posX - WHITE_GHOST_SPEED;
-	}
-
-	void MoveRight() override
-	{
-		posX = posX + WHITE_GHOST_SPEED;
-	}
 
 	bool IsGoLeft() override
 	{
@@ -118,69 +60,67 @@ public:
 			return true;
 		return false;
 	}
-	void SetDeath(bool a_isDead) override
-	{
-		isDead = a_isDead;
-	}
-
-
-
 
 	void MakeAnimation() override
 	{
 		clock++;
-		if (!isDead)
+		if (EnemyWhiteGhost::IsGoRight())
 		{
-			if (EnemyWhiteGhost::IsGoRight())
+			if (clock >= 10)
 			{
-				if (clock >= 10)
-				{
-					clock = 0;
-					if (formX >= 11)
-						formX = 6;
-					else
-						formX = formX + 1;
-				}
-				
-
-				EnemyWhiteGhost::MoveRight();
-
-				if (posX >= originalLocation + WHITE_GHOST_AREA)
-				{
-					formX = 5;
-				}
+				clock = 0;
+				if (formX >= 11)
+					formX = 6;
+				else
+					formX = formX + 1;
 			}
 
-			else if (EnemyWhiteGhost::IsGoLeft())
+
+			EnemyWhiteGhost::MoveRight();
+
+			if (posX >= originalLocation + WHITE_GHOST_AREA)
 			{
-				if (clock >= 10)
-				{
-					clock = 0;
-					if (formX <= 0)
-						formX = 5;
-					else
-						formX = formX - 1;
-				}
-				
-
-				EnemyWhiteGhost::MoveLeft();
-
-				if (posX <= originalLocation)
-				{
-					formX = 6;
-				}
+				formX = 5;
 			}
 		}
-	}
 
-	int GetWidth() override
-	{
-		return WHITE_GHOST_WIDTH;
-	}
+		else if (EnemyWhiteGhost::IsGoLeft())
+		{
+			if (clock >= 10)
+			{
+				clock = 0;
+				if (formX <= 0)
+					formX = 5;
+				else
+					formX = formX - 1;
+			}
 
-	int GetHeight() override
-	{
-		return WHITE_GHOST_HEIGHT;
+
+			EnemyWhiteGhost::MoveLeft();
+
+			if (posX <= originalLocation)
+			{
+				formX = 6;
+			}
+		}
+
+		//----
+		if (isFalling)
+		{
+			posY = posY +2;
+			if (posY >= 400)
+			{
+				isFalling = false;
+			}
+		}
+		else if (!isFalling)
+		{
+			posY = posY - 2;
+			if (posY <= 100)
+			{
+				isFalling = true;
+			}
+		}
 	}
 
 };

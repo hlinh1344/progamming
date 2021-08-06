@@ -14,10 +14,12 @@ private:
 public:
 	EnemySlime(int a_x)
 	{
+		width = SLIME_WIDTH;
+		height = SLIME_HEIGHT;
+		speed = SLIME_SPEED;
 		posX = a_x;
 		posY = 353;
 		formX = 9;
-		formY = 0;
 		originalLocation = a_x;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Slime.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 0));
@@ -26,10 +28,12 @@ public:
 
 	EnemySlime()
 	{
+		width = SLIME_WIDTH;
+		height = SLIME_HEIGHT;
+		speed = SLIME_SPEED;
 		posX = 0;
 		posY = 353;
 		formX = 9;
-		formY = 0;
 		originalLocation = 0;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Slime.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 0));
@@ -40,51 +44,7 @@ public:
 
 	}
 
-	void Draw(HWND hwnd, HDC hdc) override
-	{
-		hdcMem = CreateCompatibleDC(hdc);
-		oldBitmap = SelectObject(hdcMem, hbmMask);
-		GetObject(hbmMask, sizeof(bitmap), &bitmap);
-		BitBlt
-		(
-			hdc,
-			posX - BaseObject::mapSlider,
-			posY,
-			SLIME_WIDTH,
-			SLIME_HEIGHT,
-			hdcMem,
-			SLIME_WIDTH * formX,
-			SLIME_HEIGHT * formY,
-			SRCAND
-		);
-		oldBitmap = SelectObject(hdcMem, hBitmap);
-		GetObject(hBitmap, sizeof(bitmap), &bitmap);
-		BitBlt
-		(
-			hdc,
-			posX - BaseObject::mapSlider,
-			posY,
-			SLIME_WIDTH,
-			SLIME_HEIGHT,
-			hdcMem,
-			SLIME_WIDTH * formX,
-			SLIME_HEIGHT * formY,
-			SRCPAINT
-		);
-		SelectObject(hdcMem, oldBitmap);
-		DeleteDC(hdcMem);
-	}
-
-	void MoveLeft() override
-	{
-		posX = posX - SLIME_SPEED;
-	}
-
-	void MoveRight() override
-	{
-		posX = posX + SLIME_SPEED;
-	}
-
+	
 	bool IsGoLeft() override
 	{
 		if ((formX >= 0) && (formX <= 8))
@@ -98,66 +58,49 @@ public:
 			return true;
 		return false;
 	}
-	void SetDeath(bool a_isDead) override
-	{
-		isDead = a_isDead;
-	}
 
 	void MakeAnimation() override
 	{
 		clock++;
-		if (!isDead)
+		if (EnemySlime::IsGoRight())
 		{
-			if (EnemySlime::IsGoRight())
+			if (clock >= 10)
 			{
-				if (clock >= 10)
-				{
-					clock = 0;
-					if (formX >= 17)
-						formX = 9;
-					else
-						formX = formX + 1;
-				}
-
-
-				EnemySlime::MoveRight();
-
-				if (posX >= originalLocation + SLIME_AREA)
-				{
-					formX = 8;
-				}
+				clock = 0;
+				if (formX >= 17)
+					formX = 9;
+				else
+					formX = formX + 1;
 			}
 
-			else if (EnemySlime::IsGoLeft())
+
+			EnemySlime::MoveRight();
+
+			if (posX >= originalLocation + SLIME_AREA)
 			{
-				if (clock >= 10)
-				{
-					clock = 0;
-					if (formX <= 0)
-						formX = 8;
-					else
-						formX = formX - 1;
-				}
-
-
-				EnemySlime::MoveLeft();
-
-				if (posX <= originalLocation)
-				{
-					formX = 9;
-				}
+				formX = 8;
 			}
 		}
-	}
 
-	int GetWidth() override
-	{
-		return SLIME_WIDTH;
-	}
+		else if (EnemySlime::IsGoLeft())
+		{
+			if (clock >= 10)
+			{
+				clock = 0;
+				if (formX <= 0)
+					formX = 8;
+				else
+					formX = formX - 1;
+			}
 
-	int GetHeight() override
-	{
-		return SLIME_HEIGHT;
+
+			EnemySlime::MoveLeft();
+
+			if (posX <= originalLocation)
+			{
+				formX = 9;
+			}
+		}
 	}
 
 };

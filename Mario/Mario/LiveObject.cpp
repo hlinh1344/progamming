@@ -13,12 +13,12 @@ LiveObject::~LiveObject()
 
 void LiveObject::MoveLeft()
 {
-
+	posX = posX - speed;
 }
 
 void LiveObject::MoveRight()
 {
-
+	posX = posX + speed;
 }
 
 void LiveObject::MoveUp()

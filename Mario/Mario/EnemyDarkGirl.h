@@ -1,6 +1,6 @@
 #pragma once
 #include "Enemy.h"
-#include "Map.h"
+
 
 #define DARK_GIRL_HEIGHT 65
 #define DARK_GIRL_WIDTH 70
@@ -15,11 +15,12 @@ private:
 public:
 	EnemyDarkGirl(int a_x)
 	{
+		width = DARK_GIRL_WIDTH;
+		height = DARK_GIRL_HEIGHT;
+		speed = DARK_GIRL_SPEED;
 		posX = a_x;
 		posY = 50;
-		//CHANGE FORM
 		formX = 3;
-		formY = 0;
 		originalLocation = a_x;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkGirl.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -29,11 +30,12 @@ public:
 
 	EnemyDarkGirl()
 	{
+		width = DARK_GIRL_WIDTH;
+		height = DARK_GIRL_HEIGHT;
+		speed = DARK_GIRL_SPEED;
 		posX = 0;
 		posY = 50;
-		//CHANGE FORM
 		formX = 4;
-		formY = 0;
 		originalLocation = 0;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkGirl.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -43,91 +45,6 @@ public:
 	~EnemyDarkGirl()
 	{
 
-	}
-
-	void Draw(HWND hwnd, HDC hdc) override
-	{
-		hdcMem = CreateCompatibleDC(hdc);
-		oldBitmap = SelectObject(hdcMem, hbmMask);
-		GetObject(hbmMask, sizeof(bitmap), &bitmap);
-		BitBlt
-		(
-			hdc,
-			posX - BaseObject::mapSlider,
-			posY,
-			DARK_GIRL_WIDTH,
-			DARK_GIRL_HEIGHT,
-			hdcMem,
-			DARK_GIRL_WIDTH * formX,
-			DARK_GIRL_HEIGHT * formY,
-			SRCAND
-		);
-		oldBitmap = SelectObject(hdcMem, hBitmap);
-		GetObject(hBitmap, sizeof(bitmap), &bitmap);
-		BitBlt
-		(
-			hdc,
-			posX - BaseObject::mapSlider,
-			posY,
-			DARK_GIRL_WIDTH,
-			DARK_GIRL_HEIGHT,
-			hdcMem,
-			DARK_GIRL_WIDTH * formX,
-			DARK_GIRL_HEIGHT * formY,
-			SRCPAINT
-		);
-
-		if (isFalling)
-		{
-			posY = posY + DARK_GIRL_SPEED;
-			//formX--;
-			if (clock >= 3)
-			{
-				clock = 0;
-				if (formX <= 0)
-					formX = 2;
-				else
-					formX--;
-			}
-			
-
-			if (posY >= 20 + DARK_GIRL_AREA)
-			{
-				isFalling = false;
-			}
-		}
-		else if (!isFalling)
-		{
-			posY = posY - DARK_GIRL_SPEED;
-
-			//formX++;
-			if (clock >= 3)
-			{
-				clock = 0;
-				if (formX >= 5)
-					formX = 3;
-				else
-					formX++;
-			}
-			
-
-			if (posY <= 20)
-			{
-				isFalling = true;
-			}
-		}
-		SelectObject(hdcMem, oldBitmap);
-		DeleteDC(hdcMem);
-	}
-
-	void MoveLeft() override
-	{
-		posX = posX - DARK_GIRL_SPEED;
-	}
-
-	void MoveRight() override
-	{
-		posX = posX + DARK_GIRL_SPEED;
 	}
 
 	bool IsGoLeft() override
@@ -154,17 +71,45 @@ public:
 	void MakeAnimation() override
 	{
 		clock++;
-		//
-	}
+		if (isFalling)
+		{
+			posY = posY + speed;
+			//formX--;
+			if (clock >= 3)
+			{
+				clock = 0;
+				if (formX <= 0)
+					formX = 2;
+				else
+					formX--;
+			}
 
-	int GetWidth() override
-	{
-		return DARK_GIRL_WIDTH;
-	}
 
-	int GetHeight() override
-	{
-		return DARK_GIRL_HEIGHT;
+			if (posY >= 20 + DARK_GIRL_AREA)
+			{
+				isFalling = false;
+			}
+		}
+		else if (!isFalling)
+		{
+			posY = posY - speed;
+
+			//formX++;
+			if (clock >= 3)
+			{
+				clock = 0;
+				if (formX >= 5)
+					formX = 3;
+				else
+					formX++;
+			}
+
+
+			if (posY <= 20)
+			{
+				isFalling = true;
+			}
+		}
 	}
 
 };

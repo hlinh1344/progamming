@@ -1,13 +1,14 @@
 #pragma once
 
 #include "Enemy.h"
-#include "Map.h"
+
 
 
 #define MUSHROOM_HEIGHT 43
 #define MUSHROOM_WIDTH 44
 #define MUSHROOM_AREA 200
 #define MUSHROOM_SPEED 1
+
 class EnemyMushroom : public Enemy
 {
 private:
@@ -18,6 +19,7 @@ public:
 	{
 		width = MUSHROOM_WIDTH;
 		height = MUSHROOM_HEIGHT;
+		speed = MUSHROOM_SPEED;
 		posX = a_x;
 		posY = 422;
 		formX = 0;
@@ -31,6 +33,7 @@ public:
 	{
 		width = MUSHROOM_WIDTH;
 		height = MUSHROOM_HEIGHT;
+		speed = MUSHROOM_SPEED;
 		posX = 0;
 		posY = 422;
 		formX = 0;
@@ -44,52 +47,7 @@ public:
 
 	}
 
-	void Draw(HWND hwnd, HDC hdc) override
-	{
-		{
-			hdcMem = CreateCompatibleDC(hdc);
-			oldBitmap = SelectObject(hdcMem, hbmMask);
-			GetObject(hbmMask, sizeof(bitmap), &bitmap);
-			BitBlt
-			(
-				hdc,
-				posX - BaseObject::mapSlider,
-				posY,
-				MUSHROOM_WIDTH,
-				MUSHROOM_HEIGHT,
-				hdcMem,
-				MUSHROOM_WIDTH * formX,
-				MUSHROOM_HEIGHT * formY,
-				SRCAND
-			);
-			oldBitmap = SelectObject(hdcMem, hBitmap);
-			GetObject(hBitmap, sizeof(bitmap), &bitmap);
-			BitBlt
-			(
-				hdc,
-				posX - BaseObject::mapSlider,
-				posY,
-				MUSHROOM_WIDTH,
-				MUSHROOM_HEIGHT,
-				hdcMem,
-				MUSHROOM_WIDTH * formX,
-				MUSHROOM_HEIGHT * formY,
-				SRCPAINT
-			);
-			SelectObject(hdcMem, oldBitmap);
-			DeleteDC(hdcMem);
-		}
-	}
 
-	void MoveLeft() override
-	{
-		posX = posX - MUSHROOM_SPEED;
-	}
-
-	void MoveRight() override
-	{
-		posX = posX + MUSHROOM_SPEED;
-	}
 
 	bool IsGoLeft() override
 	{
@@ -105,66 +63,49 @@ public:
 		return false;
 	}
 
-	void SetDeath(bool a_isDead) override
-	{
-		isDead = a_isDead;
-		formX = 2;
-	}
 
 	void MakeAnimation() override
 	{
 		clock++;
-		if (!isDead)
+		if (isGoToRight)
 		{
-			if (isGoToRight)
+			if (clock >= 10)
 			{
-				if (clock >= 10)
-				{
-					clock = 0;
-					if (formX == 0)
-						formX = 1;
-					else
-						formX = 0;
-				}
-			
-
-				EnemyMushroom::MoveRight();
-
-				if (posX >= originalLocation + MUSHROOM_AREA)
-				{
-					isGoToRight = false;
-				}
+				clock = 0;
+				if (formX == 0)
+					formX = 1;
+				else
+					formX = 0;
 			}
-			else if (!isGoToRight)
+
+
+			EnemyMushroom::MoveRight();
+
+			if (posX >= originalLocation + MUSHROOM_AREA)
 			{
-				if (clock >= 10)
-				{
-					clock = 0;
-					if (formX == 0)
-						formX = 1;
-					else
-						formX = 0;
-				}
-				
-
-				EnemyMushroom::MoveLeft();
-
-				if (posX <= originalLocation)
-				{
-					isGoToRight = true;
-				}
+				isGoToRight = false;
 			}
 		}
-	}
+		else if (!isGoToRight)
+		{
+			if (clock >= 10)
+			{
+				clock = 0;
+				if (formX == 0)
+					formX = 1;
+				else
+					formX = 0;
+			}
 
 
-	int GetWidth() override
-	{
-		return MUSHROOM_WIDTH;
+			EnemyMushroom::MoveLeft();
+
+			if (posX <= originalLocation)
+			{
+				isGoToRight = true;
+			}
+		}
+		
 	}
 
-	int GetHeight() override
-	{
-		return MUSHROOM_HEIGHT;
-	}
 };

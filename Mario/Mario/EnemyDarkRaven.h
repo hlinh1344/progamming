@@ -1,6 +1,5 @@
 #pragma once
 #include "Enemy.h"
-#include "Map.h"
 
 #define DARK_RAVEN_HEIGHT 55
 #define DARK_RAVEN_WIDTH 45
@@ -15,11 +14,12 @@ private:
 public:
 	EnemyDarkRaven(int a_x)
 	{
+		width = DARK_RAVEN_WIDTH;
+		height = DARK_RAVEN_HEIGHT;
+		speed = DARK_RAVEN_SPEED;
 		posX = a_x;
 		posY = 50;
-		//CHANGE FORM
 		formX = 6;
-		formY = 0;
 		originalLocation = a_x;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkRaven.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -29,11 +29,12 @@ public:
 
 	EnemyDarkRaven()
 	{
+		width = DARK_RAVEN_WIDTH;
+		height = DARK_RAVEN_HEIGHT;
+		speed = DARK_RAVEN_SPEED;
 		posX = 0;
 		posY = 50;
-		//CHANGE FORM
 		formX = 6;
-		formY = 0;
 		originalLocation = 0;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Girl.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -43,68 +44,6 @@ public:
 	~EnemyDarkRaven()
 	{
 
-	}
-
-	void Draw(HWND hwnd, HDC hdc) override
-	{
-		hdcMem = CreateCompatibleDC(hdc);
-		oldBitmap = SelectObject(hdcMem, hbmMask);
-		GetObject(hbmMask, sizeof(bitmap), &bitmap);
-		BitBlt
-		(
-			hdc,
-			posX - BaseObject::mapSlider,
-			posY,
-			DARK_RAVEN_WIDTH,
-			DARK_RAVEN_HEIGHT,
-			hdcMem,
-			DARK_RAVEN_WIDTH * formX,
-			DARK_RAVEN_HEIGHT * formY,
-			SRCAND
-		);
-		oldBitmap = SelectObject(hdcMem, hBitmap);
-		GetObject(hBitmap, sizeof(bitmap), &bitmap);
-		BitBlt
-		(
-			hdc,
-			posX - BaseObject::mapSlider,
-			posY,
-			DARK_RAVEN_WIDTH,
-			DARK_RAVEN_HEIGHT,
-			hdcMem,
-			DARK_RAVEN_WIDTH * formX,
-			DARK_RAVEN_HEIGHT * formY,
-			SRCPAINT
-		);
-
-		if (isFalling)
-		{
-			posY = posY + 5;
-			if (posY >= 200)
-			{
-				isFalling = false;
-			}
-		}
-		else if (!isFalling)
-		{
-			posY = posY - 5;
-			if (posY <= 50)
-			{
-				isFalling = true;
-			}
-		}
-		SelectObject(hdcMem, oldBitmap);
-		DeleteDC(hdcMem);
-	}
-
-	void MoveLeft() override
-	{
-		posX = posX - DARK_RAVEN_SPEED;
-	}
-
-	void MoveRight() override
-	{
-		posX = posX + DARK_RAVEN_SPEED;
 	}
 
 	bool IsGoLeft() override
@@ -120,69 +59,66 @@ public:
 			return true;
 		return false;
 	}
-	void SetDeath(bool a_isDead) override
-	{
-		isDead = a_isDead;
-	}
-
-
-
 
 	void MakeAnimation() override
 	{
 		clock++;
-		if (!isDead)
+		if (EnemyDarkRaven::IsGoRight())
 		{
-			if (EnemyDarkRaven::IsGoRight())
+			if (clock >= 8)
 			{
-				if (clock >= 8)
-				{
-					clock = 0;
-					if (formX >= 11)
-						formX = 6;
-					else
-						formX = formX + 1;
-				}
-				
-
-				EnemyDarkRaven::MoveRight();
-
-				if (posX >= originalLocation + DARK_RAVEN_AREA)
-				{
-					formX = 5;
-				}
+				clock = 0;
+				if (formX >= 11)
+					formX = 6;
+				else
+					formX = formX + 1;
 			}
 
-			else if (EnemyDarkRaven::IsGoLeft())
+
+			EnemyDarkRaven::MoveRight();
+
+			if (posX >= originalLocation + DARK_RAVEN_AREA)
 			{
-				if (clock >= 8)
-				{
-					clock = 0;
-					if (formX <= 0)
-						formX = 5;
-					else
-						formX = formX - 1;
-				}
-				
-
-				EnemyDarkRaven::MoveLeft();
-
-				if (posX <= originalLocation)
-				{
-					formX = 6;
-				}
+				formX = 5;
 			}
 		}
-	}
 
-	int GetWidth() override
-	{
-		return DARK_RAVEN_WIDTH;
-	}
+		else if (EnemyDarkRaven::IsGoLeft())
+		{
+			if (clock >= 8)
+			{
+				clock = 0;
+				if (formX <= 0)
+					formX = 5;
+				else
+					formX = formX - 1;
+			}
 
-	int GetHeight() override
-	{
-		return DARK_RAVEN_HEIGHT;
+
+			EnemyDarkRaven::MoveLeft();
+
+			if (posX <= originalLocation)
+			{
+				formX = 6;
+			}
+		}
+		//-----------
+		if (isFalling)
+		{
+			posY = posY + 3;
+			if (posY >= 200)
+			{
+				isFalling = false;
+			}
+		}
+		else if (!isFalling)
+		{
+			posY = posY - 3;
+			if (posY <= 50)
+			{
+				isFalling = true;
+			}
+		}
 	}
 
 };

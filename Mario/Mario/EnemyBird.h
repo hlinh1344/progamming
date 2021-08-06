@@ -1,6 +1,6 @@
 #pragma once
 #include "Enemy.h"
-#include "Map.h"
+
 
 #define BIRD_HEIGHT 65
 #define BIRD_WIDTH 64
@@ -15,10 +15,12 @@ private:
 public:
 	EnemyBird(int a_x)
 	{
+		width = BIRD_WIDTH;
+		height = BIRD_HEIGHT;
+		speed = BIRD_SPEED;
 		posX = a_x;
 		posY = 150;
 		formX = 6;
-		formY = 0;
 		originalLocation = a_x;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Bird.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -28,10 +30,12 @@ public:
 
 	EnemyBird()
 	{
+		width = BIRD_WIDTH;
+		height = BIRD_HEIGHT;
+		speed = BIRD_SPEED;
 		posX = 0;
 		posY = 150;
 		formX = 6;
-		formY = 0;
 		originalLocation = 0;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Bird.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -41,68 +45,6 @@ public:
 	~EnemyBird()
 	{
 
-	}
-
-	void Draw(HWND hwnd, HDC hdc) override
-	{
-		hdcMem = CreateCompatibleDC(hdc);
-		oldBitmap = SelectObject(hdcMem, hbmMask);
-		GetObject(hbmMask, sizeof(bitmap), &bitmap);
-		BitBlt
-		(
-			hdc,
-			posX - BaseObject::mapSlider,
-			posY,
-			BIRD_WIDTH,
-			BIRD_HEIGHT,
-			hdcMem,
-			BIRD_WIDTH * formX,
-			BIRD_HEIGHT * formY,
-			SRCAND
-		);
-		oldBitmap = SelectObject(hdcMem, hBitmap);
-		GetObject(hBitmap, sizeof(bitmap), &bitmap);
-		BitBlt
-		(
-			hdc,
-			posX - BaseObject::mapSlider,
-			posY,
-			BIRD_WIDTH,
-			BIRD_HEIGHT,
-			hdcMem,
-			BIRD_WIDTH * formX,
-			BIRD_HEIGHT * formY,
-			SRCPAINT
-		);
-
-		if (isFalling)
-		{
-			posY = posY + 6;
-			if (posY >= 300)
-			{
-				isFalling = false;
-			}
-		}
-		else if (!isFalling)
-		{
-			posY = posY - 6;
-			if (posY <= 150)
-			{
-				isFalling = true;
-			}
-		}
-		SelectObject(hdcMem, oldBitmap);
-		DeleteDC(hdcMem);
-	}
-
-	void MoveLeft() override
-	{
-		posX = posX - BIRD_SPEED;
-	}
-
-	void MoveRight() override
-	{
-		posX = posX + BIRD_SPEED;
 	}
 
 	bool IsGoLeft() override
@@ -118,65 +60,68 @@ public:
 			return true;
 		return false;
 	}
-	void SetDeath(bool a_isDead) override
-	{
-		isDead = a_isDead;
-	}
 
 	void MakeAnimation() override
 	{
 		clock++;
-		if (!isDead)
+		if (EnemyBird::IsGoRight())
 		{
-			if (EnemyBird::IsGoRight())
+			if (clock >= 13)
 			{
-				if (clock >= 13)
-				{
-					clock = 0;
-					if (formX >= 7)
-						formX = 4;
-					else
-						formX = formX + 1;
-				}
-				
-
-				EnemyBird::MoveRight();
-
-				if (posX >= originalLocation + BIRD_AREA)
-				{
-					formX = 3;
-				}
+				clock = 0;
+				if (formX >= 7)
+					formX = 4;
+				else
+					formX = formX + 1;
 			}
 
-			else if (EnemyBird::IsGoLeft())
-			{
-				if (clock >= 13)
-				{
-					clock = 0;
-					if (formX <= 0)
-						formX = 3;
-					else
-						formX = formX - 1;
-				}
-				
-				EnemyBird::MoveLeft();
 
-				if (posX <= originalLocation)
-				{
-					formX = 4;
-				}
+			EnemyBird::MoveRight();
+
+			if (posX >= originalLocation + BIRD_AREA)
+			{
+				formX = 3;
 			}
 		}
-	}
 
-	int GetWidth() override
-	{
-		return BIRD_WIDTH;
-	}
+		else if (EnemyBird::IsGoLeft())
+		{
+			if (clock >= 13)
+			{
+				clock = 0;
+				if (formX <= 0)
+					formX = 3;
+				else
+					formX = formX - 1;
+			}
 
-	int GetHeight() override
-	{
-		return BIRD_HEIGHT;
+			EnemyBird::MoveLeft();
+
+			if (posX <= originalLocation)
+			{
+				formX = 4;
+			}
+		}
+
+
+		//----------------
+		if (isFalling)
+		{
+			posY = posY++;
+			if (posY >= 300)
+			{
+				isFalling = false;
+			}
+		}
+		else if (!isFalling)
+		{
+			posY = posY--;
+			if (posY <= 150)
+			{
+				isFalling = true;
+			}
+		}
+
 	}
 
 };

@@ -5,6 +5,7 @@ class LiveObject :
 {
 protected:
     int clock;
+    int speed;
 public:
     LiveObject();
     ~LiveObject();
