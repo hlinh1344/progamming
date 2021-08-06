@@ -5,7 +5,7 @@
 #define WHITE_GHOST_WIDTH 100
 #define WHITE_GHOST_AREA 850
 #define WHITE_GHOST_SPEED 4
-
+#define WHITE_GHOST_FLY_AREA 300
 
 class EnemyWhiteGhost : public Enemy
 {
@@ -17,10 +17,13 @@ public:
 		width = WHITE_GHOST_WIDTH;
 		height = WHITE_GHOST_HEIGHT;
 		speed = WHITE_GHOST_SPEED;
+		xArea = WHITE_GHOST_AREA;
+		yArea = WHITE_GHOST_FLY_AREA;
 		posX = a_x;
-		posY = 200;
+		posY = 100;
 		formX = 6;
-		originalLocation = a_x;
+		xOriginal = posX;
+		yOriginal = posY;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"WhiteGhost.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -32,10 +35,13 @@ public:
 		width = WHITE_GHOST_WIDTH;
 		height = WHITE_GHOST_HEIGHT;
 		speed = WHITE_GHOST_SPEED;
+		xArea = WHITE_GHOST_AREA;
+		yArea = WHITE_GHOST_FLY_AREA;
 		posX = 0;
-		posY = 370;
+		posY = 200;
 		formX = 6;
-		originalLocation = 0;
+		xOriginal = posX;
+		yOriginal = posY;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"WhiteGhost.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -78,7 +84,7 @@ public:
 
 			EnemyWhiteGhost::MoveRight();
 
-			if (posX >= originalLocation + WHITE_GHOST_AREA)
+			if (posX >= xOriginal + xArea)
 			{
 				formX = 5;
 			}
@@ -98,7 +104,7 @@ public:
 
 			EnemyWhiteGhost::MoveLeft();
 
-			if (posX <= originalLocation)
+			if (posX <= xOriginal)
 			{
 				formX = 6;
 			}
@@ -108,7 +114,7 @@ public:
 		if (isFalling)
 		{
 			posY = posY +2;
-			if (posY >= 400)
+			if (posY >= yOriginal + yArea)
 			{
 				isFalling = false;
 			}
@@ -116,7 +122,7 @@ public:
 		else if (!isFalling)
 		{
 			posY = posY - 2;
-			if (posY <= 100)
+			if (posY <= yOriginal)
 			{
 				isFalling = true;
 			}

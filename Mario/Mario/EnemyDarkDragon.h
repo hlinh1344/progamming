@@ -17,10 +17,11 @@ public:
 		width = DARK_DRAGON_WIDTH;
 		height = DARK_DRAGON_HEIGHT;
 		speed = DARK_DRAGON_SPEED;
+		xArea = DARK_DRAGON_AREA;
 		posX = a_x;
 		posY = 357;
 		formX = 3;
-		originalLocation = a_x;
+		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkDragon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
 
@@ -31,10 +32,11 @@ public:
 		width = DARK_DRAGON_WIDTH;
 		height = DARK_DRAGON_HEIGHT;
 		speed = DARK_DRAGON_SPEED;
+		xArea = DARK_DRAGON_AREA;
 		posX = 0;
 		posY = 357;
 		formX = 3;
-		originalLocation = 0;
+		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkDragon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
 	}
@@ -75,7 +77,7 @@ public:
 
 			EnemyDarkDragon::MoveRight();
 
-			if (posX >= originalLocation + DARK_DRAGON_AREA)
+			if (posX >= xOriginal + xArea)
 			{
 				formX = 3;
 			}
@@ -95,7 +97,7 @@ public:
 
 			EnemyDarkDragon::MoveLeft();
 
-			if (posX <= originalLocation)
+			if (posX <= xOriginal)
 			{
 				formX = 4;
 			}

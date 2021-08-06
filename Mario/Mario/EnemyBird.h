@@ -6,6 +6,7 @@
 #define BIRD_WIDTH 64
 #define BIRD_AREA 1000
 #define BIRD_SPEED 3
+#define BIRD_FLY_AREA 150
 
 
 class EnemyBird : public Enemy
@@ -18,10 +19,13 @@ public:
 		width = BIRD_WIDTH;
 		height = BIRD_HEIGHT;
 		speed = BIRD_SPEED;
+		xArea = BIRD_AREA;
+		yArea = BIRD_FLY_AREA;
 		posX = a_x;
 		posY = 150;
 		formX = 6;
-		originalLocation = a_x;
+		xOriginal = posX;
+		yOriginal = posY;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Bird.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -33,10 +37,13 @@ public:
 		width = BIRD_WIDTH;
 		height = BIRD_HEIGHT;
 		speed = BIRD_SPEED;
+		xArea = BIRD_AREA;
+		yArea = BIRD_FLY_AREA;
 		posX = 0;
 		posY = 150;
 		formX = 6;
-		originalLocation = 0;
+		xOriginal = posX;
+		yOriginal = posY;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Bird.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -78,7 +85,7 @@ public:
 
 			EnemyBird::MoveRight();
 
-			if (posX >= originalLocation + BIRD_AREA)
+			if (posX >= xOriginal + xArea)
 			{
 				formX = 3;
 			}
@@ -97,7 +104,7 @@ public:
 
 			EnemyBird::MoveLeft();
 
-			if (posX <= originalLocation)
+			if (posX <= xOriginal)
 			{
 				formX = 4;
 			}
@@ -108,7 +115,7 @@ public:
 		if (isFalling)
 		{
 			posY = posY++;
-			if (posY >= 300)
+			if (posY >= yOriginal + yArea)
 			{
 				isFalling = false;
 			}
@@ -116,7 +123,7 @@ public:
 		else if (!isFalling)
 		{
 			posY = posY--;
-			if (posY <= 150)
+			if (posY <= yOriginal)
 			{
 				isFalling = true;
 			}

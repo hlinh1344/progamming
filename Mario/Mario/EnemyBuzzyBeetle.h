@@ -17,10 +17,11 @@ public:
 		width = BUZZY_WIDTH;
 		height = BUZZY_HEIGHT;
 		speed = BUZZY_SPEED;
+		xArea = BUZZY_AREA;
 		posX = a_x;
 		posY = 421;
 		formX = 3;
-		originalLocation = a_x;
+		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"BuzzyBeetle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 
@@ -31,10 +32,11 @@ public:
 		width = BUZZY_WIDTH;
 		height = BUZZY_HEIGHT;
 		speed = BUZZY_SPEED;
+		xArea = BUZZY_AREA;
 		posX = 0;
 		posY = 421;
 		formX = 3;
-		originalLocation = 0;
+		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"BuzzyBeetle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
@@ -75,7 +77,7 @@ public:
 
 			EnemyBuzzyBeetle::MoveRight();
 
-			if (posX >= originalLocation + BUZZY_AREA)
+			if (posX >= xOriginal + xArea)
 			{
 				formX = 1;
 			}
@@ -95,7 +97,7 @@ public:
 
 			EnemyBuzzyBeetle::MoveLeft();
 
-			if (posX <= originalLocation)
+			if (posX <= xOriginal)
 			{
 				formX = 3;
 			}

@@ -17,10 +17,11 @@ public:
 		width = SLIME_WIDTH;
 		height = SLIME_HEIGHT;
 		speed = SLIME_SPEED;
+		xArea = SLIME_AREA;
 		posX = a_x;
 		posY = 353;
 		formX = 9;
-		originalLocation = a_x;
+		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Slime.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 0));
 
@@ -31,10 +32,11 @@ public:
 		width = SLIME_WIDTH;
 		height = SLIME_HEIGHT;
 		speed = SLIME_SPEED;
+		xArea = SLIME_AREA;
 		posX = 0;
 		posY = 353;
 		formX = 9;
-		originalLocation = 0;
+		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Slime.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 0));
 	}
@@ -43,7 +45,6 @@ public:
 	{
 
 	}
-
 	
 	bool IsGoLeft() override
 	{
@@ -76,7 +77,7 @@ public:
 
 			EnemySlime::MoveRight();
 
-			if (posX >= originalLocation + SLIME_AREA)
+			if (posX >= xOriginal + xArea)
 			{
 				formX = 8;
 			}
@@ -96,7 +97,7 @@ public:
 
 			EnemySlime::MoveLeft();
 
-			if (posX <= originalLocation)
+			if (posX <= xOriginal)
 			{
 				formX = 9;
 			}

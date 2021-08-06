@@ -5,7 +5,7 @@
 #define MONSTER_GIRL_WIDTH 70
 #define MONSTER_GIRL_AREA 1200
 #define MONSTER_GIRL_SPEED 8
-
+#define MONSTER_GIRL_FLY_AREA 250
 
 class EnemyMonsterGirl : public Enemy
 {
@@ -17,11 +17,13 @@ public:
 		width = MONSTER_GIRL_WIDTH;
 		height = MONSTER_GIRL_HEIGHT;
 		speed = MONSTER_GIRL_SPEED;
+		xArea = MONSTER_GIRL_AREA;
+		yArea = MONSTER_GIRL_FLY_AREA;
 		posX = a_x;
 		posY = 50;
-		//CHANGE FORM
 		formX = 4;
-		originalLocation = a_x;;
+		xOriginal = posX;
+		yOriginal = posY;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"MonsterGirl.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -33,11 +35,13 @@ public:
 		width = MONSTER_GIRL_WIDTH;
 		height = MONSTER_GIRL_HEIGHT;
 		speed = MONSTER_GIRL_SPEED;
+		xArea = MONSTER_GIRL_AREA;
+		yArea = MONSTER_GIRL_FLY_AREA;
 		posX = 0;
 		posY = 50;
-		//CHANGE FORM
 		formX = 4;
-		originalLocation = 0;
+		xOriginal = posX;
+		yOriginal = posY;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"MonsterGirl.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -80,7 +84,7 @@ public:
 
 			EnemyMonsterGirl::MoveRight();
 
-			if (posX >= originalLocation + MONSTER_GIRL_AREA)
+			if (posX >= xOriginal + xArea)
 			{
 				formX = 2;
 			}
@@ -100,17 +104,17 @@ public:
 
 			EnemyMonsterGirl::MoveLeft();
 
-			if (posX <= originalLocation)
+			if (posX <= xOriginal)
 			{
 				formX = 4;
 			}
 		}
 
-
+		//----
 		if (isFalling)
 		{
 			posY = posY +2;
-			if (posY >= 300)
+			if (posY >= yOriginal + yArea)
 			{
 				isFalling = false;
 			}
@@ -118,7 +122,7 @@ public:
 		else if (!isFalling)
 		{
 			posY = posY -2;
-			if (posY <= 50)
+			if (posY <= yOriginal)
 			{
 				isFalling = true;
 			}

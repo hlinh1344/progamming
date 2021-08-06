@@ -14,7 +14,7 @@
 class WeaponKunai : public Weapon
 {
 private:
-	int originalLocation;
+	int xOriginal;
 public:
 	WeaponKunai(int a_x, int a_dir, int	a_posY)
 	{
@@ -23,7 +23,7 @@ public:
 		formX = a_dir;
 		dir = a_dir;
 		formY = 0;
-		originalLocation = a_x;
+		xOriginal = a_x;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Kunai.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
 	}
@@ -34,7 +34,7 @@ public:
 		posY = 421;
 		formX = 1;
 		formY = 0;
-		originalLocation = 0;
+		xOriginal = 0;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Kunai.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
@@ -120,7 +120,7 @@ public:
 
 	void CheckDistance() override
 	{
-		int distance = abs(originalLocation - posX);
+		int distance = abs(xOriginal - posX);
 		if (distance >= KUNAI_AREA)
 		{
 			isDead = true;

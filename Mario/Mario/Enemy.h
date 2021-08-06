@@ -5,7 +5,10 @@
 class Enemy : public LiveObject
 {
 protected:
-	int originalLocation;
+	int xOriginal;
+	int xArea;
+	int yArea;
+	int yOriginal;
 public:
 	Enemy();
 	~Enemy();

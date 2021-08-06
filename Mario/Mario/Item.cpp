@@ -4,7 +4,7 @@ Item::Item()
 {
 	isDead = false;
 	posY = 50;
-	originalLocation = posY;
+	xOriginal = posY;
 	formX = 0;
 	formY = 0;
 }
@@ -34,7 +34,7 @@ void Item::MakeAnimation()
 		if (formX == 0)
 		{
 			posY++;
-			if (posY >= originalLocation + 10)
+			if (posY >= xOriginal + 10)
 			{
 				formX = 1;
 			}
@@ -42,7 +42,7 @@ void Item::MakeAnimation()
 		else if (formX == 1)
 		{
 			posY--;
-			if (posY <= originalLocation)
+			if (posY <= xOriginal)
 			{
 				formX = 0;
 			}

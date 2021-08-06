@@ -18,10 +18,11 @@ public:
 		width = SPINY_WIDTH;
 		height = SPINY_HEIGHT;
 		speed = SPINY_SPEED;
+		xArea = SPINY_AREA;
 		posX = a_x;
 		posY = 422;
 		formX = 2;
-		originalLocation = a_x;
+		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"SpinyBeetle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 
@@ -32,10 +33,11 @@ public:
 		width = SPINY_WIDTH;
 		height = SPINY_HEIGHT;
 		speed = SPINY_SPEED;
+		xArea = SPINY_AREA;
 		posX = 0;
 		posY = 422;
 		formX = 2;
-		originalLocation = 0;
+		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"SpinyBeetle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
@@ -76,7 +78,7 @@ public:
 
 			EnemySpinyBeetle::MoveRight();
 
-			if (posX >= originalLocation + SPINY_AREA)
+			if (posX >= xOriginal + xArea)
 			{
 				formX = 1;
 			}
@@ -95,7 +97,7 @@ public:
 
 			EnemySpinyBeetle::MoveLeft();
 
-			if (posX <= originalLocation)
+			if (posX <= xOriginal)
 			{
 				formX = 2;
 			}

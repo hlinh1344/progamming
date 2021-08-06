@@ -12,7 +12,7 @@
 class Moon : public Weapon
 {
 private:
-	int originalLocation;
+	int xOriginal;
 	bool isFalling;
 	int originalposY;
 public:
@@ -23,7 +23,7 @@ public:
 		formX = 7;
 		dir = 0;
 		formY = 0;
-		originalLocation = posX;
+		xOriginal = posX;
 		isFalling = true;
 		originalposY = a_posY;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Moon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -37,7 +37,7 @@ public:
 		formX = 7;
 		dir = 0;
 		formY = 0;
-		originalLocation = posX;
+		xOriginal = posX;
 		isFalling = true;
 		originalposY = a_posY;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Moon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -49,7 +49,7 @@ public:
 		posY = 421;
 		formX = 1;
 		formY = 0;
-		originalLocation = 0;
+		xOriginal = 0;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Moon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -143,7 +143,7 @@ public:
 
 	void CheckDistance() override
 	{
-		int distance = abs(originalLocation - posX);
+		int distance = abs(xOriginal - posX);
 		if (distance >= MOON_AREA)
 		{
 			isDead = true;

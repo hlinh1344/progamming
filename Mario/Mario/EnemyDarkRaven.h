@@ -5,7 +5,7 @@
 #define DARK_RAVEN_WIDTH 45
 #define DARK_RAVEN_AREA 1000
 #define DARK_RAVEN_SPEED 5
-
+#define DARK_RAVEN_FLY_AREA 200
 
 class EnemyDarkRaven : public Enemy
 {
@@ -14,13 +14,16 @@ private:
 public:
 	EnemyDarkRaven(int a_x)
 	{
-		width = DARK_RAVEN_WIDTH;
-		height = DARK_RAVEN_HEIGHT;
-		speed = DARK_RAVEN_SPEED;
+		width =  DARK_RAVEN_WIDTH;
+		height =  DARK_RAVEN_HEIGHT;
+		speed =  DARK_RAVEN_SPEED;
+		xArea =  DARK_RAVEN_AREA;
+		yArea =  DARK_RAVEN_FLY_AREA;
 		posX = a_x;
 		posY = 50;
 		formX = 6;
-		originalLocation = a_x;
+		xOriginal = posX;
+		yOriginal = posY;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkRaven.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -32,10 +35,13 @@ public:
 		width = DARK_RAVEN_WIDTH;
 		height = DARK_RAVEN_HEIGHT;
 		speed = DARK_RAVEN_SPEED;
+		xArea = DARK_RAVEN_AREA;
+		yArea = DARK_RAVEN_FLY_AREA;
 		posX = 0;
 		posY = 50;
 		formX = 6;
-		originalLocation = 0;
+		xOriginal = posX;
+		yOriginal = posY;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Girl.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -77,7 +83,7 @@ public:
 
 			EnemyDarkRaven::MoveRight();
 
-			if (posX >= originalLocation + DARK_RAVEN_AREA)
+			if (posX >= xOriginal + xArea)
 			{
 				formX = 5;
 			}
@@ -97,7 +103,7 @@ public:
 
 			EnemyDarkRaven::MoveLeft();
 
-			if (posX <= originalLocation)
+			if (posX <= xOriginal)
 			{
 				formX = 6;
 			}
@@ -106,7 +112,7 @@ public:
 		if (isFalling)
 		{
 			posY = posY + 3;
-			if (posY >= 200)
+			if (posY >= yOriginal + yArea)
 			{
 				isFalling = false;
 			}
@@ -114,7 +120,7 @@ public:
 		else if (!isFalling)
 		{
 			posY = posY - 3;
-			if (posY <= 50)
+			if (posY <= yOriginal)
 			{
 				isFalling = true;
 			}

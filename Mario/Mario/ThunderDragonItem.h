@@ -20,7 +20,7 @@ public:
 		height = THUNDER_DRAGON_ITEM_HEIGHT;
 		posX = 1600;
 		posY = 0;
-		originalLocation = posY;
+		xOriginal = posY;
 		typeOfWeapn = 4;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"ThunderDragonItem.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(0, 128, 0));
@@ -32,7 +32,7 @@ public:
 		height = THUNDER_DRAGON_ITEM_HEIGHT;
 		posX = a_x;
 		posY = 0;
-		originalLocation = posY;
+		xOriginal = posY;
 		typeOfWeapn = 4;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"ThunderDragonItem.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(0, 128, 0));

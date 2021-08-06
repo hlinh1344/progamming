@@ -239,6 +239,7 @@ void GamePlay::Run()
 		//boss
 		if (bossStillLive == true)
 		{
+			
 			if (CheckCollision(weapon, boss))
 			{
 				boss->SetDeath(true);
@@ -247,7 +248,12 @@ void GamePlay::Run()
 		}
 		
 	}
-		
+	//--------
+	if (bossStillLive == true)
+	{
+		boss->MakeAnimation();
+	}
+	
 	//enemy
 
 	for (auto enemy : enemies) {

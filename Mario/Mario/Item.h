@@ -6,7 +6,7 @@ class Item : public LiveObject
 protected:
     int typeOfWeapn;
     bool isDead;
-    int originalLocation;
+    int xOriginal;
 public:
     Item();
     ~Item();

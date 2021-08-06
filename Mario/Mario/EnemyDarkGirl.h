@@ -4,7 +4,7 @@
 
 #define DARK_GIRL_HEIGHT 65
 #define DARK_GIRL_WIDTH 70
-#define DARK_GIRL_AREA 350
+#define DARK_GIRL_FLY_AREA 350
 #define DARK_GIRL_SPEED 7
 
 //chang name
@@ -18,10 +18,11 @@ public:
 		width = DARK_GIRL_WIDTH;
 		height = DARK_GIRL_HEIGHT;
 		speed = DARK_GIRL_SPEED;
+		yArea = DARK_GIRL_FLY_AREA;
 		posX = a_x;
-		posY = 50;
+		posY = 20;
 		formX = 3;
-		originalLocation = a_x;
+		yOriginal = posY;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkGirl.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -33,10 +34,11 @@ public:
 		width = DARK_GIRL_WIDTH;
 		height = DARK_GIRL_HEIGHT;
 		speed = DARK_GIRL_SPEED;
+		yArea = DARK_GIRL_FLY_AREA;
 		posX = 0;
-		posY = 50;
+		posY = 20;
 		formX = 4;
-		originalLocation = 0;
+		yOriginal = posY;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkGirl.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -60,13 +62,6 @@ public:
 			return true;
 		return false;
 	}
-	void SetDeath(bool a_isDead) override
-	{
-		isDead = a_isDead;
-	}
-
-
-
 
 	void MakeAnimation() override
 	{
@@ -85,7 +80,7 @@ public:
 			}
 
 
-			if (posY >= 20 + DARK_GIRL_AREA)
+			if (posY >= yOriginal + yArea)
 			{
 				isFalling = false;
 			}
@@ -105,7 +100,7 @@ public:
 			}
 
 
-			if (posY <= 20)
+			if (posY <= yOriginal)
 			{
 				isFalling = true;
 			}

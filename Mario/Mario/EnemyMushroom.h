@@ -20,10 +20,11 @@ public:
 		width = MUSHROOM_WIDTH;
 		height = MUSHROOM_HEIGHT;
 		speed = MUSHROOM_SPEED;
+		xArea = MUSHROOM_AREA;
 		posX = a_x;
 		posY = 422;
 		formX = 0;
-		originalLocation = a_x;
+		xOriginal = posX;
 		isGoToRight = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Mushroom.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
@@ -34,10 +35,11 @@ public:
 		width = MUSHROOM_WIDTH;
 		height = MUSHROOM_HEIGHT;
 		speed = MUSHROOM_SPEED;
+		xArea = MUSHROOM_AREA;
 		posX = 0;
 		posY = 422;
 		formX = 0;
-		originalLocation = 0;
+		xOriginal = posX;
 		isGoToRight = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Mushroom.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
@@ -46,8 +48,6 @@ public:
 	{
 
 	}
-
-
 
 	bool IsGoLeft() override
 	{
@@ -81,7 +81,7 @@ public:
 
 			EnemyMushroom::MoveRight();
 
-			if (posX >= originalLocation + MUSHROOM_AREA)
+			if (posX >= xOriginal + xArea)
 			{
 				isGoToRight = false;
 			}
@@ -100,7 +100,7 @@ public:
 
 			EnemyMushroom::MoveLeft();
 
-			if (posX <= originalLocation)
+			if (posX <= xOriginal)
 			{
 				isGoToRight = true;
 			}
