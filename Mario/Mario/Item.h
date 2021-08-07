@@ -1,6 +1,6 @@
 #pragma once
 #include "LiveObject.h"
-#include "Map.h"
+
 class Item : public LiveObject
 {
 protected:

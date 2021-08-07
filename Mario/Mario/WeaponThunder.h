@@ -1,6 +1,5 @@
 #pragma once
 #include "Weapon.h"
-#include "Map.h"
 
 #define THUNDER_HEIGHT 58
 #define THUNDER_WIDTH 78
@@ -12,13 +11,16 @@
 class WeaponThunder : public Weapon
 {
 private:
-	int xOriginal;
 	bool isFalling;
-	int originalposY;
 public:
 	WeaponThunder(int a_x, int a_dir, int	a_posY)
 	{
+		width = THUNDER_WIDTH;
+		height = THUNDER_HEIGHT;
+		xArea = THUNDER_AREA;
+		speed = THUNDER_SPEED;
 		posX = a_x;
+
 		posY = a_posY;
 		if (a_dir == 0)
 		{
@@ -29,21 +31,24 @@ public:
 			formX = 9;
 		}
 		dir = a_dir;
-		formY = 0;
-		xOriginal = a_x;
 		isFalling = true;
-		originalposY = a_posY;
+		xOriginal = posX;
+		yOriginal = posY;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Thunder.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(0, 128, 0));
 	}
 
 	WeaponThunder()
 	{
+		width = THUNDER_WIDTH;
+		height = THUNDER_HEIGHT;
+		xArea = THUNDER_AREA;
+		speed = THUNDER_SPEED;
 		posX = 0;
 		posY = 421;
 		formX = 1;
-		formY = 0;
-		xOriginal = 0;
+		xOriginal = posX;
+		yOriginal = posY;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Thunder.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(0, 128, 0));
@@ -52,128 +57,55 @@ public:
 	{
 
 	}
-	void Draw(HWND hwnd, HDC hdc) override
-	{
-		if (!isDead)
-		{
-			hdcMem = CreateCompatibleDC(hdc);
-			oldBitmap = SelectObject(hdcMem, hbmMask);
-			GetObject(hbmMask, sizeof(bitmap), &bitmap);
-			BitBlt
-			(
-				hdc,
-				posX - BaseObject::mapSlider,
-				posY,
-				THUNDER_WIDTH,
-				THUNDER_HEIGHT,
-				hdcMem,
-				THUNDER_WIDTH * formX,
-				THUNDER_HEIGHT * formY,
-				SRCAND
-			);
-			oldBitmap = SelectObject(hdcMem, hBitmap);
-			GetObject(hBitmap, sizeof(bitmap), &bitmap);
-			BitBlt
-			(
-				hdc,
-				posX - BaseObject::mapSlider,
-				posY,
-				THUNDER_WIDTH,
-				THUNDER_HEIGHT,
-				hdcMem,
-				THUNDER_WIDTH * formX,
-				THUNDER_HEIGHT * formY,
-				SRCPAINT
-			);
-			SelectObject(hdcMem, oldBitmap);
-			DeleteDC(hdcMem);
-			if (dir == 0)
-			{
-				MoveLeft();
-				if (formX <= 0)
-				{
-					formX = 8;
-				}
-				else
-					formX--;
-			}
-			else if (dir == 1)
-			{
-				MoveRight();
-				if (formX >= 17)
-				{
-					formX = 9;
-				}
-				else
-					formX++;
-			}
-			CheckDistance();
 
-			if (isFalling)
+
+	void MakeAnimation() override
+	{
+		if (dir == 0)
+		{
+			MoveLeft();
+			if (formX <= 0)
 			{
-				posY = posY + 5;
-				if (posY >= originalposY + 70)
-				{
-					isFalling = false;
-				}
+				formX = 8;
 			}
-			else if (!isFalling)
+			else
+				formX--;
+		}
+		else if (dir == 1)
+		{
+			MoveRight();
+			if (formX >= 17)
 			{
-				posY = posY - 5;
-				if (posY <= originalposY - 70)
-				{
-					isFalling = true;
-				}
+				formX = 9;
+			}
+			else
+				formX++;
+		}
+
+		if (isFalling)
+		{
+			posY = posY + 5;
+			if (posY >= yOriginal + 70)
+			{
+				isFalling = false;
 			}
 		}
+		else if (!isFalling)
+		{
+			posY = posY - 5;
+			if (posY <= yOriginal - 70)
+			{
+				isFalling = true;
+			}
+		}
+		CheckDistance(xOriginal);
 	}
+
+
 
 	void MoveLeft() override
 	{
 		posX = posX - THUNDER_SPEED;
 	}
 
-	void MoveRight() override
-	{
-		posX = posX + THUNDER_SPEED;
-	}
-
-	void SetDeath(bool a_isDead) override
-	{
-		isDead = a_isDead;
-
-	}
-
-	void CheckDistance() override
-	{
-		int distance = abs(xOriginal - posX);
-		if (distance >= THUNDER_AREA)
-		{
-			isDead = true;
-		}
-	}
-
-	bool IsGoLeft() override
-	{
-		if ((formX >= 0) && (formX <= 8))
-			return true;
-		return false;
-	}
-
-	bool IsGoRight()override
-	{
-		if ((formX >= 9) && (formX <= 17))
-			return true;
-		return false;
-	}
-
-	int GetWidth() override
-	{
-		return THUNDER_WIDTH;
-	}
-
-	int GetHeight() override
-	{
-		return THUNDER_HEIGHT;
-	}
 };

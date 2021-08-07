@@ -1,6 +1,6 @@
 #pragma once
 #include "Weapon.h"
-#include "Map.h"
+
 
 #define MOON_HEIGHT 81
 #define MOON_WIDTH 82
@@ -104,7 +104,7 @@ public:
 					formX--;
 			}
 
-			CheckDistance();
+			CheckDistance(xOriginal);
 
 			if (isFalling)
 			{
@@ -141,7 +141,7 @@ public:
 
 	}
 
-	void CheckDistance() override
+	void CheckDistance(int xOriginal) override
 	{
 		int distance = abs(xOriginal - posX);
 		if (distance >= MOON_AREA)

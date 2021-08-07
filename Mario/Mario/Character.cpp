@@ -8,7 +8,7 @@ Character::Character()
 	formY = 0;
 	life = 3;
 	jumpHeight = 0;
-	typeOfWeapon = 2;
+	typeOfWeapon = 4;
 	isJumping = false;
 	isSitting = false;
 	isAttack = false;

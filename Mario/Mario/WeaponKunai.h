@@ -1,6 +1,5 @@
 #pragma once
 #include "Weapon.h"
-#include "Map.h"
 
 //45x44
 #define KUNAI_HEIGHT 17
@@ -18,23 +17,29 @@ private:
 public:
 	WeaponKunai(int a_x, int a_dir, int	a_posY)
 	{
+		width = KUNAI_WIDTH;
+		height = KUNAI_HEIGHT;
+		xArea = KUNAI_AREA;
+		speed = KUNAI_SPEED;
 		posX = a_x;
 		posY = a_posY;
 		formX = a_dir;
 		dir = a_dir;
-		formY = 0;
-		xOriginal = a_x;
+		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Kunai.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
 	}
 
 	WeaponKunai()
 	{
+		width = KUNAI_WIDTH;
+		height = KUNAI_HEIGHT;
+		xArea = KUNAI_AREA;
+		speed = KUNAI_SPEED;
 		posX = 0;
 		posY = 421;
 		formX = 1;
-		formY = 0;
-		xOriginal = 0;
+		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Kunai.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
@@ -42,99 +47,18 @@ public:
 	{
 
 	}
-	void Draw(HWND hwnd, HDC hdc) override
+
+	void MakeAnimation() override
 	{
-		if (!isDead)
+		if (dir == 0)
 		{
-			hdcMem = CreateCompatibleDC(hdc);
-			oldBitmap = SelectObject(hdcMem, hbmMask);
-			GetObject(hbmMask, sizeof(bitmap), &bitmap);
-			BitBlt
-			(
-				hdc,
-				posX - BaseObject::mapSlider,
-				posY,
-				KUNAI_WIDTH,
-				KUNAI_HEIGHT,
-				hdcMem,
-				KUNAI_WIDTH * formX,
-				KUNAI_HEIGHT * formY,
-				SRCAND
-			);
-			oldBitmap = SelectObject(hdcMem, hBitmap);
-			GetObject(hBitmap, sizeof(bitmap), &bitmap);
-			BitBlt
-			(
-				hdc,
-				posX - BaseObject::mapSlider,
-				posY,
-				KUNAI_WIDTH,
-				KUNAI_HEIGHT,
-				hdcMem,
-				KUNAI_WIDTH * formX,
-				KUNAI_HEIGHT * formY,
-				SRCPAINT
-			);
-			SelectObject(hdcMem, oldBitmap);
-			DeleteDC(hdcMem);
-			if (dir == 0)
-			{
-				MoveLeft();
-			}
-			else if (dir == 1)
-			{
-				MoveRight();
-			}
-			CheckDistance();
+			MoveLeft();
 		}
-	}
-
-	void MoveLeft() override
-	{
-		posX = posX - KUNAI_SPEED;
-	}
-
-	void MoveRight() override
-	{
-		posX = posX + KUNAI_SPEED;
-	}
-
-	bool IsGoLeft() override
-	{
-		if (formX == 0)
-			return true;
-		return false;
-	}
-
-	bool IsGoRight()override
-	{
-		if (formX == 1)
-			return true;
-		return false;
-	}
-
-	void SetDeath(bool a_isDead) override
-	{
-		isDead = a_isDead;
-	}
-
-	void CheckDistance() override
-	{
-		int distance = abs(xOriginal - posX);
-		if (distance >= KUNAI_AREA)
+		else if (dir == 1)
 		{
-			isDead = true;
+			MoveRight();
 		}
-	}
-
-	int GetWidth() override
-	{
-		return KUNAI_WIDTH;
-	}
-
-	int GetHeight() override
-	{
-		return KUNAI_HEIGHT;
+		CheckDistance(xOriginal);
 	}
 
 };

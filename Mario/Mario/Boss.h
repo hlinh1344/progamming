@@ -5,7 +5,7 @@
 #define BOSS_HEIGHT 125
 #define BOSS_WIDTH 115
 #define BOSS_FLY_AREA 350
-#define BOSS_SPEED 8
+#define BOSS_SPEED 1
 
 //chang name
 class Boss : public Enemy
@@ -22,7 +22,7 @@ public:
 		speed = BOSS_SPEED;
 		yArea = BOSS_FLY_AREA;
 		posX = a_x;
-		posY = 50;
+		posY = 10;
 		formX = 3;
 		xOriginal = posX;
 		yOriginal = posY;
@@ -113,9 +113,6 @@ public:
 			}
 
 		}
-
-	
-
 	}
 
 	void SetDeath(bool a_isDead) override
@@ -130,7 +127,7 @@ public:
 	bool CheckToAttack()
 	{
 		count++;
-		if ((formX == 0) && (formY == 1) && count >= 3)
+		if ((formX == 0) && (formY == 1) && count >= 40)
 		{
 			count = 0;
 			return true;

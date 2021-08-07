@@ -1,6 +1,5 @@
 #pragma once
 #include "Weapon.h"
-#include "Map.h"
 
 #define SHURIKEN_HEIGHT 40
 #define SHURIKEN_WIDTH 45
@@ -16,6 +15,10 @@ private:
 public:
 	WeaponShuriken(int a_x, int a_dir, int	a_posY)
 	{
+		width = SHURIKEN_WIDTH;
+		height = SHURIKEN_HEIGHT;
+		xArea = SHURIKEN_AREA;
+		speed = SHURIKEN_SPEED;
 		posX = a_x;
 		posY = a_posY;
 		if (a_dir == 0)
@@ -27,19 +30,21 @@ public:
 			formX = 4;
 		}
 		dir = a_dir;
-		formY = 0;
-		xOriginal = a_x;
+		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Shuriken.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
 	}
 
 	WeaponShuriken()
 	{
+		width = SHURIKEN_WIDTH;
+		height = SHURIKEN_HEIGHT;
+		xArea = SHURIKEN_AREA;
+		speed = SHURIKEN_SPEED;
 		posX = 0;
 		posY = 421;
 		formX = 1;
-		formY = 0;
-		xOriginal = 0;
+		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Shuriken.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
 	}
@@ -47,118 +52,31 @@ public:
 	{
 
 	}
-	void Draw(HWND hwnd, HDC hdc) override
+
+	void MakeAnimation() override
 	{
-		if (!isDead)
+		posY = posY + 2;
+		if (dir == 0)
 		{
-			hdcMem = CreateCompatibleDC(hdc);
-			oldBitmap = SelectObject(hdcMem, hbmMask);
-			GetObject(hbmMask, sizeof(bitmap), &bitmap);
-			BitBlt
-			(
-				hdc,
-				posX - BaseObject::mapSlider,
-				posY,
-				SHURIKEN_WIDTH,
-				SHURIKEN_HEIGHT,
-				hdcMem,
-				SHURIKEN_WIDTH * formX,
-				SHURIKEN_HEIGHT * formY,
-				SRCAND
-			);
-			oldBitmap = SelectObject(hdcMem, hBitmap);
-			GetObject(hBitmap, sizeof(bitmap), &bitmap);
-			BitBlt
-			(
-				hdc,
-				posX - BaseObject::mapSlider,
-				posY,
-				SHURIKEN_WIDTH,
-				SHURIKEN_HEIGHT,
-				hdcMem,
-				SHURIKEN_WIDTH * formX,
-				SHURIKEN_HEIGHT * formY,
-				SRCPAINT
-			);
-			SelectObject(hdcMem, oldBitmap);
-			DeleteDC(hdcMem);
-			posY++;
-
-			if (dir == 0)
+			MoveLeft();
+			if (formX <= 0)
 			{
-				MoveLeft();
-				if (formX <= 0)
-				{
-					formX = 2;
-				}
-				else
-					formX--;
+				formX = 2;
 			}
-			else if (dir == 1)
-			{
-				MoveRight();
-				if (formX >= 5)
-				{
-					formX = 3;
-				}
-				else
-					formX++;
-			}
-
-
-			CheckDistance();
+			else
+				formX--;
 		}
-	}
-
-	void MoveLeft() override
-	{
-		posX = posX - SHURIKEN_SPEED;
-		posY++;
-	}
-
-	void MoveRight() override
-	{
-		posX = posX + SHURIKEN_SPEED;
-		posY++;
-	}
-
-	void SetDeath(bool a_isDead) override
-	{
-		isDead = a_isDead;
-		//formX = 2;
-	}
-
-	void CheckDistance() override
-	{
-		int distance = abs(xOriginal - posX);
-		if (distance >= SHURIKEN_AREA)
+		else if (dir == 1)
 		{
-			isDead = true;
+			MoveRight();
+			if (formX >= 5)
+			{
+				formX = 3;
+			}
+			else
+				formX++;
 		}
-	}
-
-	bool IsGoLeft() override
-	{
-		if ((formX >= 0) && (formX <=2))
-			return true;
-		return false;
-	}
-
-	bool IsGoRight()override
-	{
-		if ((formX >= 3) && (formX <= 5))
-			return true;
-		return false;
-	}
-
-	int GetWidth() override
-	{
-		return SHURIKEN_WIDTH;
-	}
-
-	int GetHeight() override
-	{
-		return SHURIKEN_HEIGHT;
+		CheckDistance(xOriginal);
 	}
 
 };

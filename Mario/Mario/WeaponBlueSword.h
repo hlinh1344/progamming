@@ -1,6 +1,5 @@
 #pragma once
 #include "Weapon.h"
-#include "Map.h"
 
 //45x44
 #define BLUE_SWORD_HEIGHT 29
@@ -49,20 +48,17 @@ public:
 
 	}
 
-
-
-	bool IsGoLeft() override
+	void MakeAnimation() override
 	{
-		if (formX == 0)
-			return true;
-		return false;
-	}
-
-	bool IsGoRight()override
-	{
-		if (formX == 1)
-			return true;
-		return false;
+		if (dir == 0)
+		{
+			MoveLeft();
+		}
+		else if (dir == 1)
+		{
+			MoveRight();
+		}
+		CheckDistance(xOriginal);
 	}
 
 };

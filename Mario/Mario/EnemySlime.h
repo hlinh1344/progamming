@@ -1,6 +1,6 @@
 #pragma once
 #include "Enemy.h"
-#include "Map.h"
+
 
 #define SLIME_HEIGHT 120
 #define SLIME_WIDTH 115

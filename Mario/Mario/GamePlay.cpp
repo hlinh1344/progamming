@@ -213,7 +213,7 @@ void GamePlay::Run()
 	//weapon
 	for (auto weapon : weapons) 
 	{
-		weapon->MakeAnimation();
+		//weapon->MakeAnimation();
 		for (auto enemy : enemies)
 		{
 
