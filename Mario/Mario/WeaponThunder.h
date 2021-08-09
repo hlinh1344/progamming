@@ -101,11 +101,4 @@ public:
 		CheckDistance(xOriginal);
 	}
 
-
-
-	void MoveLeft() override
-	{
-		posX = posX - THUNDER_SPEED;
-	}
-
 };

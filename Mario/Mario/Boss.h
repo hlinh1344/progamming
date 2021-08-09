@@ -56,21 +56,6 @@ public:
 
 	}
 
-	bool IsGoLeft() override
-	{
-		if ((formX >= 0) && (formX <= 2))
-			return true;
-		return false;
-	}
-
-	bool IsGoRight() override
-	{
-		if ((formX >= 3) && (formX <= 5))
-			return true;
-		return false;
-	}
-
-
 	void MakeAnimation() override
 	{
 		clock++;

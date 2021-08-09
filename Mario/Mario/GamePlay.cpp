@@ -170,8 +170,8 @@ void GamePlay::Run()
 			if (CheckCollision(ninja, enemy))
 			{
 					//enemy->SetDeath(true);
-					//ninja->SetDeath(true);
-					//ninja->IncreseLife(-1);
+					ninja->SetDeath(true);
+					ninja->IncreseLife(-1);
 			}
 		}
 
@@ -200,8 +200,8 @@ void GamePlay::Run()
 			if (CheckCollision(ninja, moon) == true)
 			{
 				moon->SetDeath(true);
-				//ninja->SetDeath(true);
-				//ninja->IncreseLife(-1);
+				ninja->SetDeath(true);
+				ninja->IncreseLife(-1);
 			}
 		}
 	}
@@ -219,10 +219,9 @@ void GamePlay::Run()
 
 			if (CheckCollision(weapon, enemy) == true)
 			{
+				ninja->IncreaseScore(enemy->GetValue());
 				enemy->SetDeath(true);
 				weapon->SetDeath(true);
-				ninja->IncreaseScore(1);
-
 			}
 		}
 
@@ -244,7 +243,7 @@ void GamePlay::Run()
 			if (CheckCollision(weapon, boss))
 			{
 				boss->SetDeath(true);
-				ninja->IncreaseScore(2);
+				ninja->IncreaseScore(10);
 			}
 		}
 		
@@ -671,6 +670,7 @@ void  GamePlay::AddWeapon(int type, int dir_Moving, int stage)
 	}
 	else if (type == 3)
 	{
+
 		if (dir_Moving == 0)
 		{
 			if (stage == 0)

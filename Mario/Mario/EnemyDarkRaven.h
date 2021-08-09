@@ -27,7 +27,7 @@ public:
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkRaven.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
-
+		value = 8;
 	}
 
 	EnemyDarkRaven()
@@ -45,6 +45,7 @@ public:
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Girl.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
+		value = 8;
 	}
 
 	~EnemyDarkRaven()

@@ -24,7 +24,7 @@ public:
 		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkDragon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
-
+		value = 6;
 	}
 
 	EnemyDarkDragon()
@@ -39,6 +39,7 @@ public:
 		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkDragon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
+		value = 6;
 	}
 
 	~EnemyDarkDragon()

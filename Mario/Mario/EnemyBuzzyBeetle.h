@@ -24,7 +24,7 @@ public:
 		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"BuzzyBeetle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
-
+		value = 1;
 	}
 
 	EnemyBuzzyBeetle()
@@ -39,6 +39,7 @@ public:
 		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"BuzzyBeetle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
+		value = 1;
 	}
 
 	~EnemyBuzzyBeetle()

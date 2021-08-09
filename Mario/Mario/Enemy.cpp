@@ -10,3 +10,8 @@ Enemy::~Enemy()
 {
 
 }
+
+int Enemy::GetValue()
+{
+	return value;
+}

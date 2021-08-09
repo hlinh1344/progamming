@@ -9,8 +9,10 @@ protected:
 	int xArea;
 	int yArea;
 	int yOriginal;
+	int value;
 public:
 	Enemy();
 	~Enemy();
+	int GetValue();
 };
 

@@ -1,4 +1,7 @@
 #include "Character.h"
+#include <WindowsX.h>
+
+#pragma comment(lib, "winmm.lib")
 
 Character::Character()
 {
@@ -6,9 +9,9 @@ Character::Character()
 	posY = 353;
 	formX = 10;
 	formY = 0;
-	life = 3;
+	life = 2;
 	jumpHeight = 0;
-	typeOfWeapon = 4;
+	typeOfWeapon = 3;
 	isJumping = false;
 	isSitting = false;
 	isAttack = false;
@@ -444,6 +447,8 @@ void Character::Draw(HWND hwnd, HDC hdc)
 	else
 	{
 		//Game Over
+
+		PlaySound(L"ByeBye.wav", NULL, SND_FILENAME | SND_ASYNC);
 		if (countGameOver > 50)
 		{
 			countGameOver = countGameOver - 20;

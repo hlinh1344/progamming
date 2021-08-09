@@ -12,44 +12,52 @@
 class Moon : public Weapon
 {
 private:
-	int xOriginal;
 	bool isFalling;
-	int originalposY;
 public:
 	Moon(int a_posY)
 	{
+		width = MOON_WIDTH;
+		height = MOON_HEIGHT;
+		xArea = MOON_AREA;
+		speed = MOON_SPEED;
 		posX = 3500;
 		posY = a_posY;
 		formX = 7;
 		dir = 0;
-		formY = 0;
-		xOriginal = posX;
 		isFalling = true;
-		originalposY = a_posY;
+		xOriginal = posX;
+		yOriginal = posY;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Moon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
 	}
 
 	Moon(int a_posX, int a_posY)
 	{
+		width = MOON_WIDTH;
+		height = MOON_HEIGHT;
+		xArea = MOON_AREA;
+		speed = MOON_SPEED;
 		posX = a_posX;
 		posY = a_posY;
 		formX = 7;
 		dir = 0;
-		formY = 0;
-		xOriginal = posX;
 		isFalling = true;
-		originalposY = a_posY;
+		xOriginal = posX;
+		yOriginal = posY;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Moon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
 	}
 	Moon()
 	{
+		width = MOON_WIDTH;
+		height = MOON_HEIGHT;
+		xArea = MOON_AREA;
+		speed = MOON_SPEED;
 		posX = 3600;
 		posY = 421;
 		formX = 1;
-		formY = 0;
-		xOriginal = 0;
+		xOriginal = posX;
+		yOriginal = posY;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Moon.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -58,105 +66,37 @@ public:
 	{
 
 	}
-	void Draw(HWND hwnd, HDC hdc) override
+
+
+	void MakeAnimation()
 	{
-		if (!isDead)
+		if (dir == 0)
 		{
-			hdcMem = CreateCompatibleDC(hdc);
-			oldBitmap = SelectObject(hdcMem, hbmMask);
-			GetObject(hbmMask, sizeof(bitmap), &bitmap);
-			BitBlt
-			(
-				hdc,
-				posX - BaseObject::mapSlider,
-				posY,
-				MOON_WIDTH,
-				MOON_HEIGHT,
-				hdcMem,
-				MOON_WIDTH * formX,
-				MOON_HEIGHT * formY,
-				SRCAND
-			);
-			oldBitmap = SelectObject(hdcMem, hBitmap);
-			GetObject(hBitmap, sizeof(bitmap), &bitmap);
-			BitBlt
-			(
-				hdc,
-				posX - BaseObject::mapSlider,
-				posY,
-				MOON_WIDTH,
-				MOON_HEIGHT,
-				hdcMem,
-				MOON_WIDTH * formX,
-				MOON_HEIGHT * formY,
-				SRCPAINT
-			);
-			SelectObject(hdcMem, oldBitmap);
-			DeleteDC(hdcMem);
-			if (dir == 0)
+			MoveLeft();
+			if (formX <= 0)
 			{
-				MoveLeft();
-				if (formX <= 0)
-				{
-					formX = 8;
-				}
-				else
-					formX--;
+				formX = 8;
 			}
+			else
+				formX--;
+		}
 
-			CheckDistance(xOriginal);
-
-			if (isFalling)
+		if (isFalling)
+		{
+			posY = posY + 20;
+			if (posY >= yOriginal + 70)
 			{
-				posY = posY + 20;
-				if (posY >= originalposY + 70)
-				{
-					isFalling = false;
-				}
-			}
-			else if (!isFalling)
-			{
-				posY = posY - 20;
-				if (posY <= originalposY - 70)
-				{
-					isFalling = true;
-				}
+				isFalling = false;
 			}
 		}
-	}
-
-	void MoveLeft() override
-	{
-		posX = posX - MOON_SPEED;
-	}
-
-	void MoveRight() override
-	{
-		posX = posX + MOON_SPEED;
-	}
-
-	void SetDeath(bool a_isDead) override
-	{
-		isDead = a_isDead;
-
-	}
-
-	void CheckDistance(int xOriginal) override
-	{
-		int distance = abs(xOriginal - posX);
-		if (distance >= MOON_AREA)
+		else if (!isFalling)
 		{
-			isDead = true;
+			posY = posY - 20;
+			if (posY <= yOriginal - 70)
+			{
+				isFalling = true;
+			}
 		}
-	}
-
-	int GetWidth() override
-	{
-		return MOON_WIDTH;
-	}
-
-	int GetHeight() override
-	{
-		return MOON_HEIGHT;
+		CheckDistance(xOriginal);
 	}
 };

@@ -26,7 +26,7 @@ public:
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkGirl.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
-
+		value = 7;
 	}
 
 	EnemyDarkGirl()
@@ -42,25 +42,12 @@ public:
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"DarkGirl.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
+		value = 7;
 	}
 
 	~EnemyDarkGirl()
 	{
 
-	}
-
-	bool IsGoLeft() override
-	{
-		if ((formX >= 0) && (formX <= 2))
-			return true;
-		return false;
-	}
-
-	bool IsGoRight() override
-	{
-		if ((formX >= 3) && (formX <= 5))
-			return true;
-		return false;
 	}
 
 	void MakeAnimation() override

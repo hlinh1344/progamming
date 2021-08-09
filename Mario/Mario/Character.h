@@ -77,7 +77,6 @@ public:
 	void IncreseClock();
 	int GetClock();
 	void ResetClock();
-	//void IncreaseScore();
 	void IncreaseScore(int n);
 };
 
