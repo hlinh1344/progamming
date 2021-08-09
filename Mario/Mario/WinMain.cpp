@@ -165,11 +165,6 @@ void OnKeyDown(HWND hwnd, WPARAM wParam)
 			int MenuSelection = gamePlay.Select();
 			switch (MenuSelection)
 			{
-			case -1:
-			{
-				globalRunning = 0;
-				DestroyWindow(hwnd);
-			}
 			case 1:
 				PlaySound(L"Camp.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
 				break;
@@ -193,6 +188,12 @@ void OnKeyDown(HWND hwnd, WPARAM wParam)
 				break;
 			case 99:
 				break;
+			case -1:
+			{
+				globalRunning = 0;
+				DestroyWindow(hwnd);
+				break;
+			}
 			default:
 				PlaySound(NULL, NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
 				break;

@@ -448,7 +448,7 @@ void Character::Draw(HWND hwnd, HDC hdc)
 	{
 		//Game Over
 
-		PlaySound(L"ByeBye.wav", NULL, SND_FILENAME | SND_ASYNC);
+		//PlaySound(L"ByeBye.wav", NULL, SND_FILENAME | SND_ASYNC);
 		if (countGameOver > 50)
 		{
 			countGameOver = countGameOver - 20;
@@ -554,7 +554,6 @@ int Character::GetJumpingHeight()
 void Character::SetDeath(bool a_isDead)
 {
 	isDead = a_isDead;
-
 }
 
 bool Character::CheckDeath()

@@ -6,19 +6,24 @@
 #define MENU_WIDTH 990
 #define SELECTION_HEIGHT 148
 #define SELECTION_WIDTH 347
-
+#define SONG_NAME_HEIGHT 41
+#define SONG_NAME_WIDTH 290
 
 
 class Menu : public BaseObject
 {
 private:
-	HBITMAP hBitmap_Menu;
+	HBITMAP hBitmap_Menu, hBitmap_Song, hBitmap_SongMask;
 	int songID;
 	int formMenu;
+	int songPosX;
+	bool changeDirection;
 public:
 
 	Menu()
 	{
+		changeDirection = false;
+		songPosX = 10;
 		songID = 0;
 		posX = 45;
 		posY = 150;
@@ -26,9 +31,10 @@ public:
 		formY = 0;
 		formMenu = 0;
 		hBitmap_Menu = (HBITMAP)LoadImage(hInst, L"Menu2.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-
+		hBitmap_Song = (HBITMAP)LoadImage(hInst, L"SongList.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Selection.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
+		hBitmap_SongMask = CreateBitmapMask(hBitmap_Song, RGB(0, 0, 0));
 	}
 
 	~Menu()
@@ -117,8 +123,51 @@ public:
 			SELECTION_HEIGHT * formY,
 			SRCPAINT
 		);
-		SelectObject(hdcMem, oldBitmap);
-		DeleteDC(hdcMem);
+		
+		//--------
+		oldBitmap = SelectObject(hdcMem, hBitmap_SongMask);
+		GetObject(hBitmap_SongMask, sizeof(bitmap), &bitmap);
+		BitBlt
+		(
+			hdc,
+			songPosX ,
+			10,
+			SONG_NAME_WIDTH,
+			SONG_NAME_HEIGHT,
+			hdcMem,
+			SONG_NAME_WIDTH * formMenu,
+			SONG_NAME_HEIGHT * (songID - 1),
+			SRCAND
+		);
+		oldBitmap = SelectObject(hdcMem, hBitmap_Song);
+		GetObject(hBitmap_Song, sizeof(bitmap), &bitmap);
+		BitBlt
+		(
+			hdc,
+			songPosX,
+			10,
+			SONG_NAME_WIDTH,
+			SONG_NAME_HEIGHT,
+			hdcMem,
+			SONG_NAME_WIDTH * formMenu,
+			SONG_NAME_HEIGHT * (songID - 1),
+			SRCPAINT
+		);
+
+		if (changeDirection == false)
+		{
+			songPosX = songPosX + 3;
+			if (songPosX >= 600)
+				changeDirection = true;
+		}
+		else
+		{
+			songPosX = songPosX - 3;
+			if (songPosX <= 10)
+				changeDirection = false;
+		}
+
+
 
 		if (formX >= 3)
 		{
@@ -126,7 +175,8 @@ public:
 		}
 		else
 			formX++;
-
+		SelectObject(hdcMem, oldBitmap);
+		DeleteDC(hdcMem);
 	}
 
 	int SelectOption(bool& inMenu)
@@ -138,7 +188,7 @@ public:
 		}
 		else if (posY == 150 + SELECTION_HEIGHT)
 		{
-			if (songID >= 6)
+			if (songID >= 7)
 				songID = 0;
 			else
 				songID++;

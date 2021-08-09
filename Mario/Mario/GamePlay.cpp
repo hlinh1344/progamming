@@ -34,240 +34,237 @@ GamePlay::~GamePlay()
 void GamePlay::Run()
 {
 	clock++;
-
-	map.checkToAddEnemy(BaseObject::mapSlider + MAP_WIDTH, enemyID, checkToAdd);
-
-	if (checkToAdd == true)
+	if (inMenu == false)
 	{
-		switch (enemyID)
+		map.checkToAddEnemy(BaseObject::mapSlider + MAP_WIDTH, enemyID, checkToAdd);
+
+		if (checkToAdd == true)
 		{
-		case 1:
-			enemies.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 2:
-			enemies.push_back(new EnemyBird(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 3:
-			enemies.push_back(new EnemyBuzzyBeetle(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 4:
-			enemies.push_back(new EnemyWhiteGhost(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 5:
-			enemies.push_back(new EnemySpinyBeetle(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 6:
-			enemies.push_back(new EnemyDarkRaven(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 7:
-			enemies.push_back(new EnemySlime(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 8:
-			enemies.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 9:
-			enemies.push_back(new EnemyBird(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 10:
-			enemies.push_back(new EnemySpinyBeetle(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 11:
-			enemies.push_back(new EnemyDarkGirl(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 12:
-			enemies.push_back(new EnemyDarkDragon(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 13:
-			enemies.push_back(new EnemyWhiteGhost(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 14:
-			enemies.push_back(new EnemyBuzzyBeetle(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 15:
-			enemies.push_back(new EnemyMonsterGirl(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 16:
-			enemies.push_back(new EnemySlime(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 17:
-			enemies.push_back(new EnemyDarkRaven(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 18:
-			enemies.push_back(new EnemyDarkGirl(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 19:
-			enemies.push_back(new EnemyDarkDragon(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 20:
-			enemies.push_back(new EnemyMonsterGirl(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		default:
-			break;
-		}
-	}
-	
-
-	map.checkToAddItem(BaseObject::mapSlider + MAP_WIDTH, itemID, checkToAdd);
-	if (checkToAdd == true)
-	{
-		switch (itemID)
-		{
-		case 1:
-			items.push_back(new BlueSwordItem(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 2:
-			items.push_back(new ShurikenItem(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 3:
-			items.push_back(new KunaiItem(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 4:
-			items.push_back(new ShurikenItem(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 5:
-			items.push_back(new KunaiItem(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 6:
-			items.push_back(new BlueSwordItem(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 7:
-			items.push_back(new FlameItem(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 8:
-			items.push_back(new ThunderDragonItem(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 9:
-			items.push_back(new FlameItem(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		case 10:
-			items.push_back(new ThunderDragonItem(BaseObject::mapSlider + MAP_WIDTH));
-			break;
-		default:
-			break;
-		}
-	}
-
-	if (bossStillLive == true)
-	{
-		if (boss->CheckToAttack() == true)
-		{
-			moons.push_back(new Moon(boss->GetPosX(), boss->GetPosY() - 20));
-		}
-	}
-	
-
-
-
-	//main character
-	ninja->MakeAnimation();
-
-
-	//check collision main vs monster
-	if (ninja->CheckDeath() == false)
-	{
-		for (auto enemy : enemies)
-		{
-			if (CheckCollision(ninja, enemy))
+			switch (enemyID)
 			{
-					//enemy->SetDeath(true);
-					ninja->SetDeath(true);
-					ninja->IncreseLife(-1);
+			case 1:
+				enemies.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 2:
+				enemies.push_back(new EnemyBird(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 3:
+				enemies.push_back(new EnemyBuzzyBeetle(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 4:
+				enemies.push_back(new EnemyWhiteGhost(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 5:
+				enemies.push_back(new EnemySpinyBeetle(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 6:
+				enemies.push_back(new EnemyDarkRaven(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 7:
+				enemies.push_back(new EnemySlime(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 8:
+				enemies.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 9:
+				enemies.push_back(new EnemyBird(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 10:
+				enemies.push_back(new EnemySpinyBeetle(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 11:
+				enemies.push_back(new EnemyDarkGirl(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 12:
+				enemies.push_back(new EnemyDarkDragon(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 13:
+				enemies.push_back(new EnemyWhiteGhost(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 14:
+				enemies.push_back(new EnemyBuzzyBeetle(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 15:
+				enemies.push_back(new EnemyMonsterGirl(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 16:
+				enemies.push_back(new EnemySlime(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 17:
+				enemies.push_back(new EnemyDarkRaven(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 18:
+				enemies.push_back(new EnemyDarkGirl(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 19:
+				enemies.push_back(new EnemyDarkDragon(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 20:
+				enemies.push_back(new EnemyMonsterGirl(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			default:
+				break;
+			}
+		}
+
+
+		map.checkToAddItem(BaseObject::mapSlider + MAP_WIDTH, itemID, checkToAdd);
+		if (checkToAdd == true)
+		{
+			switch (itemID)
+			{
+			case 1:
+				items.push_back(new BlueSwordItem(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 2:
+				items.push_back(new ShurikenItem(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 3:
+				items.push_back(new KunaiItem(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 4:
+				items.push_back(new ShurikenItem(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 5:
+				items.push_back(new KunaiItem(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 6:
+				items.push_back(new BlueSwordItem(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 7:
+				items.push_back(new FlameItem(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 8:
+				items.push_back(new ThunderDragonItem(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 9:
+				items.push_back(new FlameItem(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			case 10:
+				items.push_back(new ThunderDragonItem(BaseObject::mapSlider + MAP_WIDTH));
+				break;
+			default:
+				break;
+			}
+		}
+
+		if (bossStillLive == true)
+		{
+			if (boss->CheckToAttack() == true)
+			{
+				moons.push_back(new Moon(boss->GetPosX(), boss->GetPosY() - 20));
 			}
 		}
 
 
 
 
-		//////item
+		//main character
+		ninja->MakeAnimation();
 
-		for (auto item : items)
+
+		//check collision main vs monster
+		if (ninja->CheckDeath() == false)
 		{
-			item->MakeAnimation();
-			if (CheckCollision(ninja, item))
+			for (auto enemy : enemies)
 			{
-				ninja->SetTypeOfWeapon(item->GetTypeOfWeapn());
-				item->SetDeath(true);
-				items.erase(items.begin() + countID);
+				if (CheckCollision(ninja, enemy))
+				{
+					//enemy->SetDeath(true);
+					ninja->SetDeath(true);
+					ninja->IncreseLife(-1);
+				}
+			}
+
+
+
+
+			//////item
+
+			for (auto item : items)
+			{
+				item->MakeAnimation();
+				if (CheckCollision(ninja, item))
+				{
+					ninja->SetTypeOfWeapon(item->GetTypeOfWeapn());
+					item->SetDeath(true);
+					items.erase(items.begin() + countID);
+				}
+				countID++;
+			}
+			countID = 0;
+
+			//moon
+			for (auto moon : moons)
+			{
+				moon->MakeAnimation();
+				if (CheckCollision(ninja, moon) == true)
+				{
+					moon->SetDeath(true);
+					ninja->SetDeath(true);
+					ninja->IncreseLife(-1);
+				}
+			}
+		}
+
+		//weapon
+		for (auto weapon : weapons)
+		{
+			//weapon->MakeAnimation();
+			for (auto enemy : enemies)
+			{
+
+				if (CheckCollision(weapon, enemy) == true)
+				{
+					ninja->IncreaseScore(enemy->GetValue());
+					enemy->SetDeath(true);
+					weapon->SetDeath(true);
+				}
+			}
+
+			for (auto moon : moons)
+			{
+
+				if (CheckCollision(weapon, moon) == true)
+				{
+					moon->SetDeath(true);
+					weapon->SetDeath(true);
+
+
+				}
+			}
+
+			//boss
+			if (bossStillLive == true)
+			{
+				if (CheckCollision(weapon, boss))
+				{
+					boss->SetDeath(true);
+					ninja->IncreaseScore(10);
+				}
+			}
+
+		}
+
+		//--------
+		if (bossStillLive == true)
+		{
+			boss->MakeAnimation();
+		}
+
+		//enemy
+
+		for (auto enemy : enemies) {
+			enemy->MakeAnimation();
+			if (enemy->CheckDeath() == true)
+			{
+				enemies.erase(enemies.begin() + countID);
 			}
 			countID++;
 		}
 		countID = 0;
 
-		//moon
-		for (auto moon : moons)
-		{
-			moon->MakeAnimation();
-			if (CheckCollision(ninja, moon) == true)
-			{
-				moon->SetDeath(true);
-				ninja->SetDeath(true);
-				ninja->IncreseLife(-1);
-			}
-		}
 	}
-	
-
-	
-
-	
-	//weapon
-	for (auto weapon : weapons) 
-	{
-		//weapon->MakeAnimation();
-		for (auto enemy : enemies)
-		{
-
-			if (CheckCollision(weapon, enemy) == true)
-			{
-				ninja->IncreaseScore(enemy->GetValue());
-				enemy->SetDeath(true);
-				weapon->SetDeath(true);
-			}
-		}
-
-		for (auto moon : moons)
-		{
-
-			if (CheckCollision(weapon, moon) == true)
-			{
-				moon->SetDeath(true);
-				weapon->SetDeath(true);
-
-
-			}
-		}
-
-		//boss
-		if (bossStillLive == true)
-		{
-			if (CheckCollision(weapon, boss))
-			{
-				boss->SetDeath(true);
-				ninja->IncreaseScore(10);
-			}
-		}
-		
-	}
-
-
-	//--------
-	if (bossStillLive == true)
-	{
-		boss->MakeAnimation();
-	}
-	
-	//enemy
-
-	for (auto enemy : enemies) {
-		enemy->MakeAnimation();
-		if (enemy->CheckDeath() == true)
-		{
-			enemies.erase(enemies.begin() + countID);
-		}
-		countID++;
-	}
-	countID = 0;
-
 	//item
 
 }
