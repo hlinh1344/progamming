@@ -7,6 +7,7 @@
 #define CHARACTER_WIDTH 125
 #define CHARACTER_HEIGHT 115
 #define PLAYER_SPEED 5
+#define JUMP_VAL 3
 #define NOTIFICATION_WIDTH 500
 #define NOTIFICATION_HEIGHT 270
 #define HEAR_WIDTH 40
@@ -20,9 +21,10 @@ class Character : public LiveObject
 private:
 	int life;
 	int jumpHeight;
-	bool isJumping;
+	bool onGround;
 	bool isSitting;
 	bool isAttack;
+	bool isJump;
 	int typeOfWeapon;
 	int formOfUnits;
 	int formOfTens;
@@ -32,6 +34,8 @@ private:
 	bool isTens;
 	bool isHundreds;
 	bool isThousands;
+	bool goingLeft;
+	bool goingRight;
 
 	HBITMAP hBitmap_GameOver, hbmMask_GameOver, hBitmap_YouWin, hbmMask_YouWin;
 	HBITMAP hBitmap_Hear, hbmMask_Hear;
@@ -57,7 +61,7 @@ public:
 	bool IsGoRight() override;
 	void SetJump(bool trueOrFalse);
 	void SetSit(bool trueOrFalse);
-	bool CheckJumping();
+	bool CheckOnGround();
 	bool CheckSitting();
 	void SetJumpHeight(int a_jumpHeight);
 	void IncreseJumpingHeight(int a);
@@ -73,11 +77,14 @@ public:
 	void MakeAnimation() override;
 	void Regeneration();
 	void IncreseLife(int a_life);
-	void Win();
 	void IncreseClock();
 	int GetClock();
 	void ResetClock();
 	void IncreaseScore(int n);
+	void KeyUpRight();
+	void KeyUpLeft();
+	void KeyUpDown();
+	void KeyUpUp();
 };
 
 

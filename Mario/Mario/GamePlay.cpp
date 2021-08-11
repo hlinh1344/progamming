@@ -368,8 +368,6 @@ void GamePlay::MoveNinjaLeft()
 		{
 			ninja->IncresePosX(PLAYER_SPEED);
 		}
-
-		
 	}
 }
 
@@ -378,21 +376,7 @@ void GamePlay::MoveNinjaRight()
 	//move
 	if (!ninja->CheckDeath())
 	{
-		ninja->MoveRight();
-
-		if (ninja->GetPosX() - map.getMapSlider() >= 250)
-		{
-			map.increseMapSlider(PLAYER_SPEED);
-		}
-
-		if (ninja->GetPosX() >= END_OF_MAP)
-		{
-			map.increseMapSlider(-PLAYER_SPEED);
-			ninja->IncresePosX(-PLAYER_SPEED);
-			ninja->Win();
-		}
-
-		
+		ninja->MoveRight();	
 	}
 }
 
@@ -420,7 +404,7 @@ void GamePlay::MoveNinjaDown()
 	if (!ninja->CheckDeath())
 	{
 		ninja->MoveDown();
-		if (ninja->CheckJumping() == true)
+		if (ninja->CheckOnGround() == false)
 		{
 			if (ninja->IsGoRight())
 			{
@@ -453,87 +437,22 @@ void GamePlay::MoveNinjaDown()
 
 void GamePlay::KeyUpDown()
 {
-	if (!ninja->CheckDeath())
-	{
-		ninja->SetSit(false);
-		if (ninja->CheckJumping() == true)
-		{
-			if (ninja->IsGoRight())
-			{
-				ninja->SetFormX(12);
-				ninja->SetFormY(1);
-			}
-			else if (ninja->IsGoLeft())
-			{
-				ninja->SetFormX(7);
-				ninja->SetFormY(1);
-			}
-		}
-		else
-		{
-			if (ninja->IsGoRight())
-			{
-				ninja->SetFormX(10);
-				ninja->SetFormY(0);
-			}
-			else if (ninja->IsGoLeft())
-			{
-				ninja->SetFormX(9);
-				ninja->SetFormY(0);
-			}
-		}
-	}
+	ninja->KeyUpDown();
 }
 
 void GamePlay::KeyUpUp()
 {
-	if (!ninja->CheckDeath())
-	{
-		if (ninja->CheckJumping() == true)
-		{
-			if (ninja->IsGoRight())
-			{
-				ninja->SetFormX(10);
-				ninja->SetFormY(1);
-			}
-			else if (ninja->IsGoLeft())
-			{
-				ninja->SetFormX(9);
-				ninja->SetFormY(1);
-			}
-		}
-		else
-		{
-			if (ninja->IsGoRight())
-			{
-				ninja->SetFormX(10);
-				ninja->SetFormY(0);
-			}
-			else if (ninja->IsGoLeft())
-			{
-				ninja->SetFormX(9);
-				ninja->SetFormY(0);
-			}
-		}
-	}
+	ninja->KeyUpUp();
 }
 
 void GamePlay::KeyUpRight()
 {
-	if (!ninja->CheckDeath())
-	{
-		ninja->SetFormX(10);
-	}
-
+	ninja->KeyUpRight();
 }
 
 void GamePlay::KeyUpLeft()
 {
-	if (!ninja->CheckDeath())
-	{
-		ninja->SetFormX(9);
-	}
-
+	ninja->KeyUpLeft();
 }
 
 bool GamePlay::CheckCollision(BaseObject* object1, BaseObject* object2)
@@ -752,11 +671,11 @@ void GamePlay::Attack()
 				{
 					AddWeapon(typeOfWeapon, 0, 0);
 				}
-				else if (ninja->CheckJumping() == true)
+				else if (ninja->CheckOnGround() == false)
 				{
 					AddWeapon(typeOfWeapon, 0, 1);
 				}
-				else if (ninja->CheckJumping() == false)
+				else if (ninja->CheckOnGround() == true)
 				{
 					AddWeapon(typeOfWeapon, 0, 2);
 				}
@@ -771,11 +690,11 @@ void GamePlay::Attack()
 				{
 					AddWeapon(typeOfWeapon, 1, 0);
 				}
-				else if (ninja->CheckJumping() == true)
+				else if (ninja->CheckOnGround() == false)
 				{
 					AddWeapon(typeOfWeapon, 1, 1);
 				}
-				else if (ninja->CheckJumping() == false)
+				else if (ninja->CheckOnGround() == true)
 				{
 					AddWeapon(typeOfWeapon, 1, 2);
 				}

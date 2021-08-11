@@ -12,10 +12,13 @@ Character::Character()
 	life = 2;
 	jumpHeight = 0;
 	typeOfWeapon = 3;
-	isJumping = false;
+	onGround = true;
 	isSitting = false;
 	isAttack = false;
+	isJump = false;
 	isWin = false;
+	goingLeft = false;
+	goingRight = false;
 	score = 0;
 	hBitmap_Hear = (HBITMAP)LoadImage(hInst, L"Hear.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hBitmap_GameOver = (HBITMAP)LoadImage(hInst, L"GameOver.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -71,21 +74,15 @@ void Character::IncreseFormX(int a)
 
 void Character::MoveLeft()
 {
+	goingLeft = true;
+	goingRight = false;
 	posX = posX - PLAYER_SPEED;
 	//change sprite
-	if (jumpHeight > 0)
+	if (CheckOnGround() == false)
 	{
-		if (Character::IsGoRight())
-		{
-			formX = 9;
-		}
-		else
-		{
-			if (formX <= 6)
-				formX = 9;
-			else
-				formX = formX - 1;
-		}
+
+		formX = 9;
+		formY = 1;
 	}
 	else
 	{
@@ -103,21 +100,15 @@ void Character::MoveLeft()
 
 void Character::MoveRight()
 {
+	goingLeft = false;
+	goingRight = true;
 	posX = posX + PLAYER_SPEED;
 	//change sprite
-	if (jumpHeight > 0)
+	if (CheckOnGround() == false)
 	{
-		if (Character::IsGoLeft())
-		{
-			formX= 10;
-		}
-		else
-		{
-			if (formX >= 13)
-				formX = 10;
-			else
-				formX = formX + 1;
-		}
+
+		formX = 10;
+		formY = 1;
 	}
 	else
 	{
@@ -132,16 +123,42 @@ void Character::MoveRight()
 		}
 	}
 
+	if (posX - BaseObject::mapSlider >= 250)
+	{
+		BaseObject::mapSlider += PLAYER_SPEED;
+	}
+
+	if (posX >= END_OF_MAP)
+	{
+		BaseObject::mapSlider -= PLAYER_SPEED;
+		posX -= PLAYER_SPEED;
+		isWin = true;
+	}
+
+
 }
 
 void Character::MoveUp()
 {
-
-	isJumping = true;
-	if (jumpHeight <= 270)
+	if (goingRight == true)
 	{
-		jumpHeight += 80;
+		MoveRight();
 	}
+	else if (goingLeft == true)
+	{
+		MoveLeft();
+	}
+
+
+	if (onGround == true)
+	{
+		isJump = true;
+	}
+
+	//if (jumpHeight <= 270)
+	//{
+	//	jumpHeight += 80;
+	//}
 
 }
 
@@ -408,7 +425,7 @@ void Character::Draw(HWND hwnd, HDC hdc)
 			{
 				formY = 2;
 			}
-			else if (CheckJumping() == false)
+			else if (CheckOnGround() == true)
 			{
 				formY = 0;
 			}
@@ -513,7 +530,7 @@ bool  Character::IsGoRight()
 }
 void Character::SetJump(bool trueOrFalse)
 {
-	isJumping = trueOrFalse;
+	onGround = trueOrFalse;
 }
 
 void Character::SetSit(bool trueOrFalse)
@@ -521,14 +538,14 @@ void Character::SetSit(bool trueOrFalse)
 	isSitting = trueOrFalse;
 }
 
-bool Character::CheckJumping()
+bool Character::CheckOnGround()
 {
 	if (jumpHeight > 0)
-		isJumping = true;
+		onGround = false;
 	else
-		isJumping = false;
+		onGround = true;
 
-	return isJumping;
+	return onGround;
 }
 
 bool Character::CheckSitting()
@@ -611,14 +628,22 @@ void Character::MakeAnimation()
 		jumpHeight += 10;
 		if ((life >=0) && (jumpHeight >= 400))
 		{
-			posX = posX - 200;
+			posX = BaseObject::mapSlider;
 			Character::Regeneration();
 		}
 	}
 
-	if ((isDead == false) && (jumpHeight) > 0)
+	if ((isDead == false) && (isJump == true))
 	{
-		jumpHeight -= 2;
+		jumpHeight += JUMP_VAL;
+		if (jumpHeight >= 270)
+		{
+			isJump = false;
+		}
+	}
+	else if ((isDead == false) && (CheckOnGround() == false))
+	{
+		jumpHeight -= JUMP_VAL;
 	}
 }
 
@@ -628,7 +653,7 @@ void Character::Regeneration()
 	formX = 10;
 	formY = 0;
 	jumpHeight = 0;
-	isJumping = false;
+	onGround = true;
 	isSitting = false;
 	isAttack = false;
 	isDead = false;
@@ -640,11 +665,6 @@ void Character::Regeneration()
 void Character::IncreseLife(int a_life)
 {
 	life = life + a_life;
-}
-
-void Character::Win()
-{
-	isWin = true;
 }
 
 void Character::IncreseClock()
@@ -691,4 +711,78 @@ void Character::IncreaseScore(int n)
 	else
 		formOfUnits = score;
 		
+}
+
+void Character::KeyUpRight()
+{
+	if (isDead == false)
+	{
+		goingRight = false;
+		formX = 10;
+	}
+}
+
+void Character::KeyUpLeft()
+{
+	if (isDead == false)
+	{
+		goingLeft = false;
+		formX = 9;
+	}
+}
+
+void Character::KeyUpDown()
+{
+	if (isDead == false)
+	{
+		isSitting = false;
+		if (onGround == false)
+		{
+			formY = 1;
+			if (IsGoRight())
+			{
+				formX = 12;
+			}
+			else if (IsGoLeft())
+			{
+				formX = 7;
+			}
+		}
+		else
+		{
+			formY = 0;
+			if (IsGoRight())
+			{
+				formX = 10;
+			}
+			else if (IsGoLeft())
+			{
+				formX = 9;
+			}
+		}
+	}
+}
+
+void Character::KeyUpUp()
+{
+	if (isDead == false)
+	{
+		if (IsGoRight())
+		{
+			formX = 10;
+		}
+		else if (IsGoLeft())
+		{
+			formX = 9;
+		}
+
+		if (onGround == false)
+		{
+			formY = 1;
+		}
+		else
+		{
+			formY = 0;
+		}
+	}
 }
