@@ -25,7 +25,7 @@ public:
 		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"SpinyBeetle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
-		value = 2;
+		value = 4;
 	}
 
 	EnemySpinyBeetle()
@@ -40,7 +40,7 @@ public:
 		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"SpinyBeetle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
-		value = 2;
+		value = 4;
 	}
 	~EnemySpinyBeetle()
 	{

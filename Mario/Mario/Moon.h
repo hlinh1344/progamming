@@ -5,7 +5,7 @@
 #define MOON_HEIGHT 81
 #define MOON_WIDTH 82
 #define MOON_AREA 500
-#define MOON_SPEED 10
+#define MOON_SPEED 7
 
 //L = 0, R = 1;
 
@@ -13,9 +13,11 @@ class Moon : public Weapon
 {
 private:
 	bool isFalling;
+	int clock;
 public:
 	Moon(int a_posY)
 	{
+		clock = 0;
 		width = MOON_WIDTH;
 		height = MOON_HEIGHT;
 		xArea = MOON_AREA;
@@ -70,33 +72,39 @@ public:
 
 	void MakeAnimation()
 	{
-		if (dir == 0)
+		clock++;
+		if (clock >= 5)
 		{
-			MoveLeft();
-			if (formX <= 0)
+			clock = 0;
+			if (dir == 0)
 			{
-				formX = 8;
+				MoveLeft();
+				if (formX <= 0)
+				{
+					formX = 8;
+				}
+				else
+					formX--;
 			}
-			else
-				formX--;
+
+			if (isFalling)
+			{
+				posY = posY + 20;
+				if (posY >= yOriginal + 70)
+				{
+					isFalling = false;
+				}
+			}
+			else if (!isFalling)
+			{
+				posY = posY - 20;
+				if (posY <= yOriginal - 70)
+				{
+					isFalling = true;
+				}
+			}
 		}
 
-		if (isFalling)
-		{
-			posY = posY + 20;
-			if (posY >= yOriginal + 70)
-			{
-				isFalling = false;
-			}
-		}
-		else if (!isFalling)
-		{
-			posY = posY - 20;
-			if (posY <= yOriginal - 70)
-			{
-				isFalling = true;
-			}
-		}
 		CheckDistance(xOriginal);
 	}
 };

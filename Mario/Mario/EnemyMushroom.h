@@ -28,7 +28,7 @@ public:
 		isGoToRight = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Mushroom.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
-		value = 1;
+		value = 3;
 	}
 
 	EnemyMushroom()
@@ -44,7 +44,7 @@ public:
 		isGoToRight = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Mushroom.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 255));
-		value = 1;
+		value = 3;
 	}
 	~EnemyMushroom()
 	{

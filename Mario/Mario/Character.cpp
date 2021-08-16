@@ -11,7 +11,7 @@ Character::Character()
 	formY = 0;
 	life = 2;
 	jumpHeight = 0;
-	typeOfWeapon = 3;
+	typeOfWeapon = -1;
 	onGround = true;
 	isSitting = false;
 	isAttack = false;
@@ -19,6 +19,8 @@ Character::Character()
 	isWin = false;
 	goingLeft = false;
 	goingRight = false;
+	addHeart = false;
+	gameOver = false;
 	score = 0;
 	hBitmap_Hear = (HBITMAP)LoadImage(hInst, L"Hear.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hBitmap_GameOver = (HBITMAP)LoadImage(hInst, L"GameOver.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -140,6 +142,7 @@ void Character::MoveRight()
 
 void Character::MoveUp()
 {
+	isJump = true;
 	if (goingRight == true)
 	{
 		MoveRight();
@@ -155,15 +158,11 @@ void Character::MoveUp()
 		isJump = true;
 	}
 
-	//if (jumpHeight <= 270)
-	//{
-	//	jumpHeight += 80;
-	//}
-
 }
 
 void Character::MoveDown()
 {
+	isJump = false;
 	if (jumpHeight > 0)
 	{
 		jumpHeight -= 10;
@@ -463,9 +462,12 @@ void Character::Draw(HWND hwnd, HDC hdc)
 	}
 	else
 	{
+		if (gameOver == false)
+		{
+			gameOver = true;
+		}
 		//Game Over
-
-		//PlaySound(L"ByeBye.wav", NULL, SND_FILENAME | SND_ASYNC);
+		
 		if (countGameOver > 50)
 		{
 			countGameOver = countGameOver - 20;
@@ -701,6 +703,11 @@ void Character::IncreaseScore(int n)
 		formOfHundreds = score / 100;
 		formOfTens = (score % 100) / 10;
 		formOfUnits = score % 10;
+		if (addHeart == false)
+		{
+			addHeart = true;
+			life++;
+		}
 	}
 	else if (score > 9)
 	{
@@ -784,5 +791,16 @@ void Character::KeyUpUp()
 		{
 			formY = 0;
 		}
+	}
+}
+
+void Character::CheckGameOver()
+{
+	if (gameOver == true)
+	{
+		gameOver = false;
+		//PlaySound(L"ByeBye.wav", NULL, SND_FILENAME | SND_ASYNC);
+		//PlaySound(L"ByeBye.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+		PlaySound(L"Aqua.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
 	}
 }

@@ -24,7 +24,7 @@ public:
 		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Slime.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 0));
-		value = 4;
+		value = 5;
 	}
 
 	EnemySlime()
@@ -39,7 +39,7 @@ public:
 		xOriginal = posX;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Slime.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 255, 0));
-		value = 4;
+		value = 5;
 	}
 
 	~EnemySlime()

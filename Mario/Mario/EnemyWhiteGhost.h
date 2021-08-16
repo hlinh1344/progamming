@@ -27,7 +27,7 @@ public:
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"WhiteGhost.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
-		value = 5;
+		value = 7;
 	}
 
 	EnemyWhiteGhost()
@@ -45,7 +45,7 @@ public:
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"WhiteGhost.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
-		value = 5;
+		value = 7;
 	}
 
 	~EnemyWhiteGhost()

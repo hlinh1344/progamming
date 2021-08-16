@@ -2,7 +2,7 @@
 #include <cmath>
 #include "LiveObject.h"
 #include "Map.h"
-
+#pragma comment(lib, "winmm.lib")
 
 #define CHARACTER_WIDTH 125
 #define CHARACTER_HEIGHT 115
@@ -36,6 +36,8 @@ private:
 	bool isThousands;
 	bool goingLeft;
 	bool goingRight;
+	bool addHeart;
+	bool gameOver;
 
 	HBITMAP hBitmap_GameOver, hbmMask_GameOver, hBitmap_YouWin, hbmMask_YouWin;
 	HBITMAP hBitmap_Hear, hbmMask_Hear;
@@ -85,6 +87,7 @@ public:
 	void KeyUpLeft();
 	void KeyUpDown();
 	void KeyUpUp();
+	void CheckGameOver();
 };
 
 

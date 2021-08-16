@@ -5,7 +5,7 @@
 #define BOSS_HEIGHT 125
 #define BOSS_WIDTH 115
 #define BOSS_FLY_AREA 350
-#define BOSS_SPEED 1
+#define BOSS_SPEED 5
 
 //chang name
 class Boss : public Enemy
@@ -61,9 +61,9 @@ public:
 		clock++;
 		if (isFalling)
 		{
-			posY = posY + 2 * (speed);
+			posY = posY + speed;
 
-			if (clock >= 2)
+			if (clock >= 5)
 			{
 				clock = 0;
 				if (formX <= 0)
@@ -82,7 +82,7 @@ public:
 		else if (!isFalling)
 		{
 			posY = posY - speed;
-			if (clock >= 2)
+			if (clock >= 5)
 			{
 				clock = 0;
 				if (formX <= 0)
@@ -112,7 +112,7 @@ public:
 	bool CheckToAttack()
 	{
 		count++;
-		if ((formX == 0) && (formY == 1) && count >= 40)
+		if ((formX == 0) && (formY == 1) && count >= 5)
 		{
 			count = 0;
 			return true;

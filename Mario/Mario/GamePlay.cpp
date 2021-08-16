@@ -73,33 +73,52 @@ void GamePlay::Run()
 				enemies.push_back(new EnemySpinyBeetle(BaseObject::mapSlider + MAP_WIDTH));
 				break;
 			case 11:
+				enemies.push_back(new EnemySlime(BaseObject::mapSlider + MAP_WIDTH));
 				enemies.push_back(new EnemyDarkGirl(BaseObject::mapSlider + MAP_WIDTH));
 				break;
 			case 12:
 				enemies.push_back(new EnemyDarkDragon(BaseObject::mapSlider + MAP_WIDTH));
 				break;
 			case 13:
+				enemies.push_back(new EnemyMonsterGirl(BaseObject::mapSlider + MAP_WIDTH));
 				enemies.push_back(new EnemyWhiteGhost(BaseObject::mapSlider + MAP_WIDTH));
 				break;
 			case 14:
+				enemies.push_back(new EnemyDarkGirl(BaseObject::mapSlider + MAP_WIDTH));
 				enemies.push_back(new EnemyBuzzyBeetle(BaseObject::mapSlider + MAP_WIDTH));
 				break;
 			case 15:
+				enemies.push_back(new EnemyDarkRaven(BaseObject::mapSlider + MAP_WIDTH));
 				enemies.push_back(new EnemyMonsterGirl(BaseObject::mapSlider + MAP_WIDTH));
+				enemies.push_back(new EnemyDarkDragon(BaseObject::mapSlider + MAP_WIDTH));
 				break;
 			case 16:
+				enemies.push_back(new EnemyBuzzyBeetle(BaseObject::mapSlider + MAP_WIDTH));
+				enemies.push_back(new EnemyBird(BaseObject::mapSlider + MAP_WIDTH));
+				enemies.push_back(new EnemyDarkDragon(BaseObject::mapSlider + MAP_WIDTH));
 				enemies.push_back(new EnemySlime(BaseObject::mapSlider + MAP_WIDTH));
 				break;
 			case 17:
 				enemies.push_back(new EnemyDarkRaven(BaseObject::mapSlider + MAP_WIDTH));
+				enemies.push_back(new EnemyWhiteGhost(BaseObject::mapSlider + MAP_WIDTH));
+				enemies.push_back(new EnemySpinyBeetle(BaseObject::mapSlider + MAP_WIDTH));
+				enemies.push_back(new EnemyMonsterGirl(BaseObject::mapSlider + MAP_WIDTH));
 				break;
 			case 18:
+				enemies.push_back(new EnemyMonsterGirl(BaseObject::mapSlider + MAP_WIDTH));
+				enemies.push_back(new EnemySpinyBeetle(BaseObject::mapSlider + MAP_WIDTH));
+				enemies.push_back(new EnemyWhiteGhost(BaseObject::mapSlider + MAP_WIDTH));
+				enemies.push_back(new EnemyMushroom(BaseObject::mapSlider + MAP_WIDTH));
+				enemies.push_back(new EnemyBird(BaseObject::mapSlider + MAP_WIDTH));
 				enemies.push_back(new EnemyDarkGirl(BaseObject::mapSlider + MAP_WIDTH));
 				break;
 			case 19:
+				enemies.push_back(new EnemySpinyBeetle(BaseObject::mapSlider + MAP_WIDTH));
+				enemies.push_back(new EnemyWhiteGhost(BaseObject::mapSlider + MAP_WIDTH));
 				enemies.push_back(new EnemyDarkDragon(BaseObject::mapSlider + MAP_WIDTH));
 				break;
 			case 20:
+				enemies.push_back(new EnemyDarkRaven(BaseObject::mapSlider + MAP_WIDTH));
 				enemies.push_back(new EnemyMonsterGirl(BaseObject::mapSlider + MAP_WIDTH));
 				break;
 			default:
@@ -265,8 +284,8 @@ void GamePlay::Run()
 		countID = 0;
 
 	}
-	//item
-
+	//itemninja->CheckGameOver()
+	(ninja->CheckGameOver());
 }
 
 void GamePlay::Draw(HWND hwnd, HDC hdc)
@@ -712,7 +731,7 @@ void GamePlay::ResetClock()
 
 bool GamePlay::CheckClock()
 {
-	if (clock >= 6)
+	if (clock >= 4)
 		return true;
 	return false;
 }
