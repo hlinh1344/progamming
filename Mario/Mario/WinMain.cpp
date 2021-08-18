@@ -60,6 +60,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	MSG msg = { };
 	float framePerSecond = 120.0;
 	float frameInterval = 1000.0 / framePerSecond;
+
 	while (globalRunning)
 	{
 
@@ -77,7 +78,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 			gamePlay.ResetClock();
 			InvalidateRect(hwnd, NULL, FALSE);
 		}
-		
 		Sleep(frameInterval);
 	}
 	return msg.wParam;

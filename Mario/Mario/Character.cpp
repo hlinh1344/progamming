@@ -142,7 +142,7 @@ void Character::MoveRight()
 
 void Character::MoveUp()
 {
-	isJump = true;
+	//isJump = true;
 	if (goingRight == true)
 	{
 		MoveRight();
@@ -151,7 +151,6 @@ void Character::MoveUp()
 	{
 		MoveLeft();
 	}
-
 
 	if (onGround == true)
 	{
@@ -791,16 +790,5 @@ void Character::KeyUpUp()
 		{
 			formY = 0;
 		}
-	}
-}
-
-void Character::CheckGameOver()
-{
-	if (gameOver == true)
-	{
-		gameOver = false;
-		//PlaySound(L"ByeBye.wav", NULL, SND_FILENAME | SND_ASYNC);
-		//PlaySound(L"ByeBye.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
-		PlaySound(L"Aqua.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
 	}
 }

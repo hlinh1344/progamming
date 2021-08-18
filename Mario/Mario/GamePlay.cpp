@@ -9,6 +9,7 @@ GamePlay::GamePlay()
 	checkToAdd = false;
 	ninja = new Character();
 	boss = new Boss(3600);
+	heart = new Heart(2200);
 	inMenu = true;
 	bossStillLive = true;
 }
@@ -17,6 +18,8 @@ GamePlay::~GamePlay()
 {
 	RemoveObject(ninja);
 	RemoveObject(boss);
+	RemoveObject(heart);
+
 	for (auto enemy : enemies) {
 		RemoveObject(enemy);
 	}
@@ -148,7 +151,7 @@ void GamePlay::Run()
 				items.push_back(new KunaiItem(BaseObject::mapSlider + MAP_WIDTH));
 				break;
 			case 6:
-				items.push_back(new BlueSwordItem(BaseObject::mapSlider + MAP_WIDTH));
+				//items.push_back(new BlueSwordItem(BaseObject::mapSlider + MAP_WIDTH));
 				break;
 			case 7:
 				items.push_back(new FlameItem(BaseObject::mapSlider + MAP_WIDTH));
@@ -213,6 +216,18 @@ void GamePlay::Run()
 			}
 			countID = 0;
 
+			//check collision main vs heart
+			if (heart->CheckDeath() == false)
+			{
+				heart->MakeAnimation();
+				if (CheckCollision(ninja, heart))
+				{
+					heart->SetDeath(true);
+					ninja->IncreseLife(1);
+				}
+			}
+			
+
 			//moon
 			for (auto moon : moons)
 			{
@@ -224,6 +239,8 @@ void GamePlay::Run()
 					ninja->IncreseLife(-1);
 				}
 			}
+
+			
 		}
 
 		//weapon
@@ -282,10 +299,9 @@ void GamePlay::Run()
 			countID++;
 		}
 		countID = 0;
-
 	}
-	//itemninja->CheckGameOver()
-	(ninja->CheckGameOver());
+	//--
+
 }
 
 void GamePlay::Draw(HWND hwnd, HDC hdc)
@@ -339,6 +355,10 @@ void GamePlay::Draw(HWND hwnd, HDC hdc)
 				enemy->Draw(hwnd, a_hdc);
 		}
 
+		if (heart->CheckDeath() == false)
+		{
+			heart->Draw(hwnd, a_hdc);
+		}
 
 		if (boss->CheckDeath() == true)
 		{
@@ -350,6 +370,7 @@ void GamePlay::Draw(HWND hwnd, HDC hdc)
 		
 
 		ninja->Draw(hwnd, a_hdc);
+		
 	}
 	else if(inMenu == true)
 		//-----------------------

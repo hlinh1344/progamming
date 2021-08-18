@@ -168,6 +168,7 @@
     <ClInclude Include="EnemyWhiteGhost.h" />
     <ClInclude Include="FlameItem.h" />
     <ClInclude Include="GamePlay.h" />
+    <ClInclude Include="Heart.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="KunaiItem.h" />
     <ClInclude Include="LiveObject.h" />

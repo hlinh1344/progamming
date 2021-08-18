@@ -39,6 +39,8 @@
 #include "FlameItem.h"
 #include "ThunderDragonItem.h"
 
+#include "Heart.h"
+
 
 class GamePlay
 {
@@ -51,6 +53,7 @@ private:
 	Boss* boss;
 	Map map;
 	Menu menu;
+	Heart* heart;
 	Character* ninja;
 	int enemyID;
 	int itemID;

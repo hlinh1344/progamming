@@ -87,7 +87,6 @@ public:
 	void KeyUpLeft();
 	void KeyUpDown();
 	void KeyUpUp();
-	void CheckGameOver();
 };
 
 
