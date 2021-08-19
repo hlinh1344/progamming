@@ -40,6 +40,8 @@
 #include "ThunderDragonItem.h"
 
 #include "Heart.h"
+#include "PetBullet.h"
+#include "Pet.h"
 
 
 class GamePlay
@@ -49,8 +51,10 @@ private:
 	std::vector <Weapon*> weapons;
 	std::vector <Item*> items;
 	std::vector <Moon*> moons;
+	std::vector <PetBullet*> bullets;
 
 	Boss* boss;
+	Pet * pet;
 	Map map;
 	Menu menu;
 	Heart* heart;

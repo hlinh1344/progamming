@@ -9,6 +9,7 @@ GamePlay::GamePlay()
 	checkToAdd = false;
 	ninja = new Character();
 	boss = new Boss(3600);
+	pet = new Pet();
 	heart = new Heart(2200);
 	inMenu = true;
 	bossStillLive = true;
@@ -18,6 +19,7 @@ GamePlay::~GamePlay()
 {
 	RemoveObject(ninja);
 	RemoveObject(boss);
+	RemoveObject(pet);
 	RemoveObject(heart);
 
 	for (auto enemy : enemies) {
@@ -178,12 +180,18 @@ void GamePlay::Run()
 			}
 		}
 
-
+		if (bossStillLive == true)
+		{
+			if (boss->CheckToAttack() == true)
+			{
+				moons.push_back(new Moon(boss->GetPosX(), boss->GetPosY() - 20));
+			}
+		}
 
 
 		//main character
 		ninja->MakeAnimation();
-
+		pet->MakeAnimation(ninja->GetPosX(), ninja->GetPosY());
 
 		//check collision main vs monster
 		if (ninja->CheckDeath() == false)
@@ -363,12 +371,11 @@ void GamePlay::Draw(HWND hwnd, HDC hdc)
 		if (boss->CheckDeath() == true)
 		{
 			bossStillLive = false;
-			//RemoveObject(boss);
 		}
 		else
 			boss->Draw(hwnd, a_hdc);
 		
-
+		pet->Draw(hwnd, a_hdc);
 		ninja->Draw(hwnd, a_hdc);
 		
 	}

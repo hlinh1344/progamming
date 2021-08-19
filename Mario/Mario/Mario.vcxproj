@@ -175,6 +175,8 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Moon.h" />
+    <ClInclude Include="Pet.h" />
+    <ClInclude Include="PetBullet.h" />
     <ClInclude Include="Point2D.h" />
     <ClInclude Include="ShurikenItem.h" />
     <ClInclude Include="ThunderDragonItem.h" />
