@@ -35,6 +35,7 @@ public:
 
 	Moon(int a_posX, int a_posY)
 	{
+		clock = 0;
 		width = MOON_WIDTH;
 		height = MOON_HEIGHT;
 		xArea = MOON_AREA;
@@ -70,7 +71,7 @@ public:
 	}
 
 
-	void MakeAnimation()
+	void MakeAnimation() override
 	{
 		clock++;
 		if (clock >= 5)

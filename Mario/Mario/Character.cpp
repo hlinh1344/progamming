@@ -792,3 +792,11 @@ void Character::KeyUpUp()
 		}
 	}
 }
+
+int Character::GetDirection()
+{
+	if (IsGoLeft() == true)
+		return 0;
+	else if (IsGoRight() == true)
+		return 1;
+}

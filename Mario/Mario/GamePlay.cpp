@@ -34,6 +34,14 @@ GamePlay::~GamePlay()
 		RemoveObject(item);
 	}
 
+	for (auto moon : moons) {
+		RemoveObject(moon);
+	}
+
+	for (auto bullet : bullets) {
+		RemoveObject(bullet);
+	}
+
 }
 
 void GamePlay::Run()
@@ -180,18 +188,17 @@ void GamePlay::Run()
 			}
 		}
 
-		if (bossStillLive == true)
+		if (pet->CheckDeath() == false)
 		{
-			if (boss->CheckToAttack() == true)
+			if (pet->CheckToAttack() == true)
 			{
-				moons.push_back(new Moon(boss->GetPosX(), boss->GetPosY() - 20));
+				bullets.push_back(new PetBullet(pet->GetPosX() + 20, pet->GetPosY()));
 			}
 		}
 
-
 		//main character
 		ninja->MakeAnimation();
-		pet->MakeAnimation(ninja->GetPosX(), ninja->GetPosY());
+		pet->MakeAnimation(ninja->GetPosX(), ninja->GetPosY(), ninja->GetDirection());
 
 		//check collision main vs monster
 		if (ninja->CheckDeath() == false)
@@ -249,6 +256,20 @@ void GamePlay::Run()
 			}
 
 			
+		}
+
+		for (auto bullet : bullets)
+		{
+			for (auto enemy : enemies)
+			{
+
+				if (CheckCollision(bullet, enemy) == true)
+				{
+					ninja->IncreaseScore(enemy->GetValue());
+					enemy->SetDeath(true);
+					bullet->SetDeath(true);
+				}
+			}
 		}
 
 		//weapon
@@ -352,6 +373,15 @@ void GamePlay::Draw(HWND hwnd, HDC hdc)
 				moon->Draw(hwnd, a_hdc);
 		}
 
+		for (auto bullet : bullets)
+		{
+			if (bullet->CheckDeath() == true)
+			{
+				bullets.erase(bullets.begin());
+			}
+			else
+				bullet->Draw(hwnd, a_hdc);
+		}
 
 		for (auto enemy : enemies)
 		{

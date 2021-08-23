@@ -87,6 +87,7 @@ public:
 	void KeyUpLeft();
 	void KeyUpDown();
 	void KeyUpUp();
+	int GetDirection();
 };
 
 

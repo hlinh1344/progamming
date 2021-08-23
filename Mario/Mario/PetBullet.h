@@ -3,9 +3,9 @@
 
 
 #define PET_BULLET_HEIGHT 50
-#define PET_BULLET_WIDTH 40
-#define PET_BULLET_AREA 600
-#define PET_BULLET_SPEED 10
+#define PET_BULLET_WIDTH 55
+#define PET_BULLET_AREA 700
+#define PET_BULLET_SPEED 15
 
 //L = 0, R = 1;
 
@@ -24,7 +24,6 @@ public:
 		posX = 3500;
 		posY = a_posY;
 		formX = 0;
-		dir = 0;
 		xOriginal = posX;
 		yOriginal = posY;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"PetBullet.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -33,6 +32,7 @@ public:
 
 	PetBullet(int a_posX, int a_posY)
 	{
+		clock = 0;
 		width = PET_BULLET_WIDTH;
 		height = PET_BULLET_HEIGHT;
 		xArea = PET_BULLET_AREA;
@@ -40,11 +40,10 @@ public:
 		posX = a_posX;
 		posY = a_posY;
 		formX = 0;
-		dir = 0;
 		xOriginal = posX;
 		yOriginal = posY;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"PetBullet.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
+		hbmMask = CreateBitmapMask(hBitmap, RGB(0, 120, 104));
 	}
 	PetBullet()
 	{
@@ -58,7 +57,7 @@ public:
 		xOriginal = posX;
 		yOriginal = posY;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"PetBullet.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
+		hbmMask = CreateBitmapMask(hBitmap, RGB(0, 120, 104));
 	}
 	~PetBullet()
 	{
@@ -66,11 +65,11 @@ public:
 	}
 
 
-	void MakeAnimation()
+	void MakeAnimation() override
 	{
 		clock++;
-		posX++;
-		if (clock >= 5)
+		MoveRight();
+		if (clock >= 2)
 		{
 			clock = 0;
 			if (formX == 3)
@@ -81,7 +80,6 @@ public:
 			{
 				formX++;
 			}
-			//--------
 		}
 
 		CheckDistance(xOriginal);
