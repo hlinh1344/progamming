@@ -21,6 +21,7 @@ Character::Character()
 	goingRight = false;
 	addHeart = false;
 	gameOver = false;
+	addPet = false;
 	score = 0;
 	hBitmap_Hear = (HBITMAP)LoadImage(hInst, L"Hear.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hBitmap_GameOver = (HBITMAP)LoadImage(hInst, L"GameOver.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -799,4 +800,29 @@ int Character::GetDirection()
 		return 0;
 	else if (IsGoRight() == true)
 		return 1;
+}
+
+void Character::AddSpecialGift(int a_value)
+{
+	switch (a_value)
+	{
+		case 1:
+			IncreseLife(1);
+			break;
+		case 2:
+			addPet = true;
+			break;
+		default:
+			break;
+	}
+}
+
+bool Character::CheckToAddPet()
+{
+	if (addPet == true)
+	{
+		addPet = false;
+		return true;
+	}
+	return false;
 }

@@ -147,6 +147,7 @@
     <ClCompile Include="LiveObject.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Point2D.cpp" />
+    <ClCompile Include="SpecialItem.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
@@ -177,8 +178,10 @@
     <ClInclude Include="Moon.h" />
     <ClInclude Include="Pet.h" />
     <ClInclude Include="PetBullet.h" />
+    <ClInclude Include="PetItem.h" />
     <ClInclude Include="Point2D.h" />
     <ClInclude Include="ShurikenItem.h" />
+    <ClInclude Include="SpecialItem.h" />
     <ClInclude Include="ThunderDragonItem.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponBlueSword.h" />

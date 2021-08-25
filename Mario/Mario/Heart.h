@@ -1,14 +1,13 @@
 #pragma once
-#include "LiveObject.h"
+#include "SpecialItem.h"
 
 #define HEART_ITEM_HEIGHT 69
 #define HEART_ITEM_WIDTH 80
 
-class Heart : public LiveObject
+class Heart : public SpecialItem
 {
 protected:
-    bool isDead;
-    bool changeDir;
+
 public:
     Heart()
     {
@@ -18,6 +17,7 @@ public:
         posY = 10;
         formX = 0;
         changeDir = false;
+        value = 1;
         hBitmap = (HBITMAP)LoadImage(hInst, L"HeartItem.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
         hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
     }
@@ -29,6 +29,7 @@ public:
         posY = 10;
         formX = 0;
         changeDir = false;
+        value = 1;
         hBitmap = (HBITMAP)LoadImage(hInst, L"HeartItem.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
         hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
     }

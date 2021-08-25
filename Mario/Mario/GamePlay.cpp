@@ -10,7 +10,6 @@ GamePlay::GamePlay()
 	ninja = new Character();
 	boss = new Boss(3600);
 	pet = new Pet();
-	heart = new Heart(2200);
 	inMenu = true;
 	bossStillLive = true;
 }
@@ -20,7 +19,6 @@ GamePlay::~GamePlay()
 	RemoveObject(ninja);
 	RemoveObject(boss);
 	RemoveObject(pet);
-	RemoveObject(heart);
 
 	for (auto enemy : enemies) {
 		RemoveObject(enemy);
@@ -40,6 +38,10 @@ GamePlay::~GamePlay()
 
 	for (auto bullet : bullets) {
 		RemoveObject(bullet);
+	}
+
+	for (auto specialItem : specialItems) {
+		RemoveObject(specialItem);
 	}
 
 }
@@ -158,10 +160,10 @@ void GamePlay::Run()
 				items.push_back(new ShurikenItem(BaseObject::mapSlider + MAP_WIDTH));
 				break;
 			case 5:
-				items.push_back(new KunaiItem(BaseObject::mapSlider + MAP_WIDTH));
+				specialItems.push_back(new PetItem(BaseObject::mapSlider + MAP_WIDTH));
 				break;
 			case 6:
-				//items.push_back(new BlueSwordItem(BaseObject::mapSlider + MAP_WIDTH));
+				specialItems.push_back(new Heart(BaseObject::mapSlider + MAP_WIDTH));
 				break;
 			case 7:
 				items.push_back(new FlameItem(BaseObject::mapSlider + MAP_WIDTH));
@@ -208,8 +210,8 @@ void GamePlay::Run()
 				if (CheckCollision(ninja, enemy))
 				{
 					//enemy->SetDeath(true);
-					ninja->SetDeath(true);
-					ninja->IncreseLife(-1);
+					//ninja->SetDeath(true);
+					//ninja->IncreseLife(-1);
 				}
 			}
 
@@ -232,14 +234,20 @@ void GamePlay::Run()
 			countID = 0;
 
 			//check collision main vs heart
-			if (heart->CheckDeath() == false)
+			for (auto specialItem : specialItems)
 			{
-				heart->MakeAnimation();
-				if (CheckCollision(ninja, heart))
+				specialItem->MakeAnimation();
+				if (CheckCollision(ninja, specialItem) == true)
 				{
-					heart->SetDeath(true);
-					ninja->IncreseLife(1);
+					ninja->AddSpecialGift(specialItem->GetValue());
+					specialItem->SetDeath(true);
+					
 				}
+			}
+
+			if ((pet->CheckDeath() == true) && (ninja->CheckToAddPet() == true))
+			{
+				pet->SetDeath(false);
 			}
 			
 
@@ -393,10 +401,15 @@ void GamePlay::Draw(HWND hwnd, HDC hdc)
 				enemy->Draw(hwnd, a_hdc);
 		}
 
-		if (heart->CheckDeath() == false)
+		for (auto specialItem : specialItems)
 		{
-			heart->Draw(hwnd, a_hdc);
-		}
+			if (specialItem->CheckDeath() == true)
+			{
+				specialItems.erase(specialItems.begin());
+			}
+			else
+				specialItem->Draw(hwnd, a_hdc);
+		}	
 
 		if (boss->CheckDeath() == true)
 		{
@@ -404,8 +417,11 @@ void GamePlay::Draw(HWND hwnd, HDC hdc)
 		}
 		else
 			boss->Draw(hwnd, a_hdc);
-		
-		pet->Draw(hwnd, a_hdc);
+
+		if (pet->CheckDeath() == false)
+		{
+			pet->Draw(hwnd, a_hdc);
+		}
 		ninja->Draw(hwnd, a_hdc);
 		
 	}

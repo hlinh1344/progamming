@@ -28,6 +28,7 @@ public:
 		posY = 290;
 		formX = 12;
 		isFalling = true;
+		isDead = true;
 		distance = 20;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Pet.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -44,6 +45,7 @@ public:
 		posY = 290;
 		formX = 12;
 		isFalling = true;
+		isDead = true;
 		distance = 20;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Pet.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));

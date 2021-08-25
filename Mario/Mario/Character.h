@@ -38,6 +38,7 @@ private:
 	bool goingRight;
 	bool addHeart;
 	bool gameOver;
+	bool addPet;
 
 	HBITMAP hBitmap_GameOver, hbmMask_GameOver, hBitmap_YouWin, hbmMask_YouWin;
 	HBITMAP hBitmap_Hear, hbmMask_Hear;
@@ -88,6 +89,8 @@ public:
 	void KeyUpDown();
 	void KeyUpUp();
 	int GetDirection();
+	void AddSpecialGift(int a_value);
+	bool CheckToAddPet();
 };
 
 

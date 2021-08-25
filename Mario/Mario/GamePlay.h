@@ -42,6 +42,9 @@
 #include "Heart.h"
 #include "PetBullet.h"
 #include "Pet.h"
+#include "SpecialItem.h"
+#include "PetItem.h"
+
 
 
 class GamePlay
@@ -52,12 +55,12 @@ private:
 	std::vector <Item*> items;
 	std::vector <Moon*> moons;
 	std::vector <PetBullet*> bullets;
+	std::vector <SpecialItem*> specialItems;
 
 	Boss* boss;
 	Pet * pet;
 	Map map;
 	Menu menu;
-	Heart* heart;
 	Character* ninja;
 	int enemyID;
 	int itemID;
