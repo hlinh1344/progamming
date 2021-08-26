@@ -14,7 +14,7 @@ public:
         width = PET_ITEM_WIDTH;
         height = PET_ITEM_HEIGHT;
         posX = 2000;
-        posY = 50;
+        posY = 70;
         formX = 0;
         changeDir = false;
         value = 2;
@@ -26,7 +26,7 @@ public:
         width = PET_ITEM_WIDTH;
         height = PET_ITEM_HEIGHT;
         posX = a_x;
-        posY = 50;
+        posY = 70;
         formX = 0;
         changeDir = false;
         value = 2;
@@ -53,7 +53,7 @@ public:
             if (changeDir == false)
             {
                 posY++;
-                if (posY >= 80)
+                if (posY >= 100)
                 {
                     changeDir = true;
                 }
@@ -61,7 +61,7 @@ public:
             else if (changeDir == true)
             {
                 posY--;
-                if (posY <= 30)
+                if (posY <= 70)
                 {
                     changeDir = false;
                 }

@@ -22,6 +22,7 @@ Character::Character()
 	addHeart = false;
 	gameOver = false;
 	addPet = false;
+	levelUp = false;
 	score = 0;
 	hBitmap_Hear = (HBITMAP)LoadImage(hInst, L"Hear.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hBitmap_GameOver = (HBITMAP)LoadImage(hInst, L"GameOver.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -378,6 +379,8 @@ void Character::Draw(HWND hwnd, HDC hdc)
 				countGameOver = countGameOver - 20;
 			}
 
+			
+
 			if (formXOver >= 7)
 			{
 				formXOver = 0;
@@ -416,6 +419,11 @@ void Character::Draw(HWND hwnd, HDC hdc)
 				0,
 				SRCPAINT
 			);
+
+			if (countGameOver <= 50)
+			{
+				levelUp = true;
+			}
 		}
 		else
 		{
@@ -703,17 +711,13 @@ void Character::IncreaseScore(int n)
 		formOfHundreds = score / 100;
 		formOfTens = (score % 100) / 10;
 		formOfUnits = score % 10;
-		if (addHeart == false)
-		{
-			addHeart = true;
-			life++;
-		}
 	}
 	else if (score > 9)
 	{
 		isTens = true;
 		formOfTens = score / 10;
 		formOfUnits = score % 10;
+
 	}
 	else
 		formOfUnits = score;
@@ -822,6 +826,24 @@ bool Character::CheckToAddPet()
 	if (addPet == true)
 	{
 		addPet = false;
+		return true;
+	}
+	return false;
+}
+
+void Character::LevelUp()
+{
+		levelUp = false;
+		isWin = false;
+		posX = 0;
+		addPet = false;
+}
+
+bool Character::CheckToUpLevel()
+{
+	if (levelUp == true)
+	{
+		LevelUp();
 		return true;
 	}
 	return false;

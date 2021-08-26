@@ -31,4 +31,5 @@ public:
 	int getMapSlider();
 	void checkToAddEnemy(int a_posX, int &enemyID, bool &checkToAdd);
 	void checkToAddItem(int a_posX, int& itemyID, bool& checkToAdd);
+	void Switch();
 };

@@ -39,6 +39,7 @@ private:
 	bool addHeart;
 	bool gameOver;
 	bool addPet;
+	bool levelUp;
 
 	HBITMAP hBitmap_GameOver, hbmMask_GameOver, hBitmap_YouWin, hbmMask_YouWin;
 	HBITMAP hBitmap_Hear, hbmMask_Hear;
@@ -91,6 +92,8 @@ public:
 	int GetDirection();
 	void AddSpecialGift(int a_value);
 	bool CheckToAddPet();
+	void LevelUp();
+	bool CheckToUpLevel();
 };
 
 

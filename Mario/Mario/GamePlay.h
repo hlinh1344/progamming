@@ -100,5 +100,6 @@ public:
 	void DownSelection();
 	void Play();
 	int Select();
+	void UpgradeLevel();
 };
 

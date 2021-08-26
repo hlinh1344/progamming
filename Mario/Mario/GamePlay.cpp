@@ -51,6 +51,11 @@ void GamePlay::Run()
 	clock++;
 	if (inMenu == false)
 	{
+		if (ninja->CheckToUpLevel() == true)
+		{
+			UpgradeLevel();
+		}
+
 		map.checkToAddEnemy(BaseObject::mapSlider + MAP_WIDTH, enemyID, checkToAdd);
 
 		if (checkToAdd == true)
@@ -237,7 +242,7 @@ void GamePlay::Run()
 			for (auto specialItem : specialItems)
 			{
 				specialItem->MakeAnimation();
-				if (CheckCollision(ninja, specialItem) == true)
+				if ((specialItem->CheckDeath() == false) && (CheckCollision(ninja, specialItem) == true))
 				{
 					ninja->AddSpecialGift(specialItem->GetValue());
 					specialItem->SetDeath(true);
@@ -834,4 +839,12 @@ void  GamePlay::DownSelection()
 void GamePlay::Play()
 {
 	inMenu = false;
+}
+
+void GamePlay::UpgradeLevel()
+{
+	map.Switch();
+	bossStillLive = true;
+	boss->SetDeath(false);
+	pet->SetDeath(true);
 }

@@ -87,3 +87,9 @@ void Map::checkToAddItem(int a_posX, int& itemID, bool& checkToAdd)
 	}
 }
 
+
+void Map::Switch()
+{
+	hbmGround = (HBITMAP)LoadImage(hInst, L"Map1.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+	BaseObject::mapSlider = 0;
+}

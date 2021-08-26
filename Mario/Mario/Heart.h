@@ -14,7 +14,7 @@ public:
         width = HEART_ITEM_WIDTH;
         height = HEART_ITEM_HEIGHT;
         posX = 2200;
-        posY = 10;
+        posY = 50;
         formX = 0;
         changeDir = false;
         value = 1;
@@ -26,7 +26,7 @@ public:
         width = HEART_ITEM_WIDTH;
         height = HEART_ITEM_HEIGHT;
         posX = a_x;
-        posY = 10;
+        posY = 50;
         formX = 0;
         changeDir = false;
         value = 1;
@@ -53,7 +53,7 @@ public:
             if (changeDir == false)
             {
                 posY++;
-                if (posY >= 35)
+                if (posY >= 60)
                 {
                     changeDir = true;
                 }
@@ -61,7 +61,7 @@ public:
             else if (changeDir == true)
             {
                 posY--;
-                if (posY <= 10)
+                if (posY <= 40)
                 {
                     changeDir = false;
                 }
