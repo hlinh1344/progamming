@@ -214,9 +214,9 @@ void GamePlay::Run()
 			{
 				if (CheckCollision(ninja, enemy))
 				{
-					//enemy->SetDeath(true);
-					//ninja->SetDeath(true);
-					//ninja->IncreseLife(-1);
+					enemy->SetDeath(true);
+					ninja->SetDeath(true);
+					ninja->IncreseLife(-1);
 				}
 			}
 
@@ -275,7 +275,6 @@ void GamePlay::Run()
 		{
 			for (auto enemy : enemies)
 			{
-
 				if (CheckCollision(bullet, enemy) == true)
 				{
 					ninja->IncreaseScore(enemy->GetValue());
@@ -283,6 +282,19 @@ void GamePlay::Run()
 					bullet->SetDeath(true);
 				}
 			}
+
+			for (auto moon : moons)
+			{
+
+				if (CheckCollision(bullet, moon) == true)
+				{
+					moon->SetDeath(true);
+					bullet->SetDeath(true);
+
+
+				}
+			}
+
 		}
 
 		//weapon
@@ -307,8 +319,6 @@ void GamePlay::Run()
 				{
 					moon->SetDeath(true);
 					weapon->SetDeath(true);
-
-
 				}
 			}
 
@@ -810,7 +820,7 @@ void GamePlay::ResetClock()
 
 bool GamePlay::CheckClock()
 {
-	if (clock >= 4)
+	if (clock >= 3)
 		return true;
 	return false;
 }
@@ -845,6 +855,7 @@ void GamePlay::UpgradeLevel()
 {
 	map.Switch();
 	bossStillLive = true;
-	boss->SetDeath(false);
 	pet->SetDeath(true);
+	boss->Revival();
+	
 }

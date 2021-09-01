@@ -1,6 +1,5 @@
 #include "Character.h"
 #include <WindowsX.h>
-
 #pragma comment(lib, "winmm.lib")
 
 Character::Character()

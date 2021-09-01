@@ -26,7 +26,7 @@ public:
 		formX = 3;
 		xOriginal = posX;
 		yOriginal = posY;
-		life = 20;
+		life = 10;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Boss.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -44,7 +44,7 @@ public:
 		formX = 3;
 		xOriginal = posX;
 		yOriginal = posY;
-		life = 20;
+		life = 10;
 		isFalling = true;
 		hBitmap = (HBITMAP)LoadImage(hInst, L"Boss.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hbmMask = CreateBitmapMask(hBitmap, RGB(255, 0, 255));
@@ -112,7 +112,7 @@ public:
 	bool CheckToAttack()
 	{
 		count++;
-		if ((formX == 0) && (formY == 1) && count >= 5)
+		if ((formX == 0) && (formY == 1) && count >= 10)
 		{
 			count = 0;
 			return true;
@@ -121,4 +121,9 @@ public:
 		return false;
 	}
 
+	void Revival()
+	{
+		life = 10;
+		isDead = false;
+	}
 };
